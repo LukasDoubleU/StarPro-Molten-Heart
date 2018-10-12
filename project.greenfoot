@@ -1,0 +1,22 @@
+#Greenfoot properties
+#Fri Oct 12 09:47:19 CEST 2018
+project.charset=UTF-8
+class.Bomb.superclass=Enemy
+class.Level2.superclass=Level
+class.Anchor.image=anchor.png
+version=2.7.1
+class.Player.image=teddybear.png
+class.Enemy.superclass=greenfoot.Actor
+class.Barrel.superclass=Obstacle
+class.Barrel.image=barrel.png
+class.Item.superclass=greenfoot.Actor
+world.lastInstantiated=Level1
+class.Anchor.superclass=Weapon
+class.Bomb.image=bomb.png
+class.Obstacle.superclass=greenfoot.Actor
+class.Level.superclass=greenfoot.World
+class.Weapon.superclass=Item
+class.Level2.image=corkboard.jpg
+class.Level1.image=granite-light.jpg
+class.Level1.superclass=Level
+class.Player.superclass=greenfoot.Actor
