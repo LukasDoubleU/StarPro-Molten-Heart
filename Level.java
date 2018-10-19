@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public abstract class Level extends World {
 
-    /**
+   /**
      *Default Welt
      *0 = Leer
      *1 = Wand
