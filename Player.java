@@ -14,23 +14,17 @@ public class Player extends Actor {
         if (key == null) {
             return;
         }
-        switch (key) {
-        case "w":
-        case "up":
+        if ("w".equals(key) || "up".equals(key)) {
             setRotation(270);
-            break;
-        case "a":
-        case "left":
+        }
+        if ("a".equals(key) || "left".equals(key)) {
             setRotation(180);
-            break;
-        case "s":
-        case "down":
+        }
+        if ("s".equals(key) || "down".equals(key)) {
             setRotation(90);
-            break;
-        case "d":
-        case "right":
+        }
+        if ("d".equals(key) || "right".equals(key)) {
             setRotation(0);
-            break;
         }
 
         move(10);
