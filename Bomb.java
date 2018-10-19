@@ -12,6 +12,10 @@ public class Bomb extends Melee {
     public Bomb(int newMov_Speed) {
         mov_speed = newMov_Speed;
     }
+    
+    public Bomb(){
+        this(3);
+    }
 
     public void act() {
         

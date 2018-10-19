@@ -24,6 +24,10 @@ public class Kamel extends Ranged
         turn(45);
         mov_speed = newMov_Speed;
     }
+    
+    public Kamel() {
+        this(3);
+    }
         
     public void act() 
     {
