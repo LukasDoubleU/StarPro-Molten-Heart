@@ -1,4 +1,4 @@
-package enemy;
+
 import greenfoot.*;
 
 /**

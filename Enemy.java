@@ -1,6 +1,5 @@
-package enemy;
+
 import greenfoot.*;
-import player.Player;
 
 public abstract class Enemy extends Actor {
     

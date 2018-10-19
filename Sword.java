@@ -1,4 +1,4 @@
-package player;
+
 import greenfoot.*;
 
 public class Sword extends Weapon {

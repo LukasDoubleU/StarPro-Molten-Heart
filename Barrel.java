@@ -1,4 +1,4 @@
-package world;
+
 
 public class Barrel extends Obstacle {
 

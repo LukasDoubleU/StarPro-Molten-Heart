@@ -1,6 +1,5 @@
-package enemy;
+
 import greenfoot.*;
-import player.Player;
 
 /**
  * Write a description of class Melee here.
