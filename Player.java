@@ -23,8 +23,18 @@ public class Player extends Actor {
 
     int oldX, oldY, oldRotation;
 
+    /*
+     * Variablen für die Bilder zur Laufanimation
+     */
+    String prefix = "soldier_bright/image_part_", suffix = ".png";
+    int firstUp = 1, lastUp = 9;
+    int firstLeft = 10, lastLeft = 18;
+    int firstDown = 19, lastDown = 27;
+    int firstRight = 28, lastRight = 36;
+    int currentImageIndex;
+
     private Player() {
-        setImage("teddybear.png");
+        setImage("soldier_bright/image_part_019.png.png");
     }
 
     @Override
@@ -97,6 +107,8 @@ public class Player extends Actor {
         if ("d".equals(key) || "right".equals(key)) {
             setRotation(0);
         }
+
+        // TODO Das Bild aktualisieren (Blickrichtung + Laufanimation)
 
         move(moveSpeed);
     }
