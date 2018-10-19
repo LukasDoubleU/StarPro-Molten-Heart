@@ -60,7 +60,7 @@ public abstract class Level extends World {
        }else if(obj == 2){
            object = Player.get();
        }else if(obj == 3){
-           object = new Bomb();
+           object = new Bomb(2);
        }else if(obj == 4){
            object = new Barrel();
        }
