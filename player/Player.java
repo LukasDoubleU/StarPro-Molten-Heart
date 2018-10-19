@@ -1,6 +1,8 @@
+package player;
 import java.util.List;
 
 import greenfoot.*;
+import world.Obstacle;
 
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine

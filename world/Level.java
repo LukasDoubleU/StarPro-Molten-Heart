@@ -1,4 +1,7 @@
+package world;
+import enemy.Bomb;
 import greenfoot.*;
+import player.Player;
 
 public abstract class Level extends World {
 

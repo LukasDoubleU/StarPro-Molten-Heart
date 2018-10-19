@@ -1,4 +1,7 @@
+package enemy;
 import greenfoot.*;
+import player.Player;
+
 import java.util.*;
 
 /**

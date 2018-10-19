@@ -1,3 +1,4 @@
+package world;
 import greenfoot.*;
 
 public class Level2 extends Level {
