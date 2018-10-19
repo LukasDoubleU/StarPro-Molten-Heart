@@ -35,7 +35,7 @@ public class Player extends Actor {
     int currentImageIndex;
 
     private Player() {
-        setImage("soldier_bright/image_part_019.png.png");
+        setImage("soldier_bright/image_part_019.png");
     }
 
     @Override
