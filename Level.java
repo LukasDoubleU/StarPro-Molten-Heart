@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public abstract class Level extends World {
-    
+
    /**
      *Default Welt
      *0 = Leer
@@ -14,7 +14,7 @@ public abstract class Level extends World {
        /**
        * 16 Zeilen von Oben nach unten für 720 Pixel
        * Die letzten 2 Zeilen sind für Lifebar und Timer da
-       * 
+       *
        * 31 Elemente von Links nach Rechts für 1280 Pixel*/
        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -35,14 +35,14 @@ public abstract class Level extends World {
        {9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9},
        {9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9},
    };
-    
-   public Level() {    
+
+   public Level() {
        super(1280, 720, 1);
        setBackground("brick.jpg");
    }
-   
+
    public abstract void finish();
-   
+
    public void generateWorld() {
        for(int j = world.length-1;j != -1; j--){
            for(int i = world[j].length-1;i != -1; i--){
@@ -52,19 +52,19 @@ public abstract class Level extends World {
            }
        }
    }
-   
+
    public void generateObject(int obj, int x, int y) {
-       Actor object = null; 
+       Actor object = null;
        if(obj == 1){
-           object = new Barrel(); 
+           object = new Barrel();
        }else if(obj == 2){
-           object = new Player(); 
+           object = Player.get();
        }else if(obj == 3){
            object = new Bomb();
        }else if(obj == 4){
            object = new Barrel();
        }
-       
+
        if(object != null){
            addObject(object, 20+x, 20+y);
        }
