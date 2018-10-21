@@ -5,14 +5,14 @@ import greenfoot.*;
 
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine
- * Instanz dieser Klasse. Auf diese kann Ã¼ber
+ * Instanz dieser Klasse. Auf diese kann über
  */
 public class Player extends Actor {
 
     private static final Player INSTANCE = new Player();
 
     /**
-     * Gibt die Instanz der Spielers zurÃ¼ck. Diese ist "permanent".
+     * Gibt die Instanz der Spielers zurück. Diese ist "permanent".
      */
     public static Player get() {
         return INSTANCE;
@@ -25,7 +25,7 @@ public class Player extends Actor {
     int oldX, oldY, oldRotation;
 
     /*
-     * Variablen fÃ¼r die Bilder zur Laufanimation
+     * Variablen für die Bilder zur Laufanimation
      */
     String prefix = "soldier_bright/image_part_", suffix = ".png";
     int firstUp = 1, lastUp = 9;
@@ -46,10 +46,10 @@ public class Player extends Actor {
     }
 
     /**
-     * FÃ¼gt dem Spieler Schaden zu (zieht ihm Leben ab)
+     * Fügt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
     public void damage() {
-        // TODO: Gegner Team zur VerfÃ¼gung stellen, Parameter definieren
+        // TODO: Gegner Team zur Verfügung stellen, Parameter definieren
     }
 
     /**
@@ -62,7 +62,7 @@ public class Player extends Actor {
     }
 
     /**
-     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zurÃ¼ck.
+     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zurück.
      */
     private void resetPosition() {
         setLocation(oldX, oldY);
@@ -70,14 +70,14 @@ public class Player extends Actor {
     }
 
     /**
-     * PrÃ¼ft & reagiert auf Kollisionen
+     * Prüft & reagiert auf Kollisionen
      */
     private void checkCollision() {
         checkObstacle();
     }
 
     /**
-     * PrÃ¼ft & reagiert auf Kollision mit Hindernissen
+     * Prüft & reagiert auf Kollision mit Hindernissen
      */
     private void checkObstacle() {
         List<Obstacle> obstacles = getIntersectingObjects(Obstacle.class);
@@ -88,7 +88,7 @@ public class Player extends Actor {
     }
 
     /**
-     * FÃ¼hrt eine Bewegung in AbhÃ¤ngigkeit zu den gedrÃ¼ckten Tasten aus
+     * Führt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
     private void move() {
 
