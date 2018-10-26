@@ -25,6 +25,7 @@ public class Camel extends Ranged
     public Camel(int newMov_Speed) {
         turn(45);
         mov_speed = newMov_Speed;
+        setImage("camel.png");
     }
     
     public Camel() {

@@ -60,24 +60,25 @@ public class BulletDamage extends Projectiles
         move(mov_speed);
         
         List intersectingObjects = new ArrayList();
-        intersectingObjects = this.getIntersectingObjects(Player.class);
+        intersectingObjects = this.getIntersectingObjects(null);
         
-        if(this.isAtEdge()) {
-            this.getWorld().removeObject(this);
-            isAlive = false;
-        }
-        
-        for(Object a : intersectingObjects)  {
+        for(Object a : intersectingObjects)  {          
             if(a instanceof Player) {
                 Player.get().damage(damage);
                 this.getWorld().removeObject(this);
                 isAlive = false;
+                return;
             }
             if(a instanceof Obstacle) {
                 this.getWorld().removeObject(this);
                 isAlive = false;
+                return;
             }
-            
+           
+        }
+        if(this.isAtEdge()) {
+            this.getWorld().removeObject(this);
+            isAlive = false;
         }
     }
    

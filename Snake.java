@@ -3,7 +3,7 @@ import greenfoot.*;
 
 import java.util.*;
 
-public class Bomb extends Melee {
+public class Snake extends Melee {
     
     int counter = 0;
     boolean lockedOntoPlayer = false;
@@ -11,11 +11,12 @@ public class Bomb extends Melee {
     int damage = 1;
     Player target = null;
     
-    public Bomb(int newMov_Speed) {
+    public Snake(int newMov_Speed) {
         mov_speed = newMov_Speed;
+        setImage("snake/image_part_010.png");
     }
     
-    public Bomb(){
+    public Snake(){
         this(3);
     }
 
