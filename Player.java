@@ -58,10 +58,19 @@ public class Player extends Actor {
 
     @Override
     public void act() {
+        String key = Greenfoot.getKey();
+
         rememberPosition();
-        move();
+        move(key);
         checkCollision();
+        useItem(key);
         processDots();
+    }
+
+    private void useItem(String key) {
+        if ("space".equals(key)) {
+            equippedWeapon.use();
+        }
     }
 
     /**
@@ -84,7 +93,6 @@ public class Player extends Actor {
         if (lifeCount <= 0) {
             // TODO GameOver Methode aufrufen
         }
-        System.out.println("Spieler nimmt " + dmg + " Schaden. Verbleibende Leben: " + lifeCount);
     }
 
     /**
@@ -133,9 +141,8 @@ public class Player extends Actor {
     /**
      * F�hrt eine Bewegung in Abh�ngigkeit zu den gedr�ckten Tasten aus
      */
-    private void move() {
+    private void move(String key) {
 
-        String key = Greenfoot.getKey();
         if (key == null) {
             return;
         }
@@ -178,5 +185,25 @@ public class Player extends Actor {
      */
     public int getLifeCount() {
         return lifeCount;
+    }
+
+    /**
+     * Gibt an, in welche Richtung der Spieler gerade schaut. {@link #getRotation()}
+     * kann nicht verwendet werden!
+     */
+    public Direction getDirection() {
+        if (currentImageIndex < 1 || currentImageIndex > 36) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if (currentImageIndex >= 28) {
+            return Direction.Right;
+        }
+        if (currentImageIndex >= 19) {
+            return Direction.Down;
+        }
+        if (currentImageIndex >= 10) {
+            return Direction.Left;
+        }
+        return Direction.Up;
     }
 }

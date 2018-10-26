@@ -1,14 +1,9 @@
 
-import greenfoot.*;
+import greenfoot.GreenfootImage;
 
 public class Sword extends Weapon {
 
     GreenfootImage image = new GreenfootImage("swords/image_part_001.png");
-
-    @Override
-    public void attack() {
-        // TODO
-    }
 
     @Override
     public int getDamage() {
@@ -17,7 +12,7 @@ public class Sword extends Weapon {
 
     @Override
     public int getCooldown() {
-        return 10;
+        return 5;
     }
 
     @Override
@@ -33,5 +28,10 @@ public class Sword extends Weapon {
     @Override
     public GreenfootImage getUsageImage() {
         return null; // TODO
+    }
+
+    @Override
+    public Attack getAttack() {
+        return new SwordAttack();
     }
 }

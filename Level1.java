@@ -3,7 +3,8 @@ import greenfoot.*;
 public class Level1 extends Level {
     
     public Level1() {
-        generateWorld();
+        super();
+        setBackground("background_final.png");
     }
 
     public void finish(){
