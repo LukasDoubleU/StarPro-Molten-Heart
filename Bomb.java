@@ -8,7 +8,7 @@ public class Bomb extends Melee {
     int counter = 0;
     boolean lockedOntoPlayer = false;
     int mov_speed;
-    float damage;
+    int damage = 1;
     Player target = null;
     
     public Bomb(int newMov_Speed) {
@@ -41,6 +41,17 @@ public class Bomb extends Melee {
         if(counter==40){
             turn(90);
             counter = 0;
+        }
+        
+        List intersectingObjects = new ArrayList();
+        intersectingObjects = this.getIntersectingObjects(Player.class);
+        
+        for(Object a : intersectingObjects)  {
+            if(a instanceof Player) {
+                Player.get().damage(damage);
+                
+            }
+            
         }
         
         move(mov_speed);

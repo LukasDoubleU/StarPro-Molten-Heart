@@ -40,7 +40,7 @@ public class Camel extends Ranged
         if(target != null) {
             this.turnTowards(target.getX(), target.getY());
             if(counter == 100) {
-                BulletDamage b = new BulletDamage(4, 1.0f, target);
+                BulletDamage b = new BulletDamage(4, 1, target, "Lava_Projectile.png");
                 this.getWorld().addObject(b, this.getX(), this.getY());
                 counter = 0;
             }
@@ -57,6 +57,8 @@ public class Camel extends Ranged
         counter = counter + 1; 
             
         }
+        
+        
         
       
     }    
