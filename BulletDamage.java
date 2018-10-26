@@ -16,37 +16,70 @@ public class BulletDamage extends Projectiles
      */
     
     int mov_speed;
-    int damage = 1;
+    int damage;
+    int turnDegree;
     Player target = null;
-    boolean turnNotDone = true;
+    boolean turnNotDone;
+    boolean isAlive;
 
-    public BulletDamage(int newMov_Speed, int newDamage, Player newTarget,String imgPath) {
+    public BulletDamage(int newMov_Speed, int newDamage, Player newTarget, String imgPath) {
         mov_speed = newMov_Speed;
         damage = newDamage;
         target = newTarget;
         setImage(imgPath);
+        isAlive = true;
+        turnNotDone = true;
+    }
+    
+    public BulletDamage(int newMov_Speed, int newDamage, int newTurnDegree, Player newTarget, String imgPath) {
+        mov_speed = newMov_Speed;
+        damage = newDamage;
+        target = newTarget;
+        setImage(imgPath);
+        isAlive = true;
+        turnNotDone = true;
+        turnDegree = newTurnDegree;
     }
     
     public void act() 
     {
+        if(isAlive) {
+       
         if(turnNotDone) {
-            this.turnTowards(target.getX(), target.getY());
+            if(target!=null) {
+                this.turnTowards(target.getX(), target.getY());
+            }
+            if(target==null) {
+                this.turn(turnDegree);
+            }
+        
             turnNotDone = false;
+            
         }
         
         move(mov_speed);
-        if(this.isAtEdge()) {
-            this.getWorld().removeObject(this);
-        }
         
         List intersectingObjects = new ArrayList();
         intersectingObjects = this.getIntersectingObjects(Player.class);
         
+        if(this.isAtEdge()) {
+            this.getWorld().removeObject(this);
+            isAlive = false;
+        }
+        
         for(Object a : intersectingObjects)  {
             if(a instanceof Player) {
                 Player.get().damage(damage);
+                this.getWorld().removeObject(this);
+                isAlive = false;
+            }
+            if(a instanceof Obstacle) {
+                this.getWorld().removeObject(this);
+                isAlive = false;
             }
             
         }
+    }
+   
     }    
 }
