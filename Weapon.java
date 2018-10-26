@@ -12,7 +12,7 @@ public abstract class Weapon extends Item {
     }
 
     /**
-     * Führt einen Angriff aus, in die Blickrichtung des Spielers.
+     * FÃ¼hrt einen Angriff aus, in die Blickrichtung des Spielers.
      */
     public abstract void attack();
 
