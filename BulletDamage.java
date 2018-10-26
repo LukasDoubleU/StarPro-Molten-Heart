@@ -7,7 +7,7 @@ import greenfoot.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class KugelSchaden extends Projectiles
+public class BulletDamage extends Projectiles
 {
     /**
      * Act - do whatever the KugelSchaden wants to do. This method is called whenever

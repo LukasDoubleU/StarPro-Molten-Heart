@@ -9,7 +9,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Kamel extends Ranged
+public class Camel extends Ranged
 {
     /**
      * Act - do whatever the Kamel wants to do. This method is called whenever
@@ -40,8 +40,8 @@ public class Kamel extends Ranged
         if(target != null) {
             this.turnTowards(target.getX(), target.getY());
             if(counter == 100) {
-                KugelSchaden k = new KugelSchaden(4, 1.0f, target);
-                this.getWorld().addObject(k, this.getX(), this.getY());
+                BulletDamage b = new BulletDamage(4, 1.0f, target);
+                this.getWorld().addObject(b, this.getX(), this.getY());
                 counter = 0;
             }
             counter++;
