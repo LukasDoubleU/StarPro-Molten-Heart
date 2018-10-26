@@ -9,7 +9,7 @@ import greenfoot.*;
 public class LavaBoss extends Boss
 {
     /**
-     *  @param counter : dient um die Schüsse in einer bestimmten zeit abzufeuern
+     *  @param counter : dient um die Schuesse in einer bestimmten zeit abzufeuern
      */
     private int counter = 9;
     private static final int counterEnd = 9;

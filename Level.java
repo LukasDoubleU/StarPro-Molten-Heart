@@ -46,6 +46,10 @@ public abstract class Level extends World {
         super(1280, 720, 1);
         generateWorld();
     }
+    
+    public Level(boolean diffParam){
+        super(1280,720,1);
+    }
 
     /**
      * Wenn getriggert wird das Level hochgesetzt
@@ -56,7 +60,8 @@ public abstract class Level extends World {
      * Startet die Game Over Welt beim Game Over und löscht vorher alle Objekte in der Welt
      */
     public void runGameOverWorld(){
-        removeObjects(getObjects(null));
+        //removeObjects(getObjects(null));
+        //Greenfoot.setWorld(new Level2());
         Greenfoot.setWorld(new GameOver());
     }
 

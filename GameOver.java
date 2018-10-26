@@ -8,13 +8,13 @@ import greenfoot.*;
  */
 public class GameOver extends Level
 {
-    private int[][] world = null;
+    
     /**
      * Constructor for objects of class GameOver.
      * 
      */
     public GameOver(){
-        super();
+        super(true);
         setBackground("gameover.png"); 
     }
     
