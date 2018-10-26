@@ -5,14 +5,14 @@ import greenfoot.*;
 
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine
- * Instanz dieser Klasse. Auf diese kann über
+ * Instanz dieser Klasse. Auf diese kann ï¿½ber
  */
 public class Player extends Actor {
 
     private static final Player INSTANCE = new Player();
 
     /**
-     * Gibt die Instanz der Spielers zurück. Diese ist "permanent".
+     * Gibt die Instanz der Spielers zurï¿½ck. Diese ist "permanent".
      */
     public static Player get() {
         return INSTANCE;
@@ -25,7 +25,7 @@ public class Player extends Actor {
     int oldX, oldY, oldRotation;
 
     /*
-     * Variablen für die Bilder zur Laufanimation
+     * Variablen fï¿½r die Bilder zur Laufanimation
      */
     String prefix = "soldier_bright/image_part_", suffix = ".png";
     int firstUp = 1, lastUp = 9;
@@ -33,9 +33,19 @@ public class Player extends Actor {
     int firstDown = 19, lastDown = 27;
     int firstRight = 28, lastRight = 36;
     int currentImageIndex;
+    GreenfootImage[] imageCache = new GreenfootImage[37];
+    {
+        for (int i = 1; i < 37; i++) {
+            imageCache[i] = new GreenfootImage(prefix + String.format("%03d", i) + suffix);
+        }
+    }
 
     private Player() {
-        setImage("soldier_bright/image_part_019.png");
+        setImage(19);
+    }
+
+    private void setImage(int index) {
+        setImage(imageCache[currentImageIndex = index]);
     }
 
     @Override
@@ -46,10 +56,17 @@ public class Player extends Actor {
     }
 
     /**
-     * Fügt dem Spieler Schaden zu (zieht ihm Leben ab)
+     * Fï¿½gt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
-    public void damage() {
-        // TODO: Gegner Team zur Verfügung stellen, Parameter definieren
+    public void damage(int dmg) {
+        // TODO: Gegner Team zur Verfï¿½gung stellen, Parameter definieren
+    }
+
+    /**
+     * Slow wird Ã¼ber Zeit abgebaut, verringert den moveSpeed
+     */
+    public void slow(int amount) {
+        // TODO: Implemetieren. Wird vom Gegner Team verwendet
     }
 
     /**
@@ -62,7 +79,7 @@ public class Player extends Actor {
     }
 
     /**
-     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zurück.
+     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zurï¿½ck.
      */
     private void resetPosition() {
         setLocation(oldX, oldY);
@@ -70,14 +87,14 @@ public class Player extends Actor {
     }
 
     /**
-     * Prüft & reagiert auf Kollisionen
+     * Prï¿½ft & reagiert auf Kollisionen
      */
     private void checkCollision() {
         checkObstacle();
     }
 
     /**
-     * Prüft & reagiert auf Kollision mit Hindernissen
+     * Prï¿½ft & reagiert auf Kollision mit Hindernissen
      */
     private void checkObstacle() {
         List<Obstacle> obstacles = getIntersectingObjects(Obstacle.class);
@@ -88,7 +105,7 @@ public class Player extends Actor {
     }
 
     /**
-     * Führt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
+     * Fï¿½hrt eine Bewegung in Abhï¿½ngigkeit zu den gedrï¿½ckten Tasten aus
      */
     private void move() {
 
@@ -97,20 +114,38 @@ public class Player extends Actor {
             return;
         }
         if ("w".equals(key) || "up".equals(key)) {
-            setRotation(270);
+            setLocation(getX(), getY() - moveSpeed);
+            setNextImage(firstUp, lastUp);
         }
         if ("a".equals(key) || "left".equals(key)) {
-            setRotation(180);
+            setLocation(getX() - moveSpeed, getY());
+            setNextImage(firstLeft, lastLeft);
         }
         if ("s".equals(key) || "down".equals(key)) {
-            setRotation(90);
+            setLocation(getX(), getY() + moveSpeed);
+            setNextImage(firstDown, lastDown);
         }
         if ("d".equals(key) || "right".equals(key)) {
-            setRotation(0);
+            setLocation(getX() + moveSpeed, getY());
+            setNextImage(firstRight, lastRight);
         }
 
         // TODO Das Bild aktualisieren (Blickrichtung + Laufanimation)
+    }
 
-        move(moveSpeed);
+    private void setNextImage(int firstImageIndex, int lastImageIndex) {
+        // Wir haben uns auch vorher in diese Richtung bewegt
+        if (currentImageIndex >= firstImageIndex && currentImageIndex <= lastImageIndex) {
+            // Nehme das nÃ¤chste Bild aus der Richtung,
+            // bzw. das Erste, wenn das Ende erreicht wurde
+            int index = ++currentImageIndex > lastImageIndex ? firstImageIndex : currentImageIndex;
+            setImage(index);
+        } else {
+            setImage(firstImageIndex);
+        }
+    }
+
+    public int getLifeCount() {
+        return lifeCount;
     }
 }
