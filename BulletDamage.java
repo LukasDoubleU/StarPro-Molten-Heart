@@ -1,5 +1,6 @@
 
 import greenfoot.*;
+import java.util.*;
 
 /**
  * Write a description of class Kugeldamage here.
@@ -15,13 +16,17 @@ public class BulletDamage extends Projectiles
      */
     
     int mov_speed;
-    float damage;
+    int damage = 1;
     Player target = null;
     boolean turnNotDone = true;
     
+<<<<<<< HEAD
     public BulletDamage(int newMov_Speed, float newdamage, Player newTarget,String imgPath) {
+=======
+    public BulletDamage(int newMov_Speed, int newDamage, Player newTarget) {
+>>>>>>> 3678463ca2c44f91788c6ef110bff76515777c46
         mov_speed = newMov_Speed;
-        damage = newdamage;
+        damage = newDamage;
         target = newTarget;
         setImage(imgPath);
     }
@@ -36,6 +41,16 @@ public class BulletDamage extends Projectiles
         move(mov_speed);
         if(this.isAtEdge()) {
             this.getWorld().removeObject(this);
+        }
+        
+        List intersectingObjects = new ArrayList();
+        intersectingObjects = this.getIntersectingObjects(Player.class);
+        
+        for(Object a : intersectingObjects)  {
+            if(a instanceof Player) {
+                Player.get().damage(damage);
+            }
+            
         }
     }    
 }

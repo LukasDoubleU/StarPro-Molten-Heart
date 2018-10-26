@@ -1,7 +1,9 @@
 
 import java.util.List;
 
-import greenfoot.*;
+import greenfoot.Actor;
+import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
 
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine
@@ -18,11 +20,17 @@ public class Player extends Actor {
         return INSTANCE;
     }
 
-    int lifeCount = 4;
-    int moveSpeed = 10;
-    Item equippedItem = new Sword();
+    int lifeCount = 5;
+
+    int moveSpeed = 8, moveSpeedSlowed = 0, moveSpeedBonus = 0;
 
     int oldX, oldY, oldRotation;
+
+    /*
+     * Equipment Slots
+     */
+    Weapon equippedWeapon = new Sword();
+    Item equippedGear; // TODO
 
     /*
      * Variablen f�r die Bilder zur Laufanimation
@@ -53,20 +61,37 @@ public class Player extends Actor {
         rememberPosition();
         move();
         checkCollision();
+        processDots();
+    }
+
+    /**
+     * Aktualisiert Über-Zeit-Effekte
+     */
+    private void processDots() {
+        if (moveSpeedBonus > 0) {
+            moveSpeedBonus--;
+        }
+        if (moveSpeedSlowed > 0) {
+            moveSpeedSlowed--;
+        }
     }
 
     /**
      * F�gt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
     public void damage(int dmg) {
-        // TODO: Gegner Team zur Verf�gung stellen, Parameter definieren
+        lifeCount -= dmg;
+        if (lifeCount <= 0) {
+            // TODO GameOver Methode aufrufen
+        }
+        System.out.println("Spieler nimmt " + dmg + " Schaden. Verbleibende Leben: " + lifeCount);
     }
 
     /**
-     * Slow wird über Zeit abgebaut, verringert den moveSpeed
+     * Verlangsamt den Spieler um die angegebene Menge. Wird über Zeit abgebaut.
      */
     public void slow(int amount) {
-        // TODO: Implemetieren. Wird vom Gegner Team verwendet
+        moveSpeedSlowed += amount;
     }
 
     /**
@@ -97,8 +122,9 @@ public class Player extends Actor {
      * Pr�ft & reagiert auf Kollision mit Hindernissen
      */
     private void checkObstacle() {
+        @SuppressWarnings("unchecked")
         List<Obstacle> obstacles = getIntersectingObjects(Obstacle.class);
-        // Kollidieren wir mit irgendeinem Hinderniss?
+        // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
             resetPosition();
         }
@@ -113,24 +139,26 @@ public class Player extends Actor {
         if (key == null) {
             return;
         }
-        if ("w".equals(key) || "up".equals(key)) {
-            setLocation(getX(), getY() - moveSpeed);
+        if ("w".equals(key)) {
+            setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
         }
-        if ("a".equals(key) || "left".equals(key)) {
-            setLocation(getX() - moveSpeed, getY());
+        if ("a".equals(key)) {
+            setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
         }
-        if ("s".equals(key) || "down".equals(key)) {
-            setLocation(getX(), getY() + moveSpeed);
+        if ("s".equals(key)) {
+            setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
         }
-        if ("d".equals(key) || "right".equals(key)) {
-            setLocation(getX() + moveSpeed, getY());
+        if ("d".equals(key)) {
+            setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
         }
+    }
 
-        // TODO Das Bild aktualisieren (Blickrichtung + Laufanimation)
+    public int getMoveSpeed() {
+        return moveSpeed + moveSpeedBonus - moveSpeedSlowed;
     }
 
     private void setNextImage(int firstImageIndex, int lastImageIndex) {
@@ -145,6 +173,9 @@ public class Player extends Actor {
         }
     }
 
+    /**
+     * @return Die Anzahl Leben des Spielers
+     */
     public int getLifeCount() {
         return lifeCount;
     }
