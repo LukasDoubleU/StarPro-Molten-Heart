@@ -15,7 +15,7 @@ public abstract class Ranged extends Enemy
      */
     
     float mov_speed;
-    float schaden;
+    float damage;
     Player target = null;
     
     public void act() 

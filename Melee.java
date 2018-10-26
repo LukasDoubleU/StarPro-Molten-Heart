@@ -14,7 +14,7 @@ public abstract class Melee extends Enemy
      */
     
     int mov_speed;
-    float schaden;
+    float damage;
     Player target = null;
     
     public void act() 

@@ -2,7 +2,7 @@
 import greenfoot.*;
 
 /**
- * Write a description of class KugelSchaden here.
+ * Write a description of class Kugeldamage here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -10,18 +10,18 @@ import greenfoot.*;
 public class BulletDamage extends Projectiles
 {
     /**
-     * Act - do whatever the KugelSchaden wants to do. This method is called whenever
+     * Act - do whatever the Kugeldamage wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
     int mov_speed;
-    float schaden;
+    float damage;
     Player target = null;
     boolean turnNotDone = true;
     
-    public KugelSchaden(int newMov_Speed, float newSchaden, Player newTarget) {
+    public BulletDamage(int newMov_Speed, float newdamage, Player newTarget) {
         mov_speed = newMov_Speed;
-        schaden = newSchaden;
+        damage = newdamage;
         target = newTarget;
         
     }

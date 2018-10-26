@@ -18,16 +18,16 @@ public class Camel extends Ranged
     int counter = 0;
     boolean lockedOntoPlayer = false;
     int mov_speed;
-    float schaden;
+    float damage;
     Player target = null;
     List projectiles = new ArrayList();
     
-    public Kamel(int newMov_Speed) {
+    public Camel(int newMov_Speed) {
         turn(45);
         mov_speed = newMov_Speed;
     }
     
-    public Kamel() {
+    public Camel() {
         this(3);
     }
         

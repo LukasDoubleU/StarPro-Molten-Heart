@@ -8,7 +8,7 @@ public class Bomb extends Melee {
     int counter = 0;
     boolean lockedOntoPlayer = false;
     int mov_speed;
-    float schaden;
+    float damage;
     Player target = null;
     
     public Bomb(int newMov_Speed) {
