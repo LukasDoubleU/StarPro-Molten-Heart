@@ -19,12 +19,8 @@ public class BulletDamage extends Projectiles
     int damage = 1;
     Player target = null;
     boolean turnNotDone = true;
-    
-<<<<<<< HEAD
-    public BulletDamage(int newMov_Speed, float newdamage, Player newTarget,String imgPath) {
-=======
-    public BulletDamage(int newMov_Speed, int newDamage, Player newTarget) {
->>>>>>> 3678463ca2c44f91788c6ef110bff76515777c46
+
+    public BulletDamage(int newMov_Speed, int newDamage, Player newTarget,String imgPath) {
         mov_speed = newMov_Speed;
         damage = newDamage;
         target = newTarget;

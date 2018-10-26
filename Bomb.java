@@ -48,12 +48,11 @@ public class Bomb extends Melee {
         for(Object a : intersectingObjects)  {
             if(a instanceof Player) {
                 Player.get().damage(damage);
+                
             }
             
         }
-        if(this.getIntersectingObjects(Player.get().getClass())) {
-                     
-        }
+        
         move(mov_speed);
         counter = counter + 1;
 
