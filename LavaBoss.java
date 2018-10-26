@@ -19,6 +19,6 @@ public class LavaBoss extends Boss
      */
     public void act() 
     {
-        turn(2);
+        turn(1);
     }    
 }
