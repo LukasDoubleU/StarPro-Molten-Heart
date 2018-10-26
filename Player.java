@@ -8,6 +8,8 @@ import greenfoot.GreenfootImage;
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine
  * Instanz dieser Klasse. Auf diese kann �ber
+ *
+ * TODO: Beim Einsammeln von Ausrüstung ändert sich das Spieler Model
  */
 public class Player extends Actor {
 
