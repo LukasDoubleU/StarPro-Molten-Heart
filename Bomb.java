@@ -13,6 +13,7 @@ public class Bomb extends Melee {
     
     public Bomb(int newMov_Speed) {
         mov_speed = newMov_Speed;
+        setImage("bomb.png");
     }
     
     public Bomb(){
