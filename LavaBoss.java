@@ -8,6 +8,11 @@ import greenfoot.*;
  */
 public class LavaBoss extends Boss
 {
+    /**
+     *  @param counter : dient um die Schüsse in einer bestimmten zeit abzufeuern
+     */
+    private int counter = 9;
+    private static final int counterEnd = 9;
     
     public LavaBoss(){
         setImage("teddybear.png");
@@ -17,8 +22,16 @@ public class LavaBoss extends Boss
      * Act - do whatever the LavaBoss wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
     public void act() 
-    {
-        turn(1);
+    {   
+        turn(2);
+        if(counter==counterEnd){
+            BulletDamage b = new BulletDamage(4, 1,this.getRotation(), null, "Lava_Projectile.png");
+            
+            this.getWorld().addObject(b, this.getX(), this.getY());
+            counter = 0;
+        }
+        counter++;
     }    
 }
