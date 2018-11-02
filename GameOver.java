@@ -14,7 +14,7 @@ public class GameOver extends Level
      * 
      */
     public GameOver(){
-        super(true);
+        super();
         setBackground("gameover.png"); 
         
         addObject(new Button(),50,80); 
