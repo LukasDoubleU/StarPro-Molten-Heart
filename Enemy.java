@@ -1,7 +1,7 @@
 
 import greenfoot.*;
 
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Obstacle {
     
     int mov_speed;
     float damage;
