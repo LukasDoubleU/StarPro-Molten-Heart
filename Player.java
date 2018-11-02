@@ -29,10 +29,9 @@ public class Player extends Actor {
     /*
      * Equipment Slots
      */
-    Weapon equippedWeapon = new BeginnerSword();
-    Armor equippedArmor = new NoArmor();
+    Weapon equippedWeapon = new Sword.BeginnerSword();
+    Armor equippedArmor = new Armor.NoArmor();
     SpeedBoots equippedBoots = null;
-    Item equippedGear; // TODO
 
     /*
      * Variablen für die Bilder zur Laufanimation
@@ -209,4 +208,19 @@ public class Player extends Actor {
     public String getArmorImagePrefix() {
         return equippedArmor.getImageFolder() + "/image_part_";
     }
+
+    /**
+     * Heilt den Spieler um die angegebene Menge.
+     */
+    public void heal(int amount) {
+        lifeCount += amount;
+    }
+
+    /**
+     * Verschnellert den Spieler um die angegebene Menge.
+     */
+    public void speedUp(int amount) {
+        moveSpeedBonus += amount;
+    }
+
 }
