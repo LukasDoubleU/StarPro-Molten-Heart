@@ -9,7 +9,7 @@ public abstract class Potion extends Item {
     public class HealthPotion extends Potion {
 
         public HealthPotion() {
-            super(""); // TODO Bild
+            super("potions/red_potion.png");
         }
 
         @Override
@@ -21,7 +21,7 @@ public abstract class Potion extends Item {
     public class SpeedPotion extends Potion {
 
         public SpeedPotion() {
-            super(""); // TODO Bild
+            super("potions/pink_potion.png");
         }
 
         @Override
@@ -33,7 +33,7 @@ public abstract class Potion extends Item {
     public class DamagePotion extends Potion {
 
         public DamagePotion() {
-            super(""); // TODO Bild
+            super("potions/green_potion.png");
         }
 
         @Override
