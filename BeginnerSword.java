@@ -1,7 +1,7 @@
 
 import greenfoot.GreenfootImage;
 
-public class Sword extends Weapon {
+public class BeginnerSword extends Weapon {
 
     GreenfootImage image = new GreenfootImage("swords/image_part_001.png");
 
@@ -12,7 +12,7 @@ public class Sword extends Weapon {
 
     @Override
     public int getCooldown() {
-        return 5;
+        return 4;
     }
 
     @Override
