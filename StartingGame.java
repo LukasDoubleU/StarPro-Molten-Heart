@@ -19,6 +19,7 @@ public class StartingGame extends World
         super(1280, 720, 1); 
         setBackground("gameover.png"); 
         
-        addObject(new Button(),50,80);
+        addObject(new Button("Start Game"),640,600);
+        //addObject(new TextField("Start Game"), 640, 300);
     }
 }
