@@ -59,25 +59,25 @@ public class MeleeDamage extends Melee {
         if(this.getX() > target.getX()) {
             this.setLocation(this.getX()-mov_speed, this.getY());
             if(checkCollision()) {
-                this.setLocation(oldX+mov_speed, oldY);
+                this.setLocation(oldX, oldY);
             }
         }
         else {
             this.setLocation(this.getX()+mov_speed, this.getY());
             if(checkCollision()) {
-                this.setLocation(oldX-mov_speed, oldY);
+                this.setLocation(oldX, oldY);
             }
         }
         if(this.getY() > target.getY()) {
             this.setLocation(this.getX(), this.getY()-mov_speed);
             if(checkCollision()) {
-                this.setLocation(oldX, oldY+mov_speed);
+                this.setLocation(oldX, oldY);
             }
         }
         else {
             this.setLocation(this.getX(), this.getY()+mov_speed);
             if(checkCollision()) {
-                this.setLocation(oldX, oldY-mov_speed);
+                this.setLocation(oldX, oldY);
             }
         }
         this.setRotation(0);

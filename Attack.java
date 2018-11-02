@@ -47,6 +47,7 @@ public abstract class Attack extends Actor {
             for (Hit hit : hits) {
                 Player.get().getWorld().removeObject(hit);
             }
+            hits.clear();
         }
     }
 
@@ -60,5 +61,23 @@ public abstract class Attack extends Actor {
      *         wird
      */
     public abstract GreenfootImage getHitImage();
+
+    public static class Sword extends Attack {
+
+        public Sword(Weapon weapon) {
+            super(weapon);
+        }
+
+        @Override
+        public GreenfootImage getUsageImage() {
+            return new GreenfootImage("sword_swipe/swipe005.png");
+        }
+
+        @Override
+        public GreenfootImage getHitImage() {
+            return new GreenfootImage("red_yellow_splash_small.png");
+        }
+
+    }
 
 }

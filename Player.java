@@ -11,13 +11,21 @@ import greenfoot.GreenfootImage;
  */
 public class Player extends Actor {
 
-    private static final Player INSTANCE = new Player();
+    private static Player INSTANCE = new Player();
 
     /**
      * Gibt die Instanz der Spielers zurück. Diese ist "permanent".
      */
     public static Player get() {
         return INSTANCE;
+    }
+
+    /**
+     * Erneuert die Instanz des Spielers. Diese Methode darf nur aufgerufen werden,
+     * wenn das Spiel neu gestartet wird.
+     */
+    public static Player newInstance() {
+        return INSTANCE = new Player();
     }
 
     int lifeCount = 5;
@@ -29,8 +37,8 @@ public class Player extends Actor {
     /*
      * Equipment Slots
      */
-    Weapon equippedWeapon = new Sword.BeginnerSword();
-    Armor equippedArmor = new Armor.NoArmor();
+    Weapon equippedWeapon = new Sword.Beginner();
+    Armor equippedArmor = new Armor.None();
     SpeedBoots equippedBoots = null;
 
     /*
@@ -42,13 +50,9 @@ public class Player extends Actor {
     int firstRight = 28, lastRight = 36;
     int currentImageIndex;
     GreenfootImage[] imageCache = new GreenfootImage[37];
-    {
-        for (int i = 1; i < 37; i++) {
-            imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
-        }
-    }
 
     private Player() {
+        refreshMoveAnimationImageCache();
         setImage(19);
     }
 
@@ -89,7 +93,7 @@ public class Player extends Actor {
     public void damage(int dmg) {
         lifeCount -= dmg - equippedArmor.getDamageReduction();
         if (lifeCount <= 0) {
-            // TODO GameOver Methode aufrufen
+            Level.runGameOverWorld();
         }
     }
 
@@ -122,6 +126,28 @@ public class Player extends Actor {
      */
     private void checkCollision() {
         checkObstacle();
+        checkItem();
+    }
+
+    /**
+     * Prüft & reagiert auf Kollision mit Item
+     */
+    private void checkItem() {
+        @SuppressWarnings("unchecked")
+        List<Item> items = getIntersectingObjects(Item.class);
+        for (Item item : items) {
+            if (item instanceof Armor) {
+                equipArmor((Armor) item);
+            } else if (item instanceof Potion) {
+                ((Potion) item).drink(this);
+            }
+        }
+    }
+
+    private void equipArmor(Armor item) {
+        equippedArmor = item;
+        getWorld().removeObject(item);
+        refreshMoveAnimationImageCache();
     }
 
     /**
@@ -221,6 +247,12 @@ public class Player extends Actor {
      */
     public void speedUp(int amount) {
         moveSpeedBonus += amount;
+    }
+
+    private void refreshMoveAnimationImageCache() {
+        for (int i = 1; i < 37; i++) {
+            imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
+        }
     }
 
 }
