@@ -7,7 +7,7 @@ import greenfoot.GreenfootImage;
 
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine
- * Instanz dieser Klasse. Auf diese kann �ber
+ * Instanz dieser Klasse. Auf diese kann über
  *
  * TODO: Beim Einsammeln von Ausrüstung ändert sich das Spieler Model
  */
@@ -16,7 +16,7 @@ public class Player extends Actor {
     private static final Player INSTANCE = new Player();
 
     /**
-     * Gibt die Instanz der Spielers zur�ck. Diese ist "permanent".
+     * Gibt die Instanz der Spielers zurück. Diese ist "permanent".
      */
     public static Player get() {
         return INSTANCE;
@@ -35,9 +35,9 @@ public class Player extends Actor {
     Item equippedGear; // TODO
 
     /*
-     * Variablen f�r die Bilder zur Laufanimation
+     * Variablen für die Bilder zur Laufanimation
      */
-    String prefix = "soldier_bright/image_part_", suffix = ".png";
+    String prefix = "soldier_blank/image_part_", suffix = ".png";
     int firstUp = 1, lastUp = 9;
     int firstLeft = 10, lastLeft = 18;
     int firstDown = 19, lastDown = 27;
@@ -88,7 +88,7 @@ public class Player extends Actor {
     }
 
     /**
-     * F�gt dem Spieler Schaden zu (zieht ihm Leben ab)
+     * Fügt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
     public void damage(int dmg) {
         lifeCount -= dmg;
@@ -114,7 +114,7 @@ public class Player extends Actor {
     }
 
     /**
-     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zur�ck.
+     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zurück.
      */
     private void resetPosition() {
         setLocation(oldX, oldY);
@@ -122,14 +122,14 @@ public class Player extends Actor {
     }
 
     /**
-     * Pr�ft & reagiert auf Kollisionen
+     * Prüft & reagiert auf Kollisionen
      */
     private void checkCollision() {
         checkObstacle();
     }
 
     /**
-     * Pr�ft & reagiert auf Kollision mit Hindernissen
+     * Prüft & reagiert auf Kollision mit Hindernissen
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
@@ -141,7 +141,7 @@ public class Player extends Actor {
     }
 
     /**
-     * F�hrt eine Bewegung in Abh�ngigkeit zu den gedr�ckten Tasten aus
+     * Fährt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
     private void move(String key) {
 

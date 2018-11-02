@@ -9,17 +9,24 @@ public abstract class Weapon extends Item {
 
         int x = p.getX(), y = p.getY();
         Direction direction = p.getDirection();
+        int rotation = 0, distance = 40;
         if (direction == Direction.Up) {
-            y -= 10;
+            y -= distance;
+            rotation = 0;
         } else if (direction == Direction.Down) {
-            y += 10;
+            y += distance;
+            rotation = 180;
         } else if (direction == Direction.Right) {
-            x += 10;
+            x += distance;
+            rotation = 90;
         } else { // Left
-            y -= 10;
+            x -= distance;
+            rotation = 270;
         }
 
-        p.getWorld().addObject(getAttack(), x, y);
+        Attack attack = getAttack();
+        attack.setRotation(rotation);
+        p.getWorld().addObject(attack, x, y);
     }
 
     /**
