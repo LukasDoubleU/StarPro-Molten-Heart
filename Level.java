@@ -90,7 +90,9 @@ public abstract class Level extends World {
             } else if (obj == 10) {
                 object = Player.get();
             } else if (obj == 3) {
-                object = new Snake(2);
+                object = new RangedDamage(2);
+            } else if (obj == 4) {
+                object = new MeleeDamage();
             }  else if (obj == 11) {
                 object = new Door(11);
             }  else if (obj == 12) {
@@ -101,8 +103,6 @@ public abstract class Level extends World {
                 object = new Door(13);
             }  else if (obj == 14) {
                 object = new Door(14);
-            }  else if (obj == 4) {
-                object = new Camel();
             } else if (obj == 95){
                 object = new MoltenHeart();
             }

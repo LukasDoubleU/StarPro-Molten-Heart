@@ -45,8 +45,18 @@ public class BulletDamage extends Projectiles
     {
         if(isAlive) {
        
-        if(turnNotDone) {
-            if(target!=null) {
+            if(turnNotDone) {
+                firstTurn();
+            }
+        
+            move(mov_speed);
+            checkCollision();
+       
+        }
+   
+    }
+    public void firstTurn() {
+        if(target!=null) {
                 this.turnTowards(target.getX(), target.getY());
             }
             if(target==null) {
@@ -54,13 +64,11 @@ public class BulletDamage extends Projectiles
             }
         
             turnNotDone = false;
-            
-        }
-        
-        move(mov_speed);
-        
+    }
+    
+    public void checkCollision() {
         List intersectingObjects = new ArrayList();
-        intersectingObjects = this.getIntersectingObjects(null);
+        intersectingObjects = this.getObjectsInRange(10, null); 
         
         for(Object a : intersectingObjects)  {          
             if(a instanceof Player) {
@@ -81,6 +89,5 @@ public class BulletDamage extends Projectiles
             isAlive = false;
         }
     }
-   
-    }    
+    
 }
