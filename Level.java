@@ -55,14 +55,14 @@ public abstract class Level extends World {
     /**
      * Neustarten des Spiels beim ersten Level  
      */
-    public void restartGame(){
+    public static void restartGame(){
         Greenfoot.setWorld(new Level1());
     }
     
     /**
      * Startet die Game Over Welt beim Game Over und löscht vorher alle Objekte in der Welt
      */
-    public void runGameOverWorld(){
+    public static void runGameOverWorld(){
         Greenfoot.setWorld(new GameOver());
     }
 

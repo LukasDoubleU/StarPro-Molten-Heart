@@ -9,8 +9,18 @@ import greenfoot.*;
 public class Button extends Actor
 {
     
-    public Button(){
+    private String text; 
+    
+    private Button(){
         setImage("button.png");
+    }
+    
+    /**
+       *Erstellt einen Button mit einem Buttontext. 
+       */
+    public Button(String buttontext){
+        this();
+        this.text = buttontext; 
     }
     
     /**
@@ -20,8 +30,7 @@ public class Button extends Actor
     public void act() 
     {
         if(Greenfoot.mouseClicked(this)){
-           Greenfoot.setWorld(new Level1());
-            //((GameOver) getWorld()).restartGame();
+           ((GameOver) getWorld()).restartGame();
         }
     }    
 }
