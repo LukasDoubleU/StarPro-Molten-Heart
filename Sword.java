@@ -13,7 +13,7 @@ public class Sword extends Weapon {
     public static class Big extends Sword {
 
         public Big() {
-            super("swords/image_part_033.png", 3, 5);
+            super("swords/image_part_033.png", 3, 75);
         }
 
         @Override
@@ -26,7 +26,7 @@ public class Sword extends Weapon {
     public static class Beginner extends Sword {
 
         public Beginner() {
-            super("swords/image_part_001.png", 1, 3);
+            super("swords/image_part_001.png", 1, 50);
         }
 
         @Override
@@ -38,7 +38,7 @@ public class Sword extends Weapon {
     public static class Master extends Sword {
 
         public Master() {
-            super("swords/image_part_051.png", 3, 3);
+            super("swords/image_part_051.png", 3, 50);
         }
 
         @Override
