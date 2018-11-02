@@ -93,7 +93,15 @@ public abstract class Level extends World {
                 object = new DestroyableObstacle(2);
             }   else if (obj == 4) {
                 object = new DestroyableObstacle(3);
-            }   else if (obj == 9) {
+            }   else if (obj == 5) {
+                object = new MeleeDamage();
+            }   else if (obj == 6) {
+                object = new RangedDamage();
+            }   /**else if (obj == 7) {
+                object = new RangedSlow();
+            }   else if (obj == 8) {
+                object = new RangedExplosion();
+            }**/ else if (obj == 9) {
                 object = new border();
             }   else if (obj == 10) {
                 object = Player.get();
