@@ -11,13 +11,6 @@ public class Wall extends Obstacle {
         
     }
     
-    public void Realwall(int x) {
-        
-        setRotation(x);
-        setImage("realwall.png");
-        
-    }
-    
     
     public void act() {
         
