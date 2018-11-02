@@ -10,7 +10,7 @@ public abstract class Level extends World {
 
     private int[][] world = {
             /**
-             * 16 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
+             * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
              * Lifebar und Timer da
              *
              * 31 Elemente von Links nach Rechts für 1280 Pixel
@@ -98,7 +98,7 @@ public abstract class Level extends World {
                 object = new Snake(2);
             } else if (obj == 4) {
                 object = new Camel();
-            } else if (obj == 5){
+            } else if (obj == 95){
                 object = new MoltenHeart();
             }
 
