@@ -45,7 +45,7 @@ public abstract class Potion extends Item {
     public static class Immortality extends Potion {
 
         public Immortality() {
-            super(""); // TODO Bild
+            super("potions/invincible.png");
         }
 
         @Override

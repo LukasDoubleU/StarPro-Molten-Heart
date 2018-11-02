@@ -1,7 +1,7 @@
 public class SpeedBoots extends Item {
 
     public SpeedBoots() {
-        super(""); // TODO Bild
+        super("swift_boots.png");
     }
 
     public int getMoveSpeedBonus() {
