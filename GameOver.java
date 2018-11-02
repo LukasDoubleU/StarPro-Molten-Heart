@@ -16,10 +16,16 @@ public class GameOver extends Level
     public GameOver(){
         super(true);
         setBackground("gameover.png"); 
+        
+        addObject(new Button(),50,80); 
     }
     
     /*
      * Der Finish macht bei Game Over nichts. 
      */
     public void finish(){}
+    
+    public void restartGame(){
+        Greenfoot.setWorld(new Level1());
+    }
 }

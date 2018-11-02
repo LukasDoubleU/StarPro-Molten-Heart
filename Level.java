@@ -55,7 +55,14 @@ public abstract class Level extends World {
      * Wenn getriggert wird das Level hochgesetzt
      */
     public abstract void finish();
-
+    
+    /**
+     * Neustarten des Spiels beim ersten Level  
+     */
+    public void restartGame(){
+        Greenfoot.setWorld(new Level1());
+    }
+    
     /**
      * Startet die Game Over Welt beim Game Over und löscht vorher alle Objekte in der Welt
      */
