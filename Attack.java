@@ -7,6 +7,8 @@ import greenfoot.GreenfootImage;
 
 public abstract class Attack extends Actor {
 
+    Weapon weapon;
+
     class Hit extends Actor {
 
         Hit() {
@@ -17,7 +19,8 @@ public abstract class Attack extends Actor {
     int duration = 10;
     Set<Hit> hits = new HashSet<Hit>();
 
-    public Attack() {
+    public Attack(Weapon weapon) {
+        this.weapon = weapon;
         setImage(getUsageImage());
     }
 
@@ -31,7 +34,10 @@ public abstract class Attack extends Actor {
             Hit hit = new Hit();
             hits.add(hit);
             Player.get().getWorld().addObject(hit, enemy.getX(), getY());
-            // TODO dem Gegner schaden zufügen
+            enemy.lifeCount -= weapon.getDamage();
+            if (enemy.lifeCount <= 0) {
+                Player.get().getWorld().removeObject(enemy);
+            }
         }
 
         // Prüfe, ob die Dauer abläuft

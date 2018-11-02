@@ -12,7 +12,7 @@ public class Sword extends Weapon {
 
     @Override
     public int getCooldown() {
-        return 3;
+        return 5;
     }
 
     @Override
@@ -27,11 +27,11 @@ public class Sword extends Weapon {
 
     @Override
     public GreenfootImage getUsageImage() {
-        return new GreenfootImage("sword/image_part_001.png"); // TODO
+        return null; // Gibt es nicht für Waffen
     }
 
     @Override
     public Attack getAttack() {
-        return new SwordAttack();
+        return new SwordAttack(this);
     }
 }

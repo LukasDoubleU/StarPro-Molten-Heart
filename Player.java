@@ -24,7 +24,7 @@ public class Player extends Actor {
 
     int lifeCount = 5;
 
-    int moveSpeed = 8, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeed = 7, moveSpeedSlowed = 0, moveSpeedBonus = 0;
 
     int oldX, oldY, oldRotation;
 
@@ -60,17 +60,15 @@ public class Player extends Actor {
 
     @Override
     public void act() {
-        String key = Greenfoot.getKey();
-
         rememberPosition();
-        move(key);
+        move();
         checkCollision();
-        useItem(key);
+        useItem();
         processDots();
     }
 
-    private void useItem(String key) {
-        if ("space".equals(key)) {
+    private void useItem() {
+        if (Greenfoot.isKeyDown("space")) {
             equippedWeapon.use();
         }
     }
@@ -143,24 +141,17 @@ public class Player extends Actor {
     /**
      * Fährt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
-    private void move(String key) {
-
-        if (key == null) {
-            return;
-        }
-        if ("w".equals(key)) {
+    private void move() {
+        if (Greenfoot.isKeyDown("w")) {
             setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
-        }
-        if ("a".equals(key)) {
+        } else if (Greenfoot.isKeyDown("a")) {
             setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
-        }
-        if ("s".equals(key)) {
+        } else if (Greenfoot.isKeyDown("s")) {
             setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
-        }
-        if ("d".equals(key)) {
+        } else if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
         }
