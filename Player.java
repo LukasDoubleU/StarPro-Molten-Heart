@@ -8,8 +8,6 @@ import greenfoot.GreenfootImage;
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine
  * Instanz dieser Klasse. Auf diese kann über
- *
- * TODO: Beim Einsammeln von Ausrüstung ändert sich das Spieler Model
  */
 public class Player extends Actor {
 
@@ -31,13 +29,13 @@ public class Player extends Actor {
     /*
      * Equipment Slots
      */
-    Weapon equippedWeapon = new BeginnerSword();
-    Item equippedGear; // TODO
+    Weapon equippedWeapon = new Sword.BeginnerSword();
+    Armor equippedArmor = new Armor.NoArmor();
+    SpeedBoots equippedBoots = null;
 
     /*
      * Variablen für die Bilder zur Laufanimation
      */
-    String prefix = "soldier_blank/image_part_", suffix = ".png";
     int firstUp = 1, lastUp = 9;
     int firstLeft = 10, lastLeft = 18;
     int firstDown = 19, lastDown = 27;
@@ -46,7 +44,7 @@ public class Player extends Actor {
     GreenfootImage[] imageCache = new GreenfootImage[37];
     {
         for (int i = 1; i < 37; i++) {
-            imageCache[i] = new GreenfootImage(prefix + String.format("%03d", i) + suffix);
+            imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
         }
     }
 
@@ -63,13 +61,13 @@ public class Player extends Actor {
         rememberPosition();
         move();
         checkCollision();
-        useItem();
+        attack();
         processDots();
     }
 
-    private void useItem() {
+    private void attack() {
         if (Greenfoot.isKeyDown("space")) {
-            equippedWeapon.use();
+            equippedWeapon.attack();
         }
     }
 
@@ -89,7 +87,7 @@ public class Player extends Actor {
      * Fügt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
     public void damage(int dmg) {
-        lifeCount -= dmg;
+        lifeCount -= dmg - equippedArmor.getDamageReduction();
         if (lifeCount <= 0) {
             // TODO GameOver Methode aufrufen
         }
@@ -158,7 +156,14 @@ public class Player extends Actor {
     }
 
     public int getMoveSpeed() {
-        return moveSpeed + moveSpeedBonus - moveSpeedSlowed;
+        // Der Basis Move Speed
+        return moveSpeed
+                // Zuzüglich Move Speed Bonus (z.B. Trank)
+                + moveSpeedBonus
+                // Abzgl. Move Speed Penalty (z.B. durch Gegner)
+                - moveSpeedSlowed
+                // Und zzgl. Move Speed Bonus von Boots
+                + (equippedBoots != null ? equippedBoots.getMoveSpeedBonus() : 0);
     }
 
     private void setNextImage(int firstImageIndex, int lastImageIndex) {
@@ -199,4 +204,23 @@ public class Player extends Actor {
         }
         return Direction.Up;
     }
+
+    public String getArmorImagePrefix() {
+        return equippedArmor.getImageFolder() + "/image_part_";
+    }
+
+    /**
+     * Heilt den Spieler um die angegebene Menge.
+     */
+    public void heal(int amount) {
+        lifeCount += amount;
+    }
+
+    /**
+     * Verschnellert den Spieler um die angegebene Menge.
+     */
+    public void speedUp(int amount) {
+        moveSpeedBonus += amount;
+    }
+
 }
