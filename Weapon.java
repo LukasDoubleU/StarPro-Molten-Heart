@@ -9,6 +9,7 @@ public abstract class Weapon extends Item {
     public Weapon(String image, int damage, int cooldown) {
         super(image);
         this.damage = damage;
+        this.cooldown = cooldown;
     }
 
     /**

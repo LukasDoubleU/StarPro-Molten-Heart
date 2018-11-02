@@ -7,43 +7,28 @@ public class Sword extends Weapon {
 
     @Override
     public Attack getAttack() {
-        return new SwordAttack(this);
+        return new Attack.Sword(this);
     }
 
     public static class Big extends Sword {
 
         public Big() {
-            super("swords/image_part_033.png", 3, 5);
+            super("swords/image_part_033.png", 3, 75);
         }
-
-        @Override
-        public Attack getAttack() {
-            return new SwordAttack(this);
-        }
-
     }
 
     public static class Beginner extends Sword {
 
         public Beginner() {
-            super("swords/image_part_001.png", 1, 3);
+            super("swords/image_part_001.png", 1, 50);
         }
 
-        @Override
-        public Attack getAttack() {
-            return new SwordAttack(this);
-        }
     }
 
     public static class Master extends Sword {
 
         public Master() {
-            super("swords/image_part_051.png", 3, 3);
-        }
-
-        @Override
-        public Attack getAttack() {
-            return new SwordAttack(this);
+            super("swords/image_part_051.png", 3, 50);
         }
 
     }
