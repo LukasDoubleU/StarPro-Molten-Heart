@@ -29,8 +29,8 @@ public class Player extends Actor {
     /*
      * Equipment Slots
      */
-    Weapon equippedWeapon = new Sword.BeginnerSword();
-    Armor equippedArmor = new Armor.NoArmor();
+    Weapon equippedWeapon = new Sword.Beginner();
+    Armor equippedArmor = new Armor.None();
     SpeedBoots equippedBoots = null;
 
     /*
@@ -42,13 +42,9 @@ public class Player extends Actor {
     int firstRight = 28, lastRight = 36;
     int currentImageIndex;
     GreenfootImage[] imageCache = new GreenfootImage[37];
-    {
-        for (int i = 1; i < 37; i++) {
-            imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
-        }
-    }
 
     private Player() {
+        refreshMoveAnimationImageCache();
         setImage(19);
     }
 
@@ -122,6 +118,28 @@ public class Player extends Actor {
      */
     private void checkCollision() {
         checkObstacle();
+        checkItem();
+    }
+
+    /**
+     * Prüft & reagiert auf Kollision mit Item
+     */
+    private void checkItem() {
+        @SuppressWarnings("unchecked")
+        List<Item> items = getIntersectingObjects(Item.class);
+        for (Item item : items) {
+            if (item instanceof Armor) {
+                equipArmor((Armor) item);
+            } else if (item instanceof Potion) {
+                ((Potion) item).drink(this);
+            }
+        }
+    }
+
+    private void equipArmor(Armor item) {
+        equippedArmor = item;
+        getWorld().removeObject(item);
+        refreshMoveAnimationImageCache();
     }
 
     /**
@@ -221,6 +239,12 @@ public class Player extends Actor {
      */
     public void speedUp(int amount) {
         moveSpeedBonus += amount;
+    }
+
+    private void refreshMoveAnimationImageCache() {
+        for (int i = 1; i < 37; i++) {
+            imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
+        }
     }
 
 }

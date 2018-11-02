@@ -10,9 +10,9 @@ public class Sword extends Weapon {
         return new SwordAttack(this);
     }
 
-    public static class BigSword extends Sword {
+    public static class Big extends Sword {
 
-        public BigSword() {
+        public Big() {
             super("swords/image_part_033.png", 3, 5);
         }
 
@@ -23,9 +23,9 @@ public class Sword extends Weapon {
 
     }
 
-    public static class BeginnerSword extends Sword {
+    public static class Beginner extends Sword {
 
-        public BeginnerSword() {
+        public Beginner() {
             super("swords/image_part_001.png", 1, 3);
         }
 
@@ -35,9 +35,9 @@ public class Sword extends Weapon {
         }
     }
 
-    public static class MasterSword extends Sword {
+    public static class Master extends Sword {
 
-        public MasterSword() {
+        public Master() {
             super("swords/image_part_051.png", 3, 3);
         }
 

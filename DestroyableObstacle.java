@@ -15,4 +15,11 @@ public class DestroyableObstacle extends Enemy
         
         
     }    
+    
+    public void damage(int damage) {
+        lifeCount = lifeCount - damage;
+        if(lifeCount < 0) {
+            this.getWorld().removeObject(this);
+        }
+    }
 }
