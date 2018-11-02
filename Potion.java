@@ -6,9 +6,9 @@ public abstract class Potion extends Item {
 
     public abstract void drink(Player p);
 
-    public class HealthPotion extends Potion {
+    public static class Health extends Potion {
 
-        public HealthPotion() {
+        public Health() {
             super("potions/red_potion.png");
         }
 
@@ -18,9 +18,9 @@ public abstract class Potion extends Item {
         }
     }
 
-    public class SpeedPotion extends Potion {
+    public static class Speed extends Potion {
 
-        public SpeedPotion() {
+        public Speed() {
             super("potions/pink_potion.png");
         }
 
@@ -30,15 +30,27 @@ public abstract class Potion extends Item {
         }
     }
 
-    public class DamagePotion extends Potion {
+    public static class Damage extends Potion {
 
-        public DamagePotion() {
+        public Damage() {
             super("potions/green_potion.png");
         }
 
         @Override
         public void drink(Player p) {
             p.equippedWeapon.damage += 1; // TODO Amount?
+        }
+    }
+
+    public static class Immortality extends Potion {
+
+        public Immortality() {
+            super(""); // TODO Bild
+        }
+
+        @Override
+        public void drink(Player p) {
+            // TODO implement
         }
     }
 

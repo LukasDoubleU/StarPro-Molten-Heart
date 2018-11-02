@@ -85,7 +85,7 @@ public class Player extends Actor {
     public void damage(int dmg) {
         lifeCount -= dmg - equippedArmor.getDamageReduction();
         if (lifeCount <= 0) {
-            // TODO GameOver Methode aufrufen
+            Level.runGameOverWorld();
         }
     }
 
