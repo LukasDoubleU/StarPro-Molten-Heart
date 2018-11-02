@@ -70,9 +70,7 @@ public class Player extends Actor {
     }
 
     private void attack() {
-        if (Greenfoot.isKeyDown("space")) {
-            equippedWeapon.attack();
-        }
+        equippedWeapon.attack();
     }
 
     /**
@@ -155,7 +153,7 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getIntersectingObjects(Obstacle.class);
+        List<Obstacle> obstacles = getObjectsInRange(39, Obstacle.class);
         // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
             resetPosition();

@@ -1,3 +1,5 @@
+import greenfoot.Greenfoot;
+
 /**
  * Waffen sind spezielle Items mit denen der Spieler Gegner angreifen kann.
  */
@@ -19,47 +21,60 @@ public abstract class Weapon extends Item {
         return cooldown;
     }
 
+    /**
+     * Führe die Attack nur aus, wenn der Cooldown passt
+     */
     public void attack() {
 
-        // Führe die Attack nur aus, wenn der Cooldown passt
-        if (!checkCooldown()) {
-            return;
+        try {
+            // Erlaubt der Cooldown den Angriff?
+            if (!Greenfoot.isKeyDown("space")) {
+
+            } else {
+                cooldownCounter--;
+            }
+
+            if (!checkCooldown()) {
+                return;
+            }
+
+            Player p = Player.get();
+
+            int x = p.getX(), y = p.getY();
+            Direction direction = p.getDirection();
+            int rotation = 0, distance = 40;
+            if (direction == Direction.Up) {
+                y -= distance;
+                rotation = 0;
+            } else if (direction == Direction.Down) {
+                y += distance;
+                rotation = 180;
+            } else if (direction == Direction.Right) {
+                x += distance;
+                rotation = 90;
+            } else { // Left
+                x -= distance;
+                rotation = 270;
+            }
+
+            Attack attack = getAttack();
+            attack.setRotation(rotation);
+            p.getWorld().addObject(attack, x, y);
+
+        } finally {
+            cooldown--;
         }
-
-        Player p = Player.get();
-
-        int x = p.getX(), y = p.getY();
-        Direction direction = p.getDirection();
-        int rotation = 0, distance = 40;
-        if (direction == Direction.Up) {
-            y -= distance;
-            rotation = 0;
-        } else if (direction == Direction.Down) {
-            y += distance;
-            rotation = 180;
-        } else if (direction == Direction.Right) {
-            x += distance;
-            rotation = 90;
-        } else { // Left
-            x -= distance;
-            rotation = 270;
-        }
-
-        Attack attack = getAttack();
-        attack.setRotation(rotation);
-        p.getWorld().addObject(attack, x, y);
     }
 
     private boolean checkCooldown() {
-        // Prüfe, ob das Item Einsatzbereit ist
-        if (cooldownCounter == 0) {
-            // Setze den Cooldown auf den Item-spezifischen Wert
+        // Cooldown abgelaufen?
+        if (cooldownCounter <= 0) {
+            // Dann setze den Cooldown wieder
             cooldownCounter = getCooldown();
+            // Und erlaube den Angriff
             return true;
-        }
-        // Das Item ist noch nicht einsatzbereit, der Cooldown wird reduziert
-        else {
-            cooldownCounter--;
+        } else {
+            // Verbietet den Angriff
             return false;
         }
     }
