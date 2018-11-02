@@ -3,8 +3,32 @@
  */
 public abstract class Weapon extends Item {
 
-    @Override
-    public final void _use() {
+    public Weapon(String image) {
+        super(image);
+    }
+
+    int cooldownCounter = 0;
+
+    /**
+     * Die Zeit für die ein Item nach der Verwendung nicht benutzt werden kann
+     */
+    public abstract int getCooldown();
+
+    public void attack() {
+        // Prüfe, ob das Item Einsatzbereit ist
+        if (cooldownCounter == 0) {
+            // Wenn Leertaste gedrückt wird, verwende das Item
+            _attack();
+            // Setzen den Cooldown auf den Item-spezifischen Wert
+            cooldownCounter = getCooldown();
+        }
+        // Das Item ist noch nicht einsatzbereit, der Cooldown wird reduziert
+        else {
+            cooldownCounter--;
+        }
+    }
+
+    private void _attack() {
         Player p = Player.get();
 
         int x = p.getX(), y = p.getY();

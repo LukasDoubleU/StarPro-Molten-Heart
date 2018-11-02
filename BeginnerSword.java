@@ -1,9 +1,8 @@
-
-import greenfoot.GreenfootImage;
-
 public class BeginnerSword extends Weapon {
 
-    GreenfootImage image = new GreenfootImage("swords/image_part_001.png");
+    public BeginnerSword() {
+        super("swords/image_part_001.png");
+    }
 
     @Override
     public int getDamage() {
@@ -13,21 +12,6 @@ public class BeginnerSword extends Weapon {
     @Override
     public int getCooldown() {
         return 4;
-    }
-
-    @Override
-    public GreenfootImage getImageOnGround() {
-        return image;
-    }
-
-    @Override
-    public GreenfootImage getImageInInventory() {
-        return image;
-    }
-
-    @Override
-    public GreenfootImage getUsageImage() {
-        return null; // Gibt es nicht für Waffen
     }
 
     @Override
