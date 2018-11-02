@@ -31,7 +31,7 @@ public class Player extends Actor {
     /*
      * Equipment Slots
      */
-    Weapon equippedWeapon = new Sword();
+    Weapon equippedWeapon = new BeginnerSword();
     Item equippedGear; // TODO
 
     /*
