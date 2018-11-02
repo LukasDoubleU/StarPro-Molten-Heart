@@ -15,10 +15,10 @@ public abstract class Armor extends Item {
      */
     public abstract String getImageFolder();
 
-    public static class DarkArmor extends Armor {
+    public static class Dark extends Armor {
 
-        public DarkArmor() {
-            super("armor/dark_armor.png"); // TODO Bild
+        public Dark() {
+            super("armor/dark_armor.png");
         }
 
         @Override
@@ -33,10 +33,10 @@ public abstract class Armor extends Item {
 
     }
 
-    public static class BrightArmor extends Armor {
+    public static class Bright extends Armor {
 
-        public BrightArmor() {
-            super("armor/bright_armor.png"); // TODO Bild
+        public Bright() {
+            super("armor/bright_armor.png");
         }
 
         @Override
@@ -51,9 +51,9 @@ public abstract class Armor extends Item {
 
     }
 
-    public static class NoArmor extends Armor {
+    public static class None extends Armor {
 
-        public NoArmor() {
+        public None() {
             super(null);
         }
 
