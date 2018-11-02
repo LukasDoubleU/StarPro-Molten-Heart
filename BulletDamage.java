@@ -27,6 +27,9 @@ public class BulletDamage extends Projectiles
         damage = newDamage;
         target = newTarget;
         setImage(imgPath);
+        if(imgPath.equals("tear.png")) {
+            getImage().scale(15,15);
+        }
         isAlive = true;
         turnNotDone = true;
     }
@@ -36,6 +39,9 @@ public class BulletDamage extends Projectiles
         damage = newDamage;
         target = newTarget;
         setImage(imgPath);
+        if(imgPath.equals("tear.png")) {
+            getImage().scale(15,15);
+        }
         isAlive = true;
         turnNotDone = true;
         turnDegree = newTurnDegree;
@@ -77,7 +83,7 @@ public class BulletDamage extends Projectiles
                 isAlive = false;
                 return;
             }
-            if(a instanceof Obstacle) {
+            if((a instanceof Obstacle) && !(a instanceof Enemy)) {
                 this.getWorld().removeObject(this);
                 isAlive = false;
                 return;

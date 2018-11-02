@@ -77,6 +77,8 @@ public class RangedDamage extends Ranged
     }
     
     public void movePattern() {
+        int oldX = this.getX();
+        int oldY = this.getY();
         if(counter==30){
             xMov_speed = -xMov_speed;
         }
@@ -91,28 +93,45 @@ public class RangedDamage extends Ranged
             counter = 0;
         }
         this.setLocation(this.getX()+xMov_speed, this.getY()+yMov_speed);
+        if(checkCollision()) {
+                this.setLocation(oldX, oldY);
+        }
         counter = counter + 1;
     }
     
     public void moveTowardsTarget() {
+        int oldX = this.getX();
+        int oldY = this.getY();
         if(this.getX() > target.getX()) {
-            this.setLocation(this.getX()-mov_speed+2, this.getY());
+            this.setLocation(this.getX()-mov_speed+(mov_speed/2), this.getY());
+            if(checkCollision()) {
+                this.setLocation(oldX, oldY);
+            }
         }
         else {
-            this.setLocation(this.getX()+mov_speed-2, this.getY());
+            this.setLocation(this.getX()+mov_speed-(mov_speed/2), this.getY());
+            if(checkCollision()) {
+                this.setLocation(oldX, oldY);
+            }
         }
         if(this.getY() > target.getY()) {
-            this.setLocation(this.getX(), this.getY()-mov_speed+2);
+            this.setLocation(this.getX(), this.getY()-mov_speed+(mov_speed/2));
+            if(checkCollision()) {
+                this.setLocation(oldX, oldY);
+            }
         }
         else {
-            this.setLocation(this.getX(), this.getY()+mov_speed-2);
+            this.setLocation(this.getX(), this.getY()+mov_speed-(mov_speed/2));
+            if(checkCollision()) {
+                this.setLocation(oldX, oldY);
+            }
         }
         this.setRotation(0);
         counter++;
     }
     
     public void spawnBullet() {
-        BulletDamage b = new BulletDamage(4, damage, target, "Lava_Projectile.png");
+        BulletDamage b = new BulletDamage(4, damage, target, "tear.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
         counter = 0;
     }
