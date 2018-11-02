@@ -8,13 +8,13 @@ public abstract class Level extends World {
      * Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
 
-    private int[][] world = null; /*= {
+    private int[][] world = {
             /**
              * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
              * Lifebar und Timer da
              *
              * 31 Elemente von Links nach Rechts für 1280 Pixel
-             *
+             */
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -42,8 +42,9 @@ public abstract class Level extends World {
      */
     private int monstercount = 0; 
 
-    public Level() {
+    public Level(String image) {
         super(1280, 720, 1); 
+        setBackground(image);
     }
     
     /**
@@ -62,12 +63,11 @@ public abstract class Level extends World {
      * Startet die Game Over Welt beim Game Over und löscht vorher alle Objekte in der Welt
      */
     public void runGameOverWorld(){
-        //removeObjects(getObjects(null));
-        //Greenfoot.setWorld(new Level2());
         Greenfoot.setWorld(new GameOver());
     }
 
-    public void generateWorld() {
+    public void generateWorld(int[][] nWorld) {
+        if(nWorld != null){this.world = nWorld;}
         if(world != null){
             for (int j = world.length - 1; j != -1; j--) {
                 for (int i = world[j].length - 1; i != -1; i--) {
