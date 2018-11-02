@@ -20,7 +20,8 @@ public class Button extends Actor
     public void act() 
     {
         if(Greenfoot.mouseClicked(this)){
-           ((GameOver) getWorld()).restartGame();
+           Greenfoot.setWorld(new Level1());
+            //((GameOver) getWorld()).restartGame();
         }
     }    
 }

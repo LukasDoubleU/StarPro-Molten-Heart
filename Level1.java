@@ -36,9 +36,8 @@ public class Level1 extends Level {
                 99, 99, 99, 99, 99, 99 }, };
 
     public Level1() {
-        super();
-        generateWorld();
-        setBackground("background_final.png");
+        super("background_final.png");
+        generateWorld(world);
     }
 
     public void finish(){
