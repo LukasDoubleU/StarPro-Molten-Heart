@@ -20,20 +20,12 @@ public abstract class Weapon extends Item {
     }
 
     public void attack() {
-        // Prüfe, ob das Item Einsatzbereit ist
-        if (cooldownCounter == 0) {
-            // Wenn Leertaste gedrückt wird, verwende das Item
-            _attack();
-            // Setzen den Cooldown auf den Item-spezifischen Wert
-            cooldownCounter = getCooldown();
-        }
-        // Das Item ist noch nicht einsatzbereit, der Cooldown wird reduziert
-        else {
-            cooldownCounter--;
-        }
-    }
 
-    private void _attack() {
+        // Führe die Attack nur aus, wenn der Cooldown passt
+        if (!checkCooldown()) {
+            return;
+        }
+
         Player p = Player.get();
 
         int x = p.getX(), y = p.getY();
@@ -56,6 +48,20 @@ public abstract class Weapon extends Item {
         Attack attack = getAttack();
         attack.setRotation(rotation);
         p.getWorld().addObject(attack, x, y);
+    }
+
+    private boolean checkCooldown() {
+        // Prüfe, ob das Item Einsatzbereit ist
+        if (cooldownCounter == 0) {
+            // Setze den Cooldown auf den Item-spezifischen Wert
+            cooldownCounter = getCooldown();
+            return true;
+        }
+        // Das Item ist noch nicht einsatzbereit, der Cooldown wird reduziert
+        else {
+            cooldownCounter--;
+            return false;
+        }
     }
 
     /**

@@ -11,13 +11,21 @@ import greenfoot.GreenfootImage;
  */
 public class Player extends Actor {
 
-    private static final Player INSTANCE = new Player();
+    private static Player INSTANCE = new Player();
 
     /**
      * Gibt die Instanz der Spielers zurück. Diese ist "permanent".
      */
     public static Player get() {
         return INSTANCE;
+    }
+
+    /**
+     * Erneuert die Instanz des Spielers. Diese Methode darf nur aufgerufen werden,
+     * wenn das Spiel neu gestartet wird.
+     */
+    public static Player newInstance() {
+        return INSTANCE = new Player();
     }
 
     int lifeCount = 5;
