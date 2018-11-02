@@ -8,13 +8,14 @@ public abstract class Level extends World {
      * Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
 
-    private int[][] world = null; /*= {
+    private int[][] world = {
             /**
              * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
              * Lifebar und Timer da
              *
              * 31 Elemente von Links nach Rechts für 1280 Pixel
              *
+             */
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -22,8 +23,8 @@ public abstract class Level extends World {
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+            {13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11},
+            {14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12},
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -31,7 +32,7 @@ public abstract class Level extends World {
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 5, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
+            { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 95, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
                 99, 99, 99, 99, 99, 99 },
             { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
                 99, 99, 99, 99, 99, 99 }, };
@@ -83,16 +84,26 @@ public abstract class Level extends World {
      * Generiert alle Objekte die sich für die Welt
      */
     public void generateObject(int obj, int x, int y) {
-        if (obj <= 9) {
+        
             Actor object = null;
-            if (obj == 1) {
+            if (obj == 11) {
                 object = new Wall();
-            } else if (obj == 2) {
+            } else if (obj == 10) {
                 object = Player.get();
             } else if (obj == 3) {
                 object = new RangedDamage(2);
             } else if (obj == 4) {
                 object = new MeleeDamage();
+            }  else if (obj == 11) {
+                object = new Door(11);
+            }  else if (obj == 12) {
+                object = new Door(12);
+            }  else if (obj == 12) {
+                object = new Door(13);
+            }  else if (obj == 13) {
+                object = new Door(13);
+            }  else if (obj == 14) {
+                object = new Door(14);
             } else if (obj == 95){
                 object = new MoltenHeart();
             }
@@ -100,7 +111,7 @@ public abstract class Level extends World {
             if (object != null) {
                 addObject(object, 20 + x, 20 + y);
             }
-        }
+        
         /* 10 bis 99 generiert allerlei andere objekte */
         else if (obj > 9) {
             /* Wird für den Hintergrund des unteren Menus genutzt */
