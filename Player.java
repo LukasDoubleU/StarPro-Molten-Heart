@@ -7,16 +7,14 @@ import greenfoot.GreenfootImage;
 
 /**
  * Die vom Spieler gesteuerte Figur. Ist ein Singleton, d.h. es gibt nur eine
- * Instanz dieser Klasse. Auf diese kann �ber
- *
- * TODO: Beim Einsammeln von Ausrüstung ändert sich das Spieler Model
+ * Instanz dieser Klasse. Auf diese kann über
  */
 public class Player extends Actor {
 
     private static final Player INSTANCE = new Player();
 
     /**
-     * Gibt die Instanz der Spielers zur�ck. Diese ist "permanent".
+     * Gibt die Instanz der Spielers zurück. Diese ist "permanent".
      */
     public static Player get() {
         return INSTANCE;
@@ -24,20 +22,20 @@ public class Player extends Actor {
 
     int lifeCount = 5;
 
-    int moveSpeed = 8, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeed = 7, moveSpeedSlowed = 0, moveSpeedBonus = 0;
 
     int oldX, oldY, oldRotation;
 
     /*
      * Equipment Slots
      */
-    Weapon equippedWeapon = new Sword();
-    Item equippedGear; // TODO
+    Weapon equippedWeapon = new Sword.BeginnerSword();
+    Armor equippedArmor = new Armor.NoArmor();
+    SpeedBoots equippedBoots = null;
 
     /*
-     * Variablen f�r die Bilder zur Laufanimation
+     * Variablen für die Bilder zur Laufanimation
      */
-    String prefix = "soldier_bright/image_part_", suffix = ".png";
     int firstUp = 1, lastUp = 9;
     int firstLeft = 10, lastLeft = 18;
     int firstDown = 19, lastDown = 27;
@@ -46,7 +44,7 @@ public class Player extends Actor {
     GreenfootImage[] imageCache = new GreenfootImage[37];
     {
         for (int i = 1; i < 37; i++) {
-            imageCache[i] = new GreenfootImage(prefix + String.format("%03d", i) + suffix);
+            imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
         }
     }
 
@@ -60,18 +58,16 @@ public class Player extends Actor {
 
     @Override
     public void act() {
-        String key = Greenfoot.getKey();
-
         rememberPosition();
-        move(key);
+        move();
         checkCollision();
-        useItem(key);
+        attack();
         processDots();
     }
 
-    private void useItem(String key) {
-        if ("space".equals(key)) {
-            equippedWeapon.use();
+    private void attack() {
+        if (Greenfoot.isKeyDown("space")) {
+            equippedWeapon.attack();
         }
     }
 
@@ -88,10 +84,10 @@ public class Player extends Actor {
     }
 
     /**
-     * F�gt dem Spieler Schaden zu (zieht ihm Leben ab)
+     * Fügt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
     public void damage(int dmg) {
-        lifeCount -= dmg;
+        lifeCount -= dmg - equippedArmor.getDamageReduction();
         if (lifeCount <= 0) {
             // TODO GameOver Methode aufrufen
         }
@@ -114,7 +110,7 @@ public class Player extends Actor {
     }
 
     /**
-     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zur�ck.
+     * Setzt die Position und Blickrichtung auf die letzten bekannten Werte zurück.
      */
     private void resetPosition() {
         setLocation(oldX, oldY);
@@ -122,14 +118,14 @@ public class Player extends Actor {
     }
 
     /**
-     * Pr�ft & reagiert auf Kollisionen
+     * Prüft & reagiert auf Kollisionen
      */
     private void checkCollision() {
         checkObstacle();
     }
 
     /**
-     * Pr�ft & reagiert auf Kollision mit Hindernissen
+     * Prüft & reagiert auf Kollision mit Hindernissen
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
@@ -141,33 +137,33 @@ public class Player extends Actor {
     }
 
     /**
-     * F�hrt eine Bewegung in Abh�ngigkeit zu den gedr�ckten Tasten aus
+     * Fährt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
-    private void move(String key) {
-
-        if (key == null) {
-            return;
-        }
-        if ("w".equals(key)) {
+    private void move() {
+        if (Greenfoot.isKeyDown("w")) {
             setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
-        }
-        if ("a".equals(key)) {
+        } else if (Greenfoot.isKeyDown("a")) {
             setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
-        }
-        if ("s".equals(key)) {
+        } else if (Greenfoot.isKeyDown("s")) {
             setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
-        }
-        if ("d".equals(key)) {
+        } else if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
         }
     }
 
     public int getMoveSpeed() {
-        return moveSpeed + moveSpeedBonus - moveSpeedSlowed;
+        // Der Basis Move Speed
+        return moveSpeed
+                // Zuzüglich Move Speed Bonus (z.B. Trank)
+                + moveSpeedBonus
+                // Abzgl. Move Speed Penalty (z.B. durch Gegner)
+                - moveSpeedSlowed
+                // Und zzgl. Move Speed Bonus von Boots
+                + (equippedBoots != null ? equippedBoots.getMoveSpeedBonus() : 0);
     }
 
     private void setNextImage(int firstImageIndex, int lastImageIndex) {
@@ -208,4 +204,23 @@ public class Player extends Actor {
         }
         return Direction.Up;
     }
+
+    public String getArmorImagePrefix() {
+        return equippedArmor.getImageFolder() + "/image_part_";
+    }
+
+    /**
+     * Heilt den Spieler um die angegebene Menge.
+     */
+    public void heal(int amount) {
+        lifeCount += amount;
+    }
+
+    /**
+     * Verschnellert den Spieler um die angegebene Menge.
+     */
+    public void speedUp(int amount) {
+        moveSpeedBonus += amount;
+    }
+
 }

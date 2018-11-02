@@ -2,9 +2,13 @@ import greenfoot.GreenfootImage;
 
 public class SwordAttack extends Attack {
 
+    public SwordAttack(Weapon weapon) {
+        super(weapon);
+    }
+
     @Override
     public GreenfootImage getUsageImage() {
-        return new GreenfootImage("red_yellow_splash_small.png");
+        return new GreenfootImage("sword_swipe/swipe005.png");
     }
 
     @Override

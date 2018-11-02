@@ -10,52 +10,55 @@ public abstract class Level extends World {
 
     private int[][] world = {
             /**
-             * 16 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
+             * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
              * Lifebar und Timer da
              *
              * 31 Elemente von Links nach Rechts für 1280 Pixel
+             *
              */
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-            { 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+            {13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11},
+            {14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12},
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 5, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
+            { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 95, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
                 99, 99, 99, 99, 99, 99 },
             { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
                 99, 99, 99, 99, 99, 99 }, };
 
     /**
-     * Zählt die Anzahl Monster auf de  r Welt. Fällt diese auf 0 so wird ein Weltwechsel gemacht.
+     * Zählt die Anzahl Monster auf der Welt. Fällt diese auf 0 so wird ein Weltwechsel gemacht.
      * Default ist 0 wird aber bei der Erschaffung der Welt hochgesetzt auf die reale Monsterzahl
      */
     private int monstercount = 0; 
 
     public Level() {
-        super(1280, 720, 1);
-        generateWorld();
+        super(1280, 720, 1); 
     }
     
-    public Level(boolean diffParam){
-        super(1280,720,1);
-    }
-
     /**
      * Wenn getriggert wird das Level hochgesetzt
      */
     public abstract void finish();
-
+    
+    /**
+     * Neustarten des Spiels beim ersten Level  
+     */
+    public void restartGame(){
+        Greenfoot.setWorld(new Level1());
+    }
+    
     /**
      * Startet die Game Over Welt beim Game Over und löscht vorher alle Objekte in der Welt
      */
@@ -81,24 +84,34 @@ public abstract class Level extends World {
      * Generiert alle Objekte die sich für die Welt
      */
     public void generateObject(int obj, int x, int y) {
-        if (obj <= 9) {
+        
             Actor object = null;
-            if (obj == 1) {
+            if (obj == 11) {
                 object = new Wall();
-            } else if (obj == 2) {
+            } else if (obj == 10) {
                 object = Player.get();
             } else if (obj == 3) {
                 object = new Snake(2);
-            } else if (obj == 4) {
+            }  else if (obj == 11) {
+                object = new Door(11);
+            }  else if (obj == 12) {
+                object = new Door(12);
+            }  else if (obj == 12) {
+                object = new Door(13);
+            }  else if (obj == 13) {
+                object = new Door(13);
+            }  else if (obj == 14) {
+                object = new Door(14);
+            }  else if (obj == 4) {
                 object = new Camel();
-            } else if (obj == 5){
+            } else if (obj == 95){
                 object = new MoltenHeart();
             }
 
             if (object != null) {
                 addObject(object, 20 + x, 20 + y);
             }
-        }
+        
         /* 10 bis 99 generiert allerlei andere objekte */
         else if (obj > 9) {
             /* Wird für den Hintergrund des unteren Menus genutzt */

@@ -1,37 +1,51 @@
 
-import greenfoot.GreenfootImage;
-
 public class Sword extends Weapon {
 
-    GreenfootImage image = new GreenfootImage("swords/image_part_001.png");
-
-    @Override
-    public int getDamage() {
-        return 3;
-    }
-
-    @Override
-    public int getCooldown() {
-        return 5;
-    }
-
-    @Override
-    public GreenfootImage getImageOnGround() {
-        return image;
-    }
-
-    @Override
-    public GreenfootImage getImageInInventory() {
-        return image;
-    }
-
-    @Override
-    public GreenfootImage getUsageImage() {
-        return null; // TODO
+    public Sword(String image, int damage, int cooldown) {
+        super(image, damage, cooldown);
     }
 
     @Override
     public Attack getAttack() {
-        return new SwordAttack();
+        return new SwordAttack(this);
     }
+
+    public static class BigSword extends Sword {
+
+        public BigSword() {
+            super("swords/image_part_033.png", 3, 5);
+        }
+
+        @Override
+        public Attack getAttack() {
+            return new SwordAttack(this);
+        }
+
+    }
+
+    public static class BeginnerSword extends Sword {
+
+        public BeginnerSword() {
+            super("swords/image_part_001.png", 1, 3);
+        }
+
+        @Override
+        public Attack getAttack() {
+            return new SwordAttack(this);
+        }
+    }
+
+    public static class MasterSword extends Sword {
+
+        public MasterSword() {
+            super("swords/image_part_051.png", 3, 3);
+        }
+
+        @Override
+        public Attack getAttack() {
+            return new SwordAttack(this);
+        }
+
+    }
+
 }
