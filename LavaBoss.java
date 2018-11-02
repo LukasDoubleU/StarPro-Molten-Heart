@@ -2,6 +2,7 @@ import greenfoot.*;
 import java.util.Random;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Timer;
 
 /**
  * Write a description of class LavaBoss here.
@@ -12,6 +13,7 @@ import java.util.Arrays;
 public class LavaBoss extends Boss
 {
     /**
+     *  Diese parameter ist für die Klasse fireCircle()
      *  @param counter : dient um die Schuesse in einer bestimmten zeit abzufeuern
      */
     private int rotateShoot = 15;
@@ -19,7 +21,7 @@ public class LavaBoss extends Boss
     private final static int shootAtRotation[]= {45,135,225,315};
    
     public LavaBoss(){
-        setImage("teddybear.png");
+        setImage("boss/boss3.png");
     }
     
     /**
@@ -29,28 +31,28 @@ public class LavaBoss extends Boss
     
     public void act() 
     {   
-
+        fireCircle();
     }
     
-    public void fireCircle(){
+    public void fireCircle() {
         turn(3);
         int rotation = this.getRotation();
-        if(rotation%rotateShoot==0){
-            BulletDamage b = new BulletDamage(4, 1,rotation, null, "Lava_Projectile.png");
+        if(rotation%rotateShoot==0) {
+            BulletDamage b = new BulletDamage(4, 1,rotation, null, "boss/lava_projectile.png");
             this.getWorld().addObject(b, this.getX(), this.getY());
         }               
         
-        if(rotation==0){
-            if(rotateBool){
+        if(rotation==0) {
+            if(rotateBool) {
                 for(int a: shootAtRotation){
-                    if(a == rotation){
-                        BulletDamage b = new BulletDamage(4, 1,rotation, null, "Lava_Projectile.png");
+                    if(a == rotation) {
+                        BulletDamage b = new BulletDamage(4, 1,rotation, null, "boss/lava_projectile.png");
                         this.getWorld().addObject(b, this.getX(), this.getY());
                     }
                 }
                 rotateShoot = rotateShoot-3;
                 rotateBool=false;
-            }else{
+            }else {
                 rotateShoot = rotateShoot+3;
                 rotateBool=true;
             }
