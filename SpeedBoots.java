@@ -1,7 +1,7 @@
 public class SpeedBoots extends Item {
 
     public SpeedBoots() {
-        super(""); // TODO
+        super(""); // TODO Bild
     }
 
     public int getMoveSpeedBonus() {

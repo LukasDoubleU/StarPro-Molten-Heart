@@ -3,16 +3,20 @@
  */
 public abstract class Weapon extends Item {
 
-    public Weapon(String image) {
-        super(image);
-    }
-
+    int damage, cooldown;
     int cooldownCounter = 0;
+
+    public Weapon(String image, int damage, int cooldown) {
+        super(image);
+        this.damage = damage;
+    }
 
     /**
      * Die Zeit für die ein Item nach der Verwendung nicht benutzt werden kann
      */
-    public abstract int getCooldown();
+    public final int getCooldown() {
+        return cooldown;
+    }
 
     public void attack() {
         // Prüfe, ob das Item Einsatzbereit ist
@@ -61,5 +65,7 @@ public abstract class Weapon extends Item {
     /**
      * Gibt an, wie viel Schaden diese Waffe bei einem Treffer verursacht.
      */
-    public abstract int getDamage();
+    public final int getDamage() {
+        return damage;
+    }
 }
