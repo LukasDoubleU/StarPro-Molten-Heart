@@ -85,15 +85,17 @@ public abstract class Level extends World {
     public void generateObject(int obj, int x, int y) {
         
             Actor object = null;
-            if (obj == 11) {
+            if (obj == 1) {
                 object = new Wall();
-            } else if (obj == 10) {
+            }   else if (obj == 2) {
+                object = new DestroyableObstacle(1);
+            }   else if (obj == 3) {
+                object = new DestroyableObstacle(2);
+            }   else if (obj == 4) {
+                object = new DestroyableObstacle(3);
+            }   else if (obj == 10) {
                 object = Player.get();
-            } else if (obj == 3) {
-                object = new RangedDamage(2);
-            } else if (obj == 4) {
-                object = new MeleeDamage();
-            }  else if (obj == 11) {
+            }   else if (obj == 11) {
                 object = new Door(11);
             }  else if (obj == 12) {
                 object = new Door(12);
