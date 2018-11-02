@@ -90,9 +90,9 @@ public abstract class Level extends World {
             } else if (obj == 2) {
                 object = Player.get();
             } else if (obj == 3) {
-                object = new Snake(2);
+                object = new RangedDamage(2);
             } else if (obj == 4) {
-                object = new Camel();
+                object = new MeleeDamage();
             } else if (obj == 95){
                 object = new MoltenHeart();
             }
