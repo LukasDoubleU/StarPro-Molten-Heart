@@ -1,5 +1,4 @@
 import greenfoot.*;
-import javafx.scene.transform.Rotate;
 
 public class Wall extends Obstacle {
 
@@ -8,7 +7,7 @@ public class Wall extends Obstacle {
     
     public Wall() {
         
-        setImage("transparent.png");
+        setImage("door/door_left_headingEast.png");
         
     }
     
