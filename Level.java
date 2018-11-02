@@ -102,7 +102,7 @@ public abstract class Level extends World {
             }   else if (obj == 8) {
                 object = new RangedExplosion();
             }**/ else if (obj == 9) {
-                object = new border();
+                object = new Border();
             }   else if (obj == 10) {
                 object = Player.get();
             }   else if (obj == 11) {

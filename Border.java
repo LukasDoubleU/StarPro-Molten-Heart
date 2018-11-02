@@ -1,9 +1,9 @@
 import greenfoot.*;
 
-public class border extends Obstacle{
+public class Border extends Obstacle{
 
     
-    public border() {
+    public Border() {
         setImage("transparent.png");
     }
     
