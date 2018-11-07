@@ -29,6 +29,7 @@ public class Player extends Actor {
     }
 
     int lifeCount = 5;
+    int immortal = 0;
 
     int moveSpeed = 7, moveSpeedSlowed = 0, moveSpeedBonus = 0;
 
@@ -64,13 +65,13 @@ public class Player extends Actor {
     public void act() {
         rememberPosition();
         move();
-        checkCollision();
+        checkCollisions();
         attack();
         processDots();
     }
 
     private void attack() {
-        equippedWeapon.attack();
+        equippedWeapon.attemptAttack();
     }
 
     /**
@@ -83,12 +84,19 @@ public class Player extends Actor {
         if (moveSpeedSlowed > 0) {
             moveSpeedSlowed--;
         }
+        if (immortal > 0) {
+            immortal--;
+        }
     }
 
     /**
      * Fügt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
     public void damage(int dmg) {
+        if (isImmortal()) {
+            // Der Spieler nimmt keinen Schaden, solange er unsterblich ist
+            return;
+        }
         lifeCount -= dmg - equippedArmor.getDamageReduction();
         if (lifeCount <= 0) {
             Level.runGameOverWorld();
@@ -122,29 +130,43 @@ public class Player extends Actor {
     /**
      * Prüft & reagiert auf Kollisionen
      */
-    private void checkCollision() {
+    private void checkCollisions() {
         checkObstacle();
         checkItem();
     }
 
     /**
-     * Prüft & reagiert auf Kollision mit Item
+     * Prüft & reagiert auf Kollision mit Item. Items werden nach der Kollision auf
+     * der Spielwelt entfernt.
      */
     private void checkItem() {
         @SuppressWarnings("unchecked")
         List<Item> items = getIntersectingObjects(Item.class);
         for (Item item : items) {
+            // Lege Rüstung an
             if (item instanceof Armor) {
                 equipArmor((Armor) item);
-            } else if (item instanceof Potion) {
+            }
+            // Trinke Tränke
+            else if (item instanceof Potion) {
                 ((Potion) item).drink(this);
             }
+            // Lege Waffen an
+            else if (item instanceof Weapon) {
+                equipWeapon((Weapon) item);
+            }
+
+            // Entferne das "aufgehobene" Objekt aus der Welt
+            getWorld().removeObject(item);
         }
+    }
+
+    private void equipWeapon(Weapon item) {
+        equippedWeapon = item;
     }
 
     private void equipArmor(Armor item) {
         equippedArmor = item;
-        getWorld().removeObject(item);
         refreshMoveAnimationImageCache();
     }
 
@@ -251,6 +273,15 @@ public class Player extends Actor {
         for (int i = 1; i < 37; i++) {
             imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
         }
+    }
+
+    public void immortal(int duration) {
+        immortal += duration;
+    }
+
+    public boolean isImmortal() {
+        // Der Spieler gilt als unsterblich, solange immortal > 0 ist
+        return immortal > 0;
     }
 
 }

@@ -50,7 +50,7 @@ public abstract class Potion extends Item {
 
         @Override
         public void drink(Player p) {
-            // TODO implement
+            p.immortal(10);
         }
     }
 
