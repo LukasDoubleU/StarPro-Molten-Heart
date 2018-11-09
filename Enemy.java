@@ -50,7 +50,6 @@ public abstract class Enemy extends Obstacle {
             }
         }
         this.setRotation(0);
-        counter++;
     }
     
     public boolean checkCollision(int stalkRange) {

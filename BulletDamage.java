@@ -74,7 +74,7 @@ public class BulletDamage extends Projectiles
     
     public void checkCollision() {
         List intersectingObjects = new ArrayList();
-        intersectingObjects = this.getObjectsInRange(10, null); 
+        intersectingObjects = this.getObjectsInRange(20, null); 
         
         for(Object a : intersectingObjects)  {          
             if(a instanceof Player) {
