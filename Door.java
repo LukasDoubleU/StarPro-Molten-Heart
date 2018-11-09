@@ -25,7 +25,7 @@ public class Door extends Actor {
         } else {
             Player=true;
         }
-        if(closedoor && Player ) {
+        if(closedoor && Player) {
             ((Level)getWorld()).finish();
         }
     }
