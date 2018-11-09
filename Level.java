@@ -47,6 +47,10 @@ public abstract class Level extends World {
     public Level(String image) {
         super(1280, 720, 1);
         setBackground(image);
+        // Zeige unten links die Leben des Spielers an
+        addObject(new PlayerHealth(), 30, 680);
+        // Zeige unten rechts die Stats des Spielers an
+        addObject(new PlayerStats(), 1100, 700);
     }
 
     /**
