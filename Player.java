@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
@@ -104,7 +105,7 @@ public class Player extends Actor {
             Level.runGameOverWorld();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
-        immortal(10);
+        immortal(1);
     }
 
     /**
@@ -179,7 +180,17 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getObjectsInRange(35, Obstacle.class);
+        List<Obstacle> obstacles = getNeighbours(39, true, Obstacle.class);
+
+        // Ausnahme: Ignoriere Kollisionen mit Projektilen (Ranged)
+        List<Projectiles> ranged = new ArrayList<Projectiles>();
+        for (Obstacle obstacle : obstacles) {
+            if (obstacle instanceof Projectiles) {
+                ranged.add((Projectiles) obstacle);
+            }
+        }
+        obstacles.removeAll(ranged);
+
         // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
             resetPosition();

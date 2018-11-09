@@ -6,10 +6,16 @@ import greenfoot.World;
 
 public class PlayerStats extends Actor {
 
+    static PlayerStats instance = new PlayerStats();
+
+    public static PlayerStats get() {
+        return instance;
+    }
+
     Actor armorDisplay, healthDisplay, damageDisplay;
     int previousArmor, previousSpeed, previousDamage;
 
-    public PlayerStats() {
+    private PlayerStats() {
         setImage("transparent.png");
         Player p = Player.get();
         refreshImage(p.equippedArmor.getDamageReduction(), p.equippedWeapon.getDamage(), p.getMoveSpeed());
