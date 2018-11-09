@@ -179,7 +179,7 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getIntersectingObjects(Obstacle.class);
+        List<Obstacle> obstacles = getNeighbours(39, true, Obstacle.class);
         // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
             resetPosition();
