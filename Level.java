@@ -95,14 +95,16 @@ public abstract class Level extends World {
     public void generateObject(double obj, int x, int y) {
 
         Actor object = null;
-        if (obj == 1) {
+        if (obj == 1.1) {
             object = new Wall(1);
-        } else if (obj == 1.1) {
-            object = new Wall(1.1);
         } else if (obj == 1.2) {
-            object = new Wall(1.2);
+            object = new Wall(2);
         } else if (obj == 1.3) {
-            object = new Wall(1.3);
+            object = new Wall(3);
+        } else if (obj == 1.4) {
+            object = new Wall(4);
+        } else if (obj == 1.5) {
+            object = new Wall(5);
         } else if (obj == 2) {
             object = new DestroyableObstacle(1);
         } else if (obj == 3) {
