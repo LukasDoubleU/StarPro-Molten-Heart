@@ -40,5 +40,9 @@ public class Level2 extends Level {
         generateWorld(world);
     }
 
-    public void finish(){}
+    @Override
+    public void finish() {
+        Greenfoot.setWorld(new Level3());
+    }
+    
 }
