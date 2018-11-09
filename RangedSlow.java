@@ -1,44 +1,41 @@
-
 import greenfoot.*;
-
 import java.util.*;
 
 /**
- * Write a description of class Kamel here.
+ * Write a description of class RangedSlow here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class RangedDamage extends Ranged
+public class RangedSlow extends Ranged
 {
     /**
-     * Act - do whatever the Kamel wants to do. This method is called whenever
+     * Act - do whatever the RangedSlow wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     int counter = 0;
     int mov_speed;
     int xMov_speed;
     int yMov_speed;
-    int damage;
+    int slow;
     int lifeCount;
     Player target = null;
-    List projectiles = new ArrayList();
     
-    public RangedDamage(int newMov_Speed, int newLifeCount) {
+    public RangedSlow(int newMov_Speed, int newLifeCount) {
         mov_speed = newMov_Speed;
-        damage = 4;
-        setImage("eyeball.png");
+        slow = 4;
+        setImage("spider.png");
         lifeCount = newLifeCount;
         xMov_speed = mov_speed;
         yMov_speed = mov_speed;
     }
     
-    public RangedDamage(int newMov_Speed) {
+    public RangedSlow(int newMov_Speed) {
         this(newMov_Speed, 3);
     }
         
     
-    public RangedDamage() {
+    public RangedSlow() {
         this(3, 3);
     }
         
@@ -68,7 +65,7 @@ public class RangedDamage extends Ranged
         
       
     }
-    
+
     public void movePattern() {
         int oldX = this.getX();
         int oldY = this.getY();
@@ -124,14 +121,14 @@ public class RangedDamage extends Ranged
     }
     
     public void spawnBullet() {
-        BulletDamage b = new BulletDamage(4, damage, target, "tear.png");
+        BulletSlow b = new BulletSlow(6, slow, target, "spider_web.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
         counter = 0;
     }
     
     public Player getTarget() {
         List actorinrange = new ArrayList();
-        actorinrange = this.getObjectsInRange(200, Player.class);
+        actorinrange = this.getObjectsInRange(400, Player.class);
         
         for(Object a : actorinrange)  {
             if(a instanceof Player) {

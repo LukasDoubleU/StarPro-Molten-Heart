@@ -142,7 +142,7 @@ public abstract class Level extends World {
         }
 
         if (object != null) {
-            addObject(object, 20 + x, 20 + y);
+            addObject(object, 10 + x, 10 + y);
         }
 
         /* 10 bis 99 generiert allerlei andere objekte */
