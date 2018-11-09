@@ -15,22 +15,17 @@ public class RangedDamage extends Ranged
      * Act - do whatever the Kamel wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    int counter = 0;
-    int mov_speed;
-    int xMov_speed;
-    int yMov_speed;
-    int damage;
-    int lifeCount;
-    Player target = null;
-    List projectiles = new ArrayList();
     
     public RangedDamage(int newMov_Speed, int newLifeCount) {
         mov_speed = newMov_Speed;
-        damage = 4;
+        damage = 1;
         setImage("eyeball.png");
         lifeCount = newLifeCount;
         xMov_speed = mov_speed;
         yMov_speed = mov_speed;
+        stalkRange = 150;
+        viewDistance = 200;
+        counter = 0;
     }
     
     public RangedDamage(int newMov_Speed) {
@@ -49,8 +44,8 @@ public class RangedDamage extends Ranged
         }
         
         if(target != null) {
-            if(!checkCollision()) {
-                moveTowardsTarget();
+            if(!checkCollision(stalkRange)) {
+                followTarget();
             }
             else {
                 counter++;
@@ -59,14 +54,10 @@ public class RangedDamage extends Ranged
                 spawnBullet();
             }
         }else {
-            if(!checkCollision()) {
+            if(!checkCollision(stalkRange)) {
                 movePattern();
             }
         }
-        
-        
-        
-      
     }
     
     public void movePattern() {
@@ -86,86 +77,15 @@ public class RangedDamage extends Ranged
             counter = 0;
         }
         this.setLocation(this.getX()+xMov_speed, this.getY()+yMov_speed);
-        if(checkCollision()) {
+        if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
         }
         counter = counter + 1;
-    }
-    
-    public void moveTowardsTarget() {
-        int oldX = this.getX();
-        int oldY = this.getY();
-        if(this.getX() > target.getX()) {
-            this.setLocation(this.getX()-mov_speed+(mov_speed/2), this.getY());
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        else {
-            this.setLocation(this.getX()+mov_speed-(mov_speed/2), this.getY());
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        if(this.getY() > target.getY()) {
-            this.setLocation(this.getX(), this.getY()-mov_speed+(mov_speed/2));
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        else {
-            this.setLocation(this.getX(), this.getY()+mov_speed-(mov_speed/2));
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        this.setRotation(0);
-        counter++;
     }
     
     public void spawnBullet() {
         BulletDamage b = new BulletDamage(4, damage, target, "tear.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
         counter = 0;
-    }
-    
-    public Player getTarget() {
-        List actorinrange = new ArrayList();
-        actorinrange = this.getObjectsInRange(200, Player.class);
-        
-        for(Object a : actorinrange)  {
-            if(a instanceof Player) {
-              
-                return (Player) a;
-            }
-            
-        }
-        return null;
-        
-    }
-    
-    public boolean checkCollision() {
-        List intersectingObjects = new ArrayList();
-        intersectingObjects = this.getObjectsInRange(25, null); 
-        
-        for(Object a : intersectingObjects)  {          
-            if(a instanceof Obstacle) {
-                return true;
-            }
-           
-        }
-        if(this.isAtEdge()) {
-            return true;
-        }
-        
-        List playerInRange = new ArrayList();
-        playerInRange = this.getObjectsInRange(150, Player.class); 
-        for(Object p: playerInRange)  {          
-            if(p instanceof Player) {
-                return true;
-            }
-           
-        }
-        return false;
     }
 }
