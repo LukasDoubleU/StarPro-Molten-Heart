@@ -13,10 +13,6 @@ public abstract class Melee extends Enemy
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    int mov_speed;
-    float damage;
-    Player target = null;
-    
     public void act() 
     {
         // Add your action code here.
