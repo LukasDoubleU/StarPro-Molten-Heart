@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class Door extends Actor {
 
-    public Door(int x) {
+    public Door(int x,int y) {
        
         if(x==11) {         
             setImage("door/upper_east.png");           
@@ -14,6 +14,8 @@ public class Door extends Actor {
             setImage("door/lower_west.png");
         }
     }
+   
+    
     
     
 }
