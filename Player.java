@@ -97,10 +97,14 @@ public class Player extends Actor {
             // Der Spieler nimmt keinen Schaden, solange er unsterblich ist
             return;
         }
+        // Füge dem Spieler Schaden zu
         lifeCount -= dmg - equippedArmor.getDamageReduction();
+        // Sinken die Leben auf 0 (oder weniger) ist das Spiel verloren
         if (lifeCount <= 0) {
             Level.runGameOverWorld();
         }
+        // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
+        immortal(10);
     }
 
     /**
