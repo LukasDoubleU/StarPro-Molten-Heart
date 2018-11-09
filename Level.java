@@ -5,8 +5,8 @@ import greenfoot.World;
 public abstract class Level extends World {
 
     /**
-     * Default Welt 0 = World border 1 = Wand 2 = Spieler 3 = Gegnertyp 1 4 = Barrel 5 =
-     * Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
+     * Default Welt 0 = World border 1 = Wand 2 = Spieler 3 = Gegnertyp 1 4 = Barrel
+     * 5 = Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
 
     private double[][] world = {
@@ -48,9 +48,11 @@ public abstract class Level extends World {
         super(1280, 720, 1);
         setBackground(image);
         // Zeige unten links die Leben des Spielers an
-        addObject(new PlayerHealth(), 30, 680);
+        addObject(PlayerHealth.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(new PlayerStats(), 1100, 700);
+        addObject(PlayerStats.get(), 1100, 700);
+        // Mittig: Spielzeit
+        addObject(TimerDisplay.get(), 640, 700);
     }
 
     /**
@@ -126,13 +128,13 @@ public abstract class Level extends World {
         } else if (obj == 10) {
             object = Player.get();
         } else if (obj == 11) {
-            object = new Door(11,0);
+            object = new Door(11, 0);
         } else if (obj == 12) {
-            object = new Door(12,0);
+            object = new Door(12, 0);
         } else if (obj == 13) {
-            object = new Door(13,0);
+            object = new Door(13, 0);
         } else if (obj == 14) {
-            object = new Door(14,0);
+            object = new Door(14, 0);
         } else if (obj == 15) {
             object = new Armor.Bright();
         } else if (obj == 16) {
@@ -157,12 +159,12 @@ public abstract class Level extends World {
             addObject(object, 10 + x, 10 + y);
         }
 
-     
     }
-    
+
     /**
-     * Wird vom LavaBoss gespawnt um existierende Bereiche Zufällig mit Lava auszuwechseln 
-       */
-    public static void triggerLava(){
+     * Wird vom LavaBoss gespawnt um existierende Bereiche Zufällig mit Lava
+     * auszuwechseln
+     */
+    public static void triggerLava() {
     }
 }
