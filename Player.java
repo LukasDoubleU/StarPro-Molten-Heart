@@ -1,9 +1,10 @@
 
+import static greenfoot.Greenfoot.isKeyDown;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
-import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 /**
@@ -204,18 +205,18 @@ public class Player extends Actor {
      * Fährt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
     private void move() {
-        if (Greenfoot.isKeyDown("w")) {
+        if (isKeyDown("w") || isKeyDown("up")) {
             setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
             getWorld().setPaintOrder(Player.class);
-        } else if (Greenfoot.isKeyDown("a")) {
+        } else if (isKeyDown("a") || isKeyDown("left")) {
             setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
-        } else if (Greenfoot.isKeyDown("s")) {
+        } else if (isKeyDown("s") || isKeyDown("down")) {
             setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
             getWorld().setPaintOrder(Player.class);
-        } else if (Greenfoot.isKeyDown("d")) {
+        } else if (isKeyDown("d") || isKeyDown("right")) {
             setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
         }
