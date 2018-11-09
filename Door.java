@@ -2,8 +2,10 @@ import greenfoot.*;
 
 public class Door extends Actor {
 
-    public Door(int x) {
-       
+    private boolean closedoor; 
+    
+    public Door(int x,boolean y) {
+       this.closedoor = y; 
         if(x==11) {         
             setImage("door/upper_east.png");           
         } else if(x==12) {
@@ -14,6 +16,18 @@ public class Door extends Actor {
             setImage("door/lower_west.png");
         }
     }
+   
     
+    public void act() {
+        boolean Player;
+        if(getOneIntersectingObject(Player.class)==null) {
+            Player=false;
+        } else {
+            Player=true;
+        }
+        if(closedoor && Player) {
+            ((Level)getWorld()).finish();
+        }
+    }
     
 }

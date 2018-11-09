@@ -1,25 +1,20 @@
 
 import greenfoot.*;
-
 import java.util.*;
 
 public class MeleeDamage extends Melee {
-    
-    int counter = 0;
-    boolean lockedOntoPlayer = false;
-    int mov_speed;
-    int xMov_speed;
-    int yMov_speed;
-    int damage = 1;
-    int lifeCount;
-    Player target = null;
+   
     
     public MeleeDamage(int newMov_Speed, int newLifeCount) {
         mov_speed = newMov_Speed;
         xMov_speed = mov_speed;
         yMov_speed = mov_speed;
+        damage = 0;
         setImage("ghost.png");
         lifeCount = newLifeCount;
+        stalkRange = 38;
+        viewDistance = 200;
+        counter = 0;
     }
     
     public MeleeDamage(int newMov_Speed) {
@@ -32,58 +27,18 @@ public class MeleeDamage extends Melee {
 
     public void act() {
         
-        if(lockedOntoPlayer) {
-            moveTowardsTarget();
+        if(target != null) {
+            followTarget();
             damagePlayer();
         }
         else {
             movePattern();
-            List actorinrange = new ArrayList();
-            actorinrange = this.getObjectsInRange(200, Player.class);
-        
-            for(Object a : actorinrange)  {
-                if(a instanceof Player) {
-                    lockedOntoPlayer = true;
-                    target =(Player) a;
-                }
-            
-            }
+            target = getTarget();
             
         }
 
     }
-    
-    public void moveTowardsTarget() {
-        int oldX = this.getX();
-        int oldY = this.getY();
-        if(this.getX() > target.getX()) {
-            this.setLocation(this.getX()-mov_speed, this.getY());
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        else {
-            this.setLocation(this.getX()+mov_speed, this.getY());
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        if(this.getY() > target.getY()) {
-            this.setLocation(this.getX(), this.getY()-mov_speed);
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        else {
-            this.setLocation(this.getX(), this.getY()+mov_speed);
-            if(checkCollision()) {
-                this.setLocation(oldX, oldY);
-            }
-        }
-        this.setRotation(0);
-        counter++;
-    }
-    
+
     public void damagePlayer() {
         List intersectingObjects = new ArrayList();
         intersectingObjects = this.getIntersectingObjects(Player.class);
@@ -96,32 +51,39 @@ public class MeleeDamage extends Melee {
             
         }
     }
-
+    
+    public void damage(int damage) {
+        lifeCount = lifeCount - damage;
+        if(lifeCount < 0) {
+            this.getWorld().removeObject(this);
+        }
+    }
+    
     public void movePattern() {
         
         int oldX = this.getX();
         int oldY = this.getY();
         if(counter<=40){
             this.setLocation(this.getX()+xMov_speed, this.getY());
-            if(checkCollision()) {
+            if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(counter<=80){
             this.setLocation(this.getX(), this.getY()+yMov_speed);
-            if(checkCollision()) {
+            if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(counter<=120){
             this.setLocation(this.getX()-xMov_speed, this.getY());
-            if(checkCollision()) {
+            if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(counter<=160){
             this.setLocation(this.getX(), this.getY()-yMov_speed);
-            if(checkCollision()) {
+            if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
@@ -131,22 +93,5 @@ public class MeleeDamage extends Melee {
         counter++;
     }
     
-    public boolean checkCollision() {
-        List intersectingObjects = new ArrayList();
-        intersectingObjects = this.getObjectsInRange(25, null); 
-        
-        for(Object a : intersectingObjects)  {          
-            if(a instanceof Player) {
-                return true;
-            }
-            if(a instanceof Obstacle) {
-                return true;
-            }
-           
-        }
-        if(this.isAtEdge()) {
-            return true;
-        }
-        return false;
-    }
+  
 }

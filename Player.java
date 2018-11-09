@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
@@ -40,7 +41,7 @@ public class Player extends Actor {
      */
     Weapon equippedWeapon = new Sword.Beginner();
     Armor equippedArmor = new Armor.None();
-    SpeedBoots equippedBoots = null;
+    Boots equippedBoots = new Boots.None();
 
     /*
      * Variablen für die Bilder zur Laufanimation
@@ -97,10 +98,14 @@ public class Player extends Actor {
             // Der Spieler nimmt keinen Schaden, solange er unsterblich ist
             return;
         }
-        lifeCount -= dmg - equippedArmor.getDamageReduction();
+        // Füge dem Spieler Schaden zu
+        lifeCount -= Math.max(0, dmg - equippedArmor.getDamageReduction());
+        // Sinken die Leben auf 0 (oder weniger) ist das Spiel verloren
         if (lifeCount <= 0) {
             Level.runGameOverWorld();
         }
+        // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
+        immortal(1);
     }
 
     /**
@@ -175,7 +180,17 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getObjectsInRange(35, Obstacle.class);
+        List<Obstacle> obstacles = getNeighbours(39, true, Obstacle.class);
+
+        // Ausnahme: Ignoriere Kollisionen mit Projektilen (Ranged)
+        List<Projectiles> ranged = new ArrayList<Projectiles>();
+        for (Obstacle obstacle : obstacles) {
+            if (obstacle instanceof Projectiles) {
+                ranged.add((Projectiles) obstacle);
+            }
+        }
+        obstacles.removeAll(ranged);
+
         // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
             resetPosition();
