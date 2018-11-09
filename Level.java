@@ -93,6 +93,12 @@ public abstract class Level extends World {
         Actor object = null;
         if (obj == 1) {
             object = new Wall(1);
+        } else if (obj == 1.1) {
+            object = new Wall(1.1);
+        } else if (obj == 1.2) {
+            object = new Wall(1.2);
+        } else if (obj == 1.3) {
+            object = new Wall(1.3);
         } else if (obj == 2) {
             object = new DestroyableObstacle(1);
         } else if (obj == 3) {

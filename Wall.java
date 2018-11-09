@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class Wall extends Obstacle {
 
-    public Wall(int x) {
+    public Wall(double x) {
         if(x==1) {
             setImage("bright_wall_width.png");
         } else if(x==2) {
