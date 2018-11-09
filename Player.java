@@ -32,7 +32,8 @@ public class Player extends Actor {
     int lifeCount = 5;
     int immortal = 0;
 
-    int moveSpeed = 7, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeed = 5, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeedMin = 1, moveSpeedMax = 10;
 
     int oldX, oldY, oldRotation;
 
@@ -180,7 +181,9 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getNeighbours(39, true, Obstacle.class);
+        // Ziehe moveSpeedMax vom Radius ab, um pauschal sicher sein zu können,
+        // dass der MoveSpeed effektiv keine Hitbox-Verschiebung verursachen kann
+        List<Obstacle> obstacles = getNeighbours(39 - moveSpeedMax, true, Obstacle.class);
 
         // Ausnahme: Ignoriere Kollisionen mit Projektilen (Ranged)
         List<Projectiles> ranged = new ArrayList<Projectiles>();
@@ -217,14 +220,16 @@ public class Player extends Actor {
     }
 
     public int getMoveSpeed() {
-        // Der Basis Move Speed
-        return moveSpeed
-                // Zuzüglich Move Speed Bonus (z.B. Trank)
-                + moveSpeedBonus
-                // Abzgl. Move Speed Penalty (z.B. durch Gegner)
-                - moveSpeedSlowed
-                // Und zzgl. Move Speed Bonus von Boots
-                + (equippedBoots != null ? equippedBoots.getMoveSpeedBonus() : 0);
+        // Es gilt: 0 < moveSpeed < 10
+        return Math.min(moveSpeedMax, Math.max(moveSpeedMin,
+                // Der Basis Move Speed
+                moveSpeed
+                        // Zuzüglich Move Speed Bonus (z.B. Trank)
+                        + moveSpeedBonus
+                        // Abzgl. Move Speed Penalty (z.B. durch Gegner)
+                        - moveSpeedSlowed
+                        // Und zzgl. Move Speed Bonus von Boots
+                        + equippedBoots.getMoveSpeedBonus()));
     }
 
     private void setNextImage(int firstImageIndex, int lastImageIndex) {
