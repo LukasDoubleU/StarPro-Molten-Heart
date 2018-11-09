@@ -8,6 +8,11 @@ public abstract class Enemy extends Obstacle {
     Player target = null;
     int lifeCount;
     
-   
+    public void damage(int damage) {
+        lifeCount = lifeCount - damage;
+        if(lifeCount < 0) {
+            this.getWorld().removeObject(this);
+        }
+    }
     
 }

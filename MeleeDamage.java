@@ -96,14 +96,7 @@ public class MeleeDamage extends Melee {
             
         }
     }
-    
-    public void damage(int damage) {
-        lifeCount = lifeCount - damage;
-        if(lifeCount < 0) {
-            this.getWorld().removeObject(this);
-        }
-    }
-    
+
     public void movePattern() {
         
         int oldX = this.getX();

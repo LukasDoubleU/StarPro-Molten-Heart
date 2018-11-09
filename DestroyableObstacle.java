@@ -19,11 +19,4 @@ public class DestroyableObstacle extends Enemy
             setImage("img_utilities/slime.png");
         }
     }
-    
-    public void damage(int damage) {
-        lifeCount = lifeCount - damage;
-        if(lifeCount < 0) {
-            this.getWorld().removeObject(this);
-        }
-    }
 }
