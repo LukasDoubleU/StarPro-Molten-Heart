@@ -6,7 +6,7 @@ import greenfoot.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class StartingGame extends World
+public class StartingGame extends Level
 {
 
     /**
@@ -15,11 +15,12 @@ public class StartingGame extends World
      */
     public StartingGame()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1280, 720, 1); 
-        setBackground("gameover.png"); 
-        
+        super("Start_Game.png");
         addObject(new Button("Start Game"),640,600);
-        //addObject(new TextField("Start Game"), 640, 300);
     }
+        
+    /*
+     * Der Finish macht bei Game Over nichts. 
+     */
+    public void finish(){}
 }

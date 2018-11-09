@@ -15,15 +15,11 @@ public class GameOver extends Level
      */
     public GameOver(){
         super("gameover.png");
-        addObject(new Button("Restart Game"),50,80); 
+        addObject(new Button("Restart Game"),640,600); 
     }
     
     /*
      * Der Finish macht bei Game Over nichts. 
      */
     public void finish(){}
-    
-    /*public void restartGame(){
-        Greenfoot.setWorld(new Level1());
-    }*/
 }
