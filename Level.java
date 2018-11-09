@@ -118,12 +118,11 @@ public abstract class Level extends World {
         } else if (obj == 6) {
             object = new RangedDamage();
         } else if (obj == 7) {
-            object = new RangedSlow(); 
-        }/** else if (obj == 8) {
-             object = new RangedExplosion(); 
-        }
+            object = new RangedSlow();
+        } /**
+           * else if (obj == 8) { object = new RangedExplosion(); }
            **/
-          else if (obj == 9) {
+        else if (obj == 9) {
             object = new Border();
         } else if (obj == 10) {
             object = Player.get();
@@ -158,7 +157,8 @@ public abstract class Level extends World {
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }
-
+        setPaintOrder(DestroyableObstacle.class);
+        setPaintOrder(Enemy.class);
     }
 
     /**
@@ -167,7 +167,9 @@ public abstract class Level extends World {
      */
     public static void triggerLava() {
     }
+
+    @Override
     public void act() {
-        
+
     }
 }

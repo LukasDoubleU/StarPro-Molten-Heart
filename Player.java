@@ -207,12 +207,14 @@ public class Player extends Actor {
         if (Greenfoot.isKeyDown("w")) {
             setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
+            getWorld().setPaintOrder(Player.class);
         } else if (Greenfoot.isKeyDown("a")) {
             setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
         } else if (Greenfoot.isKeyDown("s")) {
             setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
+            getWorld().setPaintOrder(Player.class);
         } else if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
