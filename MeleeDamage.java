@@ -1,6 +1,5 @@
 
 import greenfoot.*;
-
 import java.util.*;
 
 public class MeleeDamage extends Melee {
