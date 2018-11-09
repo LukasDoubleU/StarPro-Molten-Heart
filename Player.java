@@ -104,7 +104,7 @@ public class Player extends Actor {
             Level.runGameOverWorld();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
-        immortal(10);
+        immortal(1);
     }
 
     /**
@@ -179,7 +179,7 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getObjectsInRange(41, Obstacle.class);
+        List<Obstacle> obstacles = getIntersectingObjects(Obstacle.class);
         // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
             resetPosition();
