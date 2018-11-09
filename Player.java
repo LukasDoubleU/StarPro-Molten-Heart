@@ -106,7 +106,7 @@ public class Player extends Actor {
             Level.runGameOverWorld();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
-        immortal(1);
+        immortal(15);
     }
 
     /**
