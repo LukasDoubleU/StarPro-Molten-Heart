@@ -42,7 +42,7 @@ public abstract class Level extends World {
      * Weltwechsel gemacht. Default ist 0 wird aber bei der Erschaffung der Welt
      * hochgesetzt auf die reale Monsterzahl
      */
-    private int monstercount = 0;
+    public int monstercount = 0;
 
     public Level(String image) {
         super(1280, 720, 1);
@@ -128,13 +128,13 @@ public abstract class Level extends World {
         } else if (obj == 10) {
             object = Player.get();
         } else if (obj == 11) {
-            object = new Door(11, 0);
+            object = new Door(11, false);
         } else if (obj == 12) {
-            object = new Door(12, 0);
+            object = new Door(12, false);
         } else if (obj == 13) {
-            object = new Door(13, 0);
+            object = new Door(13, true);
         } else if (obj == 14) {
-            object = new Door(14, 0);
+            object = new Door(14, true);
         } else if (obj == 15) {
             object = new Armor.Bright();
         } else if (obj == 16) {
@@ -166,5 +166,8 @@ public abstract class Level extends World {
      * auszuwechseln
      */
     public static void triggerLava() {
+    }
+    public void act() {
+        
     }
 }
