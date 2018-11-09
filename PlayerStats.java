@@ -29,7 +29,7 @@ public class PlayerStats extends Actor {
 
         int newArmor = p.equippedArmor.getDamageReduction();
         int newDamage = p.equippedWeapon.getDamage();
-        int newSpeed = p.getLifeCount();
+        int newSpeed = p.getMoveSpeed();
         // Hat sich einer der Werte geändert?
         if (newArmor != previousArmor //
                 || newDamage != previousDamage //

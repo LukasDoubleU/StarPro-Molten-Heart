@@ -40,7 +40,7 @@ public class Player extends Actor {
      */
     Weapon equippedWeapon = new Sword.Beginner();
     Armor equippedArmor = new Armor.None();
-    SpeedBoots equippedBoots = null;
+    Boots equippedBoots = new Boots.None();
 
     /*
      * Variablen für die Bilder zur Laufanimation
@@ -98,7 +98,7 @@ public class Player extends Actor {
             return;
         }
         // Füge dem Spieler Schaden zu
-        lifeCount -= dmg - equippedArmor.getDamageReduction();
+        lifeCount -= Math.max(0, dmg - equippedArmor.getDamageReduction());
         // Sinken die Leben auf 0 (oder weniger) ist das Spiel verloren
         if (lifeCount <= 0) {
             Level.runGameOverWorld();
