@@ -13,7 +13,7 @@ import java.util.Timer;
 public class LavaBoss extends Boss
 {
     /**
-     *  Diese parameter ist für die Klasse fireCircle()
+     *  Diese parameter ist fuer die Klasse fireCircle()
      *  @param counter : dient um die Schuesse in einer bestimmten zeit abzufeuern
      */
     private int rotateShoot = 15;
