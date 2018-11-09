@@ -4,19 +4,16 @@ import greenfoot.*;
 import java.util.*;
 
 public class MeleeDamage extends Melee {
-    
-    int counter = 0;
-    boolean lockedOntoPlayer = false;
-  
+   
     
     public MeleeDamage(int newMov_Speed, int newLifeCount) {
         mov_speed = newMov_Speed;
         xMov_speed = mov_speed;
         yMov_speed = mov_speed;
-        damage = 2;
+        damage = 0;
         setImage("ghost.png");
         lifeCount = newLifeCount;
-        stalkRange = 25;
+        stalkRange = 38;
         viewDistance = 200;
         counter = 0;
     }

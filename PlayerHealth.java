@@ -7,6 +7,12 @@ import greenfoot.World;
 
 public class PlayerHealth extends Actor {
 
+    static PlayerHealth instance = new PlayerHealth();
+
+    public static PlayerHealth get() {
+        return instance;
+    }
+
     private class HealthImage extends Actor {
 
         private HealthImage() {
@@ -17,7 +23,7 @@ public class PlayerHealth extends Actor {
     int previousLifeCount;
     List<HealthImage> currentHealthImages = new ArrayList<HealthImage>();
 
-    public PlayerHealth() {
+    private PlayerHealth() {
         setImage("transparent.png");
         refreshHealth(Player.get().getLifeCount());
     }
