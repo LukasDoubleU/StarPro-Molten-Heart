@@ -145,12 +145,12 @@ public abstract class Level extends World {
             addObject(object, 10 + x, 10 + y);
         }
 
-        /* 10 bis 99 generiert allerlei andere objekte */
-        else if (obj > 9) {
-            /* Wird für den Hintergrund des unteren Menus genutzt */
-            if (obj == 99) {
-                // addImage()
-            }
-        }
+     
+    }
+    
+    /**
+     * Wird vom LavaBoss gespawnt um existierende Bereiche Zufällig mit Lava auszuwechseln 
+       */
+    public static void triggerLava(){
     }
 }
