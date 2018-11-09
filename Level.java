@@ -9,7 +9,7 @@ public abstract class Level extends World {
      * Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
 
-    private int[][] world = {
+    private double[][] world = {
             /**
              * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
              * Lifebar und Timer da
@@ -70,7 +70,7 @@ public abstract class Level extends World {
         Greenfoot.setWorld(new GameOver());
     }
 
-    public void generateWorld(int[][] nWorld) {
+    public void generateWorld(double[][] nWorld) {
         if (nWorld != null) {
             this.world = nWorld;
         }
@@ -88,11 +88,11 @@ public abstract class Level extends World {
     /**
      * Generiert alle Objekte die sich für die Welt
      */
-    public void generateObject(int obj, int x, int y) {
+    public void generateObject(double obj, int x, int y) {
 
         Actor object = null;
         if (obj == 1) {
-            object = new Wall();
+            object = new Wall(1);
         } else if (obj == 2) {
             object = new DestroyableObstacle(1);
         } else if (obj == 3) {
@@ -112,15 +112,13 @@ public abstract class Level extends World {
         } else if (obj == 10) {
             object = Player.get();
         } else if (obj == 11) {
-            object = new Door(11);
+            object = new Door(11,0);
         } else if (obj == 12) {
-            object = new Door(12);
-        } else if (obj == 12) {
-            object = new Door(13);
+            object = new Door(12,0);
         } else if (obj == 13) {
-            object = new Door(13);
+            object = new Door(13,0);
         } else if (obj == 14) {
-            object = new Door(14);
+            object = new Door(14,0);
         } else if (obj == 15) {
             object = new Armor.Bright();
         } else if (obj == 16) {

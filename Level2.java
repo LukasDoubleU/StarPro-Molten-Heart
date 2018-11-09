@@ -7,7 +7,7 @@ public class Level2 extends Level {
      * Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
 
-    private int[][] world = {
+    private double[][] world = {
             /**
              * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
              * Lifebar und Timer da
