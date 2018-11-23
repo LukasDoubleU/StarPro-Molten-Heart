@@ -52,7 +52,7 @@ public class BulletDamage extends Projectiles
     }
     
     public BulletDamage(int newMov_Speed, int newDamage, int newTurnDegree, Player newTarget, String imgPath, int knockBackXX, int knockBackYY) {
-        mov_speed = newMov_Speed;
+        super(newMov_Speed, 5);
         damage = newDamage;
         target = newTarget;
         setImage(imgPath);
