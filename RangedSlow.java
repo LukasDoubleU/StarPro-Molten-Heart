@@ -38,6 +38,9 @@ public class RangedSlow extends Ranged
         this(3, 1, wallType);
     }
         
+    public RangedSlow(){
+        this(3);
+    }
     public void act() 
     {
         if(test) {

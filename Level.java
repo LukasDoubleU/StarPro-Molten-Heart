@@ -1,6 +1,9 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 import greenfoot.World;
+import java.util.List; 
+import java.util.ArrayList; 
+import java.util.Random; 
 
 public abstract class Level extends World {
 
