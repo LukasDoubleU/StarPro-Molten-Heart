@@ -15,7 +15,7 @@ public class Wall extends Obstacle {
             setImage("bright_wall_height.png");
         }else if(x == 1.4 || x == 7.4) {
             //Transparents unten
-            setImage("bright_wall_height_mirrored.png");
+            setImage("bright_wall_height_mirrored_transp.png");
         }else if (x == 1.5 || x == 7.5) {
             setImage("bright_wall.png");
         }
