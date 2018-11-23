@@ -42,22 +42,24 @@ public class RangedDamage extends Ranged
         if(target == null) {
             target = getTarget();
         }
+       
         
         if(target != null) {
             if(!checkCollision(stalkRange)) {
                 followTarget();
             }
-            else {
-                counter++;
-            }
-            if(counter == 100) {
+            
+            if(counter >= 100) {
                 spawnBullet();
             }
-        }else {
+        }
+        else {
             if(!checkCollision(stalkRange)) {
                 movePattern();
             }
         }
+        
+        counter++;
     }
     
     public void movePattern() {
@@ -80,7 +82,7 @@ public class RangedDamage extends Ranged
         if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
         }
-        counter = counter + 1;
+
     }
     
     public void spawnBullet() {

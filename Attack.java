@@ -16,7 +16,7 @@ public abstract class Attack extends Actor {
         }
     }
 
-    int duration = 10;
+    int duration = 5;
     Set<Hit> hits = new HashSet<Hit>();
 
     public Attack(Weapon weapon) {

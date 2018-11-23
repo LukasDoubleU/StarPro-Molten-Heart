@@ -46,9 +46,7 @@ public class RangedSlow extends Ranged
             if(!checkCollision(stalkRange)) {
                 followTarget();
             }
-            else {
-                counter++;
-            }
+
             if(counter == 100) {
                 spawnBullet();
             }
@@ -57,6 +55,7 @@ public class RangedSlow extends Ranged
                 movePattern();
             }
         }
+        counter++;
         
     }
     public void movePattern() {
@@ -79,7 +78,6 @@ public class RangedSlow extends Ranged
         if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
         }
-        counter = counter + 1;
     }
     
     public void spawnBullet() {

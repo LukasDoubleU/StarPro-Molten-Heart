@@ -1,9 +1,10 @@
 
+import static greenfoot.Greenfoot.isKeyDown;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
-import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 /**
@@ -32,7 +33,8 @@ public class Player extends Actor {
     int lifeCount = 5;
     int immortal = 0;
 
-    int moveSpeed = 7, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeed = 5, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeedMin = 1, moveSpeedMax = 10;
 
     int oldX, oldY, oldRotation;
 
@@ -105,7 +107,7 @@ public class Player extends Actor {
             Level.runGameOverWorld();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
-        immortal(1);
+        immortal(15);
     }
 
     /**
@@ -180,7 +182,9 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getNeighbours(39, true, Obstacle.class);
+        // Ziehe moveSpeedMax vom Radius ab, um pauschal sicher sein zu können,
+        // dass der MoveSpeed effektiv keine Hitbox-Verschiebung verursachen kann
+        List<Obstacle> obstacles = getNeighbours(39 - moveSpeedMax, true, Obstacle.class);
 
         // Ausnahme: Ignoriere Kollisionen mit Projektilen (Ranged)
         List<Projectiles> ranged = new ArrayList<Projectiles>();
@@ -201,30 +205,34 @@ public class Player extends Actor {
      * Fährt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
     private void move() {
-        if (Greenfoot.isKeyDown("w")) {
+        if (isKeyDown("w") || isKeyDown("up")) {
             setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
-        } else if (Greenfoot.isKeyDown("a")) {
+            getWorld().setPaintOrder(Player.class);
+        } else if (isKeyDown("a") || isKeyDown("left")) {
             setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
-        } else if (Greenfoot.isKeyDown("s")) {
+        } else if (isKeyDown("s") || isKeyDown("down")) {
             setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
-        } else if (Greenfoot.isKeyDown("d")) {
+            getWorld().setPaintOrder(Player.class);
+        } else if (isKeyDown("d") || isKeyDown("right")) {
             setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
         }
     }
 
     public int getMoveSpeed() {
-        // Der Basis Move Speed
-        return moveSpeed
-                // Zuzüglich Move Speed Bonus (z.B. Trank)
-                + moveSpeedBonus
-                // Abzgl. Move Speed Penalty (z.B. durch Gegner)
-                - moveSpeedSlowed
-                // Und zzgl. Move Speed Bonus von Boots
-                + (equippedBoots != null ? equippedBoots.getMoveSpeedBonus() : 0);
+        // Es gilt: 0 < moveSpeed < 10
+        return Math.min(moveSpeedMax, Math.max(moveSpeedMin,
+                // Der Basis Move Speed
+                moveSpeed
+                        // Zuzüglich Move Speed Bonus (z.B. Trank)
+                        + moveSpeedBonus
+                        // Abzgl. Move Speed Penalty (z.B. durch Gegner)
+                        - moveSpeedSlowed
+                        // Und zzgl. Move Speed Bonus von Boots
+                        + equippedBoots.getMoveSpeedBonus()));
     }
 
     private void setNextImage(int firstImageIndex, int lastImageIndex) {
