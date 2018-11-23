@@ -102,28 +102,16 @@ public abstract class Level extends World {
     public void generateObject(double obj, int x, int y) {
 
         Actor object = null;
-        if (obj == 1.1) {
-            object = new Wall(1);
-        } else if (obj == 1.2) {
-            object = new Wall(2);
-        } else if (obj == 1.3) {
-            object = new Wall(3);
-        } else if (obj == 1.4) {
-            object = new Wall(4);
-        } else if (obj == 1.5) {
-            object = new Wall(5);
-        } else if (obj == 2) {
-            object = new DestroyableObstacle(1);
-        } else if (obj == 3) {
-            object = new DestroyableObstacle(2);
-        } else if (obj == 4) {
-            object = new DestroyableObstacle(3);
+        if ((int) obj == 1) {
+             object = new Wall(obj);
+        } else if (obj >= 2 && obj <= 4 ) {
+            object = new DestroyableObstacle(obj);
         } else if (obj == 5) {
             object = new MeleeDamage();
         } else if (obj == 6) {
             object = new RangedDamage();
         //Verlangsamungsgegner
-        } else if (obj == 7) {
+        } else if ((int)obj == 7) {
             object = new RangedSlow(obj); 
         }/** else if (obj == 8) {
         object = new RangedExplosion(); 
@@ -136,14 +124,12 @@ public abstract class Level extends World {
             object = new Border();
         } else if (obj == 10) {
             object = Player.get();
-        } else if (obj == 11) {
-            object = new Door(11, false);
-        } else if (obj == 12) {
-            object = new Door(12, false);
-        } else if (obj == 13) {
-            object = new Door(13, true);
-        } else if (obj == 14) {
-            object = new Door(14, true);
+        } else if (obj >= 11 && obj <= 14) {
+            boolean status = false; 
+            if(obj >=13){
+                status = true;
+            }
+            object = new Door(obj, status);
         } else if (obj == 15) {
             object = new Armor.Bright();
         } else if (obj == 16) {

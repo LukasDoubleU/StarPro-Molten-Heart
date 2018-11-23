@@ -4,7 +4,6 @@ public class Wall extends Obstacle {
 
     public Wall(double x) {
         x = x-(int)x; 
-        System.out.println("Wall ist " + x);
         if(x<0.2) {
             //Transparents rechts
             setImage("bright_wall_width.png");
