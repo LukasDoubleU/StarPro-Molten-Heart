@@ -1,6 +1,4 @@
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import greenfoot.Actor;
 import greenfoot.GreenfootImage;
@@ -8,46 +6,51 @@ import greenfoot.GreenfootImage;
 public abstract class Attack extends Actor {
 
     Weapon weapon;
-
-    class Hit extends Actor {
-
-        Hit() {
-            setImage(getHitImage());
-        }
-    }
-
     int duration = 5;
-    Set<Hit> hits = new HashSet<Hit>();
 
     public Attack(Weapon weapon) {
         this.weapon = weapon;
         setImage(getUsageImage());
     }
 
+    /**
+     * Entfernt die Attacke aus der Welt
+     */
+    protected void remove() {
+        Player.get().getWorld().removeObject(this);
+    }
+
     @Override
     public void act() {
 
         // Prüfe auf Treffer
+        checkHit();
+
+        // Überprüfe die "Dauer" der Attacke
+        processDuration();
+    }
+
+    protected void processDuration() {
+        // Prüfe, ob die Dauer abläuft
+        if (--duration == 0) {
+            remove();
+        }
+    }
+
+    protected void checkHit() {
         @SuppressWarnings("unchecked")
         List<Enemy> enemiesHit = getIntersectingObjects(Enemy.class);
         for (Enemy enemy : enemiesHit) {
-            Hit hit = new Hit();
-            hits.add(hit);
-            Player.get().getWorld().addObject(hit, enemy.getX(), getY());
-            enemy.lifeCount -= weapon.getDamage();
-            if (enemy.lifeCount <= 0) {
-                Player.get().getWorld().removeObject(enemy);
-            }
+            processHit(enemy);
         }
+    }
 
-        // Prüfe, ob die Dauer abläuft
-        duration--;
-        if (duration == 0) {
-            Player.get().getWorld().removeObject(this);
-            for (Hit hit : hits) {
-                Player.get().getWorld().removeObject(hit);
-            }
-            hits.clear();
+    protected void processHit(Enemy enemy) {
+        Hit hit = new Hit();
+        Player.get().getWorld().addObject(hit, enemy.getX(), getY());
+        enemy.lifeCount -= weapon.getDamage();
+        if (enemy.lifeCount <= 0) {
+            Player.get().getWorld().removeObject(enemy);
         }
     }
 
@@ -80,4 +83,20 @@ public abstract class Attack extends Actor {
 
     }
 
+    protected class Hit extends Actor {
+
+        int lifespan = 5;
+
+        Hit() {
+            setImage(getHitImage());
+        }
+
+        @Override
+        public void act() {
+            lifespan--;
+            if (lifespan <= 0) {
+                Player.get().getWorld().removeObject(this);
+            }
+        }
+    }
 }

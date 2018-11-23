@@ -11,7 +11,7 @@ public abstract class Item extends Actor {
 
         Common(0.8f, new Sword.Big(), new Potion.Health()),
 
-        Rare(0.5f, new Armor.Bright(), new Potion.Speed(), new Potion.Damage()),
+        Rare(0.5f, new Armor.Bright(), new Potion.Speed(), new Potion.Damage(), new Bow()),
 
         Legendary(0.2f, new Sword.Master(), new Armor.Dark(), new Potion.Immortality());
 
@@ -34,4 +34,10 @@ public abstract class Item extends Actor {
         }
     }
 
+    /**
+     * Entfernt das Item aus der Welt
+     */
+    protected void remove() {
+        Player.get().getWorld().removeObject(this);
+    }
 }
