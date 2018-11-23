@@ -33,7 +33,7 @@ public class Player extends Actor {
     int lifeCount = 5;
     int immortal = 0;
 
-    final int processDotsCooldownDefault = 5;
+    final int processDotsCooldownDefault = 15;
     int processDotsCooldown = processDotsCooldownDefault;
     int moveSpeed = 5, moveSpeedSlowed = 0, moveSpeedBonus = 0;
     final int moveSpeedMin = 1, moveSpeedMax = 10;

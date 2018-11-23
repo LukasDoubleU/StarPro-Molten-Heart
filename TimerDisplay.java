@@ -41,7 +41,7 @@ public class TimerDisplay extends Actor {
         Color c = new Color(1f, 0f, 0f, 0f);
         String minString = String.format("%02d", mins);
         String secString = String.format("%02d", secs);
-        setImage(new GreenfootImage(minString + ":" + secString, 30, Color.WHITE, Color.BLACK));
+        setImage(new GreenfootImage(minString + ":" + secString, 30, Color.BLACK, c));
     }
 
     private void secondPassed() {
