@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.List; 
 
 /**
  * Write a description of class Lava here.
@@ -8,32 +9,41 @@ import greenfoot.*;
  */
 public class Lava extends InteractiveObjects
 {
-    private final String GROUND = "Interactive World Objects/lavarock_ground.png"; 
-    private final String LAVA_GROUND = "Interactive World Objects/lava_ground.png"; 
+    private String ground; 
+    private String lava_ground; 
 
-    private boolean status; 
+    public boolean status; 
 
     private int cooldownTimer; 
 
-    public Lava(){
-        setImage(GROUND);
+    public Lava(double pos){
+        this.ground = "Interactive World Objects/lavarock_ground_" + pos + ".png";
+        this.lava_ground = "Interactive World Objects/lava_ground_" + pos + ".png";
+        setImage(ground);
         this.status = false;
     }
 
     public void act(){
+        List<Lava> lavaInRange = getObjectsInRange(40, Lava.class);
+        for(Lava neighbourLava : lavaInRange){
+            if(neighbourLava.status){
+                this.transform();
+                break;
+            }
+        }
         if(status){
             dealDamageOnCollision();
             cooldownTimer--; 
         }
 
         if(cooldownTimer == 0 && status){
-            setImage(GROUND);
+            setImage(ground);
             this.status = false;  
         }
     }
 
     public void transform(){
-        getImage().drawImage(new GreenfootImage(LAVA_GROUND), 0,0);
+        getImage().drawImage(new GreenfootImage(lava_ground), 0,0);
         status = true; 
         cooldownTimer = 500; 
     }

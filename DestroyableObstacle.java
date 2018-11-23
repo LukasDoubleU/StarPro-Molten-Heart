@@ -10,12 +10,12 @@ public class DestroyableObstacle extends Enemy
 {
     int lifeCount;
     
-    public DestroyableObstacle(int x) {
-        if(x==1) {
+    public DestroyableObstacle(double x) {
+        if(x==2) {
             setImage("img_utilities/rock.png");
-        } else if (x==2) {
-            setImage("img_utilities/barrel.png");
         } else if (x==3) {
+            setImage("img_utilities/barrel.png");
+        } else if (x==4) {
             setImage("img_utilities/slime.png");
         }
     }
