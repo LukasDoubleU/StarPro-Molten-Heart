@@ -15,6 +15,21 @@ import java.util.Calendar;
 public class LavaBoss extends Boss
 {
     /**
+     * Diese Parameter dienen, um die verschiedenen Attacken zu varrieren
+     * @param attack1 : aktivierung/deaktivierung der Attacke
+     * @param attack1 : aktivierung/deaktivierung der Attacke
+     * @param attack1 : aktivierung/deaktivierung der Attacke
+     * @param randomAttack : gibt an, welche reihenfolge von attacken durchgeführt werden
+     * @param attackTimer : dient zum Timen
+     */
+    private boolean attack1 = false;
+    private boolean attack2 = false;
+    private boolean attack3 = false;
+    private boolean attack4 = false;
+    private int randomAttack = 0;
+    private int attackTimer = 0;
+    
+    /**
      *  Diese parameter ist fuer die Klasse fireCircle()
      *  @param counter : dient um die Schuesse in einer bestimmten zeit abzufeuern
      *  @param rotateBool : dient für anderes Verhalten des Schießens
@@ -33,10 +48,12 @@ public class LavaBoss extends Boss
     /**
      * Diese Parameter ist für die Klasse knockBack()
      * @param knockTimer : dient zum Timen der verschiedenen Bilder des Bosses
-     * 
+     * @param playerX, playerY : speichert die x,y Koordinate vom Player
      */
     private int knockTimer = 0;
     private boolean knockShootVV = true;
+    private int playerX;
+    private int playerY;
     
     /**
      * Instruktor des LavaBoss : image wird gesetzt
@@ -64,14 +81,52 @@ public class LavaBoss extends Boss
     
     public void knockBack(){
         if(knockShootVV==true){
-            int playerX = target.getX();
-            int playerY = target.getY();
+            playerX = target.getX();
+            playerY = target.getY();
+            
             this.turnTowards(playerX, playerY);
             int thisRotate = this.getRotation();
-           // knockBackRotate(thisRotate);
+            
+            System.out.println("DAVOR: "+this.getRotation());
+            if(this.getRotation()<= 45){
+                this.setRotation(22);
+                System.out.println(this.getRotation());
+                target.setLocation(1100,500);
+            }else if(this.getRotation()<= 90 && this.getRotation()>= 46){
+                this.setRotation(67);
+                System.out.println(this.getRotation());
+            }else if(this.getRotation()<= 135 && this.getRotation()>= 91){
+                this.setRotation(112);
+                System.out.println(this.getRotation());
+            }else if(this.getRotation()<= 180 && this.getRotation()>= 136){
+                this.setRotation(157);
+                System.out.println(this.getRotation());
+            }else if(this.getRotation()<= 225 && this.getRotation()>= 181){
+                this.setRotation(202);
+                System.out.println(this.getRotation());
+            }else if(this.getRotation()<= 270 && this.getRotation()>= 226){
+                this.setRotation(247);
+                System.out.println(this.getRotation());
+            }else if(this.getRotation()<= 315 && this.getRotation()>= 271){
+                this.setRotation(292);
+                System.out.println(this.getRotation());
+            }else if(this.getRotation()>= 315){
+                this.setRotation(337);
+                System.out.println(this.getRotation());
+            }
+            
+            //test
+            knockShootVV=false;
+        
+            
+       
+           //nicht knockBackRotate(thisRotate);
             }
            
-            setImage("boss/boss1.3.png");
+            //spawn hand neben den boss
+           /* Hand hand = new Hand();
+            this.getWorld().addObject(hand, this.getX()-70, this.getY());
+            hand.turnTowards(playerX, playerY);*/
             if(knockTimer==50){ //50 = 1-2 sek
                 knockTimer = 0;
                 knockShootVV = false;
@@ -131,7 +186,7 @@ public class LavaBoss extends Boss
      */
     public Player getTarget() {
         List actorinrange = new ArrayList();
-        actorinrange = this.getObjectsInRange(1000, Player.class);
+        actorinrange = this.getObjectsInRange(1900, Player.class);
         
         for(Object a : actorinrange)  {
             if(a instanceof Player) {
