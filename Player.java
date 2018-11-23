@@ -202,6 +202,11 @@ public class Player extends Actor {
         }
     }
 
+    /**
+     * returns the player hitbox for calculation purposes
+     * 
+     * @return
+     */
     public int getPlayerHitboxSize() {
         return (39 - moveSpeedMax);
     }
