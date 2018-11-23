@@ -52,10 +52,10 @@ public class PlayerStats extends Actor {
     }
 
     private void refreshImage(int armor, int damage, int speed) {
+        Color c = new Color(1f, 0f, 0f, 0f);
         setImage(new GreenfootImage("Armor " + armor //
                 + " | Damage " + damage //
                 + " | Speed " + speed //
-                , 30, Color.WHITE, Color.BLACK));
+                , 30, Color.BLACK, c));
     }
-
 }
