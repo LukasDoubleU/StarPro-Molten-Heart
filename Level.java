@@ -53,6 +53,7 @@ public abstract class Level extends World {
         addObject(PlayerStats.get(), 1100, 700);
         // Mittig: Spielzeit
         addObject(TimerDisplay.get(), 640, 700);
+        
     }
 
     /**
@@ -118,7 +119,7 @@ public abstract class Level extends World {
         } else if (obj == 6) {
             object = new RangedDamage();
         } else if (obj == 7) {
-            object = new RangedSlow();
+            object = new RangedSlow(3);
         } /**
            * else if (obj == 8) { object = new RangedExplosion(); }
            **/

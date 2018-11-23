@@ -6,15 +6,11 @@ public class MeleeDamage extends Melee {
    
     
     public MeleeDamage(int newMov_Speed, int newLifeCount) {
-        mov_speed = newMov_Speed;
-        xMov_speed = mov_speed;
-        yMov_speed = mov_speed;
+        super(newMov_Speed, newLifeCount);
         damage = 1;
         setImage("ghost.png");
-        lifeCount = newLifeCount;
         stalkRange = 38;
         viewDistance = 200;
-        counter = 0;
     }
     
     public MeleeDamage(int newMov_Speed) {
@@ -40,14 +36,15 @@ public class MeleeDamage extends Melee {
     }
 
     public void damagePlayer() {
-        Object o = this.getOneIntersectingObject(Player.class);
-        
-        
-        if(o instanceof Player) {
-            Player.get().damage(damage);
-                
+        List playerInRange = new ArrayList();
+        playerInRange = this.getObjectsInRange(stalkRange + 1, Player.class);     
+        for(Object p : playerInRange) {
+            if(p instanceof Player) {
+                Player.get().damage(damage);
+            }                
         }
-            
+        
+           
     }
     
     public void damage(int damage) {

@@ -13,7 +13,7 @@ import java.util.Calendar;
  * @version (a version number or a date)
  */
 public class LavaBoss extends Boss
-{
+{   
     /**
      * Diese Parameter dienen, um die verschiedenen Attacken zu varrieren
      * @param attack1 : aktivierung/deaktivierung der Attacke
@@ -48,17 +48,22 @@ public class LavaBoss extends Boss
     /**
      * Diese Parameter ist f¸r die Klasse knockBack()
      * @param knockTimer : dient zum Timen der verschiedenen Bilder des Bosses
+     * @param knockShootVV : Visuele Vorwahnung, gibt den Spieler Zeit in sicherheit zu gehen, bevor er schieﬂt 
      * @param playerX, playerY : speichert die x,y Koordinate vom Player
+     * @param knockBackX, knockBackY : speichert die x,y Koordinate, wo der Player geknockbackt werden soll
      */
     private int knockTimer = 0;
     private boolean knockShootVV = true;
     private int playerX;
     private int playerY;
+    private int knockBackX;
+    private int knockBackY;
     
     /**
      * Instruktor des LavaBoss : image wird gesetzt
      */
     public LavaBoss(){
+        super(1,10);
         setImage("boss/boss1.png");
     }
     
@@ -69,17 +74,22 @@ public class LavaBoss extends Boss
     
     public void act() 
     {   
+        //Falls Spieler noch nicht in target gespeichert wurde, rufe getTarget() auf
         if(target==null){
             target = getTarget();
         }
-        addKnockTimer();
-        
         knockBack();
     }
     
 
-    
+    /**
+     * Funktion knockBack()
+     * Schieﬂt eine Hand nach einer bestimmten Zeit und knockbackt den Gegner auf eine bestimme x,y Koordinate
+     */
     public void knockBack(){
+        
+        /**VV = Virsuelle Vorwahnung
+           Ermittelt die Position vom Spieler und speichert dann die x,y Koordinate wo der Spieler geknockbackt werden soll**/
         if(knockShootVV==true){
             playerX = target.getX();
             playerY = target.getY();
@@ -87,65 +97,78 @@ public class LavaBoss extends Boss
             this.turnTowards(playerX, playerY);
             int thisRotate = this.getRotation();
             
-            System.out.println("DAVOR: "+this.getRotation());
             if(this.getRotation()<= 45){
                 this.setRotation(22);
                 System.out.println(this.getRotation());
-                target.setLocation(1100,500);
+                knockBackX = 400;
+                knockBackY = 400;
             }else if(this.getRotation()<= 90 && this.getRotation()>= 46){
                 this.setRotation(67);
                 System.out.println(this.getRotation());
+                knockBackX = 400;
+                knockBackY = 400;
             }else if(this.getRotation()<= 135 && this.getRotation()>= 91){
                 this.setRotation(112);
                 System.out.println(this.getRotation());
+                knockBackX = 400;
+                knockBackY = 400;
             }else if(this.getRotation()<= 180 && this.getRotation()>= 136){
                 this.setRotation(157);
                 System.out.println(this.getRotation());
+                knockBackX = 400;
+                knockBackY = 400;
             }else if(this.getRotation()<= 225 && this.getRotation()>= 181){
                 this.setRotation(202);
                 System.out.println(this.getRotation());
+                knockBackX = 400;
+                knockBackY = 400;
             }else if(this.getRotation()<= 270 && this.getRotation()>= 226){
                 this.setRotation(247);
                 System.out.println(this.getRotation());
+                knockBackX = 400;
+                knockBackY = 400;
             }else if(this.getRotation()<= 315 && this.getRotation()>= 271){
                 this.setRotation(292);
                 System.out.println(this.getRotation());
+                knockBackX = 400;
+                knockBackY = 400;
             }else if(this.getRotation()>= 315){
                 this.setRotation(337);
                 System.out.println(this.getRotation());
+                knockBackX = 400;
+                knockBackY = 400;
             }
-            
-            //test
-            knockShootVV=false;
-        
-            
-       
-           //nicht knockBackRotate(thisRotate);
-            }
-           
-            //spawn hand neben den boss
-           /* Hand hand = new Hand();
-            this.getWorld().addObject(hand, this.getX()-70, this.getY());
-            hand.turnTowards(playerX, playerY);*/
-            if(knockTimer==50){ //50 = 1-2 sek
-                knockTimer = 0;
-                knockShootVV = false;
-            }else{
-                setImage("boss/boss1.png");
         }
-    
+        
+        /**Counter wird hochgecountet (ist die Dauer der Visuellen Vorwahung)**/
+        knockShootVV=false;
+        addKnockTimer();
+        
+        //spawn hand neben den boss
+        /* Hand hand = new Hand();
+        this.getWorld().addObject(hand, this.getX()-70, this.getY());
+        hand.turnTowards(playerX, playerY);*/
+        
+        /**Virsuelle Vorwahnung ist nach 1-2 sek vorbei und generiert dann eine Hand**/
+        if(knockTimer==50){ //50 = 1-2 sek
+            knockTimer = 0;
+            BulletDamage b = new BulletDamage(4, 0,this.getRotation(), null, "boss/boss2hand.png",knockBackX,knockBackY);
+            this.getWorld().addObject(b, this.getX(), this.getY());
+            this.setRotation(0);
+            knockShootVV=true;
+        }
     }
     
     
     /**
-     * Funktion fireCircle
+     * Funktion fireCircle()
      * der Boss dreht sich und schieﬂt dabei Feuerkugeln
      */
     public void fireCircle() {
-        //er ist kurz davor die Feuerkugeln zu schieﬂen und gibt dem Player eine visuelle Vorwanung 
+        /**er ist kurz davor die Feuerkugeln zu schieﬂen und gibt dem Player eine visuelle Vorwanung**/
         if(rotateShootVV==true){
             this.setImage("boss/boss1.1.png");
-            //Nachdem der Timer fertig ist, setzt er ein anderes Bild und feuert die Kugeln
+            /**Nachdem der Timer fertig ist, setzt er ein anderes Bild und feuert die Kugeln**/
             if(fireTimer==60){ //100 = 2-3 sek
                 this.setImage("boss/boss1.2.png");
                 fireTimer = 0;
@@ -153,9 +176,7 @@ public class LavaBoss extends Boss
           
             }
         }else{
-            /**
-             * Hier dreht sich der Boss und schieﬂt dabei mit Lavakugeln
-             */
+            /**Hier dreht sich der Boss und schieﬂt dabei mit Lavakugeln **/
             turn(3);
             int rotation = this.getRotation();
             if(rotation%rotateShoot==0) {
@@ -182,11 +203,12 @@ public class LavaBoss extends Boss
     }
     
     /**
-     * Funktion um den Player zur¸ckzugeben
+     * Funktion getTarget()
+     * Gibt den Player zur¸ckzugeben
      */
     public Player getTarget() {
         List actorinrange = new ArrayList();
-        actorinrange = this.getObjectsInRange(1900, Player.class);
+        actorinrange = this.getObjectsInRange(4000, Player.class);
         
         for(Object a : actorinrange)  {
             if(a instanceof Player) {
@@ -198,6 +220,7 @@ public class LavaBoss extends Boss
     }
     
     /**
+     * Funktion addFireTimer()
      * Timer um die Variable fireTimer hochzucounten
      */
     public void addFireTimer(){
@@ -205,10 +228,20 @@ public class LavaBoss extends Boss
     }
     
     /**
+     * Funktion addKnockTimer()
      * Timer um die Variable knockTimer hochzucounten
      */
     public void addKnockTimer(){
         knockTimer++;
     }
+    
+    /**
+     * Funktion attackTimer()
+     * Timer um die Variable attackTimer hochzucounten
+     */
+    public void attackTimer(){
+        attackTimer++;
+    }
+    
 }
 

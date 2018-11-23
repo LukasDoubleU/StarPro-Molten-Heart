@@ -5,9 +5,10 @@
  * @version (a version number or a date)
  */
 public class DestroyableObstacle extends Enemy {
-    int lifeCount;
 
     public DestroyableObstacle(int x) {
+        super(0, 1);
+        
         if (x == 1) {
             setImage("img_utilities/rock.png");
         } else if (x == 2) {
