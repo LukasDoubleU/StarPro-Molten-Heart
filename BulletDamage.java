@@ -25,10 +25,9 @@ public class BulletDamage extends Projectiles
     boolean knockBack = false;
 
     public BulletDamage(int newMov_Speed, int newDamage, Player newTarget, String imgPath) {
-        super(newMov_Speed, 1);
+        super(newMov_Speed, 1, imgPath);
         damage = newDamage;
         target = newTarget;
-        setImage(imgPath);
         if(imgPath.equals("tear.png")) {
             getImage().scale(15,15);
         }
@@ -39,10 +38,9 @@ public class BulletDamage extends Projectiles
     
     
     public BulletDamage(int newMov_Speed, int newDamage, int newTurnDegree, Player newTarget, String imgPath) {
-        super(newMov_Speed, 1);
+        super(newMov_Speed, 1, imgPath);
         damage = newDamage;
         target = newTarget;
-        setImage(imgPath);
         if(imgPath.equals("tear.png")) {
             getImage().scale(15,15);
         }
@@ -52,10 +50,9 @@ public class BulletDamage extends Projectiles
     }
     
     public BulletDamage(int newMov_Speed, int newDamage, int newTurnDegree, Player newTarget, String imgPath, int knockBackXX, int knockBackYY) {
-        super(newMov_Speed, 5);
+        super(newMov_Speed, 5, imgPath);
         damage = newDamage;
         target = newTarget;
-        setImage(imgPath);
         isAlive = true;
         turnNotDone = true;
         turnDegree = newTurnDegree;

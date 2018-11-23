@@ -5,20 +5,19 @@ import java.util.*;
 public class MeleeDamage extends Melee {
    
     
-    public MeleeDamage(int newMov_Speed, int newLifeCount) {
-        super(newMov_Speed, newLifeCount);
+    public MeleeDamage(int newMov_Speed, int newLifeCount, String imgPath) {
+        super(newMov_Speed, newLifeCount, imgPath);
         damage = 1;
-        setImage("ghost.png");
         stalkRange = 38;
         viewDistance = 200;
     }
     
     public MeleeDamage(int newMov_Speed) {
-        this(newMov_Speed, 3);
+        this(newMov_Speed, 3, "ghost.png");
     }
     
     public MeleeDamage(){
-        this(3, 3);
+        this(3, 3, "ghost.png");
     }
 
     public void act() {

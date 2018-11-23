@@ -7,14 +7,15 @@
 public class DestroyableObstacle extends Enemy {
 
     public DestroyableObstacle(int x) {
-        super(0, 1);
         
         if (x == 1) {
-            setImage("img_utilities/rock.png");
+            super(0, 1, "img_utilities/rock.png");
         } else if (x == 2) {
-            setImage("img_utilities/barrel.png");
+            super(0, 1, "img_utilities/barrel.png");
         } else if (x == 3) {
-            setImage("img_utilities/slime.png");
+            super(0, 1, "img_utilities/slime.png");
+        }else {
+            super(0, 1, "img_utilities/slime.png");
         }
     }
 }

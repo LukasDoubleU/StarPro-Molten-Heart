@@ -16,21 +16,20 @@ public class RangedDamage extends Ranged
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public RangedDamage(int newMov_speed, int newLifeCount) {
-        super(newMov_speed, newLifeCount);
+    public RangedDamage(int newMov_speed, int newLifeCount, String imgPath) {
+        super(newMov_speed, newLifeCount, imgPath);
         damage = 1;
-        setImage("eyeball.png");
         stalkRange = 150;
         viewDistance = 200;
     }
     
     public RangedDamage(int newMov_Speed) {
-        this(newMov_Speed, 3);
+        this(newMov_Speed, 3, "eyeball.png");
     }
         
     
     public RangedDamage() {
-        this(3, 3);
+        this(3, 3, "eyeball.png");
     }
         
     public void act() 

@@ -13,24 +13,27 @@ public abstract class Enemy extends Obstacle {
     int stalkRange;
     int counter;
     int viewDistance;
+    Level level = null;
     
-    public Enemy(int newMov_speed, int newLifeCount) {
+    public Enemy(int newMov_speed, int newLifeCount, String imgPath) {
         mov_speed = newMov_speed;
         xMov_speed = mov_speed;
         yMov_speed = mov_speed;
         lifeCount = newLifeCount;
+        setImage(imgPath);
         counter = 0;
 
     }
     
     public void addedToWorld(World world) {
-        Level level = (Level) world; 
+        level = (Level) world; 
         level.monstercount++;
     }
     
     public void damage(int damage) {
         lifeCount = lifeCount - damage;
         if(lifeCount < 0) {
+            level.monstercount--;
             this.getWorld().removeObject(this);
         }
     }

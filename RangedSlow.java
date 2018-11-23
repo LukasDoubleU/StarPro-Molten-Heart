@@ -19,10 +19,9 @@ public class RangedSlow extends Ranged
     boolean test = true;
     
     
-    public RangedSlow(int newMov_Speed, int newLifeCount, int newWallType) {
-        super(newMov_Speed, newLifeCount);
+    public RangedSlow(int newMov_Speed, int newLifeCount, int newWallType, String imgPath) {
+        super(newMov_Speed, newLifeCount, imgPath);
         slow = 4;
-        setImage("spider.png");
         stalkRange = 0;
         viewDistance = 200;
         spiderWallRange = 20;
@@ -30,12 +29,12 @@ public class RangedSlow extends Ranged
     }
     
     public RangedSlow(int newMov_Speed, int wallType) {
-        this(newMov_Speed, 1, wallType);
+        this(newMov_Speed, 1, wallType, "spider.png");
     }
         
     
     public RangedSlow(int wallType) {
-        this(3, 1, wallType);
+        this(3, 1, wallType, "spider.png");
     }
         
     public void act() 
