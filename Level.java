@@ -1,6 +1,8 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 import greenfoot.World;
+import java.util.List; 
+import java.util.ArrayList;
 
 public abstract class Level extends World {
 
@@ -43,6 +45,8 @@ public abstract class Level extends World {
      * hochgesetzt auf die reale Monsterzahl
      */
     public int monstercount = 0;
+    
+    public List<Lava> lavarray = new ArrayList<Lava>();
 
     public Level(String image) {
         super(1280, 720, 1);
