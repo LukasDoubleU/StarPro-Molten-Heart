@@ -10,8 +10,7 @@ public class Hand extends Boss
 {
   
     public Hand(){
-        super(0,5);
-        setImage("boss/boss1hand.png");
+        super(0,5, "boss/boss1hand.png");
     }
     
     public void act() 

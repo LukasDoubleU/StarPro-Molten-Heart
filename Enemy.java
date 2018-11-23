@@ -24,6 +24,8 @@ public abstract class Enemy extends Obstacle {
         counter = 0;
 
     }
+    
+    public Enemy(){}
 
     public void addedToWorld(World world) {
         level = (Level) world;
