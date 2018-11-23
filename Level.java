@@ -1,6 +1,8 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 import greenfoot.World;
+import java.util.List; 
+import java.util.ArrayList;
 
 public abstract class Level extends World {
 
@@ -43,6 +45,8 @@ public abstract class Level extends World {
      * hochgesetzt auf die reale Monsterzahl
      */
     public int monstercount = 0;
+    
+    public List<Lava> lavarray = new ArrayList<Lava>();
 
     public Level(String image) {
         super(1280, 720, 1);
@@ -50,10 +54,10 @@ public abstract class Level extends World {
         // Zeige unten links die Leben des Spielers an
         addObject(PlayerHealth.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStats.get(), 1100, 700);
+        addObject(PlayerStats.get(), 1060, 687);
         // Mittig: Spielzeit
-        addObject(TimerDisplay.get(), 640, 700);
-        
+        addObject(TimerDisplay.get(), 640, 687);
+
     }
 
     /**
@@ -118,11 +122,16 @@ public abstract class Level extends World {
             object = new MeleeDamage();
         } else if (obj == 6) {
             object = new RangedDamage();
+        //Verlangsamungsgegner
         } else if (obj == 7) {
-            object = new RangedSlow(3);
-        } /**
-           * else if (obj == 8) { object = new RangedExplosion(); }
-           **/
+            object = new RangedSlow(obj); 
+        }/** else if (obj == 8) {
+        object = new RangedExplosion(); 
+        }
+
+        /**
+         * else if (obj == 8) { object = new RangedExplosion(); }
+         **/
         else if (obj == 9) {
             object = new Border();
         } else if (obj == 10) {
@@ -151,10 +160,30 @@ public abstract class Level extends World {
             object = new Potion.Immortality();
         } else if (obj == 22) {
             object = new Potion.Speed();
-        } else if (obj == 95) {
+        //Lavaboden
+        } else if((int)obj == 23){
+            /* Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen Quadrat ausgegangen
+            23.0, 23.1, 23.2,
+            23.3, 23,4, 23.5, = Lavaboden mit der Größe 3x3
+            23.6, 23.7, 23.8 
+            
+            23.0, 23.2,= Lavaboden mit der Größe 2x2
+            23.6, 23.8 
+            
+            */
+            Lava lava = new Lava(obj);
+            object = lava; 
+            /**Lavaboden mit Wert 0(links-obere-Ecke) stellt den Aufruf für die spätere Lava dar. 
+            Alle benachbarten LavaElemente entzünden sich dann einfach nur. 
+            Will man dass das entsprechende LavaElement häufiger Lava spawn
+            */
+            if(obj == 23.0){
+                lavarray.add(lava);
+            }
+        //Molten Heart
+        }else if (obj == 95) {
             object = new MoltenHeart();
         }
-
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }

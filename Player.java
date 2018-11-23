@@ -235,11 +235,12 @@ public class Player extends Actor {
      * order.
      */
     private void checkForIntersectingObjects() {
-        if (!getObjectsAtOffset(0, -getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall above player?
+        if (!getObjectsAtOffset(0, -(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall above player?
             getWorld().setPaintOrder(Player.class, Enemy.class, Obstacle.class);
         }
-        if (!getObjectsAtOffset(0, +getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall underneath player?
-            getWorld().setPaintOrder(Obstacle.class, Enemy.class, Player.class);
+        if (!getObjectsAtOffset(0, +(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall underneath
+                                                                                               // player?
+            getWorld().setPaintOrder(RangedSlow.class, Obstacle.class, Enemy.class, Player.class);
         }
     }
 

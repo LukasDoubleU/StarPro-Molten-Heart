@@ -1,13 +1,13 @@
 /**
  * Write a description of class DestroyableObstacle here.
- * 
+ *
  * @author (your name)
  * @version (a version number or a date)
  */
 public class DestroyableObstacle extends Enemy {
 
-    public DestroyableObstacle(int x) {
-        
+    public DestroyableObstacle(double x) {
+
         if (x == 1) {
             super(0, 1, "img_utilities/rock.png");
         } else if (x == 2) {

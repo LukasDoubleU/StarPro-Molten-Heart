@@ -3,8 +3,8 @@ import java.util.*;
 
 /**
  * Write a description of class RangedSlow here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class RangedSlow extends Ranged
@@ -15,11 +15,11 @@ public class RangedSlow extends Ranged
      */
     int slow;
     int spiderWallRange;
-    int wallType;
+    double wallType;
     boolean test = true;
-    
-    
-    public RangedSlow(int newMov_Speed, int newLifeCount, int newWallType, String imgPath) {
+
+
+    public RangedSlow(int newMov_Speed, int newLifeCount, double newWallType, String imgPath) {
         super(newMov_Speed, newLifeCount, imgPath);
         slow = 4;
         stalkRange = 0;
@@ -27,27 +27,30 @@ public class RangedSlow extends Ranged
         spiderWallRange = 20;
         wallType = newWallType;
     }
-    
-    public RangedSlow(int newMov_Speed, int wallType) {
+
+    public RangedSlow(int newMov_Speed, double wallType) {
         this(newMov_Speed, 1, wallType, "spider.png");
     }
-        
-    
-    public RangedSlow(int wallType) {
+
+
+    public RangedSlow(double wallType) {
         this(3, 1, wallType, "spider.png");
     }
-        
-    public void act() 
+
+    public RangedSlow(){
+        this(1.3);
+    }
+    public void act()
     {
         if(test) {
             this.getWorld().addObject(new Wall(wallType), this.getX(), this.getY());
             test = false;
         }
-        
+
         if(target == null) {
             target = getTarget();
         }
-        
+
         if(target != null) {
             //if(checkCollision(stalkRange)) {
                 followTarget();
@@ -62,9 +65,9 @@ public class RangedSlow extends Ranged
             }
         }
         counter++;
-        
+
     }
-    
+
     public void followTarget() {
         int oldX = this.getX();
         int oldY = this.getY();
@@ -98,9 +101,9 @@ public class RangedSlow extends Ranged
         }
         this.setRotation(0);
     }
-    
+
     public void followTtarget() {
-        
+
         int xDistance;
         int yDistance;
         boolean targetHigher = false;
@@ -116,7 +119,7 @@ public class RangedSlow extends Ranged
         } else {
             xDistance = 0;
         }
-        
+
         if(target.getY() > this.getY()) {
             yDistance = target.getY() - this.getY();
             targetLower = true;
@@ -126,7 +129,7 @@ public class RangedSlow extends Ranged
         } else {
             yDistance = 0;
         }
-        
+
         if(xDistance > yDistance) {
             if(targetLower) {
                 List wallList = new ArrayList();
@@ -142,7 +145,7 @@ public class RangedSlow extends Ranged
                     this.setLocation(this.getX(), this.getY()-yMov_speed);
                 }
             }
-            
+
         }
         if(xDistance < yDistance) {
             if(targetLeft) {
@@ -159,10 +162,10 @@ public class RangedSlow extends Ranged
                     this.setLocation(this.getX()+xMov_speed, this.getY());
                 }
             }
-            
+
         }
     }
-    
+
     public void movePattern() {
         int oldX = this.getX();
         int oldY = this.getY();
@@ -184,12 +187,12 @@ public class RangedSlow extends Ranged
                 this.setLocation(oldX, oldY);
         }
     }
-    
+
     public void spawnBullet() {
         BulletSlow b = new BulletSlow(6, slow, target, "spider_web.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
         counter = 0;
     }
-    
+
 
 }

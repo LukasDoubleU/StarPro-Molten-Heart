@@ -19,7 +19,7 @@ public class LavaBoss extends Boss
      * @param attack1 : aktivierung/deaktivierung der Attacke
      * @param attack1 : aktivierung/deaktivierung der Attacke
      * @param attack1 : aktivierung/deaktivierung der Attacke
-     * @param randomAttack : gibt an, welche reihenfolge von attacken durchgeführt werden
+     * @param randomAttack : gibt an, welche reihenfolge von attacken durchgefhrt werden
      * @param attackTimer : dient zum Timen
      */
     private boolean attack1 = false;
@@ -32,8 +32,8 @@ public class LavaBoss extends Boss
     /**
      *  Diese parameter ist fuer die Klasse fireCircle()
      *  @param counter : dient um die Schuesse in einer bestimmten zeit abzufeuern
-     *  @param rotateBool : dient für anderes Verhalten des Schießens
-     *  @param rotateShootVV : Visuele Vorwahnung, gibt den Spieler Zeit in sicherheit zu gehen, bevor er schießt 
+     *  @param rotateBool : dient fr anderes Verhalten des Schieens
+     *  @param rotateShootVV : Visuele Vorwahnung, gibt den Spieler Zeit in sicherheit zu gehen, bevor er schiet 
      *  @param shootAtRotation[] : sind extra position, wo abgeschossen wird
      *  @param target : instanz Player wird gespeichert
      *  @param fireTimer : dient zum Timen der verschiedenen Bilder des Bosses
@@ -46,9 +46,9 @@ public class LavaBoss extends Boss
     private int fireTimer = 0;
    
     /**
-     * Diese Parameter ist für die Klasse knockBack()
+     * Diese Parameter ist fr die Klasse knockBack()
      * @param knockTimer : dient zum Timen der verschiedenen Bilder des Bosses
-     * @param knockShootVV : Visuele Vorwahnung, gibt den Spieler Zeit in sicherheit zu gehen, bevor er schießt 
+     * @param knockShootVV : Visuele Vorwahnung, gibt den Spieler Zeit in sicherheit zu gehen, bevor er schiet 
      * @param playerX, playerY : speichert die x,y Koordinate vom Player
      * @param knockBackX, knockBackY : speichert die x,y Koordinate, wo der Player geknockbackt werden soll
      */
@@ -83,7 +83,7 @@ public class LavaBoss extends Boss
 
     /**
      * Funktion knockBack()
-     * Schießt eine Hand nach einer bestimmten Zeit und knockbackt den Gegner auf eine bestimme x,y Koordinate
+     * Schiet eine Hand nach einer bestimmten Zeit und knockbackt den Gegner auf eine bestimme x,y Koordinate
      */
     public void knockBack(){
         
@@ -161,10 +161,10 @@ public class LavaBoss extends Boss
     
     /**
      * Funktion fireCircle()
-     * der Boss dreht sich und schießt dabei Feuerkugeln
+     * der Boss dreht sich und schiet dabei Feuerkugeln
      */
     public void fireCircle() {
-        /**er ist kurz davor die Feuerkugeln zu schießen und gibt dem Player eine visuelle Vorwanung**/
+        /**er ist kurz davor die Feuerkugeln zu schieen und gibt dem Player eine visuelle Vorwanung**/
         if(rotateShootVV==true){
             this.setImage("boss/boss1.1.png");
             /**Nachdem der Timer fertig ist, setzt er ein anderes Bild und feuert die Kugeln**/
@@ -175,7 +175,7 @@ public class LavaBoss extends Boss
           
             }
         }else{
-            /**Hier dreht sich der Boss und schießt dabei mit Lavakugeln **/
+            /**Hier dreht sich der Boss und schiet dabei mit Lavakugeln **/
             turn(3);
             int rotation = this.getRotation();
             if(rotation%rotateShoot==0) {
@@ -203,7 +203,7 @@ public class LavaBoss extends Boss
     
     /**
      * Funktion getTarget()
-     * Gibt den Player zurückzugeben
+     * Gibt den Player zurckzugeben
      */
     public Player getTarget() {
         List actorinrange = new ArrayList();
