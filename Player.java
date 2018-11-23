@@ -240,7 +240,7 @@ public class Player extends Actor {
         }
         if (!getObjectsAtOffset(0, +(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall underneath
                                                                                                // player?
-            getWorld().setPaintOrder(Obstacle.class, Enemy.class, Player.class);
+            getWorld().setPaintOrder(RangedSlow.class, Obstacle.class, Enemy.class, Player.class);
         }
     }
 
