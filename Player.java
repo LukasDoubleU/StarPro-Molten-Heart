@@ -1,8 +1,10 @@
 
+import static greenfoot.Greenfoot.isKeyDown;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
-import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 /**
@@ -31,7 +33,8 @@ public class Player extends Actor {
     int lifeCount = 5;
     int immortal = 0;
 
-    int moveSpeed = 7, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeed = 5, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeedMin = 1, moveSpeedMax = 10;
 
     int oldX, oldY, oldRotation;
 
@@ -65,6 +68,7 @@ public class Player extends Actor {
     public void act() {
         rememberPosition();
         move();
+        checkForIntersectingObjects();
         checkCollisions();
         attack();
         processDots();
@@ -104,7 +108,7 @@ public class Player extends Actor {
             Level.runGameOverWorld();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
-        immortal(1);
+        immortal(15);
     }
 
     /**
@@ -179,7 +183,19 @@ public class Player extends Actor {
      */
     private void checkObstacle() {
         @SuppressWarnings("unchecked")
-        List<Obstacle> obstacles = getNeighbours(39, true, Obstacle.class);
+        // Ziehe moveSpeedMax vom Radius ab, um pauschal sicher sein zu können,
+        // dass der MoveSpeed effektiv keine Hitbox-Verschiebung verursachen kann
+        List<Obstacle> obstacles = getNeighbours(getPlayerHitboxSize(), true, Obstacle.class);
+
+        // Ausnahme: Ignoriere Kollisionen mit Projektilen (Ranged)
+        List<Projectiles> ranged = new ArrayList<Projectiles>();
+        for (Obstacle obstacle : obstacles) {
+            if (obstacle instanceof Projectiles) {
+                ranged.add((Projectiles) obstacle);
+            }
+        }
+        obstacles.removeAll(ranged);
+
         // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
             resetPosition();
@@ -187,35 +203,72 @@ public class Player extends Actor {
     }
 
     /**
+     * returns the player hitbox for calculation purposes
+     * 
+     * @return
+     */
+    public int getPlayerHitboxSize() {
+        return (39 - moveSpeedMax);
+    }
+
+    /**
      * Fährt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
     private void move() {
-        if (Greenfoot.isKeyDown("w")) {
+        if (isKeyDown("w") || isKeyDown("up")) {
             setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
-        } else if (Greenfoot.isKeyDown("a")) {
+        } else if (isKeyDown("a") || isKeyDown("left")) {
             setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
-        } else if (Greenfoot.isKeyDown("s")) {
+        } else if (isKeyDown("s") || isKeyDown("down")) {
             setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
-        } else if (Greenfoot.isKeyDown("d")) {
+        } else if (isKeyDown("d") || isKeyDown("right")) {
             setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
         }
     }
 
-    public int getMoveSpeed() {
-        // Der Basis Move Speed
-        return moveSpeed
-                // Zuzüglich Move Speed Bonus (z.B. Trank)
-                + moveSpeedBonus
-                // Abzgl. Move Speed Penalty (z.B. durch Gegner)
-                - moveSpeedSlowed
-                // Und zzgl. Move Speed Bonus von Boots
-                + (equippedBoots != null ? equippedBoots.getMoveSpeedBonus() : 0);
+    /**
+     * checks for intersecting objects relative to the player and changes the paint
+     * order.
+     */
+    private void checkForIntersectingObjects() {
+        if (!getObjectsAtOffset(0, -getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall above player?
+            getWorld().setPaintOrder(Player.class, Enemy.class, Obstacle.class);
+        }
+        if (!getObjectsAtOffset(0, +getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall underneath player?
+            getWorld().setPaintOrder(Obstacle.class, Enemy.class, Player.class);
+        }
     }
 
+    /**
+     * returns player's current movement speed.
+     * 
+     * @return
+     */
+    public int getMoveSpeed() {
+        // Es gilt: 0 < moveSpeed < 10
+        return Math.min(moveSpeedMax, Math.max(moveSpeedMin,
+                // Der Basis Move Speed
+                moveSpeed
+                        // Zuzüglich Move Speed Bonus (z.B. Trank)
+                        + moveSpeedBonus
+                        // Abzgl. Move Speed Penalty (z.B. durch Gegner)
+                        - moveSpeedSlowed
+                        // Und zzgl. Move Speed Bonus von Boots
+                        + equippedBoots.getMoveSpeedBonus()));
+    }
+
+    /**
+     * animates the player's movement for each direction therefore checks whether
+     * the player is still moving in the same direction. Different intervall for
+     * each direction.
+     * 
+     * @param firstImageIndex
+     * @param lastImageIndex
+     */
     private void setNextImage(int firstImageIndex, int lastImageIndex) {
         // Wir haben uns auch vorher in diese Richtung bewegt
         if (currentImageIndex >= firstImageIndex && currentImageIndex <= lastImageIndex) {
@@ -255,6 +308,11 @@ public class Player extends Actor {
         return Direction.Up;
     }
 
+    /**
+     * returns url string for armor to use with corresponding part id.
+     * 
+     * @return
+     */
     public String getArmorImagePrefix() {
         return equippedArmor.getImageFolder() + "/image_part_";
     }
@@ -273,19 +331,31 @@ public class Player extends Actor {
         moveSpeedBonus += amount;
     }
 
+    /**
+     * creates a container with player's armor to display for each walk animation.
+     */
     private void refreshMoveAnimationImageCache() {
         for (int i = 1; i < 37; i++) {
             imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
         }
     }
 
+    /**
+     * sets the player's invincibility for the given duration
+     * 
+     * @param duration
+     */
     public void immortal(int duration) {
         immortal += duration;
     }
 
+    /**
+     * returns whether or not the player is still immortal.
+     * 
+     * @return
+     */
     public boolean isImmortal() {
         // Der Spieler gilt als unsterblich, solange immortal > 0 ist
         return immortal > 0;
     }
-
 }

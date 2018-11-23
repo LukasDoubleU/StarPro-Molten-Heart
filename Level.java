@@ -61,6 +61,7 @@ public abstract class Level extends World {
         addObject(PlayerStats.get(), 1100, 700);
         // Mittig: Spielzeit
         addObject(TimerDisplay.get(), 640, 700);
+        
     }
 
     /**
@@ -174,7 +175,8 @@ public abstract class Level extends World {
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }
-
+        setPaintOrder(DestroyableObstacle.class);
+        setPaintOrder(Enemy.class);
     }
 
     /**
@@ -186,5 +188,10 @@ public abstract class Level extends World {
             int rngLava = new Random().nextInt(lavarray.size()+1);
             lavarray.get(rngLava).transform();
         }
+    }
+
+    @Override
+    public void act() {
+
     }
 }
