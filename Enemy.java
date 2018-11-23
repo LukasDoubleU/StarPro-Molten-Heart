@@ -14,6 +14,19 @@ public abstract class Enemy extends Obstacle {
     int counter;
     int viewDistance;
     
+    public Enemy(int newMov_speed, int newLifeCount) {
+        mov_speed = newMov_speed;
+        xMov_speed = mov_speed;
+        yMov_speed = mov_speed;
+        lifeCount = newLifeCount;
+        counter = 0;
+
+    }
+    
+    public void addedToWorld(World world) {
+        Level level = (Level) world; 
+        level.monstercount++;
+    }
     
     public void damage(int damage) {
         lifeCount = lifeCount - damage;
@@ -31,7 +44,7 @@ public abstract class Enemy extends Obstacle {
                 this.setLocation(oldX, oldY);
             }
         }
-        else {
+        else if(this.getX() < target.getX()){
             this.setLocation(this.getX()+mov_speed-(mov_speed/2), this.getY());
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
@@ -43,7 +56,7 @@ public abstract class Enemy extends Obstacle {
                 this.setLocation(oldX, oldY);
             }
         }
-        else {
+        else if(this.getY() < target.getY()){
             this.setLocation(this.getX(), this.getY()+mov_speed-(mov_speed/2));
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);

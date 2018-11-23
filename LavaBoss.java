@@ -42,6 +42,7 @@ public class LavaBoss extends Boss
      * Instruktor des LavaBoss : image wird gesetzt
      */
     public LavaBoss(){
+        super(1,10);
         setImage("boss/boss1.png");
     }
     
