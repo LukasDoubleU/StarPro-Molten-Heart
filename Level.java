@@ -171,7 +171,6 @@ public abstract class Level extends World {
         }else if (obj == 95) {
             object = new MoltenHeart();
         }
-
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }

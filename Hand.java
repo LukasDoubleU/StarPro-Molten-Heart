@@ -10,8 +10,8 @@ public class Hand extends Boss
 {
   
     public Hand(){
+        super(0,5);
         setImage("boss/boss1hand.png");
-        this.lifeCount = 5;
     }
     
     public void act() 
