@@ -17,7 +17,7 @@ public class MeleeDamage extends Melee {
     }
     
     public MeleeDamage(){
-        this(3, 3, "ghost.png");
+        this(4, 3, "ghost.png");
     }
 
     public void act() {
@@ -44,13 +44,6 @@ public class MeleeDamage extends Melee {
         }
         
            
-    }
-    
-    public void damage(int damage) {
-        lifeCount = lifeCount - damage;
-        if(lifeCount < 0) {
-            this.getWorld().removeObject(this);
-        }
     }
     
     public void movePattern() {

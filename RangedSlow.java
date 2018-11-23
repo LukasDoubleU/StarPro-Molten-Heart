@@ -34,7 +34,7 @@ public class RangedSlow extends Ranged
 
 
     public RangedSlow(double wallType) {
-        this(3, 1, wallType, "spider.png");
+        this(1, 1, wallType, "spider.png");
     }
 
     public RangedSlow(){

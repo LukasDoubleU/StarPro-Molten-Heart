@@ -15,8 +15,6 @@ public class DestroyableObstacle extends Enemy {
             imgPath = "img_utilities/barrel.png";
         } else if (x == 3) {
             imgPath = "img_utilities/slime.png";
-        }else {
-            imgPath = "img_utilities/slime.png";
         }
         setImage(imgPath);
     }
