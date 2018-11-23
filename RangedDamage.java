@@ -37,7 +37,6 @@ public class RangedDamage extends Ranged
         if(target == null) {
             target = getTarget();
         }
-        System.out.println(level.monstercount);
         
         if(target != null) {
             if(!checkCollision(stalkRange)) {
