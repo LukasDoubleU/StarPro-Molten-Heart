@@ -13,8 +13,8 @@ public class Boss extends Enemy
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public Boss(int moveSpeed, int newLifeCount, String imgPath) {
-        super(moveSpeed, newLifeCount, imgPath);
+    public Boss(int moveSpeed, int lifeCount, String imgPath) {
+        super(moveSpeed, lifeCount, imgPath);
         
     }
     public void act() 

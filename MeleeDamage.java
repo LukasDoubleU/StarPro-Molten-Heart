@@ -5,8 +5,8 @@ import java.util.*;
 public class MeleeDamage extends Melee {
    
     
-    public MeleeDamage(int moveSpeed, int newLifeCount, String imgPath) {
-        super(moveSpeed, newLifeCount, imgPath);
+    public MeleeDamage(int moveSpeed, int lifeCount, String imgPath) {
+        super(moveSpeed, lifeCount, imgPath);
         damage = 1;
         stalkRange = 38;
         viewDistance = 200;

@@ -13,11 +13,11 @@ public abstract class Enemy extends Obstacle {
     int viewDistance;
     Level level = null;
 
-    public Enemy(int moveSpeed, int newLifeCount, String imgPath) {
+    public Enemy(int moveSpeed, int lifeCount, String imgPath) {
         this.moveSpeed = moveSpeed;
-        lifeCount = newLifeCount;
+        this.lifeCount = lifeCount;
         setImage(imgPath);
-        counter = 0;
+        this.counter = 0;
     }
     
     public Enemy(){}
@@ -30,7 +30,7 @@ public abstract class Enemy extends Obstacle {
     }
 
     public void damage(int damage) {
-        lifeCount = lifeCount - damage;
+        this.lifeCount = lifeCount - damage;
         if(lifeCount < 0) {
             if(!(this instanceof DestroyableObstacle)){
                 level.monstercount--;
@@ -71,26 +71,24 @@ public abstract class Enemy extends Obstacle {
     }
 
     public boolean checkCollision(int stalkRange) {
-        List intersectingObjects = new ArrayList();
-        intersectingObjects = this.getObjectsInRange(25, null);
-
-        for(Object a : intersectingObjects)  {
-            if(a instanceof Obstacle) {
-                return true;
+        List<Actor> intersectingObjects = this.getObjectsInRange(25, null);
+        if(intersectingObjects.size() > 0){
+            for(Object a : intersectingObjects)  {
+                if(a instanceof Obstacle) {
+                    return true;
+                }
+    
             }
-
         }
         if(this.isAtEdge()) {
             return true;
         }
 
-        List playerInRange = new ArrayList();
-        playerInRange = this.getObjectsInRange(stalkRange, Player.class);
+        List<Player> playerInRange = this.getObjectsInRange(stalkRange, Player.class);
         for(Object p: playerInRange)  {
             if(p instanceof Player) {
                 return true;
             }
-
         }
         return false;
     }

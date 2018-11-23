@@ -14,8 +14,8 @@ public abstract class Projectiles extends Melee
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public Projectiles(int movSpeed, int newLifeCount, String imgPath) {
-        super(movSpeed, newLifeCount, imgPath);
+    public Projectiles(int movSpeed, int lifeCount, String imgPath) {
+        super(movSpeed, lifeCount, imgPath);
         
     }
     

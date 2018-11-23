@@ -17,8 +17,8 @@ public class RangedSlow extends Ranged
     int spiderWallRange;
     double wallType;
 
-    public RangedSlow(int moveSpeed, int newLifeCount, double newWallType, String imgPath) {
-        super(moveSpeed, newLifeCount, imgPath);
+    public RangedSlow(int moveSpeed, int lifeCount, double newWallType, String imgPath) {
+        super(moveSpeed, lifeCount, imgPath);
         slow = 4;
         stalkRange = 0;
         viewDistance = 200;
