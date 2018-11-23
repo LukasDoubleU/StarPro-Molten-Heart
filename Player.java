@@ -236,13 +236,18 @@ public class Player extends Actor {
      */
     private void checkForIntersectingObjects() {
         if (!getObjectsAtOffset(0, -getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall above player?
-            getWorld().setPaintOrder(Player.class, Obstacle.class);
+            getWorld().setPaintOrder(Player.class, Enemy.class, Obstacle.class);
         }
         if (!getObjectsAtOffset(0, +getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall underneath player?
-            getWorld().setPaintOrder(Obstacle.class, Player.class);
+            getWorld().setPaintOrder(Obstacle.class, Enemy.class, Player.class);
         }
     }
 
+    /**
+     * returns player's current movement speed.
+     * 
+     * @return
+     */
     public int getMoveSpeed() {
         // Es gilt: 0 < moveSpeed < 10
         return Math.min(moveSpeedMax, Math.max(moveSpeedMin,
@@ -256,6 +261,14 @@ public class Player extends Actor {
                         + equippedBoots.getMoveSpeedBonus()));
     }
 
+    /**
+     * animates the player's movement for each direction therefore checks whether
+     * the player is still moving in the same direction. Different intervall for
+     * each direction.
+     * 
+     * @param firstImageIndex
+     * @param lastImageIndex
+     */
     private void setNextImage(int firstImageIndex, int lastImageIndex) {
         // Wir haben uns auch vorher in diese Richtung bewegt
         if (currentImageIndex >= firstImageIndex && currentImageIndex <= lastImageIndex) {
@@ -295,6 +308,11 @@ public class Player extends Actor {
         return Direction.Up;
     }
 
+    /**
+     * returns url string for armor to use with corresponding part id.
+     * 
+     * @return
+     */
     public String getArmorImagePrefix() {
         return equippedArmor.getImageFolder() + "/image_part_";
     }
@@ -313,19 +331,31 @@ public class Player extends Actor {
         moveSpeedBonus += amount;
     }
 
+    /**
+     * creates a container with player's armor to display for each walk animation.
+     */
     private void refreshMoveAnimationImageCache() {
         for (int i = 1; i < 37; i++) {
             imageCache[i] = new GreenfootImage(getArmorImagePrefix() + String.format("%03d", i) + ".png");
         }
     }
 
+    /**
+     * sets the player's invincibility for the given duration
+     * 
+     * @param duration
+     */
     public void immortal(int duration) {
         immortal += duration;
     }
 
+    /**
+     * returns whether or not the player is still immortal.
+     * 
+     * @return
+     */
     public boolean isImmortal() {
         // Der Spieler gilt als unsterblich, solange immortal > 0 ist
         return immortal > 0;
     }
-
 }
