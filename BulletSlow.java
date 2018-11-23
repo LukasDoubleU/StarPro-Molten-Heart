@@ -21,7 +21,7 @@ public class BulletSlow extends Projectiles
     boolean isAlive;
 
     public BulletSlow(int newMov_Speed, int newSlow, Player newTarget, String imgPath) {
-        mov_speed = newMov_Speed;
+        super(newMov_Speed, 1);
         slow = newSlow;
         target = newTarget;
         setImage(imgPath);
@@ -36,7 +36,7 @@ public class BulletSlow extends Projectiles
     }
     
     public BulletSlow(int newMov_Speed, int newSlow, int newTurnDegree, Player newTarget, String imgPath) {
-        mov_speed = newMov_Speed;
+        super(newMov_Speed, 1);
         slow = newSlow;
         target = newTarget;
         setImage(imgPath);
@@ -84,11 +84,11 @@ public class BulletSlow extends Projectiles
                 isAlive = false;
                 return;
             }
-            if((a instanceof Obstacle) && !(a instanceof Enemy)) {
+            /*if((a instanceof Obstacle) && !(a instanceof Enemy)) {
                 this.getWorld().removeObject(this);
                 isAlive = false;
                 return;
-            }
+            }*/
            
         }
         if(this.isAtEdge()) {

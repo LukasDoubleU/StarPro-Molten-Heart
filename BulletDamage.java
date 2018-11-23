@@ -15,7 +15,6 @@ public class BulletDamage extends Projectiles
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    int mov_speed;
     int damage;
     int turnDegree;
     int knockBackX;
@@ -26,7 +25,7 @@ public class BulletDamage extends Projectiles
     boolean knockBack = false;
 
     public BulletDamage(int newMov_Speed, int newDamage, Player newTarget, String imgPath) {
-        mov_speed = newMov_Speed;
+        super(newMov_Speed, 1);
         damage = newDamage;
         target = newTarget;
         setImage(imgPath);
@@ -40,7 +39,7 @@ public class BulletDamage extends Projectiles
     
     
     public BulletDamage(int newMov_Speed, int newDamage, int newTurnDegree, Player newTarget, String imgPath) {
-        mov_speed = newMov_Speed;
+        super(newMov_Speed, 1);
         damage = newDamage;
         target = newTarget;
         setImage(imgPath);
