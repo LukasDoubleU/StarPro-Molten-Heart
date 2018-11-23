@@ -20,18 +20,22 @@ public class LavaBoss extends Boss
      * @param attack1 : aktivierung/deaktivierung der Attacke
      * @param attack1 : aktivierung/deaktivierung der Attacke
      * @param randomAttack : gibt an, welche reihenfolge von attacken durchgeführt werden
+     * @param randomRotate : 
      * @param attackTimer : dient zum Timen
+     * @param normalAttackCounter : timet, wie oft der Boss angreift
      */
-    private boolean attack1 = false;
+    private boolean attack1 = true;
     private boolean attack2 = false;
     private boolean attack3 = false;
     private boolean attack4 = false;
-    private int randomAttack = 0;
+    private int randomAttack = randomNumber(0);
+    private int randomRotate = randomNumber(2);
     private int attackTimer = 0;
+    private int normalAttackCounter = 40;
     
     /**
      *  Diese parameter ist fuer die Klasse fireCircle()
-     *  @param counter : dient um die Schuesse in einer bestimmten zeit abzufeuern
+     *  @param counter : dient um die Anzahl der Drehungen zu counten
      *  @param rotateBool : dient für anderes Verhalten des Schießens
      *  @param rotateShootVV : Visuele Vorwahnung, gibt den Spieler Zeit in sicherheit zu gehen, bevor er schießt 
      *  @param shootAtRotation[] : sind extra position, wo abgeschossen wird
@@ -71,14 +75,56 @@ public class LavaBoss extends Boss
      * Act - do whatever the LavaBoss wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
     public void act() 
     {   
         //Falls Spieler noch nicht in target gespeichert wurde, rufe getTarget() auf
         if(target==null){
             target = getTarget();
         }
-        knockBack();
+        //test
+        System.out.println(randomAttack+ "RANDOM NUMMER");
+        
+        if(randomAttack == 1){
+            if(attack1){
+                /**normale attacke, 2-3 sekunden**/
+                if(normalAttackCounter==40){
+                    spawnBullet();
+                }
+                normalAttackCounter++;
+                attackTimer();
+                if(attackTimer==100){
+                    attack1 = false;
+                    attack2 = true;
+                }
+            }else if(attack2){
+                /**random lava aktivieren**/
+                //funktion_lava()
+                this.getWorld(). 
+                attack2 = false;
+                attack3= true;
+            }else if(attack3){
+                /**fireCircle() aktivieren, 2-3 rotates**/
+                fireCircle();
+                if(counter==randomRotate){
+                    attack3 = false;
+                    attack4 = true;
+                }
+            }else if(attack4){
+                /**knockBack() wird aktiviert**/
+                knockBack();
+                
+            }
+        }else{
+            if(attack1){
+                /**random Lava**/
+            }else if(attack2){
+                /**knockBack() wird aktiviert**/
+            }else if(attack3){
+                /**random Lava**/
+            }else if(attack4){
+                /**fireCircle()**/
+            }
+        }
     }
     
 
@@ -185,6 +231,7 @@ public class LavaBoss extends Boss
             }               
         
             if(rotation==0) {
+                counter++;
                 if(rotateBool) {
                     for(int a: shootAtRotation){
                         if(a == rotation) {
@@ -200,6 +247,16 @@ public class LavaBoss extends Boss
                 }
             }
         }
+    }
+    
+    /**
+     * Funktion spawnBullet()
+     * normale Attacke 
+     */
+    public void spawnBullet() {
+        BulletDamage b = new BulletDamage(6, damage, target, "boss/lava_projectile.png");
+        this.getWorld().addObject(b, this.getX(), this.getY());
+        normalAttackCounter = 0;
     }
     
     /**
@@ -243,5 +300,12 @@ public class LavaBoss extends Boss
         attackTimer++;
     }
     
+    /**
+     * 
+     */
+    public int randomNumber(int x){
+        Random rand = new Random(); 
+        return rand.nextInt(2)+x;
+    }
 }
 
