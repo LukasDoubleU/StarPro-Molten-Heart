@@ -153,10 +153,7 @@ public abstract class Level extends World {
             object = new Potion.Speed();
         } else if (obj == 95) {
             object = new MoltenHeart();
-        } else if (obj == 94) {
-            object = new Footer();
         }
-
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }
