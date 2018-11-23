@@ -1,9 +1,6 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 import greenfoot.World;
-import java.util.List; 
-import java.util.ArrayList; 
-import java.util.Random; 
 
 public abstract class Level extends World {
 
@@ -53,10 +50,10 @@ public abstract class Level extends World {
         // Zeige unten links die Leben des Spielers an
         addObject(PlayerHealth.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStats.get(), 1100, 700);
+        addObject(PlayerStats.get(), 1060, 687);
         // Mittig: Spielzeit
-        addObject(TimerDisplay.get(), 640, 700);
-        
+        addObject(TimerDisplay.get(), 640, 687);
+
     }
 
     /**
@@ -127,10 +124,10 @@ public abstract class Level extends World {
         }/** else if (obj == 8) {
         object = new RangedExplosion(); 
         }
-        
+
         /**
-           * else if (obj == 8) { object = new RangedExplosion(); }
-           **/
+         * else if (obj == 8) { object = new RangedExplosion(); }
+         **/
         else if (obj == 9) {
             object = new Border();
         } else if (obj == 10) {
