@@ -9,14 +9,14 @@ public class DestroyableObstacle extends Enemy {
     public DestroyableObstacle(double x) {
         this(0,1,"");
         String imgPath = ""; 
-        if (x == 1) {
+        if (x == 2) {
             imgPath = "img_utilities/rock.png";
-        } else if (x == 2) {
-            imgPath = "img_utilities/barrel.png";
         } else if (x == 3) {
+            imgPath = "img_utilities/barrel.png";
+        } else if (x == 4) {
             imgPath = "img_utilities/slime.png";
         }else {
-            imgPath = "img_utilities/slime.png";
+            imgPath = "img_utilities/rock.png";
         }
         setImage(imgPath);
     }
