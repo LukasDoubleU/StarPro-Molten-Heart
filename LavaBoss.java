@@ -97,7 +97,7 @@ public class LavaBoss extends Boss
             }else if(attack2){
                 /**random lava aktivieren**/
                 //funktion_lava()
-                this.getWorld().
+                //this.getWorld().
                 attack2 = false;
                 attack3= true;
             }else if(attack3){
