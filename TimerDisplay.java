@@ -48,5 +48,4 @@ public class TimerDisplay extends Actor {
         String strSeconds = String.valueOf(String.format("%02d", secs));
         setImage(new GreenfootImage(strMinutes + ":" + strSeconds, 30, Color.BLACK, c));
     }
-
 }
