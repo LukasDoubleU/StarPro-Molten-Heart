@@ -34,4 +34,10 @@ public abstract class Item extends Actor {
         }
     }
 
+    /**
+     * Entfernt das Item aus der Welt
+     */
+    protected void remove() {
+        Player.get().getWorld().removeObject(this);
+    }
 }
