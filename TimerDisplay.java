@@ -86,5 +86,4 @@ public class TimerDisplay extends Actor {
     public int getMinutesLeft() {
         return timeLeft.get(Calendar.MINUTE);
     }
-
 }
