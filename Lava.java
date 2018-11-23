@@ -28,6 +28,10 @@ public class Lava extends InteractiveObjects
         if(status){
             dealDamageOnCollision();
             cooldownTimer--; 
+        }else if(cooldownTimer > -500){
+            //Bisschen versetzt, damit sich die Lava nicht 
+            //durch benachbarte Lava direkt wieder aktiviert
+            cooldownTimer--;
         }else{
             for(Lava neighbourLava : lavaInRange){
                 if(neighbourLava.status){
