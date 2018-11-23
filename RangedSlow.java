@@ -17,8 +17,8 @@ public class RangedSlow extends Ranged
     int spiderWallRange;
     double wallType;
 
-    public RangedSlow(int newMov_Speed, int newLifeCount, double newWallType, String imgPath) {
-        super(newMov_Speed, newLifeCount, imgPath);
+    public RangedSlow(int moveSpeed, int newLifeCount, double newWallType, String imgPath) {
+        super(moveSpeed, newLifeCount, imgPath);
         slow = 4;
         stalkRange = 0;
         viewDistance = 200;
@@ -26,8 +26,8 @@ public class RangedSlow extends Ranged
         wallType = newWallType;
     }
 
-    public RangedSlow(int newMov_Speed, double wallType) {
-        this(newMov_Speed, 1, wallType, "spider.png");
+    public RangedSlow(int moveSpeed, double wallType) {
+        this(moveSpeed, 1, wallType, "spider.png");
     }
 
 
@@ -75,28 +75,28 @@ public class RangedSlow extends Ranged
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(-spiderWallRange, 0, Wall.class);
             if(!wallList.isEmpty()) {
-                this.setLocation(this.getX()-mov_speed+(mov_speed/2), this.getY());
+                this.setLocation(this.getX()-moveSpeed+(moveSpeed/2), this.getY());
             }
         }
         else if(this.getX() < target.getX()){
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(spiderWallRange, 0, Wall.class);
             if(!wallList.isEmpty()) {
-                this.setLocation(this.getX()+mov_speed-(mov_speed/2), this.getY());
+                this.setLocation(this.getX()+moveSpeed-(moveSpeed/2), this.getY());
             }
         }
         if(this.getY() > target.getY()) {
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(0, -spiderWallRange, Wall.class);
             if(!wallList.isEmpty()) {
-                this.setLocation(this.getX(), this.getY()-mov_speed+(mov_speed/2));
+                this.setLocation(this.getX(), this.getY()-moveSpeed+(moveSpeed/2));
             }
         }
         else if(this.getY() < target.getY()){
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(0, spiderWallRange, Wall.class);
             if(!wallList.isEmpty()) {
-                this.setLocation(this.getX(), this.getY()+mov_speed-(mov_speed/2));
+                this.setLocation(this.getX(), this.getY()+moveSpeed-(moveSpeed/2));
             }
         }
         this.setRotation(0);
@@ -106,19 +106,19 @@ public class RangedSlow extends Ranged
         int oldX = this.getX();
         int oldY = this.getY();
         if(counter==30){
-            xMov_speed = -xMov_speed;
+            moveSpeed = -moveSpeed;
         }
         if(counter==60){
-            yMov_speed = -yMov_speed;
+            moveSpeed = -moveSpeed;
         }
         if(counter==90){
-            xMov_speed = -xMov_speed;
+            moveSpeed = -moveSpeed;
         }
         if(counter==120){
-            yMov_speed = -yMov_speed;
+            moveSpeed = -moveSpeed;
             counter = 0;
         }
-        this.setLocation(this.getX()+xMov_speed, this.getY()+yMov_speed);
+        this.setLocation(this.getX()+moveSpeed, this.getY()+moveSpeed);
         if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
         }

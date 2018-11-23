@@ -4,9 +4,7 @@ import java.util.*;
 
 public abstract class Enemy extends Obstacle {
 
-    int mov_speed;
-    int xMov_speed;
-    int yMov_speed;
+    int moveSpeed;
     int damage;
     Player target = null;
     int lifeCount;
@@ -15,14 +13,11 @@ public abstract class Enemy extends Obstacle {
     int viewDistance;
     Level level = null;
 
-    public Enemy(int newMov_speed, int newLifeCount, String imgPath) {
-        mov_speed = newMov_speed;
-        xMov_speed = mov_speed;
-        yMov_speed = mov_speed;
+    public Enemy(int moveSpeed, int newLifeCount, String imgPath) {
+        this.moveSpeed = moveSpeed;
         lifeCount = newLifeCount;
         setImage(imgPath);
         counter = 0;
-
     }
     
     public Enemy(){}
@@ -37,8 +32,11 @@ public abstract class Enemy extends Obstacle {
     public void damage(int damage) {
         lifeCount = lifeCount - damage;
         if(lifeCount < 0) {
-            level.monstercount--;
+            if(!(this instanceof DestroyableObstacle)){
+                level.monstercount--;
+            }    
             this.getWorld().removeObject(this);
+           
         }
     }
 
@@ -46,25 +44,25 @@ public abstract class Enemy extends Obstacle {
         int oldX = this.getX();
         int oldY = this.getY();
         if(this.getX() > target.getX()) {
-            this.setLocation(this.getX()-mov_speed+(mov_speed/2), this.getY());
+            this.setLocation(this.getX()-moveSpeed+(moveSpeed/2), this.getY());
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(this.getX() < target.getX()){
-            this.setLocation(this.getX()+mov_speed-(mov_speed/2), this.getY());
+            this.setLocation(this.getX()+moveSpeed-(moveSpeed/2), this.getY());
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         if(this.getY() > target.getY()) {
-            this.setLocation(this.getX(), this.getY()-mov_speed+(mov_speed/2));
+            this.setLocation(this.getX(), this.getY()-moveSpeed+(moveSpeed/2));
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(this.getY() < target.getY()){
-            this.setLocation(this.getX(), this.getY()+mov_speed-(mov_speed/2));
+            this.setLocation(this.getX(), this.getY()+moveSpeed-(moveSpeed/2));
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
@@ -108,7 +106,6 @@ public abstract class Enemy extends Obstacle {
 
         }
         return null;
-
     }
 
 }

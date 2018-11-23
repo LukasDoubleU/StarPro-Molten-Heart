@@ -16,15 +16,15 @@ public class RangedDamage extends Ranged
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public RangedDamage(int newMov_speed, int newLifeCount, String imgPath) {
-        super(newMov_speed, newLifeCount, imgPath);
+    public RangedDamage(int moveSpeed, int newLifeCount, String imgPath) {
+        super(moveSpeed, newLifeCount, imgPath);
         damage = 1;
         stalkRange = 150;
         viewDistance = 200;
     }
     
-    public RangedDamage(int newMov_Speed) {
-        this(newMov_Speed, 3, "eyeball.png");
+    public RangedDamage(int moveSpeed) {
+        this(moveSpeed, 3, "eyeball.png");
     }
         
     
@@ -60,19 +60,19 @@ public class RangedDamage extends Ranged
         int oldX = this.getX();
         int oldY = this.getY();
         if(counter==30){
-            xMov_speed = -xMov_speed;
+            moveSpeed = -moveSpeed;
         }
         if(counter==60){
-            yMov_speed = -yMov_speed;
+            moveSpeed = -moveSpeed;
         }
         if(counter==90){
-            xMov_speed = -xMov_speed;
+            moveSpeed = -moveSpeed;
         }
         if(counter==120){
-            yMov_speed = -yMov_speed;
+            moveSpeed = -moveSpeed;
             counter = 0;
         }
-        this.setLocation(this.getX()+xMov_speed, this.getY()+yMov_speed);
+        this.setLocation(this.getX()+moveSpeed, this.getY()+moveSpeed);
         if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
         }

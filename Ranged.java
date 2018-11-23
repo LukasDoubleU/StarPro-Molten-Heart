@@ -13,8 +13,8 @@ public abstract class Ranged extends Enemy
      * Act - do whatever the Ranged wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Ranged(int newMov_speed, int newLifeCount, String imgPath) {
-        super(newMov_speed, newLifeCount, imgPath);
+    public Ranged(int movSpeed, int newLifeCount, String imgPath) {
+        super(movSpeed, newLifeCount, imgPath);
         
     }
 

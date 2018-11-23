@@ -24,8 +24,8 @@ public class BulletDamage extends Projectiles
     boolean isAlive;
     boolean knockBack = false;
 
-    public BulletDamage(int newMov_Speed, int newDamage, Player newTarget, String imgPath) {
-        super(newMov_Speed, 1, imgPath);
+    public BulletDamage(int newmoveSpeed, int newDamage, Player newTarget, String imgPath) {
+        super(newmoveSpeed, 1, imgPath);
         damage = newDamage;
         target = newTarget;
         if(imgPath.equals("tear.png")) {
@@ -37,8 +37,8 @@ public class BulletDamage extends Projectiles
     
     
     
-    public BulletDamage(int newMov_Speed, int newDamage, int newTurnDegree, Player newTarget, String imgPath) {
-        super(newMov_Speed, 1, imgPath);
+    public BulletDamage(int newmoveSpeed, int newDamage, int newTurnDegree, Player newTarget, String imgPath) {
+        super(newmoveSpeed, 1, imgPath);
         damage = newDamage;
         target = newTarget;
         if(imgPath.equals("tear.png")) {
@@ -49,8 +49,8 @@ public class BulletDamage extends Projectiles
         turnDegree = newTurnDegree;
     }
     
-    public BulletDamage(int newMov_Speed, int newDamage, int newTurnDegree, Player newTarget, String imgPath, int knockBackXX, int knockBackYY) {
-        super(newMov_Speed, 5, imgPath);
+    public BulletDamage(int newmoveSpeed, int newDamage, int newTurnDegree, Player newTarget, String imgPath, int knockBackXX, int knockBackYY) {
+        super(newmoveSpeed, 5, imgPath);
         damage = newDamage;
         target = newTarget;
         isAlive = true;
@@ -70,7 +70,7 @@ public class BulletDamage extends Projectiles
                 firstTurn();
             }
         
-            move(mov_speed);
+            move(moveSpeed);
             checkCollision();
        
         }

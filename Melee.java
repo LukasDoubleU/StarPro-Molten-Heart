@@ -13,8 +13,8 @@ public abstract class Melee extends Enemy
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public Melee(int newMov_speed, int newLifeCount, String imgPath) {
-        super(newMov_speed, newLifeCount, imgPath);
+    public Melee(int moveSpeed, int newLifeCount, String imgPath) {
+        super(moveSpeed, newLifeCount, imgPath);
     }
     
     public void act() 
