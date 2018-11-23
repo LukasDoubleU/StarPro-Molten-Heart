@@ -68,6 +68,7 @@ public class Player extends Actor {
     public void act() {
         rememberPosition();
         move();
+        checkForIntersectingObjects();
         checkCollisions();
         attack();
         processDots();
@@ -184,7 +185,7 @@ public class Player extends Actor {
         @SuppressWarnings("unchecked")
         // Ziehe moveSpeedMax vom Radius ab, um pauschal sicher sein zu können,
         // dass der MoveSpeed effektiv keine Hitbox-Verschiebung verursachen kann
-        List<Obstacle> obstacles = getNeighbours(39 - moveSpeedMax, true, Obstacle.class);
+        List<Obstacle> obstacles = getNeighbours(getPlayerHitboxSize(), true, Obstacle.class);
 
         // Ausnahme: Ignoriere Kollisionen mit Projektilen (Ranged)
         List<Projectiles> ranged = new ArrayList<Projectiles>();
@@ -201,6 +202,10 @@ public class Player extends Actor {
         }
     }
 
+    public int getPlayerHitboxSize() {
+        return (39 - moveSpeedMax);
+    }
+
     /**
      * Fährt eine Bewegung in Abhängigkeit zu den gedrückten Tasten aus
      */
@@ -208,17 +213,28 @@ public class Player extends Actor {
         if (isKeyDown("w") || isKeyDown("up")) {
             setLocation(getX(), getY() - getMoveSpeed());
             setNextImage(firstUp, lastUp);
-            getWorld().setPaintOrder(Player.class);
         } else if (isKeyDown("a") || isKeyDown("left")) {
             setLocation(getX() - getMoveSpeed(), getY());
             setNextImage(firstLeft, lastLeft);
         } else if (isKeyDown("s") || isKeyDown("down")) {
             setLocation(getX(), getY() + getMoveSpeed());
             setNextImage(firstDown, lastDown);
-            getWorld().setPaintOrder(Player.class);
         } else if (isKeyDown("d") || isKeyDown("right")) {
             setLocation(getX() + getMoveSpeed(), getY());
             setNextImage(firstRight, lastRight);
+        }
+    }
+
+    /**
+     * checks for intersecting objects relative to the player and changes the paint
+     * order.
+     */
+    private void checkForIntersectingObjects() {
+        if (!getObjectsAtOffset(0, -getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall above player?
+            getWorld().setPaintOrder(Player.class, Obstacle.class);
+        }
+        if (!getObjectsAtOffset(0, +getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall underneath player?
+            getWorld().setPaintOrder(Obstacle.class, Player.class);
         }
     }
 
