@@ -16,8 +16,6 @@ public class RangedSlow extends Ranged
     int slow;
     int spiderWallRange;
     double wallType;
-    boolean test = true;
-
 
     public RangedSlow(int newMov_Speed, int newLifeCount, double newWallType, String imgPath) {
         super(newMov_Speed, newLifeCount, imgPath);
@@ -34,19 +32,21 @@ public class RangedSlow extends Ranged
 
 
     public RangedSlow(double wallType) {
-        this(3, 1, wallType, "spider.png");
+        this(1, 1, wallType, "spider.png");
     }
 
     public RangedSlow(){
         this(1.3);
     }
+    
+    public void addedToWorld(World world) {
+        this.getWorld().addObject(new Wall(wallType), this.getX(), this.getY());
+        level = (Level) world;
+        level.monstercount++;
+    }
+    
     public void act()
     {
-        if(test) {
-            this.getWorld().addObject(new Wall(wallType), this.getX(), this.getY());
-            test = false;
-        }
-
         if(target == null) {
             target = getTarget();
         }

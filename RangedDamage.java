@@ -29,7 +29,7 @@ public class RangedDamage extends Ranged
         
     
     public RangedDamage() {
-        this(3, 3, "eyeball.png");
+        this(2, 3, "eyeball.png");
     }
         
     public void act() 
@@ -37,7 +37,6 @@ public class RangedDamage extends Ranged
         if(target == null) {
             target = getTarget();
         }
-       
         
         if(target != null) {
             if(!checkCollision(stalkRange)) {

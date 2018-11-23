@@ -29,7 +29,9 @@ public abstract class Enemy extends Obstacle {
 
     public void addedToWorld(World world) {
         level = (Level) world;
-        level.monstercount++;
+        if(!(this instanceof DestroyableObstacle)){
+            level.monstercount++;
+        }
     }
 
     public void damage(int damage) {

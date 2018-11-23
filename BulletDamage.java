@@ -62,8 +62,6 @@ public class BulletDamage extends Projectiles
         getImage().scale(90,90);
     }
     
-    
-    
     public void act() 
     {
         if(isAlive) {
@@ -102,17 +100,20 @@ public class BulletDamage extends Projectiles
                 if(this.knockBack){
                     Player.get().setLocation(this.knockBackX, this.knockBackY);
                     this.getWorld().removeObject(this);
+                    level.monstercount--;
                     isAlive = false;
                     return;
                 }else{
                     Player.get().damage(damage);
                     this.getWorld().removeObject(this);
+                    level.monstercount--;
                     isAlive = false;
                     return;
                 }
             }
             if((a instanceof Obstacle) && !(a instanceof Enemy)) {
                 this.getWorld().removeObject(this);
+                level.monstercount--;
                 isAlive = false;
                 return;
             }
@@ -120,6 +121,7 @@ public class BulletDamage extends Projectiles
         }
         if(this.isAtEdge()) {
             this.getWorld().removeObject(this);
+            level.monstercount--;
             isAlive = false;
         }
     }

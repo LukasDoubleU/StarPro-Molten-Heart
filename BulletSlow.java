@@ -64,11 +64,11 @@ public class BulletSlow extends Projectiles
         if(target!=null) {
                 this.turnTowards(target.getX(), target.getY());
             }
-            if(target==null) {
-                this.turn(turnDegree);
-            }
+        if(target==null) {
+            this.turn(turnDegree);
+        }
         
-            turnNotDone = false;
+        turnNotDone = false;
     }
     
     public void checkCollision() {
@@ -79,18 +79,14 @@ public class BulletSlow extends Projectiles
             if(a instanceof Player) {
                 Player.get().slow(slow);
                 this.getWorld().removeObject(this);
+                level.monstercount--;
                 isAlive = false;
                 return;
             }
-            /*if((a instanceof Obstacle) && !(a instanceof Enemy)) {
-                this.getWorld().removeObject(this);
-                isAlive = false;
-                return;
-            }*/
-           
         }
         if(this.isAtEdge()) {
             this.getWorld().removeObject(this);
+            level.monstercount--;
             isAlive = false;
         }
     }  
