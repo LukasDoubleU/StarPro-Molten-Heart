@@ -25,15 +25,16 @@ public class Lava extends InteractiveObjects
 
     public void act(){
         List<Lava> lavaInRange = getObjectsInRange(40, Lava.class);
-        for(Lava neighbourLava : lavaInRange){
-            if(neighbourLava.status){
-                this.transform();
-                break;
-            }
-        }
         if(status){
             dealDamageOnCollision();
             cooldownTimer--; 
+        }else{
+            for(Lava neighbourLava : lavaInRange){
+                if(neighbourLava.status){
+                    this.transform();
+                    break;
+                }
+            }
         }
 
         if(cooldownTimer == 0 && status){

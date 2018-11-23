@@ -120,7 +120,7 @@ public abstract class Level extends World {
             object = new RangedDamage();
         //Verlangsamungsgegner
         } else if (obj == 7) {
-            object = new RangedSlow(); 
+            object = new RangedSlow(obj); 
         }/** else if (obj == 8) {
         object = new RangedExplosion(); 
         }
@@ -158,6 +158,15 @@ public abstract class Level extends World {
             object = new Potion.Speed();
         //Lavaboden
         } else if((int)obj == 23){
+            /* Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen Quadrat ausgegangen
+            23.0, 23.1, 23.2,
+            23.3, 23,4, 23.5, = Lavaboden mit der Größe 3x3
+            23.6, 23.7, 23.8 
+            
+            23.0, 23.2,= Lavaboden mit der Größe 2x2
+            23.6, 23.8 
+            
+            */
             Lava lava = new Lava(obj);
             object = lava; 
             /**Lavaboden mit Wert 0(links-obere-Ecke) stellt den Aufruf für die spätere Lava dar. 

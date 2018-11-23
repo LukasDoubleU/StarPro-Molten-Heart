@@ -15,11 +15,11 @@ public class RangedSlow extends Ranged
      */
     int slow;
     int spiderWallRange;
-    int wallType;
+    double wallType;
     boolean test = true;
     
     
-    public RangedSlow(int newMov_Speed, int newLifeCount, int newWallType) {
+    public RangedSlow(int newMov_Speed, int newLifeCount, double newWallType) {
         super(newMov_Speed, newLifeCount);
         slow = 4;
         setImage("spider.png");
@@ -29,17 +29,17 @@ public class RangedSlow extends Ranged
         wallType = newWallType;
     }
     
-    public RangedSlow(int newMov_Speed, int wallType) {
+    public RangedSlow(int newMov_Speed, double wallType) {
         this(newMov_Speed, 1, wallType);
     }
         
     
-    public RangedSlow(int wallType) {
+    public RangedSlow(double wallType) {
         this(3, 1, wallType);
     }
         
     public RangedSlow(){
-        this(3);
+        this(1.3);
     }
     public void act() 
     {
