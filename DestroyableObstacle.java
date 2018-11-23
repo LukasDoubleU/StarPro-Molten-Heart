@@ -1,20 +1,31 @@
 /**
  * Write a description of class DestroyableObstacle here.
- * 
+ *
  * @author (your name)
  * @version (a version number or a date)
  */
 public class DestroyableObstacle extends Enemy {
 
-    public DestroyableObstacle(int x) {
-        super(0, 1);
-        
-        if (x == 1) {
-            setImage("img_utilities/rock.png");
-        } else if (x == 2) {
-            setImage("img_utilities/barrel.png");
+    public DestroyableObstacle(double x) {
+        this(0,1,"");
+        String imgPath = "";
+        if (x == 2) {
+            imgPath = "img_utilities/rock.png";
         } else if (x == 3) {
-            setImage("img_utilities/slime.png");
+            imgPath = "img_utilities/barrel.png";
+        } else if (x == 4) {
+            imgPath = "img_utilities/slime.png";
+        } else {
+            imgPath = "img_utilities/rock.png";
         }
+        setImage(imgPath);
     }
+
+    public DestroyableObstacle(int newMov_speed, int newLifeCount, String imgPath) {
+        //super(newMov_speed, newLifeCount, imgPath);
+        this();
+    }
+
+    public DestroyableObstacle(){}
+
 }

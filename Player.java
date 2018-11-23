@@ -33,8 +33,10 @@ public class Player extends Actor {
     int lifeCount = 5;
     int immortal = 0;
 
+    final int processDotsCooldownDefault = 15;
+    int processDotsCooldown = processDotsCooldownDefault;
     int moveSpeed = 5, moveSpeedSlowed = 0, moveSpeedBonus = 0;
-    int moveSpeedMin = 1, moveSpeedMax = 10;
+    final int moveSpeedMin = 1, moveSpeedMax = 10;
 
     int oldX, oldY, oldRotation;
 
@@ -82,14 +84,18 @@ public class Player extends Actor {
      * Aktualisiert Über-Zeit-Effekte
      */
     private void processDots() {
-        if (moveSpeedBonus > 0) {
-            moveSpeedBonus--;
-        }
-        if (moveSpeedSlowed > 0) {
-            moveSpeedSlowed--;
-        }
-        if (immortal > 0) {
-            immortal--;
+        if (--processDotsCooldown <= 0) {
+            if (moveSpeedBonus > 0) {
+                moveSpeedBonus--;
+            }
+            if (moveSpeedSlowed > 0) {
+                moveSpeedSlowed--;
+            }
+            if (immortal > 0) {
+                immortal--;
+            }
+
+            processDotsCooldown = processDotsCooldownDefault;
         }
     }
 
@@ -204,11 +210,11 @@ public class Player extends Actor {
 
     /**
      * returns the player hitbox for calculation purposes
-     * 
+     *
      * @return
      */
     public int getPlayerHitboxSize() {
-        return (39 - moveSpeedMax);
+        return 39 - moveSpeedMax;
     }
 
     /**
@@ -235,17 +241,20 @@ public class Player extends Actor {
      * order.
      */
     private void checkForIntersectingObjects() {
-        if (!getObjectsAtOffset(0, -getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall above player?
-            getWorld().setPaintOrder(Player.class, Enemy.class, Obstacle.class);
+        if (!getObjectsAtOffset(0, -(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall above player?
+            getWorld().setPaintOrder(Player.class, Enemy.class, Barrel.class, DestroyableObstacle.class,
+                    Obstacle.class);
         }
-        if (!getObjectsAtOffset(0, +getPlayerHitboxSize(), Obstacle.class).isEmpty()) { // wall underneath player?
-            getWorld().setPaintOrder(Obstacle.class, Enemy.class, Player.class);
+        if (!getObjectsAtOffset(0, +(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall underneath
+                                                                                               // player?
+            getWorld().setPaintOrder(RangedSlow.class, DestroyableObstacle.class, Obstacle.class, Enemy.class,
+                    Player.class);
         }
     }
 
     /**
      * returns player's current movement speed.
-     * 
+     *
      * @return
      */
     public int getMoveSpeed() {
@@ -265,7 +274,7 @@ public class Player extends Actor {
      * animates the player's movement for each direction therefore checks whether
      * the player is still moving in the same direction. Different intervall for
      * each direction.
-     * 
+     *
      * @param firstImageIndex
      * @param lastImageIndex
      */
@@ -310,7 +319,7 @@ public class Player extends Actor {
 
     /**
      * returns url string for armor to use with corresponding part id.
-     * 
+     *
      * @return
      */
     public String getArmorImagePrefix() {
@@ -342,7 +351,7 @@ public class Player extends Actor {
 
     /**
      * sets the player's invincibility for the given duration
-     * 
+     *
      * @param duration
      */
     public void immortal(int duration) {
@@ -351,7 +360,7 @@ public class Player extends Actor {
 
     /**
      * returns whether or not the player is still immortal.
-     * 
+     *
      * @return
      */
     public boolean isImmortal() {

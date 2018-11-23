@@ -48,10 +48,7 @@ public abstract class Attack extends Actor {
     protected void processHit(Enemy enemy) {
         Hit hit = new Hit();
         Player.get().getWorld().addObject(hit, enemy.getX(), getY());
-        enemy.lifeCount -= weapon.getDamage();
-        if (enemy.lifeCount <= 0) {
-            Player.get().getWorld().removeObject(enemy);
-        }
+        enemy.damage(weapon.getDamage());
     }
 
     /**
