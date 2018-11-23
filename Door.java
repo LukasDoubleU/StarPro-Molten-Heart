@@ -4,7 +4,7 @@ public class Door extends Actor {
 
     private boolean closedoor; 
     
-    public Door(int x,boolean y) {
+    public Door(double x,boolean y) {
        this.closedoor = y; 
         if(x==11) {         
             setImage("door/upper_east.png");           

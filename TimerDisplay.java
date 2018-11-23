@@ -41,9 +41,12 @@ public class TimerDisplay extends Actor {
     }
 
     private void refreshImage() {
+        Color c = new Color(1f, 0f, 0f, 0f);
         int mins = timeLeft.get(Calendar.MINUTE);
         int secs = timeLeft.get(Calendar.SECOND);
-        setImage(new GreenfootImage(mins + ":" + secs, 30, Color.WHITE, Color.BLACK));
+        String strMinutes = String.valueOf(String.format("%02d", mins));
+        String strSeconds = String.valueOf(String.format("%02d", secs));
+        setImage(new GreenfootImage(strMinutes + ":" + strSeconds, 30, Color.BLACK, c));
     }
 
 }

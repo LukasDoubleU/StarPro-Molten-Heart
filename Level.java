@@ -1,6 +1,9 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 import greenfoot.World;
+import java.util.List; 
+import java.util.ArrayList; 
+import java.util.Random; 
 
 public abstract class Level extends World {
 
@@ -118,9 +121,17 @@ public abstract class Level extends World {
             object = new MeleeDamage();
         } else if (obj == 6) {
             object = new RangedDamage();
-        } else if (obj == 7) {
+        } else if (obj == 7.1) {
+            object = new RangedSlow(1);
+        } else if (obj == 7.2) {
+            object = new RangedSlow(2);
+        }else if (obj == 7.3) {
             object = new RangedSlow(3);
-        } /**
+        }else if (obj == 7.4) {
+            object = new RangedSlow(4);
+        }
+        
+        /**
            * else if (obj == 8) { object = new RangedExplosion(); }
            **/
         else if (obj == 9) {
