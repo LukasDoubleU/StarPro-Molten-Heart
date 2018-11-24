@@ -1,7 +1,6 @@
 import java.awt.Color;
 
 import greenfoot.Actor;
-import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 public class PlayerStats extends Actor {
@@ -53,9 +52,9 @@ public class PlayerStats extends Actor {
 
     private void refreshImage(int armor, int damage, int speed) {
         Color c = new Color(1f, 0f, 0f, 0f);
-        setImage(new GreenfootImage("Armor " + armor //
+        String txt = "Armor " + armor //
                 + " | Damage " + damage //
-                + " | Speed " + speed //
-                , 30, Color.BLACK, c));
+                + " | Speed " + speed;
+        setImage(GreenfootImageConstructor.getConstructedImg(14, txt, c, txt.length()));
     }
 }
