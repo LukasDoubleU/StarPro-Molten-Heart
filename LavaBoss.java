@@ -1,10 +1,7 @@
 import greenfoot.*;
 import java.util.*;
-import java.util.Random;
-import java.util.List;
-import java.util.Arrays;
+
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 /**
  * Write a description of class LavaBoss here.
