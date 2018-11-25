@@ -38,15 +38,15 @@ public class BulletExplosion extends Projectiles
     public void act() 
     {
         if(!exploded) {
-            if(counter > bombRange && mov_speed != 0) {
+            if(counter > bombRange && moveSpeed != 0) {
                 counter2++;
                 if(counter2 == 5) {
-                    mov_speed--;
+                    moveSpeed--;
                     counter2 = 0;
                 }
             }
             if(!checkCollision()) {
-                move(mov_speed);
+                move(moveSpeed);
             }
             if(counter == oldCounter + 10) {
                 oldCounter = counter;
