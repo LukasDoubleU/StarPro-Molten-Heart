@@ -1,25 +1,18 @@
-import greenfoot.*;
+public class GameOver extends Level {
 
-/**
- * Write a description of class GameOver here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class GameOver extends Level
-{
-    
-    /**
-     * Constructor for objects of class GameOver.
-     * 
-     */
-    public GameOver(){
+    public GameOver() {
         super("gameover.png");
-        addObject(new Button("Restart Game"),640,600); 
+        addObject(new Button("Restart Game") {
+
+            @Override
+            public void onClick() {
+                Level.restartGame();
+            }
+        }, 640, 600);
     }
-    
-    /*
-     * Der Finish macht bei Game Over nichts. 
-     */
-    public void finish(){}
+
+    @Override
+    public void finish() {
+        // Der Finish macht bei Game Over nichts.
+    }
 }

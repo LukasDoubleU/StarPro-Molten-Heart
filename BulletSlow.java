@@ -13,15 +13,15 @@ public class BulletSlow extends Projectiles
      * Act - do whatever the BulletSlow wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-        // Add your action code here.int mov_speed;
+        // Add your action code here.int moveSpeed;
     int slow;
     int turnDegree;
     Player target = null;
     boolean turnNotDone;
     boolean isAlive;
 
-    public BulletSlow(int newMov_Speed, int newSlow, Player newTarget, String imgPath) {
-        super(newMov_Speed, 1, imgPath);
+    public BulletSlow(int moveSpeed, int newSlow, Player newTarget, String imgPath) {
+        super(moveSpeed, 1, imgPath);
         slow = newSlow;
         target = newTarget;
         if(imgPath.equals("tear.png")) {
@@ -34,8 +34,8 @@ public class BulletSlow extends Projectiles
         turnNotDone = true;
     }
     
-    public BulletSlow(int newMov_Speed, int newSlow, int newTurnDegree, Player newTarget, String imgPath) {
-        super(newMov_Speed, 1, imgPath);
+    public BulletSlow(int moveSpeed, int newSlow, int newTurnDegree, Player newTarget, String imgPath) {
+        super(moveSpeed, 1, imgPath);
         slow = newSlow;
         target = newTarget;
         if(imgPath.equals("tear.png")) {
@@ -54,7 +54,7 @@ public class BulletSlow extends Projectiles
                 firstTurn();
             }
         
-            move(mov_speed);
+            move(moveSpeed);
             checkCollision();
        
         }
