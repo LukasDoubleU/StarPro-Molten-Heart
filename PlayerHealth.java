@@ -31,10 +31,10 @@ public class PlayerHealth extends Actor {
     @Override
     public void act() {
         Player p = Player.get();
-        int newLifeCount = p.getLifeCount();
-        if (newLifeCount != previousLifeCount) {
-            previousLifeCount = newLifeCount;
-            refreshHealth(newLifeCount);
+        int lifeCount = p.getLifeCount();
+        if (lifeCount != previousLifeCount) {
+            previousLifeCount = lifeCount;
+            refreshHealth(lifeCount);
         }
     }
 

@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 import greenfoot.World;
-import java.util.List; 
-import java.util.ArrayList;
 
 public abstract class Level extends World {
 
@@ -45,8 +47,8 @@ public abstract class Level extends World {
      * hochgesetzt auf die reale Monsterzahl
      */
     public int monstercount = 0;
-    
-    public List<Lava> lavarray = new ArrayList<Lava>();
+
+    public static List<Lava> lavarray = new ArrayList<Lava>();
 
     public Level(String image) {
         super(1280, 720, 1);
@@ -54,9 +56,9 @@ public abstract class Level extends World {
         // Zeige unten links die Leben des Spielers an
         addObject(PlayerHealth.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStats.get(), 1060, 687);
+        addObject(PlayerStats.get(), 1160, 680);
         // Mittig: Spielzeit
-        addObject(TimerDisplay.get(), 640, 687);
+        addObject(TimerDisplay.get(), 640, 685);
 
     }
 
@@ -103,30 +105,28 @@ public abstract class Level extends World {
 
         Actor object = null;
         if ((int) obj == 1) {
-             object = new Wall(obj);
-        } else if (obj >= 2 && obj <= 4 ) {
+            object = new Wall(obj);
+        } else if (obj >= 2 && obj <= 4) {
             object = new DestroyableObstacle(obj);
         } else if (obj == 5) {
             object = new MeleeDamage();
         } else if (obj == 6) {
             object = new RangedDamage();
-        //Verlangsamungsgegner
-        } else if ((int)obj == 7) {
-            object = new RangedSlow(obj); 
-        }/** else if (obj == 8) {
-        object = new RangedExplosion(); 
-        }
-
-        /**
-         * else if (obj == 8) { object = new RangedExplosion(); }
-         **/
+            // Verlangsamungsgegner
+        } else if ((int) obj == 7) {
+            object = new RangedSlow(obj);
+        } /**
+           * else if (obj == 8) { object = new RangedExplosion(); }
+           * 
+           * /** else if (obj == 8) { object = new RangedExplosion(); }
+           **/
         else if (obj == 9) {
             object = new Border();
         } else if (obj == 10) {
             object = Player.get();
         } else if (obj >= 11 && obj <= 14) {
-            boolean status = false; 
-            if(obj >=13){
+            boolean status = false;
+            if (obj >= 13) {
                 status = true;
             }
             object = new Door(obj, status);
@@ -146,35 +146,34 @@ public abstract class Level extends World {
             object = new Potion.Immortality();
         } else if (obj == 22) {
             object = new Potion.Speed();
-        //Lavaboden
-        } else if((int)obj == 23){
-            /* Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen Quadrat ausgegangen
-            23.0, 23.1, 23.2,
-            23.3, 23,4, 23.5, = Lavaboden mit der Größe 3x3
-            23.6, 23.7, 23.8 
-            
-            23.0, 23.2,= Lavaboden mit der Größe 2x2
-            23.6, 23.8 
-            
-            */
+            // Lavaboden
+        } else if ((int) obj == 23) {
+            /*
+             * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
+             * Quadrat ausgegangen 23.0, 23.1, 23.2, 23.3, 23,4, 23.5, = Lavaboden mit der
+             * Größe 3x3 23.6, 23.7, 23.8
+             * 
+             * 23.0, 23.2,= Lavaboden mit der Größe 2x2 23.6, 23.8
+             * 
+             */
             Lava lava = new Lava(obj);
-            object = lava; 
-            /**Lavaboden mit Wert 0(links-obere-Ecke) stellt den Aufruf für die spätere Lava dar. 
-            Alle benachbarten LavaElemente entzünden sich dann einfach nur. 
-            Will man dass das entsprechende LavaElement häufiger Lava spawn
-            */
-            if(obj == 23.0){
+            object = lava;
+            /**
+             * Lavaboden mit Wert 0(links-obere-Ecke) stellt den Aufruf für die spätere Lava
+             * dar. Alle benachbarten LavaElemente entzünden sich dann einfach nur. Will man
+             * dass das entsprechende LavaElement häufiger Lava spawn
+             */
+            if (obj == 23.0) {
                 lavarray.add(lava);
             }
-        //Molten Heart
-        }else if (obj == 95) {
+            // Molten Heart
+        } else if (obj == 95) {
             object = new MoltenHeart();
         }
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }
-        setPaintOrder(DestroyableObstacle.class);
-        setPaintOrder(Enemy.class);
+        setPaintOrder(Player.class, Enemy.class, Barrel.class, DestroyableObstacle.class, Obstacle.class);
     }
 
     /**
@@ -182,6 +181,9 @@ public abstract class Level extends World {
      * auszuwechseln
      */
     public static void triggerLava() {
+        if (lavarray.size() > 0) {
+            lavarray.get(new Random().nextInt(lavarray.size()));
+        }
     }
 
     @Override

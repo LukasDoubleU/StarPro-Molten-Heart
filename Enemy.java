@@ -4,9 +4,7 @@ import java.util.*;
 
 public abstract class Enemy extends Obstacle {
 
-    int mov_speed;
-    int xMov_speed;
-    int yMov_speed;
+    int moveSpeed;
     int damage;
     Player target = null;
     int lifeCount;
@@ -15,14 +13,11 @@ public abstract class Enemy extends Obstacle {
     int viewDistance;
     Level level = null;
 
-    public Enemy(int newMov_speed, int newLifeCount, String imgPath) {
-        mov_speed = newMov_speed;
-        xMov_speed = mov_speed;
-        yMov_speed = mov_speed;
-        lifeCount = newLifeCount;
+    public Enemy(int moveSpeed, int lifeCount, String imgPath) {
+        this.moveSpeed = moveSpeed;
+        this.lifeCount = lifeCount;
         setImage(imgPath);
-        counter = 0;
-
+        this.counter = 0;
     }
     
     public Enemy(){}
@@ -35,10 +30,13 @@ public abstract class Enemy extends Obstacle {
     }
 
     public void damage(int damage) {
-        lifeCount = lifeCount - damage;
+        this.lifeCount = lifeCount - damage;
         if(lifeCount < 0) {
-            level.monstercount--;
+            if(!(this instanceof DestroyableObstacle)){
+                level.monstercount--;
+            }    
             this.getWorld().removeObject(this);
+           
         }
     }
 
@@ -46,25 +44,25 @@ public abstract class Enemy extends Obstacle {
         int oldX = this.getX();
         int oldY = this.getY();
         if(this.getX() > target.getX()) {
-            this.setLocation(this.getX()-mov_speed+(mov_speed/2), this.getY());
+            this.setLocation(this.getX()-moveSpeed+(moveSpeed/2), this.getY());
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(this.getX() < target.getX()){
-            this.setLocation(this.getX()+mov_speed-(mov_speed/2), this.getY());
+            this.setLocation(this.getX()+moveSpeed-(moveSpeed/2), this.getY());
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         if(this.getY() > target.getY()) {
-            this.setLocation(this.getX(), this.getY()-mov_speed+(mov_speed/2));
+            this.setLocation(this.getX(), this.getY()-moveSpeed+(moveSpeed/2));
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(this.getY() < target.getY()){
-            this.setLocation(this.getX(), this.getY()+mov_speed-(mov_speed/2));
+            this.setLocation(this.getX(), this.getY()+moveSpeed-(moveSpeed/2));
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
@@ -73,26 +71,24 @@ public abstract class Enemy extends Obstacle {
     }
 
     public boolean checkCollision(int stalkRange) {
-        List intersectingObjects = new ArrayList();
-        intersectingObjects = this.getObjectsInRange(25, null);
-
-        for(Object a : intersectingObjects)  {
-            if(a instanceof Obstacle) {
-                return true;
+        List<Actor> intersectingObjects = this.getObjectsInRange(25, null);
+        if(intersectingObjects.size() > 0){
+            for(Object a : intersectingObjects)  {
+                if(a instanceof Obstacle) {
+                    return true;
+                }
+    
             }
-
         }
         if(this.isAtEdge()) {
             return true;
         }
 
-        List playerInRange = new ArrayList();
-        playerInRange = this.getObjectsInRange(stalkRange, Player.class);
+        List<Player> playerInRange = this.getObjectsInRange(stalkRange, Player.class);
         for(Object p: playerInRange)  {
             if(p instanceof Player) {
                 return true;
             }
-
         }
         return false;
     }
@@ -108,7 +104,6 @@ public abstract class Enemy extends Obstacle {
 
         }
         return null;
-
     }
 
 }

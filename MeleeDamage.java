@@ -5,15 +5,15 @@ import java.util.*;
 public class MeleeDamage extends Melee {
    
     
-    public MeleeDamage(int newMov_Speed, int newLifeCount, String imgPath) {
-        super(newMov_Speed, newLifeCount, imgPath);
+    public MeleeDamage(int moveSpeed, int lifeCount, String imgPath) {
+        super(moveSpeed, lifeCount, imgPath);
         damage = 1;
         stalkRange = 38;
         viewDistance = 200;
     }
     
-    public MeleeDamage(int newMov_Speed) {
-        this(newMov_Speed, 3, "ghost.png");
+    public MeleeDamage(int moveSpeed) {
+        this(moveSpeed, 3, "ghost.png");
     }
     
     public MeleeDamage(){
@@ -36,7 +36,7 @@ public class MeleeDamage extends Melee {
 
     public void damagePlayer() {
         List playerInRange = new ArrayList();
-        playerInRange = this.getObjectsInRange(stalkRange + 1, Player.class);     
+        playerInRange = this.getObjectsInRange(stalkRange + 10, Player.class);     
         for(Object p : playerInRange) {
             if(p instanceof Player) {
                 Player.get().damage(damage);
@@ -51,25 +51,25 @@ public class MeleeDamage extends Melee {
         int oldX = this.getX();
         int oldY = this.getY();
         if(counter<=40){
-            this.setLocation(this.getX()+xMov_speed, this.getY());
+            this.setLocation(this.getX()+moveSpeed, this.getY());
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(counter<=80){
-            this.setLocation(this.getX(), this.getY()+yMov_speed);
+            this.setLocation(this.getX(), this.getY()+moveSpeed);
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(counter<=120){
-            this.setLocation(this.getX()-xMov_speed, this.getY());
+            this.setLocation(this.getX()-moveSpeed, this.getY());
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         else if(counter<=160){
-            this.setLocation(this.getX(), this.getY()-yMov_speed);
+            this.setLocation(this.getX(), this.getY()-moveSpeed);
             if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }

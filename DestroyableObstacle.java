@@ -21,8 +21,8 @@ public class DestroyableObstacle extends Enemy {
         setImage(imgPath);
     }
 
-    public DestroyableObstacle(int newMov_speed, int newLifeCount, String imgPath) {
-        //super(newMov_speed, newLifeCount, imgPath);
+    public DestroyableObstacle(int moveSpeed, int lifeCount, String imgPath) {
+        //super(moveSpeed, lifeCount, imgPath);
         this();
     }
 

@@ -4,7 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import greenfoot.Actor;
-import greenfoot.GreenfootImage;
 
 public class TimerDisplay extends Actor {
 
@@ -37,11 +36,15 @@ public class TimerDisplay extends Actor {
         }
     }
 
-    private void refreshImage(int mins, int secs) {
+    private void refreshImage(int mins, int secs) { // TODO: this is ugly, just for testing
+
         Color c = new Color(1f, 0f, 0f, 0f);
         String minString = String.format("%02d", mins);
         String secString = String.format("%02d", secs);
-        setImage(new GreenfootImage(minString + ":" + secString, 30, Color.BLACK, c));
+
+        // create the text image
+        String text = minString + ":" + secString;
+        setImage(GreenfootImageConstructor.getConstructedImg(20, text, c, text.length()));
     }
 
     private void secondPassed() {
