@@ -43,10 +43,12 @@ public class LavaBoss extends Boss
      */
     private int rotateShoot = 15;
     private boolean rotateBool = true;
-    private boolean rotateShootVV = false;
+    private boolean rotateShootVV = true;
     private final static int shootAtRotation[]= {45,135,225,315};
     private Player target = null;
     private int fireTimer = 0;
+    private Level level = null;
+
 
     /**
      * Diese Parameter ist fr die Klasse knockBack()
@@ -54,6 +56,7 @@ public class LavaBoss extends Boss
      * @param knockShootVV : Visuele Vorwahnung, gibt den Spieler Zeit in sicherheit zu gehen, bevor er schiet
      * @param playerX, playerY : speichert die x,y Koordinate vom Player
      * @param knockBackX, knockBackY : speichert die x,y Koordinate, wo der Player geknockbackt werden soll
+     * @param knockBackOver : dient dazu, um anzugeben, dass die Attacke vorbei ist
      */
     private int knockTimer = 0;
     private boolean knockShootVV = true;
@@ -61,6 +64,7 @@ public class LavaBoss extends Boss
     private int playerY;
     private int knockBackX;
     private int knockBackY;
+    private boolean knockBackOver = false;
 
     /**
      * Instruktor des LavaBoss : image wird gesetzt
@@ -69,6 +73,14 @@ public class LavaBoss extends Boss
         super(1,10, "boss/boss1.png");
     }
 
+    /**
+     * Funktion addedToWorld
+     * Speichert in der Variable level die World
+     */
+   /* public void addedToWorld(World world) {
+        level = (Level) world;
+    }*/
+    
     /**
      * Act - do whatever the LavaBoss wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -81,23 +93,27 @@ public class LavaBoss extends Boss
         }
         //test
         System.out.println(randomAttack+ "RANDOM NUMMER");
+        System.out.println(attack1+ " " + attack2 + " " + attack3 + " " + attack4);
 
         if(randomAttack == 1){
             if(attack1){
+                attack2 = false;
+                attack3 = false;
+                attack4 = false;
                 /**normale attacke, 2-3 sekunden**/
                 if(normalAttackCounter==40){
                     spawnBullet();
                 }
                 normalAttackCounter++;
-                attackTimer();
+                addAttackTimer();
                 if(attackTimer==100){
                     attack1 = false;
                     attack2 = true;
+                    attackTimer = 0;
                 }
             }else if(attack2){
                 /**random lava aktivieren**/
-                //funktion_lava()
-                //this.getWorld().
+                level.triggerLava();
                 attack2 = false;
                 attack3= true;
             }else if(attack3){
@@ -106,25 +122,67 @@ public class LavaBoss extends Boss
                 if(counter==randomRotate){
                     attack3 = false;
                     attack4 = true;
+                    counter=0;
+                    rotateShootVV=true;
+                    this.setImage("boss/boss1.png");
                 }
             }else if(attack4){
                 /**knockBack() wird aktiviert**/
-                knockBack();
-
+                if(attackTimer==30){
+                    knockBack();
+                    if(knockBackOver){
+                        attackTimer=0;
+                        randomAttack = randomNumber(0);
+                        attack4=false;
+                        attack1=true;
+                        this.setRotation(0);
+                        knockBackOver = false;
+                    }
+                }else{
+                    addAttackTimer();
+                }
             }
         }else{
             if(attack1){
+                attack2 = false;
+                attack3 = false;
+                attack4 = false;
                 /**random Lava**/
+                level.triggerLava();
+                attack1 = false;
+                attack2 = true;
             }else if(attack2){
-                /**knockBack() wird aktiviert**/
+                if(attackTimer==30){
+                    knockBack();
+                    if(knockBackOver){
+                        attackTimer=0;
+                        attack2=false;
+                        attack3=true;
+                        this.setRotation(0);
+                        knockBackOver = false;
+                    }
+                }else{
+                    addAttackTimer();
+                }
             }else if(attack3){
                 /**random Lava**/
+                level.triggerLava();
+                attack3 = false;
+                attack4 = true;
             }else if(attack4){
                 /**fireCircle()**/
+                fireCircle();
+                if(counter==randomRotate){
+                    counter=0;
+                    attack4 = false;
+                    attack1 = true;
+                    this.setImage("boss/boss1.png");
+                    rotateShootVV=true;
+                    randomAttack = randomNumber(0);
+                }
             }
         }
     }
-
 
     /**
      * Funktion knockBack()
@@ -137,10 +195,9 @@ public class LavaBoss extends Boss
         if(knockShootVV==true){
             playerX = target.getX();
             playerY = target.getY();
-
             this.turnTowards(playerX, playerY);
             int thisRotate = this.getRotation();
-
+          
             if(this.getRotation()<= 45){
                 this.setRotation(22);
                 System.out.println(this.getRotation());
@@ -182,12 +239,11 @@ public class LavaBoss extends Boss
                 knockBackX = 400;
                 knockBackY = 400;
             }
+            knockShootVV=false;
         }
 
         /**Counter wird hochgecountet (ist die Dauer der Visuellen Vorwahung)**/
-        knockShootVV=false;
         addKnockTimer();
-
         //spawn hand neben den boss
         /* Hand hand = new Hand();
         this.getWorld().addObject(hand, this.getX()-70, this.getY());
@@ -199,6 +255,7 @@ public class LavaBoss extends Boss
             BulletDamage b = new BulletDamage(4, 0,this.getRotation(), null, "boss/boss2hand.png",knockBackX,knockBackY);
             this.getWorld().addObject(b, this.getX(), this.getY());
             this.setRotation(0);
+            knockBackOver = true;
             knockShootVV=true;
         }
     }
@@ -212,6 +269,7 @@ public class LavaBoss extends Boss
         /**er ist kurz davor die Feuerkugeln zu schieen und gibt dem Player eine visuelle Vorwanung**/
         if(rotateShootVV==true){
             this.setImage("boss/boss1.1.png");
+            addFireTimer();
             /**Nachdem der Timer fertig ist, setzt er ein anderes Bild und feuert die Kugeln**/
             if(fireTimer==60){ //100 = 2-3 sek
                 this.setImage("boss/boss1.2.png");
@@ -291,18 +349,20 @@ public class LavaBoss extends Boss
     }
 
     /**
-     * Funktion attackTimer()
+     * Funktion addAttackTimer()
      * Timer um die Variable attackTimer hochzucounten
      */
-    public void attackTimer(){
+    public void addAttackTimer(){
         attackTimer++;
     }
 
     /**
-     *
+     * Funktion randomNumber
+     * gibt einen wert zwischen 0-1 + x zurück
      */
     public int randomNumber(int x){
         Random rand = new Random();
         return rand.nextInt(2)+x;
     }
+   
 }
