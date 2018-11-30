@@ -8,8 +8,7 @@ public class GameWon extends Level {
 
     class ScoringTable extends Actor {
         ScoringTable() {
-            GreenfootImage img = new GreenfootImage(Scoring.generateTable(), 12, Color.WHITE, Color.BLACK);
-            setImage(img);
+            setImage(new GreenfootImage(Scoring.generateTable(), 20, Color.WHITE, Color.BLACK));
         }
     }
 
@@ -23,7 +22,7 @@ public class GameWon extends Level {
             }
         }, 640, 600);
         Scoring.saveScore();
-        addObject(new ScoringTable(), 640, 650);
+        addObject(new ScoringTable(), 640, 450);
     }
 
     @Override

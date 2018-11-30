@@ -65,7 +65,7 @@ public class Scoring {
 
     }
 
-    static final String FILE_PATH = System.getProperty("user.home") + File.pathSeparator + "MoltenHeartScoring.txt";
+    static final String FILE_PATH = System.getProperty("user.home") + File.separator + "MoltenHeartScoring.txt";
     static final char SCORE_SEP_CHAR = ';';
 
     static File file;
@@ -148,7 +148,7 @@ public class Scoring {
         Collection<Score> read = read();
         StringBuilder sb = new StringBuilder();
         for (Score score : read) {
-            sb.append(score.getName() + "\t" + score.getValue());
+            sb.append(score.getName() + "\t" + score.getValue() + "\n");
         }
         return sb.toString();
     }
