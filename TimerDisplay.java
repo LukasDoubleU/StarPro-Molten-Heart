@@ -44,7 +44,7 @@ public class TimerDisplay extends Actor {
 
         // create the text image
         String text = minString + ":" + secString;
-        setImage(GreenfootImageConstructor.getConstructedImg(20, text, c, text.length()));
+        setImage(GreenfootImageConstructor.getConstructedImg(20, text, c));
     }
 
     private void secondPassed() {
