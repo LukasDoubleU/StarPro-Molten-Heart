@@ -55,6 +55,6 @@ public class PlayerStats extends Actor {
         String txt = "Armor " + armor //
                 + " | Damage " + damage //
                 + " | Speed " + speed;
-        setImage(GreenfootImageConstructor.getConstructedImg(14, txt, c, txt.length()));
+        setImage(GreenfootImageConstructor.getConstructedImg(14, txt, c));
     }
 }

@@ -6,37 +6,37 @@ import greenfoot.GreenfootImage;
 
 public class GreenfootImageConstructor {
 
-    public GreenfootImageConstructor() {
-
+    private GreenfootImageConstructor() {
     }
 
-    public static GreenfootImage getConstructedImg(int fontSize, String text, Color c, int strLength) {
-        Font font = new Font("q", 0, 0);
-        InputStream is = Player.get().getClass().getResourceAsStream("/images/PressStart2P.ttf");// location in project
-                                                                                                 // folder
+    public static GreenfootImage getConstructedImg(int fontSize, String text, Color c) {
+        // Lade die eigene Font als InputStream
+        InputStream is = Player.get().getClass().getResourceAsStream("/images/PressStart2P.ttf");
         Font uniFont = null;
         try {
+            // Lade den InputStream in eine Font
             uniFont = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (java.awt.FontFormatException r) {
             System.err.println("FontFormatException: " + r.getMessage());
         } catch (java.io.IOException r) {
             System.err.println("FontFormatException: " + r.getMessage());
         }
-        font = uniFont.deriveFont(Float.valueOf(fontSize + "f"));// desired font size
-        GreenfootImage img = new GreenfootImage(generatePlaceHolder(strLength), 50, Color.BLACK, c); // <- placeholder
-                                                                                                     // for timer lul.
-        // i dont get this sheet
+        // Erzeuge eine Derived-Font, bei der die Schriftgröße angegeben werden kann
+        Font font = uniFont.deriveFont((float) fontSize);
+        // Erzeuge ein Bild auf das der Text geschrieben werden kann
+        GreenfootImage img = new GreenfootImage(generatePlaceHolder(text), 50, Color.BLACK, c);
+        // Schreibe den gewünschten Text auf das Bild
         img.setFont(font);
-        img.drawString(text, 30, 40);
+        img.drawString(text, 0, img.getHeight());
         return img;
     }
 
-    public static String generatePlaceHolder(int charAmount) {
-        String str = "";
-        for (int i = 0; i <= charAmount; i++) {
-            str += "  ";
+    private static String generatePlaceHolder(String text) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            sb.append("  ");
         }
-        return str;
+        return sb.toString();
     }
 
 }

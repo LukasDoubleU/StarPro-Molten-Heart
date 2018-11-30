@@ -67,7 +67,7 @@ public class LavaBoss extends Boss
      * Instruktor des LavaBoss : image wird gesetzt
      */
     public LavaBoss(){
-        super(1,10, "boss/boss1.png");
+        super(1,20, "boss/boss1.png");
     }
 
     /**
@@ -88,9 +88,6 @@ public class LavaBoss extends Boss
         if(target==null){
             target = getTarget();
         }
-        //test
-        System.out.println(randomAttack+ "RANDOM NUMMER");
-        System.out.println(attack1+ " " + attack2 + " " + attack3 + " " + attack4);
 
         if(randomAttack == 1){
             if(attack1){
@@ -197,42 +194,34 @@ public class LavaBoss extends Boss
           
             if(this.getRotation()<= 45){
                 this.setRotation(22);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }else if(this.getRotation()<= 90 && this.getRotation()>= 46){
                 this.setRotation(67);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }else if(this.getRotation()<= 135 && this.getRotation()>= 91){
                 this.setRotation(112);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }else if(this.getRotation()<= 180 && this.getRotation()>= 136){
                 this.setRotation(157);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }else if(this.getRotation()<= 225 && this.getRotation()>= 181){
                 this.setRotation(202);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }else if(this.getRotation()<= 270 && this.getRotation()>= 226){
                 this.setRotation(247);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }else if(this.getRotation()<= 315 && this.getRotation()>= 271){
                 this.setRotation(292);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }else if(this.getRotation()>= 315){
                 this.setRotation(337);
-                System.out.println(this.getRotation());
                 knockBackX = 400;
                 knockBackY = 400;
             }
