@@ -15,7 +15,7 @@ public class TimerDisplay extends Actor {
     static TimerDisplay instance = new TimerDisplay();
     static Timer timer;
 
-    boolean running = false;
+    boolean running = true;
 
     private TimerDisplay() {
         reset();
@@ -30,13 +30,15 @@ public class TimerDisplay extends Actor {
 
                 @Override
                 public void run() {
-                    secondPassed();
+                    if (running) {
+                        secondPassed();
+                    }
                 }
             }, 1000, 1000);
         }
     }
 
-    private void refreshImage(int mins, int secs) { // TODO: this is ugly, just for testing
+    private void refreshImage(int mins, int secs) {
 
         Color c = new Color(1f, 0f, 0f, 0f);
         String minString = String.format("%02d", mins);
@@ -44,7 +46,7 @@ public class TimerDisplay extends Actor {
 
         // create the text image
         String text = minString + ":" + secString;
-        setImage(GreenfootImageConstructor.getConstructedImg(20, text, c, text.length()));
+        setImage(GreenfootImageConstructor.getConstructedImg(20, text, c));
     }
 
     private void secondPassed() {

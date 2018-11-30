@@ -56,10 +56,9 @@ public abstract class Level extends World {
         // Zeige unten links die Leben des Spielers an
         addObject(PlayerHealth.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStats.get(), 1160, 680);
+        addObject(PlayerStats.get(), 1180, 672);
         // Mittig: Spielzeit
-        addObject(TimerDisplay.get(), 640, 685);
-
+        addObject(TimerDisplay.get(), 640, 674);
     }
 
     /**
@@ -117,7 +116,7 @@ public abstract class Level extends World {
             object = new RangedSlow(obj);
         } /**
            * else if (obj == 8) { object = new RangedExplosion(); }
-           * 
+           *
            * /** else if (obj == 8) { object = new RangedExplosion(); }
            **/
         else if (obj == 9) {
@@ -152,9 +151,9 @@ public abstract class Level extends World {
              * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
              * Quadrat ausgegangen 23.0, 23.1, 23.2, 23.3, 23,4, 23.5, = Lavaboden mit der
              * Größe 3x3 23.6, 23.7, 23.8
-             * 
+             *
              * 23.0, 23.2,= Lavaboden mit der Größe 2x2 23.6, 23.8
-             * 
+             *
              */
             Lava lava = new Lava(obj);
             object = lava;
