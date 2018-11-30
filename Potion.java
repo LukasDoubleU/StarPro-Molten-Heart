@@ -14,7 +14,7 @@ public abstract class Potion extends Item {
 
         @Override
         public void drink(Player p) {
-            p.heal(1); // TODO Amount?
+            p.heal(1); // TODO Amount? Test
         }
     }
 
