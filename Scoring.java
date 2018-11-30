@@ -1,15 +1,18 @@
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import greenfoot.Actor;
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
 
 /**
  * <p>
@@ -17,6 +20,15 @@ import greenfoot.Greenfoot;
  * </p>
  */
 public class Scoring {
+
+    static final int PLAYER_NAME_MAX_LENGTH = 12;
+
+    public static class Table extends Actor {
+
+        public Table() {
+            setImage(new GreenfootImage(Scoring.generateTable(), 20, Color.WHITE, Color.BLACK));
+        }
+    }
 
     /**
      * <p>
@@ -42,9 +54,13 @@ public class Scoring {
             return value;
         }
 
+        public String getValueFilledToMax() {
+            return fill(getValue() + "", 6, true);
+        }
+
         @Override
         public int compareTo(Score o) {
-            return Integer.valueOf(o.getValue()).compareTo(Integer.valueOf(o.getValue()));
+            return Integer.valueOf(o.getValue()).compareTo(Integer.valueOf(getValue()));
         }
 
         /**
@@ -60,7 +76,11 @@ public class Scoring {
 
         @Override
         public String toString() {
-            return name + SCORE_SEP_CHAR + value;
+            return getName() + SCORE_SEP_CHAR + getValue();
+        }
+
+        public String getNameFilledToMax() {
+            return fill(getName(), PLAYER_NAME_MAX_LENGTH, false);
         }
 
     }
@@ -69,6 +89,19 @@ public class Scoring {
     static final char SCORE_SEP_CHAR = ';';
 
     static File file;
+
+    static String fill(String s, int length, boolean prepend) {
+        StringBuilder sb = new StringBuilder(s);
+        // Fülle den Namen auf die maximale Länge auf, mit Leerzeichen
+        while (sb.length() < length) {
+            if (prepend) {
+                sb.insert(0, " ");
+            } else {
+                sb.append(" ");
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * Speichert die Datei
@@ -92,7 +125,7 @@ public class Scoring {
             JOptionPane.showMessageDialog(null, "Die Eingabe enthält ungültige Einzeichen!");
             return askForPlayerName();
         }
-        if (ask.length() > 12) {
+        if (ask.length() > PLAYER_NAME_MAX_LENGTH) {
             JOptionPane.showMessageDialog(null, "Die Eingabe ist zu lang! (Maximal 12 Zeichen)");
             return askForPlayerName();
         }
@@ -128,7 +161,7 @@ public class Scoring {
         return getFile().toPath();
     }
 
-    public static Collection<Score> read() {
+    public static List<Score> read() {
         List<Score> scores = new ArrayList<Score>();
 
         try {
@@ -145,10 +178,12 @@ public class Scoring {
     }
 
     public static String generateTable() {
-        Collection<Score> read = read();
+        List<Score> read = read();
+        Collections.sort(read);
         StringBuilder sb = new StringBuilder();
+        sb.append("Rangliste\n");
         for (Score score : read) {
-            sb.append(score.getName() + "\t" + score.getValue() + "\n");
+            sb.append(score.getNameFilledToMax() + " " + score.getValueFilledToMax() + "\n");
         }
         return sb.toString();
     }
