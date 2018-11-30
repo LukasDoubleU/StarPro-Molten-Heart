@@ -71,6 +71,7 @@ public abstract class Level extends World {
      */
     public static void restartGame() {
         Player.newInstance();
+        TimerDisplay.get().reset();
         Greenfoot.setWorld(new Level1());
     }
 
