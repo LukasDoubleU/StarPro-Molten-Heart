@@ -26,6 +26,7 @@ public class TimerDisplay extends Actor {
         // Wenn der Timer das erste Mal "actet" fange an zu zählen
         if (timer == null) {
             timer = new Timer("timer");
+            running = true;
             timer.scheduleAtFixedRate(new TimerTask() {
 
                 @Override
@@ -67,6 +68,7 @@ public class TimerDisplay extends Actor {
     private void timesUp() {
         GameOver.runGameOverWorld();
         stop();
+        reset();
     }
 
     public void reset() {

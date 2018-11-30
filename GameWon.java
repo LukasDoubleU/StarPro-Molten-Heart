@@ -1,16 +1,4 @@
-
-import java.awt.Color;
-
-import greenfoot.Actor;
-import greenfoot.GreenfootImage;
-
 public class GameWon extends Level {
-
-    class ScoringTable extends Actor {
-        ScoringTable() {
-            setImage(new GreenfootImage(Scoring.generateTable(), 20, Color.WHITE, Color.BLACK));
-        }
-    }
 
     public GameWon() {
         super("WinScreen.png");
@@ -22,7 +10,7 @@ public class GameWon extends Level {
             }
         }, 640, 600);
         Scoring.saveScore();
-        addObject(new ScoringTable(), 640, 450);
+        addObject(new Scoring.Table(), 640, 450);
     }
 
     @Override

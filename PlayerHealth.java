@@ -21,6 +21,7 @@ public class PlayerHealth extends Actor {
     }
 
     int previousLifeCount;
+    World previousWorld;
     List<HealthImage> currentHealthImages = new ArrayList<HealthImage>();
 
     private PlayerHealth() {
@@ -32,7 +33,9 @@ public class PlayerHealth extends Actor {
     public void act() {
         Player p = Player.get();
         int lifeCount = p.getLifeCount();
-        if (lifeCount != previousLifeCount) {
+        World world = getWorld();
+        if (lifeCount != previousLifeCount || world != previousWorld) {
+            previousWorld = world;
             previousLifeCount = lifeCount;
             refreshHealth(lifeCount);
         }
