@@ -8,10 +8,15 @@ import greenfoot.*;
  */
 public class MiniBoss extends Boss
 {
+    /**
+     * @param
+     */
+    
     
     public MiniBoss(){
-        super(1,10,"images/boss2.1");
+        super(1,10,"boss/boss2.1");
     }
+    
     /**
      * Act - do whatever the MiniBoss wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -19,5 +24,9 @@ public class MiniBoss extends Boss
     public void act() 
     {
         // Add your action code here.
-    }    
+    }
+    
+    public void summon(){
+        
+    }
 }

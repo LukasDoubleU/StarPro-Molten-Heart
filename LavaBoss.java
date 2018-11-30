@@ -88,7 +88,7 @@ public class LavaBoss extends Boss
         if(target==null){
             target = getTarget();
         }
-
+        
         if(randomAttack == 1){
             if(attack1){
                 attack2 = false;
@@ -177,6 +177,16 @@ public class LavaBoss extends Boss
             }
         }
     }
+    
+    public void damage(int damage) {
+        this.lifeCount = lifeCount - damage;
+        if(lifeCount < 0) {
+            this.getWorld().addObject(new MoltenHeart(), this.getX(), this.getY());
+            this.getWorld().removeObject(this);
+           
+        }
+    }
+    
 
     /**
      * Funktion knockBack()
