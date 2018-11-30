@@ -27,7 +27,7 @@ public class GreenfootImageConstructor {
         GreenfootImage img = new GreenfootImage(generatePlaceHolder(text), 50, Color.BLACK, c);
         // Schreibe den gewünschten Text auf das Bild
         img.setFont(font);
-        img.drawString(text, 30, 40);
+        img.drawString(text, 0, img.getHeight());
         return img;
     }
 
