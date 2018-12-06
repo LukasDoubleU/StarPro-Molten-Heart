@@ -15,9 +15,13 @@ public class RangedDamage extends Ranged
      * Act - do whatever the Kamel wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    int moveSpeedX;
+    int moveSpeedY;
     
     public RangedDamage(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
+        this.moveSpeedY = moveSpeed;
+        this.moveSpeedX = moveSpeed;
         damage = 1;
         stalkRange = 150;
         viewDistance = 200;
@@ -60,19 +64,19 @@ public class RangedDamage extends Ranged
         int oldX = this.getX();
         int oldY = this.getY();
         if(counter==30){
-            moveSpeed = -moveSpeed;
+            moveSpeedX = -moveSpeedX;
         }
         if(counter==60){
-            moveSpeed = -moveSpeed;
+            moveSpeedY = -moveSpeedY;
         }
         if(counter==90){
-            moveSpeed = -moveSpeed;
+            moveSpeedX = -moveSpeedX;
         }
         if(counter==120){
-            moveSpeed = -moveSpeed;
+            moveSpeedY = -moveSpeedY;
             counter = 0;
         }
-        this.setLocation(this.getX()+moveSpeed, this.getY()+moveSpeed);
+        this.setLocation(this.getX()+moveSpeedX, this.getY()+moveSpeedY);
         if(checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
         }
