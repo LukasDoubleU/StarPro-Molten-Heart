@@ -48,6 +48,6 @@ public class Level3 extends Level
     
     @Override
     public void finish() {
-        Greenfoot.setWorld(new GameWon());
+        Greenfoot.setWorld(new WinningScreenLevel());
     }
 }
