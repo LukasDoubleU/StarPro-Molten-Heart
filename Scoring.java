@@ -7,6 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -26,7 +27,7 @@ public class Scoring {
     public static class Table extends Actor {
 
         public Table() {
-            setImage(new GreenfootImage(Scoring.generateTable(), 20, Color.WHITE, Color.BLACK));
+            setImage(new GreenfootImage(Scoring.generateTable(), 30, Color.WHITE, Color.BLACK));
         }
     }
 
@@ -112,8 +113,20 @@ public class Scoring {
             // null = Abbruch
             return;
         }
-        int score = calcScoreForCurrentGame();
-        new Score(name, score).write();
+        int points = calcScoreForCurrentGame();
+        final List<Score> previousScores = new CopyOnWriteArrayList<Score>(read());
+        Score score = new Score(name, points);
+        previousScores.add(score);
+        // Sortiere, sodass die besten Scores ganz oben stehen
+        Collections.sort(previousScores);
+        // Behalte nur die 5 besten Scores
+        for (int i = 4; i < previousScores.size(); i++) {
+            previousScores.remove(i);
+        }
+        // Schreibe alle Scores in die Datei
+        for (Score s : previousScores) {
+            s.write();
+        }
     }
 
     private static String askForPlayerName() {

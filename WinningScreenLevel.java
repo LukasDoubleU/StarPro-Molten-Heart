@@ -1,7 +1,11 @@
-public class GameWon extends Level {
+public class WinningScreenLevel extends Level {
 
-    public GameWon() {
+    public WinningScreenLevel() {
         super("WinScreen.png");
+        Scoring.saveScore();
+
+        addObject(new Scoring.Table(), 640, 400);
+
         addObject(new Button("Restart") {
 
             @Override
@@ -9,8 +13,6 @@ public class GameWon extends Level {
                 Level.restartGame();
             }
         }, 640, 600);
-        Scoring.saveScore();
-        addObject(new Scoring.Table(), 640, 450);
     }
 
     @Override
