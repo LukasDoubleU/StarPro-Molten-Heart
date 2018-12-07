@@ -44,7 +44,7 @@ public class LavaBoss extends Boss
     private final static int shootAtRotation[]= {45,135,225,315};
     private Player target = null;
     private int fireTimer = 0;
-    private Level level = null;
+    //private Level level = null;
 
 
     /**
@@ -183,7 +183,7 @@ public class LavaBoss extends Boss
         if(lifeCount < 0) {
             this.getWorld().addObject(new MoltenHeart(), this.getX(), this.getY());
             this.getWorld().removeObject(this);
-           
+            level.monstercount--;
         }
     }
     
@@ -354,7 +354,7 @@ public class LavaBoss extends Boss
 
     /**
      * Funktion randomNumber
-     * gibt einen wert zwischen 0-1 + x zurück
+     * gibt einen wert zwischen 0-1 + x zurueck
      */
     public int randomNumber(int x){
         Random rand = new Random();
