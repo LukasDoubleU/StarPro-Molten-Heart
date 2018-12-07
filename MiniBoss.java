@@ -13,22 +13,30 @@ public class MiniBoss extends Boss
      * @param attackTimer : dient zum timen der Attacken
      * @param summonTimer : dient zum timen, nachdem die 3 nahkaempfer beschworen wurden
      * @param normalAttackCounter : dient zum timen der normale attacke
-     * @meleeCounter
-     * 
+     * @meleeSpawned : gibt an, ob die Melee 
      * @param attack1 : dient zum steuern der zwei verschiedenen Attacken
      * @param summonEnd : 
      */
-    private int attackTimer = 0;
-    private int summonTimer = 0;
-    private int normalAttackCounter = 30;
-    private boolean meleeSpawned = false;
-    private boolean attack1 = true;
-    private boolean summonEnd = false;
+    private int attackTimer;
+    private int summonTimer;
+    private int normalAttackCounter;
+    private int damage;
+    private boolean meleeSpawned;
+    private boolean attack1;
+    private boolean summonEnd;
+   
     
     
     
     public MiniBoss(){
         super(1,10,"boss/boss2.1.png");
+        summonTimer = 0;
+        attackTimer = 0;
+        normalAttackCounter = 30;
+        damage = 2;
+        meleeSpawned = false;
+        attack1 = true;
+        summonEnd = false;
     }
     
     /**
@@ -48,7 +56,7 @@ public class MiniBoss extends Boss
             }
             addNormalAttackCounter();
             addAttackTimer();
-            if(attackTimer==120){
+            if(attackTimer==180){
                 attack1 = false;
                 attackTimer = 0;
             }
@@ -57,8 +65,21 @@ public class MiniBoss extends Boss
             if(summonEnd){
                 attack1 = true;
                 meleeSpawned = false;
+                normalAttackCounter = -60;
+                attackTimer=-60;
                 summonEnd = false;
             }
+        }
+    }
+    
+    public void damage(int damage) {
+        this.lifeCount = lifeCount - damage;
+        if(lifeCount < 0) {
+            this.getWorld().addObject(new Bow(), this.getX(), this.getY());
+            this.getWorld().addObject(new Armor.Dark(), this.getX()+20, this.getY());
+            this.getWorld().addObject(new MeleeDamage(4,3, "boss/boss2.5.png"),this.getX(),this.getY()-100);
+            this.getWorld().removeObject(this);
+            level.monstercount--;
         }
     }
     
@@ -76,11 +97,11 @@ public class MiniBoss extends Boss
                 for(int i=0;i<3;i++){
                     MeleeDamage b = new MeleeDamage(4,3, "boss/boss2.5.png");
                     if(i==0){
-                        this.getWorld().addObject(b, this.getX()-100, this.getY());    
+                        this.getWorld().addObject(b, this.getX()-120, this.getY());    
                     }else if (i==1){
-                        this.getWorld().addObject(b, this.getX()+100, this.getY());
+                        this.getWorld().addObject(b, this.getX()+120, this.getY());
                     }else{
-                        this.getWorld().addObject(b, this.getX(), this.getY()-100);
+                        this.getWorld().addObject(b, this.getX(), this.getY()-120);
                     }
                 }
                 meleeSpawned = true;
