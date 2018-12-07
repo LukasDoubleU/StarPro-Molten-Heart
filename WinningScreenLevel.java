@@ -8,7 +8,7 @@ public class WinningScreenLevel extends Level {
     public WinningScreenLevel() {
         super("WinScreen.png");
 
-        Scoring.saveScore();
+        ScoringHandler.saveScore();
 
         addObject(new Button("Restart") {
 

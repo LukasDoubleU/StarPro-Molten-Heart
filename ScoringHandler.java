@@ -18,15 +18,19 @@ import greenfoot.GreenfootImage;
  * <p>
  * Diese Klasse handhabt das Scoring.
  * </p>
+ *
+ * TODO - Es sollen immer alle Scores gespeichert werden - Auf der normalen
+ * Score-Seite werden nur die Top X (10) angezeigt - Im GameOverScreen wird der
+ * erzielte Score in Einordnung gezeigt
  */
-public class Scoring {
+public class ScoringHandler {
 
     static final int PLAYER_NAME_MAX_LENGTH = 12;
 
     public static class Table extends Actor {
 
         public Table() {
-            setImage(new GreenfootImage(Scoring.generateTable(), 36, Color.WHITE, Color.BLACK));
+            setImage(new GreenfootImage(ScoringHandler.generateTable(), 36, Color.WHITE, Color.BLACK));
         }
     }
 
