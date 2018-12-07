@@ -35,7 +35,7 @@ public abstract class Level extends World {
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9},
+            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
             { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
                     99, 99, 99, 99, 99, 99 },
             { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
@@ -113,15 +113,11 @@ public abstract class Level extends World {
             object = new MeleeDamage();
         } else if (obj == 6) {
             object = new RangedDamage();
-            // Verlangsamungsgegner
         } else if ((int) obj == 7) {
             object = new RangedSlow(obj);
-        } /**
-           * else if (obj == 8) { object = new RangedExplosion(); }
-           *
-           * /** else if (obj == 8) { object = new RangedExplosion(); }
-           **/
-        else if (obj == 9) {
+        } else if (obj == 8){ 
+            object = new RangedExplosion(); 
+        } else if (obj == 9) {
             object = new Border();
         } else if (obj == 10) {
             object = Player.get();
@@ -147,8 +143,9 @@ public abstract class Level extends World {
             object = new Potion.Immortality();
         } else if (obj == 22) {
             object = new Potion.Speed();
-            // Lavaboden
-        } else if ((int) obj == 23) {
+            
+        } // Lavaboden
+        else if ((int) obj == 23) {
         
             /*
              * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
