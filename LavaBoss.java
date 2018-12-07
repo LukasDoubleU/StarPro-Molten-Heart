@@ -306,7 +306,7 @@ public class LavaBoss extends Boss
      * normale Attacke
      */
     public void spawnBullet() {
-        BulletDamage b = new BulletDamage(6, damage, target, "boss/lava_projectile.png");
+        BulletDamage b = new BulletDamage(2, damage, target, "boss/lava_projectile.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
         normalAttackCounter = 0;
     }
