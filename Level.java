@@ -171,7 +171,7 @@ public abstract class Level extends World {
         }else if(obj == 24){
             object = new LavaBoss();
             // Molten Heart
-        } /*else if (obj == 24) {
+        } /*else if (obj == 25) {
             object = new MiniBoss(); 
         } */else if (obj == 95) {
             object = new MoltenHeart();

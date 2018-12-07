@@ -1,6 +1,6 @@
 import greenfoot.Greenfoot;
 
-public class minibosslevel extends Level {
+public class MiniBossLevel extends Level {
 
     private double[][] world = {
             /**
@@ -34,7 +34,7 @@ public class minibosslevel extends Level {
      * Constructor for objects of class Level3.
      *
      */
-    public minibosslevel() {
+    public MiniBossLevel() {
         super("background_final.png");
         generateWorld(world);
     }
