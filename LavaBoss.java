@@ -44,7 +44,7 @@ public class LavaBoss extends Boss
     private final static int shootAtRotation[]= {45,135,225,315};
     private Player target = null;
     private int fireTimer = 0;
-    private Level level = null;
+    //private Level level = null;
 
 
     /**
@@ -183,7 +183,7 @@ public class LavaBoss extends Boss
         if(lifeCount < 0) {
             this.getWorld().addObject(new MoltenHeart(), this.getX(), this.getY());
             this.getWorld().removeObject(this);
-           
+            level.monstercount--;
         }
     }
     
@@ -306,7 +306,7 @@ public class LavaBoss extends Boss
      * normale Attacke
      */
     public void spawnBullet() {
-        BulletDamage b = new BulletDamage(2, damage, target, "boss/lava_projectile.png");
+        BulletDamage b = new BulletDamage(6, damage, target, "boss/lava_projectile.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
         normalAttackCounter = 0;
     }

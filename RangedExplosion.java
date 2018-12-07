@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.*;
 
 /**
  * Write a description of class RangedExplosion here.
@@ -12,35 +13,61 @@ public class RangedExplosion extends Ranged
      * Act - do whatever the RangedExplosion wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    int rotation;
     
     public RangedExplosion(int newMov_speed, int newLifeCount, String imgPath) {
         super(newMov_speed, newLifeCount, imgPath);
         damage = 3;
+        rotation = 0;
         stalkRange = 150;
+        this.getImage().scale(110,110);
         viewDistance = 200;
     }
     
     public RangedExplosion(int newMov_Speed) {
-        this(newMov_Speed, 3, "teddybear.png");
+        this(newMov_Speed, 3, "cannon.png");
     }
     
     public RangedExplosion() {
-        this(2, 3, "teddybear.png");
+        this(2, 3, "cannon.png");
+    }
+    
+    public void addedToWorld(World world) {
+        this.getImage().rotate(90);
+        rotation = randomizeRotation();
     }
     
     public void act() 
     {
-        if(counter == 100) {
-            spawnBullet();
+        if(counter > 100) {
+            if(counter == 115) {
+                spawnBullet();
+                rotation = randomizeRotation();
+            }
+            if(counter == 125) {
+                counter = 0;
+            }
             
+        }else {
+            this.turn(rotation);
         }
         counter++;
     }
     
     public void spawnBullet() {
-        BulletExplosion b = new BulletExplosion(6, damage, "bomb_proj.png");
+        BulletExplosion b = new BulletExplosion(6, damage, this.getRotation(), "bomb_proj.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
-        counter = 0;
+    }
+    
+    public int randomizeRotation() {
+        Random rand = new Random();
+        int vorzeichen = rand.nextInt(100)+1;
+        if(vorzeichen >= 50) {
+            return (rand.nextInt(5)+1);
+        }else {
+            return ((rand.nextInt(5)+1)*-1);
+        }
+        
     }
 
 }
