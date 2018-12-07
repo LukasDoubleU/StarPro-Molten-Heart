@@ -354,7 +354,7 @@ public class LavaBoss extends Boss
 
     /**
      * Funktion randomNumber
-     * gibt einen wert zwischen 0-1 + x zurück
+     * gibt einen wert zwischen 0-1 + x zurueck
      */
     public int randomNumber(int x){
         Random rand = new Random();

@@ -3,10 +3,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -26,7 +26,7 @@ public class Scoring {
     public static class Table extends Actor {
 
         public Table() {
-            setImage(new GreenfootImage(Scoring.generateTable(), 20, Color.WHITE, Color.BLACK));
+            setImage(new GreenfootImage(Scoring.generateTable(), 36, Color.WHITE, Color.BLACK));
         }
     }
 
@@ -61,17 +61,6 @@ public class Scoring {
         @Override
         public int compareTo(Score o) {
             return Integer.valueOf(o.getValue()).compareTo(Integer.valueOf(getValue()));
-        }
-
-        /**
-         * Schreibt den Score in die Datei
-         */
-        public void write() {
-            try {
-                Files.write(getPath(), this.toString().getBytes(), StandardOpenOption.APPEND);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         @Override
@@ -112,8 +101,27 @@ public class Scoring {
             // null = Abbruch
             return;
         }
-        int score = calcScoreForCurrentGame();
-        new Score(name, score).write();
+        int points = calcScoreForCurrentGame();
+        final List<Score> previousScores = new CopyOnWriteArrayList<Score>(read());
+        Score score = new Score(name, points);
+        previousScores.add(score);
+        // Sortiere, sodass die besten Scores ganz oben stehen
+        Collections.sort(previousScores);
+        // Behalte nur die 10 besten Scores
+        for (int i = 9; i < previousScores.size(); i++) {
+            previousScores.remove(i);
+        }
+
+        // Schreibe alle Scores in die Datei
+        StringBuilder sb = new StringBuilder();
+        for (Score s : previousScores) {
+            sb.append(s.toString() + "\n");
+        }
+        try {
+            Files.write(getPath(), sb.toString().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static String askForPlayerName() {

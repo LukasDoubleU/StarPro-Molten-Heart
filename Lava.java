@@ -14,9 +14,12 @@ public class Lava extends InteractiveObjects
 
     public boolean status; 
 
-    private int cooldownTimer; 
+    private int cooldownTimer = 0; 
 
     public Lava(double pos){
+        if(pos == 23.01 || pos == 23.21 || pos == 23.61 || pos == 23.81){
+            pos = 23.4; 
+        }
         this.ground = "Interactive World Objects/lavarock_ground_" + pos + ".png";
         this.lava_ground = "Interactive World Objects/lava_ground_" + pos + ".png";
         setImage(ground);
