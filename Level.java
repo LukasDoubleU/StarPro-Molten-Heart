@@ -80,7 +80,7 @@ public abstract class Level extends World {
      * der Welt
      */
     public static void runGameOverWorld() {
-        Greenfoot.setWorld(new GameOver());
+        Greenfoot.setWorld(new GameOverLevel());
     }
 
     public void generateWorld(double[][] nWorld) {

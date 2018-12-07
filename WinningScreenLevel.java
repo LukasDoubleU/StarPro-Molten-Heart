@@ -1,10 +1,14 @@
+/**
+ * <p>
+ * Das Level für Gewinner
+ * </p>
+ */
 public class WinningScreenLevel extends Level {
 
     public WinningScreenLevel() {
         super("WinScreen.png");
-        Scoring.saveScore();
 
-        addObject(new Scoring.Table(), 640, 400);
+        Scoring.saveScore();
 
         addObject(new Button("Restart") {
 

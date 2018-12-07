@@ -66,7 +66,7 @@ public class TimerDisplay extends Actor {
     }
 
     private void timesUp() {
-        GameOver.runGameOverWorld();
+        GameOverLevel.runGameOverWorld();
         stop();
         reset();
     }
