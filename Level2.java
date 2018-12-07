@@ -42,7 +42,7 @@ public class Level2 extends Level {
 
     public void finish() {
         if (monstercount == 0) {
-            Greenfoot.setWorld(new EndBossLevel());
+            Greenfoot.setWorld(new MiniBossLevel());
         }
     }
 }
