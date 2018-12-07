@@ -25,7 +25,7 @@ public class BulletExplosion extends Projectiles
         damage = newDamage;
         target = null;
         counter2 = 0;
-        bombScale = 2;
+        bombScale = 3;
         oldCounter = 0;
         bombRange = randomNumber(5, 20);
         turnRate = randomNumber(0, 360);

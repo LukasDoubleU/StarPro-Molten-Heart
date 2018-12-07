@@ -80,7 +80,7 @@ public abstract class Level extends World {
      * der Welt
      */
     public static void runGameOverWorld() {
-        Greenfoot.setWorld(new GameOver());
+        Greenfoot.setWorld(new GameOverLevel());
     }
 
     public void generateWorld(double[][] nWorld) {
@@ -148,6 +148,7 @@ public abstract class Level extends World {
             object = new Potion.Speed();
             // Lavaboden
         } else if ((int) obj == 23) {
+        
             /*
              * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
              * Quadrat ausgegangen 23.0, 23.1, 23.2, 23.3, 23,4, 23.5, = Lavaboden mit der
@@ -170,7 +171,9 @@ public abstract class Level extends World {
         }else if(obj == 24){
             object = new LavaBoss();
             // Molten Heart
-        } else if (obj == 95) {
+        } /*else if (obj == 24) {
+            object = new MiniBoss(); 
+        } */else if (obj == 95) {
             object = new MoltenHeart();
         } 
         if (object != null) {
