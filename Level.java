@@ -147,7 +147,10 @@ public abstract class Level extends World {
         } else if (obj == 22) {
             object = new Potion.Speed();
             // Lavaboden
-        } else if ((int) obj == 23) {
+        } else if (obj == 23) {
+            object = new MiniBoss();
+        }    else if ((int) obj == 23) {
+        
             /*
              * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
              * Quadrat ausgegangen 23.0, 23.1, 23.2, 23.3, 23,4, 23.5, = Lavaboden mit der
