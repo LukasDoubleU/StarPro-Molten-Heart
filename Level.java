@@ -147,9 +147,7 @@ public abstract class Level extends World {
         } else if (obj == 22) {
             object = new Potion.Speed();
             // Lavaboden
-        } else if (obj == 23) {
-            object = new MiniBoss();
-        }    else if ((int) obj == 23) {
+        } else if ((int) obj == 23) {
         
             /*
              * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
@@ -170,6 +168,8 @@ public abstract class Level extends World {
                 lavarray.add(lava);
             }
             // Molten Heart
+        } else if (obj == 24) {
+            object = new MiniBoss();
         } else if (obj == 95) {
             object = new MoltenHeart();
         }
