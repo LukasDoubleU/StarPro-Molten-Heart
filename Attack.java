@@ -70,7 +70,7 @@ public abstract class Attack extends Actor {
 
         @Override
         public GreenfootImage getUsageImage() {
-            return new GreenfootImage("sword_swipe/swipe005.png");
+            return new GreenfootImage("sword_swipe/swipe.png");
         }
 
         @Override
