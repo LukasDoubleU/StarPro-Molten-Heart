@@ -41,6 +41,6 @@ public class MiniBossLevel extends Level {
 
     @Override
     public void finish() {
-        Greenfoot.setWorld(new Level3());
+        Greenfoot.setWorld(new Level4());
     }
 }
