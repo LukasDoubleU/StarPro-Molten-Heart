@@ -15,7 +15,7 @@ public class MainMenuLevel extends Level {
 
             @Override
             public void onClick() {
-                Greenfoot.setWorld(new ScoringLevel());
+                Greenfoot.setWorld(new ScoringLevel(MainMenuLevel.this));
             }
         }, 640, 570);
     }

@@ -1,6 +1,11 @@
-public class GameOver extends Level {
+/**
+ * <p>
+ * Das Level für Verlierer.
+ * </p>
+ */
+public class GameOverLevel extends Level {
 
-    public GameOver() {
+    public GameOverLevel() {
         super("gameover.png");
         addObject(new Button("Restart Game") {
 
