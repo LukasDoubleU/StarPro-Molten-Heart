@@ -1,5 +1,5 @@
 import greenfoot.*;
-public class Level4 extends Level {
+public class Level3 extends Level {
     
     private double[][] world = {
             /**
@@ -34,7 +34,7 @@ public class Level4 extends Level {
      * Constructor for objects of class Level3.
      * 
      */
-    public Level4()
+    public Level3()
     {
         super("background_final.png");
         generateWorld(world);
