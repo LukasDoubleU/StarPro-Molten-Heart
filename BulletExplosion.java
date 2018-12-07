@@ -20,7 +20,7 @@ public class BulletExplosion extends Projectiles
     int turnRate;
     boolean exploded;
     
-    public BulletExplosion(int newMov_Speed, int newDamage, String imgPath) {
+    public BulletExplosion(int newMov_Speed, int newDamage, int newRotation, String imgPath) {
         super(newMov_Speed, 1, imgPath);
         damage = newDamage;
         target = null;
@@ -28,16 +28,19 @@ public class BulletExplosion extends Projectiles
         bombScale = 3;
         oldCounter = 0;
         bombRange = randomNumber(5, 20);
-        turnRate = randomNumber(0, 360);
+        turnRate = newRotation;
         exploded = false;
         if(imgPath.equals("bomb_proj.png")) {
-            getImage().scale(50,50);
+            getImage().scale(35,35);
         }
     }
     
     public void act() 
     {
         if(!exploded) {
+            if(counter == 8) {
+                this.getImage().setTransparency(255);
+            }
             if(counter > bombRange && moveSpeed != 0) {
                 counter2++;
                 if(counter2 == 5) {
@@ -50,7 +53,7 @@ public class BulletExplosion extends Projectiles
             }
             if(counter == oldCounter + 10) {
                 oldCounter = counter;
-                this.getImage().scale(50 + bombScale, 50 + bombScale);
+                this.getImage().scale(30 + bombScale, 30 + bombScale);
                 bombScale = bombScale * -1;
             }
             if(counter > 200) {
@@ -62,9 +65,9 @@ public class BulletExplosion extends Projectiles
     }    
     
     public void addedToWorld(World world) {
-        this.turn(turnRate);
+        this.setRotation(turnRate);
         this.getImage().rotate(-this.getRotation());
-        level = (Level) world;
+        this.getImage().setTransparency(0);
     }
     
     public void explode() {
@@ -92,7 +95,6 @@ public class BulletExplosion extends Projectiles
             }
             
             this.getWorld().removeObject(this);
-            level.monstercount--;
         }
         
         
@@ -106,7 +108,6 @@ public class BulletExplosion extends Projectiles
         for(Object a : intersectingObjects)  {          
           
             if((a instanceof Obstacle) && !(a instanceof Enemy)) {
-                level.monstercount--;
                 return true;
             }
         }
