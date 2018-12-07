@@ -168,9 +168,9 @@ public abstract class Level extends World {
                 lavarray.add(lava);
             }
             // Molten Heart
-        } else if (obj == 24) {
-            object = new MiniBoss();
-        } else if (obj == 95) {
+        } /*else if (obj == 24) {
+            object = new MiniBoss(); 
+        } */else if (obj == 95) {
             object = new MoltenHeart();
         }
         if (object != null) {
