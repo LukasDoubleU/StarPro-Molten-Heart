@@ -75,8 +75,8 @@ public class MiniBoss extends Boss
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
         if(lifeCount < 0) {
-            this.getWorld().addObject(new Bow(), this.getX(), this.getY());
-            this.getWorld().addObject(new Armor.Dark(), this.getX()+20, this.getY());
+            this.getWorld().addObject(new Bow(), 115, 290);
+            this.getWorld().addObject(new Armor.Dark(), 115, 356);
             this.getWorld().addObject(new MeleeDamage(4,3, "boss/boss2.5.png"),this.getX(),this.getY()-100);
             this.getWorld().removeObject(this);
             level.monstercount--;
