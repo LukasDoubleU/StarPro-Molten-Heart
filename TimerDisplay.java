@@ -9,7 +9,7 @@ import greenfoot.World;
 public class TimerDisplay extends Actor {
 
     public static TimerDisplay get() {
-	return instance;
+        return instance;
     }
 
     static Calendar timeLeft = Calendar.getInstance();
@@ -19,89 +19,90 @@ public class TimerDisplay extends Actor {
     boolean running = false;
 
     private TimerDisplay() {
-	reset();
+        setImage("transparent.png");
+        reset();
     }
 
     @Override
     public void act() {
 
-	// Blende den Timer nicht ein, wenn der Spieler sich nicht in der Welt befindet
-	World world = Player.get().getWorld();
-	if (world == null || world != getWorld()) {
-	    // Wenn der Spieler nicht in der Welt oder in einer anderen Welt
-	    // als der aktuellen ist
-	    setImage("transparent.png");
-	    return;
-	}
+        // Blende den Timer nicht ein, wenn der Spieler sich nicht in der Welt befindet
+        World world = Player.get().getWorld();
+        if (world == null || world != getWorld()) {
+            // Wenn der Spieler nicht in der Welt oder in einer anderen Welt
+            // als der aktuellen ist
+            setImage("transparent.png");
+            return;
+        }
 
-	// Wenn der Timer das erste Mal "actet" fängt er an zu laufen
-	if (timer == null) {
-	    timer = new Timer("timer");
-	    running = true;
-	    timer.scheduleAtFixedRate(new TimerTask() {
+        // Wenn der Timer das erste Mal "actet" fängt er an zu laufen
+        if (timer == null) {
+            timer = new Timer("timer");
+            running = true;
+            timer.scheduleAtFixedRate(new TimerTask() {
 
-		@Override
-		public void run() {
-		    if (running) {
-			secondPassed();
-		    }
-		}
-	    }, 1000, 1000);
-	}
+                @Override
+                public void run() {
+                    if (running) {
+                        secondPassed();
+                    }
+                }
+            }, 1000, 1000);
+        }
     }
 
     private void refreshImage(int mins, int secs) {
 
-	Color c = new Color(1f, 0f, 0f, 0f);
-	String minString = String.format("%02d", mins);
-	String secString = String.format("%02d", secs);
+        Color c = new Color(1f, 0f, 0f, 0f);
+        String minString = String.format("%02d", mins);
+        String secString = String.format("%02d", secs);
 
-	// create the text image
-	String text = minString + ":" + secString;
-	setImage(GreenfootImageConstructor.getConstructedImg(20, text, c));
+        // create the text image
+        String text = minString + ":" + secString;
+        setImage(GreenfootImageConstructor.getConstructedImg(20, text, c));
     }
 
     private void secondPassed() {
-	// Ziehe jede Sekunde eine Sekunde vom Timer ab
-	timeLeft.add(Calendar.SECOND, -1);
+        // Ziehe jede Sekunde eine Sekunde vom Timer ab
+        timeLeft.add(Calendar.SECOND, -1);
 
-	int mins = getMinutesLeft();
-	int secs = getSecondsLeft();
+        int mins = getMinutesLeft();
+        int secs = getSecondsLeft();
 
-	if (mins == 0 && secs == 0) {
-	    timesUp();
-	}
+        if (mins == 0 && secs == 0) {
+            timesUp();
+        }
 
-	// Aktualisiere das Bild
-	refreshImage(mins, secs);
+        // Aktualisiere das Bild
+        refreshImage(mins, secs);
     }
 
     private void timesUp() {
-	GameOverLevel.runGameOverWorld();
-	stop();
-	reset();
+        GameOverLevel.runGameOverWorld();
+        stop();
+        reset();
     }
 
     public void reset() {
-	// Am Anfang steht des Timer auf 2 Minuten
-	timeLeft.set(Calendar.MINUTE, 2);
-	timeLeft.set(Calendar.SECOND, 0);
-	refreshImage(2, 0);
+        // Am Anfang steht des Timer auf 2 Minuten
+        timeLeft.set(Calendar.MINUTE, 2);
+        timeLeft.set(Calendar.SECOND, 0);
+        refreshImage(2, 0);
     }
 
     public void start() {
-	running = true;
+        running = true;
     }
 
     public void stop() {
-	running = false;
+        running = false;
     }
 
     public int getSecondsLeft() {
-	return timeLeft.get(Calendar.SECOND);
+        return timeLeft.get(Calendar.SECOND);
     }
 
     public int getMinutesLeft() {
-	return timeLeft.get(Calendar.MINUTE);
+        return timeLeft.get(Calendar.MINUTE);
     }
 }

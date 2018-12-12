@@ -7,8 +7,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class RangedSlow extends Ranged
-{
+public class RangedSlow extends Ranged {
     /**
      * Act - do whatever the RangedSlow wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -30,37 +29,35 @@ public class RangedSlow extends Ranged
         this(moveSpeed, 1, wallType, "spider.png");
     }
 
-
     public RangedSlow(double wallType) {
         this(1, 1, wallType, "spider.png");
     }
 
-    public RangedSlow(){
+    public RangedSlow() {
         this(1.3);
     }
-    
+
     public void addedToWorld(World world) {
         this.getWorld().addObject(new Wall(wallType), this.getX(), this.getY());
         level = (Level) world;
         level.monstercount++;
     }
-    
-    public void act()
-    {
-        if(target == null) {
+
+    public void act() {
+        if (target == null) {
             target = getTarget();
         }
 
-        if(target != null) {
-            //if(checkCollision(stalkRange)) {
-                followTarget();
-            //}
+        if (target != null) {
+            // if(checkCollision(stalkRange)) {
+            followTarget();
+            // }
 
-            if(counter > 100) {
+            if (counter > 100) {
                 spawnBullet();
             }
-        }else {
-            if(!checkCollision(stalkRange)) {
+        } else {
+            if (!checkCollision(stalkRange)) {
                 movePattern();
             }
         }
@@ -71,32 +68,30 @@ public class RangedSlow extends Ranged
     public void followTarget() {
         int oldX = this.getX();
         int oldY = this.getY();
-        if(this.getX() > target.getX()) {
+        if (this.getX() > target.getX()) {
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(-spiderWallRange, 0, Wall.class);
-            if(!wallList.isEmpty()) {
-                this.setLocation(this.getX()-moveSpeed+(moveSpeed/2), this.getY());
+            if (!wallList.isEmpty()) {
+                this.setLocation(this.getX() - moveSpeed + (moveSpeed / 2), this.getY());
             }
-        }
-        else if(this.getX() < target.getX()){
+        } else if (this.getX() < target.getX()) {
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(spiderWallRange, 0, Wall.class);
-            if(!wallList.isEmpty()) {
-                this.setLocation(this.getX()+moveSpeed-(moveSpeed/2), this.getY());
+            if (!wallList.isEmpty()) {
+                this.setLocation(this.getX() + moveSpeed - (moveSpeed / 2), this.getY());
             }
         }
-        if(this.getY() > target.getY()) {
+        if (this.getY() > target.getY()) {
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(0, -spiderWallRange, Wall.class);
-            if(!wallList.isEmpty()) {
-                this.setLocation(this.getX(), this.getY()-moveSpeed+(moveSpeed/2));
+            if (!wallList.isEmpty()) {
+                this.setLocation(this.getX(), this.getY() - moveSpeed + (moveSpeed / 2));
             }
-        }
-        else if(this.getY() < target.getY()){
+        } else if (this.getY() < target.getY()) {
             List wallList = new ArrayList();
             wallList = getObjectsAtOffset(0, spiderWallRange, Wall.class);
-            if(!wallList.isEmpty()) {
-                this.setLocation(this.getX(), this.getY()+moveSpeed-(moveSpeed/2));
+            if (!wallList.isEmpty()) {
+                this.setLocation(this.getX(), this.getY() + moveSpeed - (moveSpeed / 2));
             }
         }
         this.setRotation(0);
@@ -105,22 +100,22 @@ public class RangedSlow extends Ranged
     public void movePattern() {
         int oldX = this.getX();
         int oldY = this.getY();
-        if(counter==30){
+        if (counter == 30) {
             moveSpeed = -moveSpeed;
         }
-        if(counter==60){
+        if (counter == 60) {
             moveSpeed = -moveSpeed;
         }
-        if(counter==90){
+        if (counter == 90) {
             moveSpeed = -moveSpeed;
         }
-        if(counter==120){
+        if (counter == 120) {
             moveSpeed = -moveSpeed;
             counter = 0;
         }
-        this.setLocation(this.getX()+moveSpeed, this.getY()+moveSpeed);
-        if(checkCollision(stalkRange)) {
-                this.setLocation(oldX, oldY);
+        this.setLocation(this.getX() + moveSpeed, this.getY() + moveSpeed);
+        if (checkCollision(stalkRange)) {
+            this.setLocation(oldX, oldY);
         }
     }
 
@@ -129,6 +124,5 @@ public class RangedSlow extends Ranged
         this.getWorld().addObject(b, this.getX(), this.getY());
         counter = 0;
     }
-
 
 }

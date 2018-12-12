@@ -1,8 +1,7 @@
 
-
 public class Barrel extends Obstacle {
 
-    public Barrel(){
+    public Barrel() {
         setImage("barrel.png");
     }
 }

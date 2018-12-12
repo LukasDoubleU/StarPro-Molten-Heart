@@ -44,8 +44,6 @@ public abstract class Potion extends Item {
 
     public static class Immortality extends Potion {
 
-        // TODO Indikator für Unverwundbarkeit einblenden
-
         public Immortality() {
             super("potions/invincible.png");
         }

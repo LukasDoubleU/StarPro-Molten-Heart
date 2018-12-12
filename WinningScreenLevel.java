@@ -8,16 +8,16 @@
 public class WinningScreenLevel extends Menu {
 
     public WinningScreenLevel() {
-	super("WinScreen.png");
+        super("WinScreen.png");
 
-	ScoringHandler.saveScore();
+        ScoringHandler.saveScore();
 
-	addObject(new Button("Restart") {
+        addObject(new Button("Restart") {
 
-	    @Override
-	    public void onClick() {
-		Level.restartGame();
-	    }
-	}, 640, 600);
+            @Override
+            public void onClick() {
+                Level.restartGame();
+            }
+        }, 640, 600);
     }
 }
