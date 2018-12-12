@@ -1,4 +1,4 @@
-import greenfoot.*;
+import greenfoot.Greenfoot;
 
 public class Level4 extends Level {
 
@@ -35,7 +35,7 @@ public class Level4 extends Level {
 
     /**
      * Constructor for objects of class Level3.
-     * 
+     *
      */
     public Level4() {
         super("background_final.png");
@@ -44,7 +44,6 @@ public class Level4 extends Level {
 
     @Override
     public void finish() {
-        Greenfoot.setWorld(new GameOverLevel());
-        // Greenfoot.setWorld(new StartingGame());
+        Greenfoot.setWorld(new EndBossLevel());
     }
 }

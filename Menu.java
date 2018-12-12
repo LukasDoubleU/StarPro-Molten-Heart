@@ -18,6 +18,10 @@ public class Menu extends Level {
 
     public Menu(String image) {
         super(image);
+        // Bei jedem Wechsel in ein Menu kann der Timer pauschal angehalten werden
+        TimerDisplay timer = TimerDisplay.get();
+        timer.stop();
+        timer.reset();
     }
 
     protected void addBackToMainMenuButton() {
