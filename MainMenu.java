@@ -23,7 +23,7 @@ public class MainMenu extends Menu {
         }
 
         @Override
-        public void onClick() {
+        public void _onClick() {
             restartGame();
         }
 
@@ -40,7 +40,7 @@ public class MainMenu extends Menu {
         }
 
         @Override
-        public void onClick() {
+        public void _onClick() {
             Greenfoot.setWorld(new Menu.Scoring());
         }
 
@@ -58,7 +58,7 @@ public class MainMenu extends Menu {
         }
 
         @Override
-        public void onClick() {
+        public void _onClick() {
             Greenfoot.setWorld(new Menu.Controls());
         }
 

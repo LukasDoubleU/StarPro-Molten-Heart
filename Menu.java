@@ -2,9 +2,17 @@ import java.util.List;
 
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootSound;
 import greenfoot.MouseInfo;
 
 public class Menu extends Level {
+
+    static {
+        // Wird beim Start des Programms einmalig ausgeführt
+        // Spiele die Hintergrundmusik in Dauerschleife
+        GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
+        backgroundMusic.playLoop();
+    }
 
     protected Entry selectedEntry;
 
@@ -98,7 +106,7 @@ public class Menu extends Level {
         public Scoring() {
             super("highscore_background.png");
             addBackToMainMenuButton();
-            addObject(new ScoringHandler.TopTenTable(), 640, 300);
+            addObject(new ScoringHandler.TopTenTable(), 640, 400);
         }
     }
 

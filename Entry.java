@@ -54,7 +54,13 @@ public abstract class Entry extends Actor {
         }
     }
 
-    public abstract void onClick();
+    public final void onClick() {
+        // TODO delay zu groß, erste Sekunde abschneiden
+        Greenfoot.playSound("sounds/select_sound.wav");
+        _onClick();
+    }
+
+    protected abstract void _onClick();
 
     public abstract int getIndex();
 }

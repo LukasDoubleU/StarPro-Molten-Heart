@@ -18,103 +18,46 @@ import greenfoot.GreenfootImage;
  * <p>
  * Diese Klasse handhabt das Scoring.
  * </p>
- *
- * TODO - Es sollen immer alle Scores gespeichert werden - Auf der normalen
- * Score-Seite werden nur die Top X (10) angezeigt - Im GameOverScreen wird der
- * erzielte Score in Einordnung gezeigt
  */
 public class ScoringHandler {
-
-    static final int PLAYER_NAME_MAX_LENGTH = 12;
 
     public static class TopTenTable extends Actor {
 
         public TopTenTable() {
-            setImage(new GreenfootImage(ScoringHandler.generateTopTenTableString(), 36, Color.BLACK,
-                    new Color(0, 0, 0, 1)));
+            setImage(new GreenfootImage(ScoringHandler.generateTopTenTableString(), 36, Color.WHITE,
+                    new Color(0, 0, 0, 1), Color.BLACK));
         }
     }
 
-    /**
-     * <p>
-     * Repräsentiert einen einzelnen Score
-     * </p>
-     */
-    public static class Score implements Comparable<Score> {
-
-        String name;
-        int value;
-
-        public Score(String name, int value) {
-            super();
-            this.name = name;
-            this.value = value;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public String getValueFilledToMax() {
-            return fill(getValue() + "", 6, true);
-        }
-
-        @Override
-        public int compareTo(Score o) {
-            return Integer.valueOf(o.getValue()).compareTo(Integer.valueOf(getValue()));
-        }
-
-        @Override
-        public String toString() {
-            return getName() + SCORE_SEP_CHAR + getValue();
-        }
-
-        public String getNameFilledToMax() {
-            return fill(getName(), PLAYER_NAME_MAX_LENGTH, false);
-        }
-    }
-
+    public static List<Score> mostRecentLoadedScores = null;
+    public static final int PLAYER_NAME_MAX_LENGTH = 12;
+    public static final char SCORE_SEP_CHAR = ';';
     static final String FILE_PATH = System.getProperty("user.home") + File.separator + "MoltenHeartScoring.txt";
-    static final char SCORE_SEP_CHAR = ';';
-
     static File file;
 
-    private static String fill(String s, int length, boolean prepend) {
-        StringBuilder sb = new StringBuilder(s);
-        // Fülle den Namen auf die maximale Länge auf, mit Leerzeichen
-        while (sb.length() < length) {
-            if (prepend) {
-                sb.insert(0, " ");
-            } else {
-                sb.append(" ");
-            }
-        }
-        return sb.toString();
-    }
-
     /**
-     * Speichert die Datei
+     * Speichert die Datei inklusive des Scores fürs aktuelle Spiel
+     *
+     * @return Den Score aus diesem Spiel (oder null)
      */
-    public static void saveScore() {
+    public static Score saveScore() {
+
+        // Der Name des aktuellen Spielers
         String name = askForPlayerName();
         if (name == null) {
             // null = Abbruch
-            return;
+            return null;
         }
-        int points = calcScoreForCurrentGame();
+
+        // Die bisherigen Scores
         final List<Score> previousScores = new CopyOnWriteArrayList<Score>(read());
+
+        // Der Score fürs aktuelle Spiel
+        int points = calcScoreForCurrentGame();
         Score score = new Score(name, points);
+        mostRecentLoadedScores.add(score);
+        Collections.sort(mostRecentLoadedScores);
         previousScores.add(score);
-        // Sortiere, sodass die besten Scores ganz oben stehen
-        Collections.sort(previousScores);
-        // Behalte nur die 10 besten Scores
-        for (int i = 9; i < previousScores.size(); i++) {
-            previousScores.remove(i);
-        }
 
         // Schreibe alle Scores in die Datei
         StringBuilder sb = new StringBuilder();
@@ -126,14 +69,17 @@ public class ScoringHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return score;
     }
 
     private static String askForPlayerName() {
-        String ask = Greenfoot.ask("What's your name boi?");
+        String ask = Greenfoot.ask("Gib deinen Namen ein, du Held");
+        // Wenn nichts eingegeben wird, speichern wir den Score halt nicht
         if (ask == null || ask.isEmpty()) {
             return null;
         }
-        if (ask.matches("[a-zA-Z0-9]")) {
+        if (!ask.matches("[a-zA-Z0-9]+")) {
             JOptionPane.showMessageDialog(null, "Die Eingabe enthält ungültige Einzeichen!");
             return askForPlayerName();
         }
@@ -186,6 +132,11 @@ public class ScoringHandler {
             e.printStackTrace();
         }
 
+        // Sortiere, sodass die besten Scores ganz oben stehen
+        Collections.sort(scores);
+
+        mostRecentLoadedScores = scores;
+
         return scores;
     }
 
@@ -193,12 +144,16 @@ public class ScoringHandler {
         List<Score> read = read();
         Collections.sort(read);
         StringBuilder sb = new StringBuilder();
-        int i = 0;
-        for (Score score : read) {
-            sb.append(score.getNameFilledToMax() + " " + score.getValueFilledToMax() + "\n");
-            // Nur die 10 Besten
-            if (i++ > 9) {
-                break;
+        for (int i = 0; i < 10; i++) {
+            // gibt es für diesen index einen score?
+            if (read.size() > i) {
+                // Schreibe den Score
+                Score score = read.get(i);
+                sb.append(score.getNameFilledToMax() + " " + score.getValueFilledToMax() + "\n");
+            }
+            // Ansonsten füge eine Leerzeile ein
+            else {
+                sb.append(" - \n");
             }
         }
         return sb.toString();
