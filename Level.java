@@ -14,33 +14,32 @@ public abstract class Level extends World {
      */
 
     private double[][] world = {
-            /**
-             * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
-             * Lifebar und Timer da
-             *
-             * 32 Elemente von Links nach Rechts für 1280 Pixel
-             */
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            {13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 11},
-            {14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12},
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
-            { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
-                    99, 99, 99, 99, 99, 99 },
-            { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
-                    99, 99, 99, 99, 99, 99 }, 
-            };
+	    /**
+	     * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
+	     * Lifebar und Timer da
+	     *
+	     * 32 Elemente von Links nach Rechts für 1280 Pixel
+	     */
+	    { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 11 },
+	    { 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+	    { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+	    { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
+		    99, 99, 99, 99, 99, 99 },
+	    { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
+		    99, 99, 99, 99, 99, 99 }, };
 
     /**
      * Zählt die Anzahl Monster auf der Welt. Fällt diese auf 0 so wird ein
@@ -52,14 +51,14 @@ public abstract class Level extends World {
     public static List<Lava> lavarray = new ArrayList<Lava>();
 
     public Level(String image) {
-        super(1280, 720, 1);
-        setBackground(image);
-        // Zeige unten links die Leben des Spielers an
-        addObject(PlayerHealth.get(), 30, 680);
-        // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStats.get(), 1180, 672);
-        // Mittig: Spielzeit
-        addObject(TimerDisplay.get(), 640, 674);
+	super(1280, 720, 1);
+	setBackground(image);
+	// Zeige unten links die Leben des Spielers an
+	addObject(PlayerHealth.get(), 30, 680);
+	// Zeige unten rechts die Stats des Spielers an
+	addObject(PlayerStats.get(), 1180, 672);
+	// Mittig: Spielzeit
+	addObject(TimerDisplay.get(), 640, 674);
     }
 
     /**
@@ -71,9 +70,9 @@ public abstract class Level extends World {
      * Neustarten des Spiels beim ersten Level
      */
     public static void restartGame() {
-        Player.newInstance();
-        TimerDisplay.get().reset();
-        Greenfoot.setWorld(new Level1());
+	Player.newInstance();
+	TimerDisplay.get().reset();
+	Greenfoot.setWorld(new Level1());
     }
 
     /**
@@ -81,22 +80,22 @@ public abstract class Level extends World {
      * der Welt
      */
     public static void runGameOverWorld() {
-        Greenfoot.setWorld(new GameOverLevel());
+	Greenfoot.setWorld(new GameOverLevel());
     }
 
     public void generateWorld(double[][] nWorld) {
-        if (nWorld != null) {
-            this.world = nWorld;
-        }
-        if (world != null) {
-            for (int j = world.length - 1; j != -1; j--) {
-                for (int i = world[j].length - 1; i != -1; i--) {
-                    if (world[j][i] != 0) {
-                        generateObject(world[j][i], i * 40, j * 40);
-                    }
-                }
-            }
-        }
+	if (nWorld != null) {
+	    this.world = nWorld;
+	}
+	if (world != null) {
+	    for (int j = world.length - 1; j != -1; j--) {
+		for (int i = world[j].length - 1; i != -1; i--) {
+		    if (world[j][i] != 0) {
+			generateObject(world[j][i], i * 40, j * 40);
+		    }
+		}
+	    }
+	}
     }
 
     /**
@@ -104,80 +103,80 @@ public abstract class Level extends World {
      */
     public void generateObject(double obj, int x, int y) {
 
-        Actor object = null;
-        if ((int) obj == 1) {
-            object = new Wall(obj);
-        } else if (obj >= 2 && obj <= 4) {
-            object = new DestroyableObstacle(obj);
-        } else if (obj == 5) {
-            object = new MeleeDamage();
-        } else if (obj == 6) {
-            object = new RangedDamage();
-        } else if ((int) obj == 7) {
-            object = new RangedSlow(obj);
-        } else if (obj == 8){ 
-            object = new RangedExplosion(); 
-        } else if (obj == 9) {
-            object = new Border();
-        } else if (obj == 10) {
-            object = Player.get();
-        } else if (obj >= 11 && obj <= 14) {
-            boolean status = false;
-            if (obj >= 13) {
-                status = true;
-            }
-            object = new Door(obj, status);
-        } else if (obj == 15) {
-            object = new Armor.Bright();
-        } else if (obj == 16) {
-            object = new Armor.Dark();
-        } else if (obj == 17) {
-            object = new Sword.Big();
-        } else if (obj == 18) {
-            object = new Sword.Master();
-        } else if (obj == 19) {
-            object = new Potion.Damage();
-        } else if (obj == 20) {
-            object = new Potion.Health();
-        } else if (obj == 21) {
-            object = new Potion.Immortality();
-        } else if (obj == 22) {
-            object = new Potion.Speed();
-            
-        } // Lavaboden
-        else if ((int) obj == 23) {
-        
-            /*
-             * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
-             * Quadrat ausgegangen 23.0, 23.1, 23.2, 23.3, 23,4, 23.5, = Lavaboden mit der
-             * Größe 3x3 23.6, 23.7, 23.8
-             *
-             * 23.0, 23.2,= Lavaboden mit der Größe 2x2 23.6, 23.8
-             *
-             */
-            Lava lava = new Lava(obj);
-            object = lava;
-            /**
-             * Lavaboden mit Wert 0(links-obere-Ecke) stellt den Aufruf für die spätere Lava
-             * dar. Alle benachbarten LavaElemente entzünden sich dann einfach nur. Will man
-             * dass das entsprechende LavaElement häufiger Lava spawn
-             */
-            if (obj == 23.0) {
-                lavarray.add(lava);
-            }
-           //Bossgegner
-        }else if(obj == 24){
-            object = new LavaBoss();
-            // Molten Heart
-        } /*else if (obj == 25) {
-            object = new MiniBoss(); 
-        } */else if (obj == 95) {
-            object = new MoltenHeart();
-        } 
-        if (object != null) {
-            addObject(object, 10 + x, 10 + y);
-        }
-        setPaintOrder(Player.class, Enemy.class, Barrel.class, DestroyableObstacle.class, Obstacle.class);
+	Actor object = null;
+	if ((int) obj == 1) {
+	    object = new Wall(obj);
+	} else if (obj >= 2 && obj <= 4) {
+	    object = new DestroyableObstacle(obj);
+	} else if (obj == 5) {
+	    object = new MeleeDamage();
+	} else if (obj == 6) {
+	    object = new RangedDamage();
+	} else if ((int) obj == 7) {
+	    object = new RangedSlow(obj);
+	} else if (obj == 8) {
+	    object = new RangedExplosion();
+	} else if (obj == 9) {
+	    object = new Border();
+	} else if (obj == 10) {
+	    object = Player.get();
+	} else if (obj >= 11 && obj <= 14) {
+	    boolean status = false;
+	    if (obj >= 13) {
+		status = true;
+	    }
+	    object = new Door(obj, status);
+	} else if (obj == 15) {
+	    object = new Armor.Bright();
+	} else if (obj == 16) {
+	    object = new Armor.Dark();
+	} else if (obj == 17) {
+	    object = new Sword.Big();
+	} else if (obj == 18) {
+	    object = new Sword.Master();
+	} else if (obj == 19) {
+	    object = new Potion.Damage();
+	} else if (obj == 20) {
+	    object = new Potion.Health();
+	} else if (obj == 21) {
+	    object = new Potion.Immortality();
+	} else if (obj == 22) {
+	    object = new Potion.Speed();
+
+	} // Lavaboden
+	else if ((int) obj == 23) {
+
+	    /*
+	     * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
+	     * Quadrat ausgegangen 23.0, 23.1, 23.2, 23.3, 23,4, 23.5, = Lavaboden mit der
+	     * Größe 3x3 23.6, 23.7, 23.8
+	     *
+	     * 23.0, 23.2,= Lavaboden mit der Größe 2x2 23.6, 23.8
+	     *
+	     */
+	    Lava lava = new Lava(obj);
+	    object = lava;
+	    /**
+	     * Lavaboden mit Wert 0(links-obere-Ecke) stellt den Aufruf für die spätere Lava
+	     * dar. Alle benachbarten LavaElemente entzünden sich dann einfach nur. Will man
+	     * dass das entsprechende LavaElement häufiger Lava spawn
+	     */
+	    if (obj == 23.0) {
+		lavarray.add(lava);
+	    }
+	    // Bossgegner
+	} else if (obj == 24) {
+	    object = new LavaBoss();
+	    // Molten Heart
+	} /*
+	   * else if (obj == 25) { object = new MiniBoss(); }
+	   */else if (obj == 95) {
+	    object = new MoltenHeart();
+	}
+	if (object != null) {
+	    addObject(object, 10 + x, 10 + y);
+	}
+	setPaintOrder(Player.class, Enemy.class, Barrel.class, DestroyableObstacle.class, Obstacle.class);
     }
 
     /**
@@ -185,9 +184,9 @@ public abstract class Level extends World {
      * auszuwechseln
      */
     public static void triggerLava() {
-        if (lavarray.size() > 0) {
-            lavarray.get(new Random().nextInt(lavarray.size()));
-        }
+	if (lavarray.size() > 0) {
+	    lavarray.get(new Random().nextInt(lavarray.size()));
+	}
     }
 
     @Override

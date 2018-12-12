@@ -10,7 +10,9 @@ public class Menu extends Level {
 
     public Menu(String image) {
 	super(image);
+    }
 
+    protected void addBackToMainMenuButton() {
 	addObject(new Button("Main Menu") {
 
 	    @Override
@@ -87,6 +89,7 @@ public class Menu extends Level {
 
 	public Controls() {
 	    super("controls_background.png");
+	    addBackToMainMenuButton();
 	}
     }
 
@@ -94,8 +97,8 @@ public class Menu extends Level {
 
 	public Scoring() {
 	    super("highscore_background.png");
-
-	    addObject(new ScoringHandler.Table(), 640, 200);
+	    addBackToMainMenuButton();
+	    addObject(new ScoringHandler.TopTenTable(), 640, 300);
 	}
     }
 
