@@ -195,10 +195,18 @@ public class Player extends Actor {
             else if (item instanceof Weapon) {
                 equipWeapon((Weapon) item);
             }
+            // Ziehe Schuhe an
+            else if (item instanceof Boots) {
+                equipBoots((Boots) item);
+            }
 
             // Entferne das "aufgehobene" Objekt aus der Welt
             getWorld().removeObject(item);
         }
+    }
+
+    private void equipBoots(Boots item) {
+        equippedBoots = item;
     }
 
     private void equipWeapon(Weapon item) {
@@ -280,9 +288,7 @@ public class Player extends Actor {
     }
 
     /**
-     * returns player's current movement speed.
-     *
-     * @return
+     * @return player's current movement speed
      */
     public int getMoveSpeed() {
         // Es gilt: 0 < moveSpeed < 10
