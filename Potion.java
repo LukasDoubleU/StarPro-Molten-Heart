@@ -35,7 +35,7 @@ public abstract class Potion extends Item {
 
         @Override
         public void _drink(Player p) {
-            p.speedUp(1);
+            p.speedUp(5);
         }
     }
 
@@ -59,7 +59,7 @@ public abstract class Potion extends Item {
 
         @Override
         public void _drink(Player p) {
-            p.immortal(100);
+            p.immortal(120);
         }
 
         @Override
