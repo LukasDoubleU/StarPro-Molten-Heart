@@ -7,13 +7,6 @@ import greenfoot.MouseInfo;
 
 public class Menu extends Level {
 
-    static {
-        // Wird beim Start des Programms einmalig ausgeführt
-        // Spiele die Hintergrundmusik in Dauerschleife
-        GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
-        backgroundMusic.playLoop();
-    }
-
     protected Entry selectedEntry;
 
     public Menu(String image) {
@@ -22,6 +15,14 @@ public class Menu extends Level {
         TimerDisplay timer = TimerDisplay.get();
         timer.stop();
         timer.reset();
+    }
+
+    @Override
+    public void started() {
+        // Wird beim Start des Programms einmalig ausgeführt
+        // Spiele die Hintergrundmusik in Dauerschleife
+        GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
+        backgroundMusic.playLoop();
     }
 
     protected void addBackToMainMenuButton() {
