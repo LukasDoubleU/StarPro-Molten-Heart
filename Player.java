@@ -12,7 +12,7 @@ import greenfoot.GreenfootImage;
  * Instanz dieser Klasse. Auf diese kann über
  */
 public class Player extends Actor {
-    
+
     private static int speeduptimer = 0;
     private static Player INSTANCE = new Player();
 
@@ -85,16 +85,16 @@ public class Player extends Actor {
      * Aktualisiert Über-Zeit-Effekte
      */
     private void processDots() {
-        
+
         if (--processDotsCooldown <= 0) {
             if (moveSpeedSlowed > 0) {
                 moveSpeedSlowed--;
             }
             if (moveSpeedBonus > 0) {
                 speeduptimer++;
-                if(speeduptimer==100) {                    
-                 moveSpeedBonus = 0;
-                 speeduptimer=0;
+                if (speeduptimer == 100) {
+                    moveSpeedBonus = 0;
+                    speeduptimer = 0;
                 }
             }
             if (immortal > 0) {
@@ -369,7 +369,6 @@ public class Player extends Actor {
      */
     public void speedUp(int amount) {
         moveSpeedBonus += amount;
-        
     }
 
     /**
@@ -397,6 +396,6 @@ public class Player extends Actor {
      */
     public boolean isImmortal() {
         // Der Spieler gilt als unsterblich, solange immortal > 0 ist
-        return true;// immortal > 0;
+        return immortal > 0;
     }
 }

@@ -43,6 +43,10 @@ public abstract class Attack extends Actor {
     protected void checkHit() {
         @SuppressWarnings("unchecked")
         List<Enemy> intersectingEnemies = getIntersectingObjects(Enemy.class);
+        // Wenn min. 1 Gegner getroffen wird, spiele Sound
+        if (!intersectingEnemies.isEmpty()) {
+            SoundUtil.playSound("enemy_hit.wav");
+        }
         for (Enemy enemy : intersectingEnemies) {
             if (!alreadyHit.contains(enemy)) {
                 processHit(enemy);
