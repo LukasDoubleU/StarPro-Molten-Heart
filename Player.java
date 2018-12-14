@@ -123,11 +123,16 @@ public class Player extends Actor {
         }
         // Sinken die Leben auf 0 (oder weniger) ist das Spiel verloren
         if (lifeCount <= 0) {
-            SoundUtil.playSound("death_fall_sound.wav");
-            Level.runGameOverWorld();
+            die();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
         immortal(10);
+    }
+
+    private void die() {
+        SoundUtil.stopLoop("low_hp_sound.wav");
+        SoundUtil.playSound("death_fall_sound.wav");
+        Level.runGameOverWorld();
     }
 
     public boolean isLowHP() {
