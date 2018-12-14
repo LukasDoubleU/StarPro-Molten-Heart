@@ -19,7 +19,7 @@ public class RangedExplosion extends Ranged {
         damage = 3;
         rotation = 0;
         stalkRange = 150;
-        this.getImage().scale(110, 110);
+        this.getImage().scale(100, 100);
         viewDistance = 200;
     }
 
@@ -42,7 +42,7 @@ public class RangedExplosion extends Ranged {
                 spawnBullet();
                 rotation = randomizeRotation();
             }
-            if (counter == 125) {
+            if (counter > 125) {
                 counter = 0;
             }
 
@@ -61,9 +61,9 @@ public class RangedExplosion extends Ranged {
         Random rand = new Random();
         int vorzeichen = rand.nextInt(100) + 1;
         if (vorzeichen >= 50) {
-            return (rand.nextInt(5) + 1);
+            return (rand.nextInt(2) + 2);
         } else {
-            return ((rand.nextInt(5) + 1) * -1);
+            return ((rand.nextInt(2 ) + 2) * -1);
         }
 
     }

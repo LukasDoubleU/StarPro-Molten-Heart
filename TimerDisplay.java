@@ -15,8 +15,9 @@ public class TimerDisplay extends Actor {
     static Calendar timeLeft = Calendar.getInstance();
     static TimerDisplay instance = new TimerDisplay();
     static Timer timer;
-
+    static int time = 5;
     boolean running = false;
+    
 
     private TimerDisplay() {
         setImage("transparent.png");
@@ -84,10 +85,10 @@ public class TimerDisplay extends Actor {
     }
 
     public void reset() {
-        // Am Anfang steht des Timer auf 2 Minuten
-        timeLeft.set(Calendar.MINUTE, 2);
+        // Am Anfang steht des Timer auf 5 Minuten
+        timeLeft.set(Calendar.MINUTE, time);
         timeLeft.set(Calendar.SECOND, 0);
-        refreshImage(2, 0);
+        refreshImage(time, 0);
     }
 
     public void start() {

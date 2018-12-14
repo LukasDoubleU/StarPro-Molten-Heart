@@ -4,7 +4,16 @@ public abstract class Potion extends Item {
         super(image);
     }
 
-    public abstract void drink(Player p);
+    public void drink(Player p) {
+        SoundUtil.playSound(getSound());
+        _drink(p);
+    };
+
+    protected String getSound() {
+        return "drink_sound.wav";
+    }
+
+    protected abstract void _drink(Player p);
 
     public static class Health extends Potion {
 
@@ -13,7 +22,7 @@ public abstract class Potion extends Item {
         }
 
         @Override
-        public void drink(Player p) {
+        public void _drink(Player p) {
             p.heal(1);
         }
     }
@@ -25,8 +34,8 @@ public abstract class Potion extends Item {
         }
 
         @Override
-        public void drink(Player p) {
-            p.speedUp(1);
+        public void _drink(Player p) {
+            p.speedUp(4);
         }
     }
 
@@ -37,7 +46,7 @@ public abstract class Potion extends Item {
         }
 
         @Override
-        public void drink(Player p) {
+        public void _drink(Player p) {
             p.equippedWeapon.damage += 1;
         }
     }
@@ -49,8 +58,13 @@ public abstract class Potion extends Item {
         }
 
         @Override
-        public void drink(Player p) {
-            p.immortal(100);
+        public void _drink(Player p) {
+            p.immortal(120);
+        }
+
+        @Override
+        protected String getSound() {
+            return "immortality.wav";
         }
     }
 

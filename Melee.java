@@ -11,7 +11,8 @@ public abstract class Melee extends Enemy {
      * Act - do whatever the Melee wants to do. This method is called whenever the
      * 'Act' or 'Run' button gets pressed in the environment.
      */
-
+    boolean miniEnemy;
+    
     public Melee(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
     }

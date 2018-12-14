@@ -56,7 +56,7 @@ public abstract class Level extends World {
         // Zeige unten links die Leben des Spielers an
         addObject(PlayerHealth.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStats.get(), 1180, 672);
+        addObject(PlayerStats.get(), 1195, 672);
         // Mittig: Spielzeit
         addObject(TimerDisplay.get(), 640, 674);
     }
@@ -71,7 +71,9 @@ public abstract class Level extends World {
      */
     public static void restartGame() {
         Player.newInstance();
-        TimerDisplay.get().reset();
+        TimerDisplay timer = TimerDisplay.get();
+        timer.reset();
+        timer.start();
         Greenfoot.setWorld(new Level1());
     }
 
@@ -168,9 +170,10 @@ public abstract class Level extends World {
         } else if (obj == 24) {
             object = new LavaBoss();
             // Molten Heart
-        } 
-            else if (obj == 25) {
-                object = new MiniBoss(); 
+        } else if (obj == 25) {
+            object = new MiniBoss();
+        } else if (obj == 26) {
+            object = new Boots.Speed();
         } else if (obj == 95) {
             object = new MoltenHeart();
         }

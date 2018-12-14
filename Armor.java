@@ -6,9 +6,9 @@ public abstract class Armor extends Item {
     }
 
     /**
-     * @return Die Menge, um die die Rüstung den Schaden reduziert
+     * @return Zwischen 0-1, wird prozentual vom kassierten Schaden abgezogen
      */
-    public abstract int getDamageReduction();
+    public abstract float getDamageReduction();
 
     /**
      * @return Der Name des Ordners in dem sich die Bilder befinden
@@ -22,8 +22,8 @@ public abstract class Armor extends Item {
         }
 
         @Override
-        public int getDamageReduction() {
-            return 2;
+        public float getDamageReduction() {
+            return 0.5f;
         }
 
         @Override
@@ -40,8 +40,8 @@ public abstract class Armor extends Item {
         }
 
         @Override
-        public int getDamageReduction() {
-            return 1;
+        public float getDamageReduction() {
+            return 0.3f;
         }
 
         @Override
@@ -58,7 +58,7 @@ public abstract class Armor extends Item {
         }
 
         @Override
-        public int getDamageReduction() {
+        public float getDamageReduction() {
             return 0;
         }
 
@@ -67,6 +67,10 @@ public abstract class Armor extends Item {
             return "soldier_blank";
         }
 
+    }
+
+    public int getDamageReductionPercent() {
+        return (int) getDamageReduction() * 100;
     }
 
 }

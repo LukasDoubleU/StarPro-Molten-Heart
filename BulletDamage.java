@@ -19,7 +19,6 @@ public class BulletDamage extends Projectiles {
     int knockBackX;
     int knockBackY;
     Player target = null;
-    boolean turnNotDone;
     boolean isAlive;
     boolean knockBack = false;
 
@@ -31,7 +30,6 @@ public class BulletDamage extends Projectiles {
             getImage().scale(15, 15);
         }
         isAlive = true;
-        turnNotDone = true;
     }
 
     public BulletDamage(int newmoveSpeed, int newDamage, int newTurnDegree, Player newTarget, String imgPath) {

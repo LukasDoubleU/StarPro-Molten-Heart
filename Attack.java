@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import greenfoot.Actor;
 import greenfoot.GreenfootImage;
@@ -7,6 +9,7 @@ public abstract class Attack extends Actor {
 
     Weapon weapon;
     int duration = 5;
+    Set<Enemy> alreadyHit = new HashSet<Enemy>();
 
     public Attack(Weapon weapon) {
         this.weapon = weapon;
@@ -39,9 +42,15 @@ public abstract class Attack extends Actor {
 
     protected void checkHit() {
         @SuppressWarnings("unchecked")
-        List<Enemy> enemiesHit = getIntersectingObjects(Enemy.class);
-        for (Enemy enemy : enemiesHit) {
-            processHit(enemy);
+        List<Enemy> intersectingEnemies = getIntersectingObjects(Enemy.class);
+        // Wenn min. 1 Gegner getroffen wird, spiele Sound
+        if (!intersectingEnemies.isEmpty()) {
+            SoundUtil.playSound("enemy_hit.wav");
+        }
+        for (Enemy enemy : intersectingEnemies) {
+            if (!alreadyHit.contains(enemy)) {
+                processHit(enemy);
+            }
         }
     }
 
@@ -49,6 +58,7 @@ public abstract class Attack extends Actor {
         Hit hit = new Hit();
         Player.get().getWorld().addObject(hit, enemy.getX(), getY());
         enemy.damage(weapon.getDamage());
+        alreadyHit.add(enemy);
     }
 
     /**

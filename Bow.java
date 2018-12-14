@@ -18,6 +18,10 @@ public class Bow extends Weapon {
 
         boolean markedForRemoval = false;
         Direction direction;
+        /**
+         * Wie oft der Pfeil mit einem Objekt kollidieren darf, bevor er entfernt wird.
+         */
+        int objectHitCount = 3;
 
         public Arrow(Weapon weapon) {
             super(weapon);
@@ -65,7 +69,7 @@ public class Bow extends Weapon {
             if (isAtEdge()) {
                 markedForRemoval = true;
             }
-            // Überlappung mit einem Objekt
+            // Überlappung mit einem Objekt (Obstacles die keine Gegner sind)
             @SuppressWarnings("unchecked")
             List<Obstacle> obj = getIntersectingObjects(Obstacle.class);
             List<Obstacle> nonEnemies = new ArrayList<Obstacle>();
@@ -74,7 +78,7 @@ public class Bow extends Weapon {
                     nonEnemies.add(obstacle);
                 }
             }
-            if (!nonEnemies.isEmpty()) {
+            if (!nonEnemies.isEmpty() && --objectHitCount <= 0) {
                 markedForRemoval = true;
             }
         }
@@ -101,6 +105,11 @@ public class Bow extends Weapon {
             // Pfeile sollen nicht nach Zeit verschwinden
         }
 
+    }
+
+    @Override
+    protected String getAttackSound() {
+        return "bow_attack.wav";
     }
 
 }

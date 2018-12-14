@@ -35,6 +35,10 @@ public class BulletExplosion extends Projectiles {
     }
 
     public void act() {
+        if(turnNotDone) {
+            firstTurn();
+            turnNotDone = false;
+        }
         if (!exploded) {
             if (counter == 8) {
                 this.getImage().setTransparency(255);
@@ -54,7 +58,7 @@ public class BulletExplosion extends Projectiles {
                 this.getImage().scale(30 + bombScale, 30 + bombScale);
                 bombScale = bombScale * -1;
             }
-            if (counter > 200) {
+            if (counter > 80) {
                 explode();
                 counter2++;
             }
@@ -62,10 +66,12 @@ public class BulletExplosion extends Projectiles {
         counter++;
     }
 
-    public void addedToWorld(World world) {
+    public void firstTurn() {
         this.setRotation(turnRate);
         this.getImage().rotate(-this.getRotation());
         this.getImage().setTransparency(0);
+
+        turnNotDone = false;
     }
 
     public void explode() {
@@ -106,11 +112,6 @@ public class BulletExplosion extends Projectiles {
         }
 
         return false;
-    }
-
-    public int randomNumber(int minWert, int maxWert) {
-        Random rand = new Random();
-        return rand.nextInt(maxWert) + minWert;
     }
 
 }

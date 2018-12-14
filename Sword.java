@@ -6,6 +6,11 @@ public class Sword extends Weapon {
     }
 
     @Override
+    protected String getAttackSound() {
+        return "melee_attack.wav";
+    }
+
+    @Override
     public Attack getAttack() {
         return new Attack.Sword(this);
     }

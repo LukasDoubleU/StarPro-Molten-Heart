@@ -16,6 +16,7 @@ public class MiniBoss extends Boss {
      * @meleeSpawned : gibt an, ob die Melee
      * @param attack1   : dient zum steuern der zwei verschiedenen Attacken
      * @param summonEnd :
+     * @param enemyAlive : ueberprüft ob die 3 Gegner noch am leben sind
      */
     private int attackTimer;
     private int summonTimer;
@@ -24,9 +25,11 @@ public class MiniBoss extends Boss {
     private boolean meleeSpawned;
     private boolean attack1;
     private boolean summonEnd;
+    private boolean enemyAlive;
+    private int miniCounter;
 
     public MiniBoss() {
-        super(1, 10, "boss/boss2.1.png");
+        super(1, 9, "boss/boss2.1.png");
         summonTimer = 0;
         attackTimer = 0;
         normalAttackCounter = 30;
@@ -34,6 +37,7 @@ public class MiniBoss extends Boss {
         meleeSpawned = false;
         attack1 = true;
         summonEnd = false;
+        miniCounter = 0;
     }
 
     /**
@@ -71,8 +75,9 @@ public class MiniBoss extends Boss {
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
         if (lifeCount < 0) {
-            this.getWorld().addObject(new Bow(), 115, 290);
-            this.getWorld().addObject(new Armor.Dark(), 115, 356);
+            this.getWorld().addObject(new Bow(), 125, 196);
+            this.getWorld().addObject(new Armor.Dark(), 125, 341);
+            this.getWorld().addObject(new Sword.Master(), 125, 512);
             this.getWorld().addObject(new MeleeDamage(4, 3, "boss/boss2.5.png"), this.getX(), this.getY() - 100);
             this.getWorld().removeObject(this);
             level.monstercount--;
@@ -83,25 +88,31 @@ public class MiniBoss extends Boss {
      * Funktion summon() beschwoert 3 Gegner an bestimmten stellen
      */
     public void summon() {
-        this.setImage("boss/boss2.2.png");
+        if(miniCounter==0){   
+            this.setImage("boss/boss2.2.png");
+        }
         addAttackTimer();
         if (attackTimer >= 30) {
-            this.setImage("boss/boss2.3.png");
-            // spawn gegner
-            if (!meleeSpawned) {
-                for (int i = 0; i < 3; i++) {
-                    MeleeDamage b = new MeleeDamage(4, 3, "boss/boss2.5.png");
-                    if (i == 0) {
-                        this.getWorld().addObject(b, this.getX() - 120, this.getY());
-                    } else if (i == 1) {
-                        this.getWorld().addObject(b, this.getX() + 120, this.getY());
-                    } else {
-                        this.getWorld().addObject(b, this.getX(), this.getY() - 120);
+            if(miniCounter==0){
+                this.setImage("boss/boss2.3.png");
+                // spawn gegner
+                if (!meleeSpawned) {
+                    for (int i = 0; i < 3; i++) {
+                        MeleeDamage b = new MeleeDamage(3, 3, "boss/boss2.5.png",1);
+                        if (i == 0) {
+                            this.getWorld().addObject(b, this.getX() - 150, this.getY());
+                            miniCounter++;
+                        } else if (i == 1) {
+                            this.getWorld().addObject(b, this.getX() + 150, this.getY());
+                            miniCounter++;
+                        } else {
+                            this.getWorld().addObject(b, this.getX(), this.getY() - 150);
+                            miniCounter++;
+                        }
                     }
+                    meleeSpawned = true;
                 }
-                meleeSpawned = true;
             }
-
             if (attackTimer == 65) {
                 this.setImage("boss/boss2.1.png");
                 summonEnd = true;
@@ -157,4 +168,7 @@ public class MiniBoss extends Boss {
         normalAttackCounter++;
     }
 
+    public void setMiniCounter(){
+        miniCounter--;
+    }
 }
