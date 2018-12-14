@@ -16,14 +16,11 @@ public class PlayerStats extends Actor {
     private PlayerStats() {
         setImage("transparent.png");
         Player p = Player.get();
-        refreshImage(p.equippedArmor.getDamageReduction(), p.equippedWeapon.getDamage(), p.getMoveSpeed());
+        refreshImage(p.equippedArmor.getDamageReductionPercent(), p.equippedWeapon.getDamage(), p.getMoveSpeed());
     }
 
     @Override
     public void act() {
-        // TODO Initial werden die Stats manchmal nicht angezeigt (Level wechsel, Reset)
-        // LW: Nicht reproduzierbar?
-
         Player p = Player.get();
 
         World world = p.getWorld();
@@ -34,7 +31,7 @@ public class PlayerStats extends Actor {
             return;
         }
 
-        int newArmor = p.equippedArmor.getDamageReduction();
+        int newArmor = p.equippedArmor.getDamageReductionPercent();
         int newDamage = p.equippedWeapon.getDamage();
         int newSpeed = p.getMoveSpeed();
         // Hat sich einer der Werte geändert?
@@ -54,9 +51,9 @@ public class PlayerStats extends Actor {
 
     private void refreshImage(int armor, int damage, int speed) {
         Color c = new Color(1f, 0f, 0f, 0f);
-        String txt = "Armor " + armor //
+        String txt = "Armor " + armor + "%" //
                 + " | Damage " + damage //
                 + " | Speed " + speed;
-        setImage(GreenfootImageConstructor.getConstructedImg(14, txt, c));
+        setImage(GreenfootImageConstructor.getConstructedImg(13, txt, c));
     }
 }

@@ -109,14 +109,18 @@ public class Player extends Actor {
      * Fügt dem Spieler Schaden zu (zieht ihm Leben ab)
      */
     public void damage(int dmg) {
-        if (isImmortal()) {
+        if (isImmortal() || dmg < 1) {
             // Der Spieler nimmt keinen Schaden, solange er unsterblich ist
             return;
         }
         // Füge dem Spieler Schaden zu
-        lifeCount -= Math.max(0, dmg - equippedArmor.getDamageReduction());
+        lifeCount -= calculateReducedDamage(dmg);
         // Spiele Sound
         SoundUtil.playSound("damage_taken.wav");
+        // Wenn der Spieler jetzt LowHP ist, spiele den Sound in Loop
+        if (isLowHP()) {
+            SoundUtil.loop("low_hp_sound.wav");
+        }
         // Sinken die Leben auf 0 (oder weniger) ist das Spiel verloren
         if (lifeCount <= 0) {
             SoundUtil.playSound("death_fall_sound.wav");
@@ -124,6 +128,19 @@ public class Player extends Actor {
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
         immortal(10);
+    }
+
+    public boolean isLowHP() {
+        return getLifeCount() <= 2;
+    }
+
+    private long calculateReducedDamage(int dmg) {
+        // Die Rüstung wird prozentual vom zuzufügenden Schaden abgezogen
+        double reduced = dmg * equippedArmor.getDamageReduction();
+        // Runde kaufmännisch
+        long rounded = Math.round(reduced);
+        // Stelle sicher, dass mindestens 1 Schaden zugefügt wird
+        return Math.max(1l, rounded);
     }
 
     /**
@@ -341,6 +358,10 @@ public class Player extends Actor {
      */
     public void heal(int amount) {
         lifeCount += amount;
+        // Wenn der Spieler nach dem Heilen nicht mehr Low HP ist, beende die Sound Loop
+        if (!isLowHP()) {
+            SoundUtil.stopLoop("low_hp_sound.wav");
+        }
     }
 
     /**
@@ -376,6 +397,6 @@ public class Player extends Actor {
      */
     public boolean isImmortal() {
         // Der Spieler gilt als unsterblich, solange immortal > 0 ist
-        return immortal > 0;
+        return true;// immortal > 0;
     }
 }

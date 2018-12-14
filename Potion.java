@@ -5,9 +5,13 @@ public abstract class Potion extends Item {
     }
 
     public void drink(Player p) {
-        SoundUtil.playSound("drink_sound.wav");
+        SoundUtil.playSound(getSound());
         _drink(p);
     };
+
+    protected String getSound() {
+        return "drink_sound.wav";
+    }
 
     protected abstract void _drink(Player p);
 
@@ -56,6 +60,11 @@ public abstract class Potion extends Item {
         @Override
         public void _drink(Player p) {
             p.immortal(120);
+        }
+
+        @Override
+        protected String getSound() {
+            return "immortality.wav";
         }
     }
 
