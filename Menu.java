@@ -7,18 +7,21 @@ import greenfoot.MouseInfo;
 
 public class Menu extends Level {
 
-    static {
+    protected Entry selectedEntry;
+
+    public Menu(String image) {
+        super(image);
+    }
+
+    @Override
+    public void started() {
         // Wird beim Start des Programms einmalig ausgeführt
         // Spiele die Hintergrundmusik in Dauerschleife
         GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
         backgroundMusic.playLoop();
     }
 
-    protected Entry selectedEntry;
-
-    public Menu(String image) {
-        super(image);
-        // Bei jedem Wechsel in ein Menu kann der Timer pauschal angehalten werden
+    protected void resetTimer() {
         TimerDisplay timer = TimerDisplay.get();
         timer.stop();
         timer.reset();

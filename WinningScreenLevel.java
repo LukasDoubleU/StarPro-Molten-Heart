@@ -28,6 +28,8 @@ public class WinningScreenLevel extends Menu {
             int rank = scores.indexOf(score) + 1;
             addObject(new Text(format("Rang: %s", rank)), 640, 500);
         }
+
+        resetTimer();
     }
 
     private class Text extends Actor {
