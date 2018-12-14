@@ -57,7 +57,9 @@ public class MeleeDamage extends Melee {
         if (lifeCount < 0) {
             if(miniEnemy){
                 MiniBoss a = getBoss();
-                a.setMiniCounter();
+                if(a != null){
+                    a.setMiniCounter();
+                }
             }
             level.monstercount--;
             this.getWorld().removeObject(this);

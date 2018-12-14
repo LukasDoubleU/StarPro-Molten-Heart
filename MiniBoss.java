@@ -75,9 +75,9 @@ public class MiniBoss extends Boss {
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
         if (lifeCount < 0) {
-            this.getWorld().addObject(new Bow(), 115, 290);
-            this.getWorld().addObject(new Armor.Dark(), 115, 356);
-            this.getWorld().addObject(new Sword.Master(), 115, 400);
+            this.getWorld().addObject(new Bow(), 125, 196);
+            this.getWorld().addObject(new Armor.Dark(), 125, 341);
+            this.getWorld().addObject(new Sword.Master(), 125, 512);
             this.getWorld().addObject(new MeleeDamage(4, 3, "boss/boss2.5.png"), this.getX(), this.getY() - 100);
             this.getWorld().removeObject(this);
             level.monstercount--;
@@ -100,13 +100,13 @@ public class MiniBoss extends Boss {
                     for (int i = 0; i < 3; i++) {
                         MeleeDamage b = new MeleeDamage(3, 3, "boss/boss2.5.png",1);
                         if (i == 0) {
-                            this.getWorld().addObject(b, this.getX() - 120, this.getY());
+                            this.getWorld().addObject(b, this.getX() - 150, this.getY());
                             miniCounter++;
                         } else if (i == 1) {
-                            this.getWorld().addObject(b, this.getX() + 120, this.getY());
+                            this.getWorld().addObject(b, this.getX() + 150, this.getY());
                             miniCounter++;
                         } else {
-                            this.getWorld().addObject(b, this.getX(), this.getY() - 120);
+                            this.getWorld().addObject(b, this.getX(), this.getY() - 150);
                             miniCounter++;
                         }
                     }
