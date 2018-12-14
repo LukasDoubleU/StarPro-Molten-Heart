@@ -63,10 +63,14 @@ public abstract class Weapon extends Item {
             rotation = 270;
         }
 
+        Greenfoot.playSound(getAttackSound());
+
         Attack attack = getAttack();
         attack.setRotation(rotation);
         p.getWorld().addObject(attack, x, y);
     }
+
+    protected abstract String getAttackSound();
 
     private boolean checkCooldown() {
         // Cooldown abgelaufen?

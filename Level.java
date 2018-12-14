@@ -71,7 +71,9 @@ public abstract class Level extends World {
      */
     public static void restartGame() {
         Player.newInstance();
-        TimerDisplay.get().reset();
+        TimerDisplay timer = TimerDisplay.get();
+        timer.reset();
+        timer.start();
         Greenfoot.setWorld(new Level1());
     }
 
@@ -168,9 +170,8 @@ public abstract class Level extends World {
         } else if (obj == 24) {
             object = new LavaBoss();
             // Molten Heart
-        } 
-            else if (obj == 25) {
-                object = new MiniBoss(); 
+        } else if (obj == 25) {
+            object = new MiniBoss();
         } else if (obj == 95) {
             object = new MoltenHeart();
         }

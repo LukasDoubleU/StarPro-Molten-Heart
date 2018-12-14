@@ -11,6 +11,7 @@ public class GameOverLevel extends Menu {
     public GameOverLevel() {
         super("/game_over/game_over_part_1.png");
 
+        resetTimer();
     }
 
     @Override

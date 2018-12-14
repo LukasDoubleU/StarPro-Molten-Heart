@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
+import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 /**
@@ -109,6 +110,8 @@ public class Player extends Actor {
         }
         // Füge dem Spieler Schaden zu
         lifeCount -= Math.max(0, dmg - equippedArmor.getDamageReduction());
+        // Spiele Sound
+        Greenfoot.playSound("damage_taken.wav");
         // Sinken die Leben auf 0 (oder weniger) ist das Spiel verloren
         if (lifeCount <= 0) {
             Level.runGameOverWorld();
