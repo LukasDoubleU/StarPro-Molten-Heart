@@ -6,9 +6,18 @@ public class MeleeDamage extends Melee {
 
     public MeleeDamage(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
+        //AENDERN NOCH AUF 2
+        damage = 0;
+        stalkRange = 38;
+        viewDistance = 200;
+    }
+    
+    public MeleeDamage(int moveSpeed, int lifeCount, String imgPath, int miniCounte) {
+        this(moveSpeed, lifeCount, imgPath);
         damage = 2;
         stalkRange = 38;
         viewDistance = 200;
+        miniEnemy = true;
     }
 
     public MeleeDamage(int moveSpeed) {
@@ -41,6 +50,18 @@ public class MeleeDamage extends Melee {
             }
         }
 
+    }
+    
+    public void damage(int damage) {
+        this.lifeCount = lifeCount - damage;
+        if (lifeCount < 0) {
+            level.monstercount--;
+            this.getWorld().removeObject(this);
+            if(miniEnemy){
+                miniCounter--;
+            }
+
+        }
     }
 
     public void movePattern() {
