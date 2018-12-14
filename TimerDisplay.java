@@ -17,7 +17,6 @@ public class TimerDisplay extends Actor {
     static Timer timer;
     static int time = 5;
     boolean running = false;
-    
 
     private TimerDisplay() {
         setImage("transparent.png");
@@ -105,5 +104,9 @@ public class TimerDisplay extends Actor {
 
     public int getMinutesLeft() {
         return timeLeft.get(Calendar.MINUTE);
+    }
+
+    public int getMillisecondsLeft() {
+        return timeLeft.get(Calendar.MILLISECOND);
     }
 }
