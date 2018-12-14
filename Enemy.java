@@ -15,9 +15,6 @@ public abstract class Enemy extends Obstacle {
     int counter;
     int viewDistance;
     Level level = null;
-    //Fuer MiniBoss
-    int miniCounter;
-    boolean miniEnemy; 
 
     public Enemy(int moveSpeed, int lifeCount, String imgPath) {
         this.moveSpeed = moveSpeed;
