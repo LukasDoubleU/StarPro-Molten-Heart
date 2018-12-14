@@ -29,6 +29,11 @@ public class Menu extends Level {
 
     protected void addBackToMainMenuButton() {
         addObject(new Actor() {
+
+            {
+                setImage("return_button.png");
+            }
+
             @Override
             public void act() {
                 MouseInfo mouseInfo = Greenfoot.getMouseInfo();
