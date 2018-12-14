@@ -55,12 +55,12 @@ public class MeleeDamage extends Melee {
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
         if (lifeCount < 0) {
+            if(miniEnemy){
+                MiniBoss a = getBoss();
+                a.setMiniCounter();
+            }
             level.monstercount--;
             this.getWorld().removeObject(this);
-            if(miniEnemy){
-                miniCounter--;
-            }
-
         }
     }
 
@@ -92,6 +92,19 @@ public class MeleeDamage extends Melee {
             counter = 0;
         }
         counter++;
+    }
+    
+    public MiniBoss getBoss() {
+        List actorinrange = new ArrayList();
+        actorinrange = this.getObjectsInRange(4000, MiniBoss.class);
+
+        for (Object a : actorinrange) {
+            if (a instanceof MiniBoss) {
+                return (MiniBoss) a;
+            }
+
+        }
+        return null;
     }
 
 }

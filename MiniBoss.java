@@ -26,6 +26,7 @@ public class MiniBoss extends Boss {
     private boolean attack1;
     private boolean summonEnd;
     private boolean enemyAlive;
+    private int miniCounter;
 
     public MiniBoss() {
         super(1, 9, "boss/boss2.1.png");
@@ -36,6 +37,7 @@ public class MiniBoss extends Boss {
         meleeSpawned = false;
         attack1 = true;
         summonEnd = false;
+        miniCounter = 0;
     }
 
     /**
@@ -165,4 +167,7 @@ public class MiniBoss extends Boss {
         normalAttackCounter++;
     }
 
+    public void setMiniCounter(){
+        miniCounter--;
+    }
 }
