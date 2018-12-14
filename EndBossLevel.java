@@ -6,7 +6,7 @@ import greenfoot.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Level3 extends Level
+public class EndBossLevel extends Level
 {
 
     private double[][] world = {
@@ -40,7 +40,7 @@ public class Level3 extends Level
      * Constructor for objects of class Level3.
      * 
      */
-    public Level3()
+    public EndBossLevel()
     {
         super("background_final.png");
         generateWorld(world);

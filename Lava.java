@@ -1,32 +1,28 @@
-import greenfoot.*;
 import java.util.List;
 import java.util.ArrayList;  
+import greenfoot.GreenfootImage;
 
 /**
  * Write a description of class Lava here.
  * 
- * @author (your name) 
+ * @author (your name)
  * @version (a version number or a date)
  */
-public class Lava extends InteractiveObjects
-{
-    private String ground; 
-    private String lava_ground; 
+public class Lava extends InteractiveObjects {
+    private String ground;
+    private String lava_ground;
 
     private static final int COOLDOWN = 500; 
 
     public boolean status; 
     public double type; 
 
-    private int cooldownTimer = 0; 
+    private int cooldownTimer = 0;
 
     public ArrayList<Lava> neighbours = new ArrayList<Lava>(); 
 
     public Lava(double pos){
         this.type = pos; 
-        if(pos == 23.01 || pos == 23.21 || pos == 23.61 || pos == 23.81){
-            pos = 23.4; 
-        }
         this.ground = "Interactive World Objects/lavarock_ground_" + pos + ".png";
         this.lava_ground = "Interactive World Objects/lava_ground_" + pos + ".png";
         setImage(ground);
@@ -36,9 +32,9 @@ public class Lava extends InteractiveObjects
 
     public void act(){
         //Beim ersten Act-Durchlauf soll er sich alle seine Nachbarn suchen und speichern
-        if(this.neighbours.size() == 0){
+        /*if(this.neighbours.size() == 0){
             setAllNeighbours();
-        }
+        }*/
 
         if(status){
             dealDamageOnCollision();
@@ -50,9 +46,9 @@ public class Lava extends InteractiveObjects
             //durch benachbarte Lava direkt wieder aktiviert
             cooldownTimer--;
         }else{
-            if(neighbourIsHot()){
+            /*if(neighbourIsHot()){
                 transform();
-            }
+            }*/
         }
 
         if(cooldownTimer == 0 && status){
@@ -133,9 +129,8 @@ public class Lava extends InteractiveObjects
         cooldownTimer = coolDownTimer; 
     }
 
-    public void dealDamageOnCollision()
-    {
-        if(this.getOneObjectAtOffset(10, 10, Player.class) != null) {
+    public void dealDamageOnCollision() {
+        if (this.getOneObjectAtOffset(10, 10, Player.class) != null) {
             Player.get().damage(1);
         }
 
