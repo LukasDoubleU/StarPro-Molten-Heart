@@ -27,20 +27,19 @@ public abstract class Level extends World {
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            {13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 11},
-            {14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12},
+            { 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 11 },
+            { 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
             { 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
             { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
                     99, 99, 99, 99, 99, 99 },
             { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
-                    99, 99, 99, 99, 99, 99 }, 
-            };
+                    99, 99, 99, 99, 99, 99 }, };
 
     /**
      * Zählt die Anzahl Monster auf der Welt. Fällt diese auf 0 so wird ein
@@ -115,8 +114,8 @@ public abstract class Level extends World {
             object = new RangedDamage();
         } else if ((int) obj == 7) {
             object = new RangedSlow(obj);
-        } else if (obj == 8){ 
-            object = new RangedExplosion(); 
+        } else if (obj == 8) {
+            object = new RangedExplosion();
         } else if (obj == 9) {
             object = new Border();
         } else if (obj == 10) {
@@ -143,10 +142,10 @@ public abstract class Level extends World {
             object = new Potion.Immortality();
         } else if (obj == 22) {
             object = new Potion.Speed();
-            
+
         } // Lavaboden
         else if ((int) obj == 23) {
-        
+
             /*
              * Lavaboden kann beliebig vergrößert werden. dabei wird von einem 9-teiligen
              * Quadrat ausgegangen 23.0, 23.1, 23.2, 23.3, 23,4, 23.5, = Lavaboden mit der
@@ -165,15 +164,15 @@ public abstract class Level extends World {
             if (obj == 23.0) {
                 lavarray.add(lava);
             }
-           //Bossgegner
-        }else if(obj == 24){
+            // Bossgegner
+        } else if (obj == 24) {
             object = new LavaBoss();
             // Molten Heart
-        } /*else if (obj == 25) {
-            object = new MiniBoss(); 
-        } */else if (obj == 95) {
+        } /*
+           * else if (obj == 25) { object = new MiniBoss(); }
+           */else if (obj == 95) {
             object = new MoltenHeart();
-        } 
+        }
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }

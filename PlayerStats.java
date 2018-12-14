@@ -11,7 +11,6 @@ public class PlayerStats extends Actor {
         return instance;
     }
 
-    Actor armorDisplay, healthDisplay, damageDisplay;
     int previousArmor, previousSpeed, previousDamage;
 
     private PlayerStats() {
@@ -22,6 +21,9 @@ public class PlayerStats extends Actor {
 
     @Override
     public void act() {
+        // TODO Initial werden die Stats manchmal nicht angezeigt (Level wechsel, Reset)
+        // LW: Nicht reproduzierbar?
+
         Player p = Player.get();
 
         World world = p.getWorld();

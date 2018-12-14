@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import greenfoot.Actor;
+import greenfoot.World;
 
 public class TimerDisplay extends Actor {
 
@@ -15,15 +16,26 @@ public class TimerDisplay extends Actor {
     static TimerDisplay instance = new TimerDisplay();
     static Timer timer;
 
-    boolean running = true;
+    boolean running = false;
 
     private TimerDisplay() {
+        setImage("transparent.png");
         reset();
     }
 
     @Override
     public void act() {
-        // Wenn der Timer das erste Mal "actet" fange an zu zählen
+
+        // Blende den Timer nicht ein, wenn der Spieler sich nicht in der Welt befindet
+        World world = Player.get().getWorld();
+        if (world == null || world != getWorld()) {
+            // Wenn der Spieler nicht in der Welt oder in einer anderen Welt
+            // als der aktuellen ist
+            setImage("transparent.png");
+            return;
+        }
+
+        // Wenn der Timer das erste Mal "actet" fängt er an zu laufen
         if (timer == null) {
             timer = new Timer("timer");
             running = true;

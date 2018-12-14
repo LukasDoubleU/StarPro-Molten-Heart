@@ -7,7 +7,7 @@
 public class DestroyableObstacle extends Enemy {
 
     public DestroyableObstacle(double x) {
-        this(0,1,"");
+        this(0, 1, "");
         String imgPath = "";
         if (x == 2) {
             imgPath = "img_utilities/rock.png";
@@ -22,10 +22,11 @@ public class DestroyableObstacle extends Enemy {
     }
 
     public DestroyableObstacle(int moveSpeed, int lifeCount, String imgPath) {
-        //super(moveSpeed, lifeCount, imgPath);
+        // super(moveSpeed, lifeCount, imgPath);
         this();
     }
 
-    public DestroyableObstacle(){}
+    public DestroyableObstacle() {
+    }
 
 }

@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
-import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 public class PlayerHealth extends Actor {
@@ -15,8 +14,50 @@ public class PlayerHealth extends Actor {
 
     private class HealthImage extends Actor {
 
+        private final int defaultGlobalBlinkCooldown = 15;
+        private int globalBlinkCooldown = 0;
+
+        private boolean blinking;
+        private boolean transparent;
+
         private HealthImage() {
-            setImage(new GreenfootImage("heart.png"));
+            setImage("heart.png");
+        }
+
+        @Override
+        public void act() {
+
+            // Soll das Herz blinken?
+            if (blinking) {
+
+                // Ist der Cooldown abgelaufen? (Damit das Herz nicht zu schnell blinkt)
+                if (--globalBlinkCooldown <= 0) {
+                    globalBlinkCooldown = defaultGlobalBlinkCooldown;
+                } else {
+                    return;
+                }
+
+                // Tausche das Image transparent <> heart
+                if (transparent) {
+                    setImage("heart.png");
+                } else {
+                    setImage("transparent.png");
+                }
+            }
+            // Stelle sicher, dass das Herz Bild wiederhergestellt wird
+            else if (!blinking && transparent) {
+                setImage("heart.png");
+            }
+        }
+
+        public void setBlinking(boolean active) {
+            blinking = active;
+        }
+
+        @Override
+        public void setImage(String filename) throws IllegalArgumentException {
+            transparent = filename.equals("transparent.png");
+            super.setImage(filename);
         }
     }
 
@@ -32,12 +73,17 @@ public class PlayerHealth extends Actor {
     @Override
     public void act() {
         Player p = Player.get();
+
         int lifeCount = p.getLifeCount();
         World world = getWorld();
         if (lifeCount != previousLifeCount || world != previousWorld) {
             previousWorld = world;
             previousLifeCount = lifeCount;
             refreshHealth(lifeCount);
+        }
+
+        for (HealthImage img : currentHealthImages) {
+            img.setBlinking(p.isImmortal());
         }
     }
 
@@ -51,6 +97,7 @@ public class PlayerHealth extends Actor {
 
         // Entferne die bisherigen Bilder
         world.removeObjects(currentHealthImages);
+        currentHealthImages.clear();
 
         // Erzeuge ein neues Herz für jeden Lebenspunkt
         for (int i = 0; i < lifeCount; i++) {

@@ -114,7 +114,7 @@ public class Player extends Actor {
             Level.runGameOverWorld();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
-        immortal(15);
+        immortal(10);
     }
 
     /**
@@ -246,7 +246,7 @@ public class Player extends Actor {
                     Obstacle.class);
         }
         if (!getObjectsAtOffset(0, +(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall underneath
-                                                                                               // player?
+            // player?
             getWorld().setPaintOrder(RangedSlow.class, Enemy.class, DestroyableObstacle.class, Obstacle.class,
                     Player.class);
         }

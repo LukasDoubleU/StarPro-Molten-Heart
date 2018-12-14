@@ -6,18 +6,17 @@ import java.util.*;
 /**
  * Write a description of class Kamel here.
  * 
- * @author (your name) 
+ * @author (your name)
  * @version (a version number or a date)
  */
-public class RangedDamage extends Ranged
-{
+public class RangedDamage extends Ranged {
     /**
-     * Act - do whatever the Kamel wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Act - do whatever the Kamel wants to do. This method is called whenever the
+     * 'Act' or 'Run' button gets pressed in the environment.
      */
     int moveSpeedX;
     int moveSpeedY;
-    
+
     public RangedDamage(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
         this.moveSpeedY = moveSpeed;
@@ -26,63 +25,60 @@ public class RangedDamage extends Ranged
         stalkRange = 150;
         viewDistance = 200;
     }
-    
+
     public RangedDamage(int moveSpeed) {
         this(moveSpeed, 3, "eyeball.png");
     }
-        
-    
+
     public RangedDamage() {
         this(2, 3, "eyeball.png");
     }
-        
-    public void act() 
-    {
-        if(target == null) {
+
+    public void act() {
+        if (target == null) {
             target = getTarget();
         }
-        
-        if(target != null) {
-            if(!checkCollision(stalkRange)) {
+
+        if (target != null) {
+            if (!checkCollision(stalkRange)) {
                 followTarget();
             }
-            
-            if(counter >= 100) {
+
+            if (counter >= 100) {
                 spawnBullet();
             }
-        }
-        else {
-            if(!checkCollision(stalkRange)) {
+        } else {
+            if (!checkCollision(stalkRange)) {
                 movePattern();
             }
         }
-        
+
         counter++;
     }
-    
+
     public void movePattern() {
         int oldX = this.getX();
         int oldY = this.getY();
-        if(counter==30){
+        if (counter == 30) {
             moveSpeedX = -moveSpeedX;
         }
-        if(counter==60){
+        if (counter == 60) {
             moveSpeedY = -moveSpeedY;
         }
-        if(counter==90){
+        if (counter == 90) {
             moveSpeedX = -moveSpeedX;
         }
-        if(counter==120){
+        if (counter == 120) {
             moveSpeedY = -moveSpeedY;
             counter = 0;
         }
-        this.setLocation(this.getX()+moveSpeedX, this.getY()+moveSpeedY);
-        if(checkCollision(stalkRange)) {
-                this.setLocation(oldX, oldY);
+        this.setLocation(this.getX() + moveSpeedX, this.getY() + moveSpeedY);
+        if (checkCollision(stalkRange)) {
+            this.setLocation(oldX, oldY);
         }
 
     }
-    
+
     public void spawnBullet() {
         BulletDamage b = new BulletDamage(4, damage, target, "tear.png");
         this.getWorld().addObject(b, this.getX(), this.getY());

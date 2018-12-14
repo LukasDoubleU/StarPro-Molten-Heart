@@ -3,7 +3,7 @@ import java.util.TimerTask;
 
 import greenfoot.Greenfoot;
 
-public class GameOverLevel extends Level {
+public class GameOverLevel extends Menu {
 
     static Timer timer;
     boolean running = false;
@@ -16,16 +16,11 @@ public class GameOverLevel extends Level {
     @Override
     public void act() {
         timerAction();
-        if (Greenfoot.isKeyDown("enter")) {
-            Level.restartGame();
+        String key = Greenfoot.getKey();
+        if (key != null && key.equals("enter")) {
+            Greenfoot.setWorld(new MainMenu());
             timer = null;
         }
-    }
-    // 1280 x 720
-
-    @Override
-    public void finish() {
-        // Der Finish macht bei Game Over nichts.
     }
 
     public void timerAction() {
