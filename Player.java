@@ -36,7 +36,7 @@ public class Player extends Actor {
 
     final int processDotsCooldownDefault = 15;
     int processDotsCooldown = processDotsCooldownDefault;
-    int moveSpeed = 5, moveSpeedSlowed = 0, moveSpeedBonus = 0;
+    int moveSpeed = 3, moveSpeedSlowed = 0, moveSpeedBonus = 0;
     final int moveSpeedMin = 1, moveSpeedMax = 10;
 
     int oldX, oldY, oldRotation;
@@ -92,7 +92,7 @@ public class Player extends Actor {
             }
             if (moveSpeedBonus > 0) {
                 speeduptimer++;
-                if(speeduptimer==100) {                    
+                if(speeduptimer == 100) {                    
                  moveSpeedBonus = 0;
                  speeduptimer=0;
                 }

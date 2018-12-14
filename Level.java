@@ -172,6 +172,8 @@ public abstract class Level extends World {
             // Molten Heart
         } else if (obj == 25) {
             object = new MiniBoss();
+        } else if (obj == 26) {
+            object = new Boots.Speed();
         } else if (obj == 95) {
             object = new MoltenHeart();
         }
