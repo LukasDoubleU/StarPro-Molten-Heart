@@ -1,14 +1,23 @@
 
-import greenfoot.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MeleeDamage extends Melee {
 
     public MeleeDamage(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
+        // AENDERN NOCH AUF 2
+        damage = 0;
+        stalkRange = 38;
+        viewDistance = 200;
+    }
+
+    public MeleeDamage(int moveSpeed, int lifeCount, String imgPath, int miniCounte) {
+        this(moveSpeed, lifeCount, imgPath);
         damage = 2;
         stalkRange = 38;
         viewDistance = 200;
+        miniEnemy = true;
     }
 
     public MeleeDamage(int moveSpeed) {
@@ -19,6 +28,7 @@ public class MeleeDamage extends Melee {
         this(4, 3, "ghost.png");
     }
 
+    @Override
     public void act() {
 
         if (target != null) {
@@ -35,13 +45,29 @@ public class MeleeDamage extends Melee {
 
     public void damagePlayer() {
         List playerInRange = new ArrayList();
-        playerInRange = this.getObjectsInRange(stalkRange+2, Player.class);
+        playerInRange = this.getObjectsInRange(stalkRange + 2, Player.class);
         for (Object p : playerInRange) {
             if (p instanceof Player) {
                 Player.get().damage(damage);
             }
         }
 
+    }
+
+    @Override
+    public void damage(int damage) {
+        this.lifeCount = lifeCount - damage;
+        if (lifeCount < 0) {
+            if (miniEnemy) {
+                MiniBoss a = getBoss();
+                if (a != null) {
+                    a.setMiniCounter();
+                }
+            }
+            level.monstercount--;
+            this.getWorld().removeObject(this);
+            SoundUtil.playSound("splash_sound.wav");
+        }
     }
 
     public void movePattern() {
@@ -125,6 +151,19 @@ public class MeleeDamage extends Melee {
             }
         }
         return false;
+    }
+
+    public MiniBoss getBoss() {
+        List actorinrange = new ArrayList();
+        actorinrange = this.getObjectsInRange(4000, MiniBoss.class);
+
+        for (Object a : actorinrange) {
+            if (a instanceof MiniBoss) {
+                return (MiniBoss) a;
+            }
+
+        }
+        return null;
     }
 
 }

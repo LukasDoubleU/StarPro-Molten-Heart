@@ -11,10 +11,6 @@ public class Menu extends Level {
 
     public Menu(String image) {
         super(image);
-        // Bei jedem Wechsel in ein Menu kann der Timer pauschal angehalten werden
-        TimerDisplay timer = TimerDisplay.get();
-        timer.stop();
-        timer.reset();
     }
 
     @Override
@@ -23,6 +19,12 @@ public class Menu extends Level {
         // Spiele die Hintergrundmusik in Dauerschleife
         GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
         backgroundMusic.playLoop();
+    }
+
+    protected void resetTimer() {
+        TimerDisplay timer = TimerDisplay.get();
+        timer.stop();
+        timer.reset();
     }
 
     protected void addBackToMainMenuButton() {

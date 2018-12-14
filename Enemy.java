@@ -44,7 +44,7 @@ public abstract class Enemy extends Obstacle {
                 level.monstercount--;
             }
             this.getWorld().removeObject(this);
-
+            SoundUtil.playSound("splash_sound.wav");
         }
     }
 
@@ -52,23 +52,23 @@ public abstract class Enemy extends Obstacle {
         int oldX = this.getX();
         int oldY = this.getY();
         if (this.getX() > target.getX()) {
-            this.setLocation(this.getX() - moveSpeed + (moveSpeed / 2), this.getY());
+            this.setLocation(this.getX() - moveSpeed + moveSpeed / 2, this.getY());
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getX() < target.getX()) {
-            this.setLocation(this.getX() + moveSpeed - (moveSpeed / 2), this.getY());
+            this.setLocation(this.getX() + moveSpeed - moveSpeed / 2, this.getY());
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         if (this.getY() > target.getY()) {
-            this.setLocation(this.getX(), this.getY() - moveSpeed + (moveSpeed / 2));
+            this.setLocation(this.getX(), this.getY() - moveSpeed + moveSpeed / 2);
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getY() < target.getY()) {
-            this.setLocation(this.getX(), this.getY() + moveSpeed - (moveSpeed / 2));
+            this.setLocation(this.getX(), this.getY() + moveSpeed - moveSpeed / 2);
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }

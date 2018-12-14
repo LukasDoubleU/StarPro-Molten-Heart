@@ -32,6 +32,7 @@ public abstract class Entry extends Actor {
                 menu.selectedEntry.deselect();
             }
             menu.selectedEntry = this;
+            SoundUtil.playSound("menu_select.wav");
             setImage(selected);
         }
     }
@@ -55,8 +56,7 @@ public abstract class Entry extends Actor {
     }
 
     public final void onClick() {
-        // TODO delay zu groß, erste Sekunde abschneiden
-        Greenfoot.playSound("sounds/select_sound.wav");
+        SoundUtil.playSound("menu_click.wav");
         _onClick();
     }
 
