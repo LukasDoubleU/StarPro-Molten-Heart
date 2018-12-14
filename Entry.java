@@ -32,7 +32,7 @@ public abstract class Entry extends Actor {
                 menu.selectedEntry.deselect();
             }
             menu.selectedEntry = this;
-            Greenfoot.playSound("menu_select.wav");
+            SoundUtil.playSound("menu_select.wav");
             setImage(selected);
         }
     }
@@ -56,7 +56,7 @@ public abstract class Entry extends Actor {
     }
 
     public final void onClick() {
-        Greenfoot.playSound("menu_click.wav");
+        SoundUtil.playSound("menu_click.wav");
         _onClick();
     }
 

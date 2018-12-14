@@ -63,7 +63,7 @@ public abstract class Weapon extends Item {
             rotation = 270;
         }
 
-        Greenfoot.playSound(getAttackSound());
+        SoundUtil.playSound(getAttackSound());
 
         Attack attack = getAttack();
         attack.setRotation(rotation);

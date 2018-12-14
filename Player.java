@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import greenfoot.Actor;
-import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 /**
@@ -111,9 +110,10 @@ public class Player extends Actor {
         // Füge dem Spieler Schaden zu
         lifeCount -= Math.max(0, dmg - equippedArmor.getDamageReduction());
         // Spiele Sound
-        Greenfoot.playSound("damage_taken.wav");
+        SoundUtil.playSound("damage_taken.wav");
         // Sinken die Leben auf 0 (oder weniger) ist das Spiel verloren
         if (lifeCount <= 0) {
+            SoundUtil.playSound("death_fall_sound.wav");
             Level.runGameOverWorld();
         }
         // Nachdem der Spieler Schaden nimmt, ist er für eine kurze Zeit unsterblich
@@ -207,6 +207,7 @@ public class Player extends Actor {
 
         // Kollidieren wir mit irgendeinem Hindernis?
         if (!obstacles.isEmpty()) {
+            SoundUtil.playSound("collision_sound.wav");
             resetPosition();
         }
     }
