@@ -136,7 +136,7 @@ public class Player extends Actor {
     }
 
     public boolean isLowHP() {
-        return getLifeCount() <= 2;
+        return getLifeCount() <= 1;
     }
 
     private long calculateReducedDamage(int dmg) {
