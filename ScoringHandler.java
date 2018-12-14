@@ -97,8 +97,8 @@ public class ScoringHandler {
         TimerDisplay timer = TimerDisplay.get();
         int secs = timer.getSecondsLeft();
         int mins = timer.getMinutesLeft();
-        int millis = secs * 1000 + mins * 60 * 1000;
-        return millis;
+        int millis = timer.getMillisecondsLeft();
+        return secs * 1000 + mins * 60 * 1000 + millis;
     }
 
     public static File getFile() {
