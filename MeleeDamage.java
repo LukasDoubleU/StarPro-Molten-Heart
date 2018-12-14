@@ -34,7 +34,7 @@ public class MeleeDamage extends Melee {
 
     public void damagePlayer() {
         List playerInRange = new ArrayList();
-        playerInRange = this.getObjectsInRange(stalkRange + 10, Player.class);
+        playerInRange = this.getObjectsInRange(stalkRange+2, Player.class);
         for (Object p : playerInRange) {
             if (p instanceof Player) {
                 Player.get().damage(damage);

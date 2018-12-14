@@ -54,7 +54,7 @@ public class BulletExplosion extends Projectiles {
                 this.getImage().scale(30 + bombScale, 30 + bombScale);
                 bombScale = bombScale * -1;
             }
-            if (counter > 200) {
+            if (counter > 80) {
                 explode();
                 counter2++;
             }
