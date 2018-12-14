@@ -1,13 +1,13 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import greenfoot.Actor;
 
 public class MeleeDamage extends Melee {
 
     public MeleeDamage(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
-        // AENDERN NOCH AUF 2
-        damage = 0;
+        damage = 2;
         stalkRange = 38;
         viewDistance = 200;
     }
@@ -101,7 +101,7 @@ public class MeleeDamage extends Melee {
     }
     
      public boolean checkCollision(int stalkRange) {
-        List<Actor> intersectingObjects = this.getObjectsInRange(35, null);
+        List<Object> intersectingObjects = this.getObjectsInRange(35, null);
             for (Object a : intersectingObjects) {
                 if (a instanceof Obstacle || a instanceof Door) {
                     if(target == null) {
@@ -133,7 +133,6 @@ public class MeleeDamage extends Melee {
                                 return true;
                             }
                         }
-                        //counter = counter - randomNumber(200, 100);
                     }   
                     return true;
                 }
