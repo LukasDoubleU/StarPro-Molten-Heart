@@ -42,7 +42,7 @@ public class RangedExplosion extends Ranged {
                 spawnBullet();
                 rotation = randomizeRotation();
             }
-            if (counter == 125) {
+            if (counter > 125) {
                 counter = 0;
             }
 
@@ -63,7 +63,7 @@ public class RangedExplosion extends Ranged {
         if (vorzeichen >= 50) {
             return (rand.nextInt(2) + 2);
         } else {
-            return ((rand.nextInt(2) + 2) * -1);
+            return ((rand.nextInt(2 ) + 2) * -1);
         }
 
     }

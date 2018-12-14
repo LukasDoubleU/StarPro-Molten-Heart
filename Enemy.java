@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import greenfoot.Actor;
 import greenfoot.World;
@@ -32,12 +33,14 @@ public abstract class Enemy extends Obstacle {
         if (!(this instanceof DestroyableObstacle)) {
             level.monstercount++;
         }
+        //damage = damage + level.damageModifier;
+        counter = randomNumber(200, 1);
     }
 
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
         if (lifeCount < 0) {
-            if (level != null && !(this instanceof DestroyableObstacle)) {
+            if (level != null && !(this instanceof DestroyableObstacle) && !(this instanceof Projectiles)) {
                 level.monstercount--;
             }
             this.getWorld().removeObject(this);
@@ -107,6 +110,11 @@ public abstract class Enemy extends Obstacle {
 
         }
         return null;
+    }
+    
+    public int randomNumber(int minWert, int maxWert) {
+        Random rand = new Random();
+        return rand.nextInt(maxWert) + minWert;
     }
 
 }
