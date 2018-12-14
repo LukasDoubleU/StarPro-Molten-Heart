@@ -6,7 +6,7 @@ import greenfoot.GreenfootImage;
 public class Bow extends Weapon {
 
     public Bow() {
-        super("BowAndArrow/Bow.png", 2, 50);
+        super("BowAndArrow/Bow.png", 2, 40);
     }
 
     @Override
