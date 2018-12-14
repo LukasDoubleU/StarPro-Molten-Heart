@@ -94,7 +94,7 @@ public class Player extends Actor {
                 speeduptimer++;
                 if(speeduptimer == 100) {                    
                  moveSpeedBonus = 0;
-                 speeduptimer=0;
+                 speeduptimer = 0;
                 }
             }
             if (immortal > 0) {
