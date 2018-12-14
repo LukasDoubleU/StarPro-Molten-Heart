@@ -41,7 +41,6 @@ public class BulletSlow extends Projectiles {
             getImage().scale(15, 15);
         }
         isAlive = true;
-        turnNotDone = true;
         turnDegree = newTurnDegree;
     }
 
@@ -50,6 +49,7 @@ public class BulletSlow extends Projectiles {
 
             if (turnNotDone) {
                 firstTurn();
+                
             }
 
             move(moveSpeed);
@@ -66,7 +66,6 @@ public class BulletSlow extends Projectiles {
         if (target == null) {
             this.turn(turnDegree);
         }
-
         turnNotDone = false;
     }
 
@@ -78,14 +77,12 @@ public class BulletSlow extends Projectiles {
             if (a instanceof Player) {
                 Player.get().slow(slow);
                 this.getWorld().removeObject(this);
-                level.monstercount--;
                 isAlive = false;
                 return;
             }
         }
         if (this.isAtEdge()) {
             this.getWorld().removeObject(this);
-            level.monstercount--;
             isAlive = false;
         }
     }
