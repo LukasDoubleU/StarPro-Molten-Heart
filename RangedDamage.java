@@ -22,6 +22,7 @@ public class RangedDamage extends Ranged {
         this.moveSpeedY = moveSpeed;
         this.moveSpeedX = moveSpeed;
         damage = 1;
+        isMoving = true;
         stalkRange = 150;
         viewDistance = 200;
     }
@@ -41,10 +42,7 @@ public class RangedDamage extends Ranged {
 
         if (target != null) {
             shootCounter++;
-            if (!checkCollision(stalkRange)) {
-                followTarget();
-            }
-
+            followTarget();
             if (shootCounter >= 100) {
                 spawnBullet();
             }
@@ -53,7 +51,8 @@ public class RangedDamage extends Ranged {
                 movePattern();
             }
         }
-
+        refreshImage();
+        imgCounter++;
         counter++;
     }
 
@@ -72,6 +71,11 @@ public class RangedDamage extends Ranged {
         if (counter > 320) {
             moveSpeedY = -moveSpeedY;
             counter = 0;
+        }
+        if(moveSpeedX < 0) {
+            left = true;
+        } else {
+            right = true;
         }
         this.setLocation(this.getX() + moveSpeedX, this.getY() + moveSpeedY);
         if (checkCollision(stalkRange)) {
@@ -92,30 +96,34 @@ public class RangedDamage extends Ranged {
         for (Object a : intersectingObjects) {
             
             if (a instanceof Obstacle) {
-                   List<Actor> left = this.getObjectsAtOffset(-this.getImage().getWidth()-10, 0, null);
-                   List<Actor> right = this.getObjectsAtOffset(this.getImage().getWidth()-10, 0, null);
-                   List<Actor> top = this.getObjectsAtOffset(0, -this.getImage().getHeight()-10, null);
-                   List<Actor> down = this.getObjectsAtOffset(0, this.getImage().getHeight()+10, null);
-                   for (Object leftA : left) {
-                       if (leftA instanceof Obstacle) {
+                   List<Actor> leftList = this.getObjectsAtOffset(-this.getImage().getWidth()-10, 0, null);
+                   List<Actor> rightList = this.getObjectsAtOffset(this.getImage().getWidth()-10, 0, null);
+                   List<Actor> topList = this.getObjectsAtOffset(0, -this.getImage().getHeight()-10, null);
+                   List<Actor> downList = this.getObjectsAtOffset(0, this.getImage().getHeight()+10, null);
+                   for (Object leftA : leftList) {
+                       if ((leftA instanceof Obstacle || leftA instanceof Enemy) && !(leftA instanceof Projectiles)) {
                            moveSpeedX = moveSpeedX * -1;
+                           left = false;
+                           right = true;
                            return true;
                         }
                    }
-                   for (Object rightA : right) {
-                       if (rightA instanceof Obstacle) {
+                   for (Object rightA : rightList) {
+                       if ((rightA instanceof Obstacle || rightA instanceof Enemy) && !(rightA instanceof Projectiles)) {
                            moveSpeedX = moveSpeedX * -1;
+                           left = true;
+                           right = false;
                            return true;
                         }
                    }
-                   for (Object topA : top) {
-                       if (topA instanceof Obstacle) {
+                   for (Object topA : topList) {
+                       if ((topA instanceof Obstacle  || topA instanceof Enemy) && !(topA instanceof Projectiles)) {
                            moveSpeedY = moveSpeedY * -1;
                            return true;
                         }
                    }
-                   for (Object downA : down) {
-                       if (downA instanceof Obstacle) {
+                   for (Object downA : downList) {
+                       if ((downA instanceof Obstacle || downA instanceof Enemy) && !(downA instanceof Projectiles)) {
                            moveSpeedY = moveSpeedY * -1;
                            return true;
                         }

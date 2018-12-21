@@ -4,12 +4,13 @@ import java.util.List;
 import greenfoot.Actor;
 
 public class MeleeDamage extends Melee {
-
+    
     public MeleeDamage(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
         damage = 2;
         stalkRange = 38;
         viewDistance = 200;
+        isMoving = true;
     }
 
     public MeleeDamage(int moveSpeed, int lifeCount, String imgPath, int miniCounte) {
@@ -30,7 +31,6 @@ public class MeleeDamage extends Melee {
 
     @Override
     public void act() {
-
         if (target != null) {
             moveSpeed = 4;
             followTarget();
@@ -40,7 +40,8 @@ public class MeleeDamage extends Melee {
             target = getTarget();
 
         }
-
+        refreshImage();
+        imgCounter++;
     }
 
     public void damagePlayer() {
@@ -71,7 +72,6 @@ public class MeleeDamage extends Melee {
     }
 
     public void movePattern() {
-
         int oldX = this.getX();
         int oldY = this.getY();
         if (counter <= 60) {
@@ -97,6 +97,18 @@ public class MeleeDamage extends Melee {
         } else if (counter > 161) {
             counter = 0;
         }
+        if(oldX > this.getX()) {
+                left = true;
+        }
+        if(oldY > this.getY()) {
+                up = true;
+        }
+        if(oldX < this.getX()) {
+                right = true;
+        }
+        if(oldY < this.getY()) {
+                down = true;
+        }
         counter++;
     }
     
@@ -105,35 +117,43 @@ public class MeleeDamage extends Melee {
             for (Object a : intersectingObjects) {
                 if (a instanceof Obstacle || a instanceof Door) {
                     if(target == null) {
-                        List<Actor> left = this.getObjectsAtOffset(-this.getImage().getWidth()-5, 0, null);
-                        List<Actor> right = this.getObjectsAtOffset(this.getImage().getWidth()-5, 0, null);
-                        List<Actor> top = this.getObjectsAtOffset(0, -this.getImage().getHeight()-5, null);
-                        List<Actor> down = this.getObjectsAtOffset(0, this.getImage().getHeight()+5, null);
-                        for (Object leftA : left) {
-                            if (leftA instanceof Obstacle) {
+                        List<Actor> leftList = this.getObjectsAtOffset(-this.getImage().getWidth()-5, 0, null);
+                        List<Actor> rightList = this.getObjectsAtOffset(this.getImage().getWidth()-5, 0, null);
+                        List<Actor> topList = this.getObjectsAtOffset(0, -this.getImage().getHeight()-5, null);
+                        List<Actor> downList = this.getObjectsAtOffset(0, this.getImage().getHeight()+5, null);
+                        for (Object leftA : leftList) {
+                            if (leftA instanceof Obstacle || leftA instanceof Enemy) {
                                 moveSpeed = moveSpeed * -1;
+                                //left = !left;
+                                //right = !right;
                                 return true;
                             }
                         }
-                        for (Object rightA : right) {
-                            if (rightA instanceof Obstacle) {
+                        for (Object rightA : rightList) {
+                            if (rightA instanceof Obstacle || rightA instanceof Enemy) {
                                 moveSpeed = moveSpeed * -1;
+                                //left = !left;
+                                //right = !right;
                                 return true;
                             }
                         }
-                        for (Object topA : top) {
-                            if (topA instanceof Obstacle) {
+                        for (Object topA : topList) {
+                            if (topA instanceof Obstacle || topA instanceof Enemy) {
                                 moveSpeed = moveSpeed * -1;
+                                //up = !up;
+                                //down = !down;
                                 return true;
                             }
                         }
-                        for (Object downA : down) {
-                            if (downA instanceof Obstacle) {
+                        for (Object downA : downList) {
+                            if (downA instanceof Obstacle || downA instanceof Enemy) {
                                 moveSpeed = moveSpeed * -1;
+                                //up = !up;
+                                //down = !down;
                                 return true;
                             }
                         }
-                    }   
+                    }
                     return true;
                 }
 

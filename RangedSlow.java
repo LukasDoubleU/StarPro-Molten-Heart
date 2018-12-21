@@ -22,6 +22,7 @@ public class RangedSlow extends Ranged {
         stalkRange = 0;
         viewDistance = 200;
         spiderWallRange = 20;
+        isMoving = false;
         wallType = newWallType;
     }
 

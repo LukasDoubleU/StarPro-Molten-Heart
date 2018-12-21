@@ -17,6 +17,7 @@ public abstract class Projectiles extends Melee {
     public Projectiles(int movSpeed, int lifeCount, String imgPath) {
         super(movSpeed, lifeCount, imgPath);
         turnNotDone = true;
+        isMoving = false;
 
     }
 

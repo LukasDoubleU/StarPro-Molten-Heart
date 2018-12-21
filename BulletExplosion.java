@@ -50,7 +50,7 @@ public class BulletExplosion extends Projectiles {
                     counter2 = 0;
                 }
             }
-            if (!checkCollision()) {
+            if (!checkCollision() && counter < 30) {
                 move(moveSpeed);
             }
             if (counter == oldCounter + 10) {
