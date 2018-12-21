@@ -199,6 +199,16 @@ public class Player extends Actor {
             // Lege Waffen an
             else if (item instanceof Weapon) {
                 equipWeapon((Weapon) item);
+                if (item instanceof Bow) {
+                    @SuppressWarnings("unchecked")
+                    List<Actor> listBow = getWorld().getObjects(Sword.Master.class);
+                    getWorld().removeObject(listBow.get(0));
+                }
+                if (item instanceof Sword.Master) {
+                    @SuppressWarnings("unchecked")
+                    List<Actor> listSword = getWorld().getObjects(Bow.class);
+                    getWorld().removeObject(listSword.get(0));
+                }
             }
             // Ziehe Schuhe an
             else if (item instanceof Boots) {
@@ -216,6 +226,7 @@ public class Player extends Actor {
 
     private void equipWeapon(Weapon item) {
         equippedWeapon = item;
+
     }
 
     private void equipArmor(Armor item) {
