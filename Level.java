@@ -46,7 +46,7 @@ public abstract class Level extends World {
      * Weltwechsel gemacht. Default ist 0 wird aber bei der Erschaffung der Welt
      * hochgesetzt auf die reale Monsterzahl
      */
-    public int monstercount = 0;
+    private int monstercount = 0;
 
     public static List<Lava> lavarray = new ArrayList<Lava>();
 
@@ -54,9 +54,9 @@ public abstract class Level extends World {
         super(1280, 720, 1);
         setBackground(image);
         // Zeige unten links die Leben des Spielers an
-        addObject(PlayerHealth.get(), 30, 680);
+        addObject(PlayerHealthDisplay.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStats.get(), 1195, 672);
+        addObject(PlayerStatsDisplay.get(), 1195, 672);
         // Mittig: Spielzeit
         addObject(TimerDisplay.get(), 640, 674);
     }
@@ -191,6 +191,24 @@ public abstract class Level extends World {
         if (lavarray.size() > 0) {
             lavarray.get(new Random().nextInt(lavarray.size()));
         }
+    }
+
+    public void decreaseMonstercount(Actor actor) {
+        // DestroyableObstacles und Projectiles nicht mitzählen
+        if (!(actor instanceof DestroyableObstacle) && !(actor instanceof Projectiles)) {
+            MonsterCounterDisplay.show(--monstercount);
+        }
+    }
+
+    public void increaseMonstercount(Actor actor) {
+        // DestroyableObstacles und Projectiles nicht mitzählen
+        if (!(actor instanceof DestroyableObstacle) && !(actor instanceof Projectiles)) {
+            monstercount++;
+        }
+    }
+
+    public int getMonstercount() {
+        return monstercount;
     }
 
     @Override

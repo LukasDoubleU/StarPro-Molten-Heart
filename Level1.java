@@ -44,7 +44,7 @@ public class Level1 extends Level {
 
     @Override
     public void finish() {
-        if (monstercount == 0) {
+        if (getMonstercount() == 0) {
             Greenfoot.setWorld(new Level2());
         }
     }

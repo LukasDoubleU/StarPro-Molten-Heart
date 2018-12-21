@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
  * Write a description of class MiniBoss here.
- * 
+ *
  * @author (your name)
  * @version (a version number or a date)
  */
@@ -80,7 +80,7 @@ public class MiniBoss extends Boss {
             this.getWorld().addObject(new Sword.Master(), 125, 512);
             this.getWorld().addObject(new MeleeDamage(4, 3, "boss/boss2.5.png"), this.getX(), this.getY() - 100);
             this.getWorld().removeObject(this);
-            level.monstercount--;
+            level.decreaseMonstercount(this);
         }
     }
 
@@ -88,7 +88,7 @@ public class MiniBoss extends Boss {
      * Funktion summon() beschwoert 3 Gegner an bestimmten stellen
      */
     public void summon() {
-        if(miniCounter==0){   
+        if(miniCounter==0){
             this.setImage("boss/boss2.2.png");
         }
         addAttackTimer();

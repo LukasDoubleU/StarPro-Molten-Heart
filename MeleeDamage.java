@@ -64,7 +64,7 @@ public class MeleeDamage extends Melee {
                     a.setMiniCounter();
                 }
             }
-            level.monstercount--;
+            level.decreaseMonstercount(this);
             this.getWorld().removeObject(this);
             SoundUtil.playSound("splash_sound.wav");
         }
@@ -99,45 +99,44 @@ public class MeleeDamage extends Melee {
         }
         counter++;
     }
-    
-     public boolean checkCollision(int stalkRange) {
-        List<Object> intersectingObjects = this.getObjectsInRange(35, null);
-            for (Object a : intersectingObjects) {
-                if (a instanceof Obstacle || a instanceof Door) {
-                    if(target == null) {
-                        List<Actor> left = this.getObjectsAtOffset(-this.getImage().getWidth()-5, 0, null);
-                        List<Actor> right = this.getObjectsAtOffset(this.getImage().getWidth()-5, 0, null);
-                        List<Actor> top = this.getObjectsAtOffset(0, -this.getImage().getHeight()-5, null);
-                        List<Actor> down = this.getObjectsAtOffset(0, this.getImage().getHeight()+5, null);
-                        for (Object leftA : left) {
-                            if (leftA instanceof Obstacle) {
-                                moveSpeed = moveSpeed * -1;
-                                return true;
-                            }
-                        }
-                        for (Object rightA : right) {
-                            if (rightA instanceof Obstacle) {
-                                moveSpeed = moveSpeed * -1;
-                                return true;
-                            }
-                        }
-                        for (Object topA : top) {
-                            if (topA instanceof Obstacle) {
-                                moveSpeed = moveSpeed * -1;
-                                return true;
-                            }
-                        }
-                        for (Object downA : down) {
-                            if (downA instanceof Obstacle) {
-                                moveSpeed = moveSpeed * -1;
-                                return true;
-                            }
-                        }
-                    }   
-                    return true;
-                }
 
-            
+    public boolean checkCollision(int stalkRange) {
+        List<Object> intersectingObjects = this.getObjectsInRange(35, null);
+        for (Object a : intersectingObjects) {
+            if (a instanceof Obstacle || a instanceof Door) {
+                if (target == null) {
+                    List<Actor> left = this.getObjectsAtOffset(-this.getImage().getWidth() - 5, 0, null);
+                    List<Actor> right = this.getObjectsAtOffset(this.getImage().getWidth() - 5, 0, null);
+                    List<Actor> top = this.getObjectsAtOffset(0, -this.getImage().getHeight() - 5, null);
+                    List<Actor> down = this.getObjectsAtOffset(0, this.getImage().getHeight() + 5, null);
+                    for (Object leftA : left) {
+                        if (leftA instanceof Obstacle) {
+                            moveSpeed = moveSpeed * -1;
+                            return true;
+                        }
+                    }
+                    for (Object rightA : right) {
+                        if (rightA instanceof Obstacle) {
+                            moveSpeed = moveSpeed * -1;
+                            return true;
+                        }
+                    }
+                    for (Object topA : top) {
+                        if (topA instanceof Obstacle) {
+                            moveSpeed = moveSpeed * -1;
+                            return true;
+                        }
+                    }
+                    for (Object downA : down) {
+                        if (downA instanceof Obstacle) {
+                            moveSpeed = moveSpeed * -1;
+                            return true;
+                        }
+                    }
+                }
+                return true;
+            }
+
         }
         if (this.isAtEdge()) {
             return true;

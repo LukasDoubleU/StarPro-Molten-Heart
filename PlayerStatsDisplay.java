@@ -3,18 +3,18 @@ import java.awt.Color;
 import greenfoot.Actor;
 import greenfoot.World;
 
-public class PlayerStats extends Actor {
+public class PlayerStatsDisplay extends Actor {
 
-    static PlayerStats instance = new PlayerStats();
+    static PlayerStatsDisplay instance = new PlayerStatsDisplay();
 
-    public static PlayerStats get() {
+    public static PlayerStatsDisplay get() {
         return instance;
     }
 
     float previousArmor;
     int previousSpeed, previousDamage;
 
-    private PlayerStats() {
+    private PlayerStatsDisplay() {
         setImage("transparent.png");
         Player p = Player.get();
         refreshImage(p.equippedArmor.getDamageReductionPercent(), p.equippedWeapon.getDamage(), p.getMoveSpeed());

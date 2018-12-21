@@ -40,7 +40,7 @@ public class RangedSlow extends Ranged {
     public void addedToWorld(World world) {
         this.getWorld().addObject(new Wall(wallType), this.getX(), this.getY());
         level = (Level) world;
-        level.monstercount++;
+        level.increaseMonstercount(this);
     }
 
     public void act() {
@@ -56,7 +56,6 @@ public class RangedSlow extends Ranged {
             }
         }
         counter++;
-
     }
 
     public void followTarget() {
@@ -90,7 +89,7 @@ public class RangedSlow extends Ranged {
         }
         this.setRotation(0);
     }
-    
+
     public void spawnBullet() {
         BulletSlow b = new BulletSlow(6, slow, target, "spider_web.png");
         this.getWorld().addObject(b, this.getX(), this.getY());
