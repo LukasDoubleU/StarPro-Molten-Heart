@@ -11,7 +11,8 @@ public class PlayerStats extends Actor {
         return instance;
     }
 
-    int previousArmor, previousSpeed, previousDamage;
+    float previousArmor;
+    int previousSpeed, previousDamage;
 
     private PlayerStats() {
         setImage("transparent.png");
@@ -31,7 +32,7 @@ public class PlayerStats extends Actor {
             return;
         }
 
-        int newArmor = p.equippedArmor.getDamageReductionPercent();
+        float newArmor = p.equippedArmor.getDamageReductionPercent();
         int newDamage = p.equippedWeapon.getDamage();
         int newSpeed = p.getMoveSpeed();
         // Hat sich einer der Werte geändert?
@@ -40,7 +41,7 @@ public class PlayerStats extends Actor {
                 || newSpeed != previousSpeed) {
 
             // Merke die neuen Werte
-            previousArmor = newArmor;
+            previousArmor = Math.round(newArmor / 100);
             previousDamage = newDamage;
             previousSpeed = newSpeed;
 
@@ -49,9 +50,9 @@ public class PlayerStats extends Actor {
         }
     }
 
-    private void refreshImage(int armor, int damage, int speed) {
+    private void refreshImage(float armor, int damage, int speed) {
         Color c = new Color(1f, 0f, 0f, 0f);
-        String txt = "Armor " + armor + "%" //
+        String txt = "Armor " + Math.round(armor) + "%" //
                 + " | Damage " + damage //
                 + " | Speed " + speed;
         setImage(GreenfootImageConstructor.getConstructedImg(13, txt, c));
