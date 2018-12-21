@@ -30,18 +30,16 @@ public abstract class Enemy extends Obstacle {
     @Override
     public void addedToWorld(World world) {
         level = (Level) world;
-        if (level != null && !(this instanceof DestroyableObstacle) && !(this instanceof Projectiles)) {
-            level.monstercount++;
-        }
-        //damage = damage + level.damageModifier;
+        level.increaseMonstercount(this);
+        // damage = damage + level.damageModifier;
         counter = randomNumber(200, 1);
     }
 
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
         if (lifeCount <= 0) {
-            if (level != null && !(this instanceof DestroyableObstacle) && !(this instanceof Projectiles)) {
-                level.monstercount--;
+            if (level != null) {
+                level.decreaseMonstercount(this);
             }
             this.getWorld().removeObject(this);
             SoundUtil.playSound("splash_sound.wav");
@@ -81,7 +79,7 @@ public abstract class Enemy extends Obstacle {
                 this.setLocation(oldX, oldY);
             }
         }
-        
+
         this.setRotation(0);
     }
 
@@ -120,7 +118,7 @@ public abstract class Enemy extends Obstacle {
         }
         return null;
     }
-    
+
     public int randomNumber(int minWert, int maxWert) {
         Random rand = new Random();
         return rand.nextInt(maxWert) + minWert;
