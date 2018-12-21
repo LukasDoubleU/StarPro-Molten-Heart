@@ -17,7 +17,7 @@ import greenfoot.GreenfootImage;
 public class WinningScreenLevel extends Menu {
 
     public WinningScreenLevel() {
-        super("WinScreen.png");
+        super("WinScreen/win_screen.png");
 
         addBackToMainMenuButton();
 

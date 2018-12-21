@@ -28,14 +28,30 @@ public class Menu extends Level {
     }
 
     protected void addBackToMainMenuButton() {
-        addObject(new Button("Main Menu") {
+        addObject(new Actor() {
 
-            @Override
-            public void onClick() {
-                Greenfoot.setWorld(new MainMenu());
+            {
+                setImage("return_button.png");
             }
 
-        }, 200, 100);
+            @Override
+            public void act() {
+                MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+                if (mouseInfo != null) {
+                    int mouseX = mouseInfo.getX();
+                    int mouseY = mouseInfo.getY();
+                    List<?> objectsAt = getWorld().getObjectsAt(mouseX, mouseY, this.getClass());
+                    if (objectsAt.contains(this)) {
+                        setImage("return_button_inverted.png");
+                    } else {
+                        setImage("return_button.png");
+                    }
+                }
+                if (Greenfoot.mouseClicked(this)) {
+                    Greenfoot.setWorld(new MainMenu());
+                }
+            }
+        }, 310, 670);
     }
 
     @Override
