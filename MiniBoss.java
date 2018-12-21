@@ -74,7 +74,7 @@ public class MiniBoss extends Boss {
 
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
-        if (lifeCount < 0) {
+        if (lifeCount <= 0) {
             this.getWorld().addObject(new Bow(), 125, 196);
             this.getWorld().addObject(new Armor.Dark(), 125, 341);
             this.getWorld().addObject(new Sword.Master(), 125, 512);
