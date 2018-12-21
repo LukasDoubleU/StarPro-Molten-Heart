@@ -30,7 +30,7 @@ public abstract class Enemy extends Obstacle {
     @Override
     public void addedToWorld(World world) {
         level = (Level) world;
-        if (!(this instanceof DestroyableObstacle)) {
+        if (level != null && !(this instanceof DestroyableObstacle) && !(this instanceof Projectiles)) {
             level.monstercount++;
         }
         //damage = damage + level.damageModifier;
@@ -39,7 +39,7 @@ public abstract class Enemy extends Obstacle {
 
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
-        if (lifeCount < 0) {
+        if (lifeCount <= 0) {
             if (level != null && !(this instanceof DestroyableObstacle) && !(this instanceof Projectiles)) {
                 level.monstercount--;
             }
@@ -49,30 +49,39 @@ public abstract class Enemy extends Obstacle {
     }
 
     public void followTarget() {
+        boolean right = false;
+        boolean left = false;
+        boolean up = false;
+        boolean down = false;
         int oldX = this.getX();
         int oldY = this.getY();
         if (this.getX() > target.getX()) {
             this.setLocation(this.getX() - moveSpeed + moveSpeed / 2, this.getY());
+            right = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getX() < target.getX()) {
             this.setLocation(this.getX() + moveSpeed - moveSpeed / 2, this.getY());
+            left = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         if (this.getY() > target.getY()) {
             this.setLocation(this.getX(), this.getY() - moveSpeed + moveSpeed / 2);
+            down = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getY() < target.getY()) {
             this.setLocation(this.getX(), this.getY() + moveSpeed - moveSpeed / 2);
+            up = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
+        
         this.setRotation(0);
     }
 

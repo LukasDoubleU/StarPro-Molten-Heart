@@ -21,11 +21,11 @@ public class MeleeDamage extends Melee {
     }
 
     public MeleeDamage(int moveSpeed) {
-        this(moveSpeed, 3, "ghost.png");
+        this(moveSpeed, 1, "ghost.png");
     }
 
     public MeleeDamage() {
-        this(4, 3, "ghost.png");
+        this(4, 1, "ghost.png");
     }
 
     @Override
