@@ -127,7 +127,7 @@ public abstract class Level extends World {
             if (obj >= 13) {
                 status = true;
             }
-            object = new Door(obj, status);
+            object = new Door(this, obj, status);
         } else if (obj == 15) {
             object = new Armor.Bright();
         } else if (obj == 16) {
