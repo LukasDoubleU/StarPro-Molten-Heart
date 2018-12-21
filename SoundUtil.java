@@ -3,6 +3,13 @@ import java.util.Map;
 
 import greenfoot.GreenfootSound;
 
+/**
+ * <p>
+ * Util-Klasse für das Abspielen von Sounds mit Caching.
+ * </p>
+ *
+ * @author Lukas Wulff
+ */
 public class SoundUtil {
 
     private static Map<String, GreenfootSound> SOUND_CACHE = new HashMap<String, GreenfootSound>();

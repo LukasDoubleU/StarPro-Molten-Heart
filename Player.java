@@ -215,6 +215,12 @@ public class Player extends Actor {
                 equipBoots((Boots) item);
             }
 
+            // Spiele ggf. den Sound des Items
+            String sound = item.getSound();
+            if (sound != null) {
+                SoundUtil.playSound(sound);
+            }
+
             // Entferne das "aufgehobene" Objekt aus der Welt
             getWorld().removeObject(item);
         }
@@ -391,7 +397,6 @@ public class Player extends Actor {
      */
     public void speedUp(int amount) {
         moveSpeedBonus += amount;
-
     }
 
     /**
