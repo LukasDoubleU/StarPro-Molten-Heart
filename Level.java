@@ -56,7 +56,7 @@ public abstract class Level extends World {
         // Zeige unten links die Leben des Spielers an
         addObject(PlayerHealthDisplay.get(), 30, 680);
         // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStatsDisplay.get(), 1195, 672);
+        addObject(PlayerStatsDisplay.get(), 1196, 672);
         // Mittig: Spielzeit
         addObject(TimerDisplay.get(), 640, 674);
     }

@@ -5,7 +5,7 @@ public class MoltenHeart extends Potion {
     }
 
     @Override
-    public void _drink(Player p) {
+    public void drink(Player p) {
         ((Level) getWorld()).finish();
     }
 }

@@ -40,4 +40,8 @@ public abstract class Item extends Actor {
     protected void remove() {
         Player.get().getWorld().removeObject(this);
     }
+
+    protected String getSound() {
+        return "item_pickup.wav";
+    }
 }
