@@ -31,7 +31,7 @@ public class RangedDamage extends Ranged {
     }
 
     public RangedDamage() {
-        this(2, 3, "eyeball.png");
+        this(2, 1, "eyeball.png");
     }
 
     public void act() {
