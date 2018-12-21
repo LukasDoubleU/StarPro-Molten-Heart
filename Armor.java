@@ -69,8 +69,8 @@ public abstract class Armor extends Item {
 
     }
 
-    public int getDamageReductionPercent() {
-        return (int) getDamageReduction() * 100;
+    public float getDamageReductionPercent() {
+        return getDamageReduction() * 100;
     }
 
 }

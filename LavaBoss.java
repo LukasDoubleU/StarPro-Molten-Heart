@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 public class LavaBoss extends Boss {
     /**
      * Diese Parameter dienen, um die verschiedenen Attacken zu varrieren
-     * 
+     *
      * @param attack1             : aktivierung/deaktivierung der Attacke
      * @param attack1             : aktivierung/deaktivierung der Attacke
      * @param attack1             : aktivierung/deaktivierung der Attacke
@@ -32,7 +32,7 @@ public class LavaBoss extends Boss {
 
     /**
      * Diese parameter ist fuer die Klasse fireCircle()
-     * 
+     *
      * @param counter       : dient um die Schuesse in einer bestimmten zeit
      *                      abzufeuern
      * @param rotateBool    : dient fr anderes Verhalten des Schieens
@@ -53,7 +53,7 @@ public class LavaBoss extends Boss {
 
     /**
      * Diese Parameter ist fr die Klasse knockBack()
-     * 
+     *
      * @param knockTimer    : dient zum Timen der verschiedenen Bilder des Bosses
      * @param knockShootVV  : Visuele Vorwahnung, gibt den Spieler Zeit in
      *                      sicherheit zu gehen, bevor er schiet
@@ -189,7 +189,7 @@ public class LavaBoss extends Boss {
         if (lifeCount < 0) {
             this.getWorld().addObject(new MoltenHeart(), this.getX(), this.getY());
             this.getWorld().removeObject(this);
-            level.monstercount--;
+            level.decreaseMonstercount(this);
         }
     }
 

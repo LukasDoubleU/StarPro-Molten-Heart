@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
  * Write a description of class MiniBoss here.
- * 
+ *
  * @author (your name)
  * @version (a version number or a date)
  */
@@ -16,7 +16,7 @@ public class MiniBoss extends Boss {
      * @meleeSpawned : gibt an, ob die Melee
      * @param attack1   : dient zum steuern der zwei verschiedenen Attacken
      * @param summonEnd :
-     * @param enemyAlive : ueberprüft ob die 3 Gegner noch am leben sind
+     * @param enemyAlive : ueberprueft ob die 3 Gegner noch am leben sind
      */
     private int attackTimer;
     private int summonTimer;
@@ -74,13 +74,13 @@ public class MiniBoss extends Boss {
 
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
-        if (lifeCount < 0) {
+        if (lifeCount <= 0) {
             this.getWorld().addObject(new Bow(), 125, 196);
             this.getWorld().addObject(new Armor.Dark(), 125, 341);
             this.getWorld().addObject(new Sword.Master(), 125, 512);
             this.getWorld().addObject(new MeleeDamage(4, 3, "boss/boss2.5.png"), this.getX(), this.getY() - 100);
             this.getWorld().removeObject(this);
-            level.monstercount--;
+            level.decreaseMonstercount(this);
         }
     }
 
@@ -88,7 +88,7 @@ public class MiniBoss extends Boss {
      * Funktion summon() beschwoert 3 Gegner an bestimmten stellen
      */
     public void summon() {
-        if(miniCounter==0){   
+        if(miniCounter==0){
             this.setImage("boss/boss2.2.png");
         }
         addAttackTimer();

@@ -44,6 +44,8 @@ public class Level4 extends Level {
 
     @Override
     public void finish() {
+        if (getMonstercount() == 0) {
         Greenfoot.setWorld(new EndBossLevel());
+        }
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import greenfoot.Actor;
 
 public class MeleeDamage extends Melee {
-    
+
     public MeleeDamage(int moveSpeed, int lifeCount, String imgPath) {
         super(moveSpeed, lifeCount, imgPath);
         damage = 2;
@@ -65,7 +65,7 @@ public class MeleeDamage extends Melee {
                     a.setMiniCounter();
                 }
             }
-            level.monstercount--;
+            level.decreaseMonstercount(this);
             this.getWorld().removeObject(this);
             SoundUtil.playSound("splash_sound.wav");
         }
@@ -111,8 +111,8 @@ public class MeleeDamage extends Melee {
         }
         counter++;
     }
-    
-     public boolean checkCollision(int stalkRange) {
+
+    public boolean checkCollision(int stalkRange) {
         List<Object> intersectingObjects = this.getObjectsInRange(35, null);
             for (Object a : intersectingObjects) {
                 if (a instanceof Obstacle || a instanceof Door) {
@@ -124,40 +124,33 @@ public class MeleeDamage extends Melee {
                         for (Object leftA : leftList) {
                             if (leftA instanceof Obstacle || leftA instanceof Enemy) {
                                 moveSpeed = moveSpeed * -1;
-                                //left = !left;
-                                //right = !right;
                                 return true;
                             }
                         }
                         for (Object rightA : rightList) {
                             if (rightA instanceof Obstacle || rightA instanceof Enemy) {
-                                moveSpeed = moveSpeed * -1;
-                                //left = !left;
-                                //right = !right;
+                                moveSpeed = moveSpeed * - 1;
                                 return true;
                             }
                         }
                         for (Object topA : topList) {
                             if (topA instanceof Obstacle || topA instanceof Enemy) {
                                 moveSpeed = moveSpeed * -1;
-                                //up = !up;
-                                //down = !down;
                                 return true;
                             }
                         }
                         for (Object downA : downList) {
                             if (downA instanceof Obstacle || downA instanceof Enemy) {
                                 moveSpeed = moveSpeed * -1;
-                                //up = !up;
-                                //down = !down;
                                 return true;
                             }
                         }
                     }
                     return true;
                 }
+                return true;
+            }
 
-            
         }
         if (this.isAtEdge()) {
             return true;

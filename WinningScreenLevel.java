@@ -11,8 +11,7 @@ import greenfoot.GreenfootImage;
  * Das Level für Gewinner
  * </p>
  *
- * TODO: - Hier brauchen wir noch einen netten Hintergrund - Wenn Rang = 1 solle
- * noch eine "Highscore" Meldung kommen
+ * @author Lukas Wulff
  */
 public class WinningScreenLevel extends Menu {
 
@@ -26,7 +25,14 @@ public class WinningScreenLevel extends Menu {
         if (score != null && scores != null) {
             addObject(new Text(format("Score: %s", score.getValue())), 640, 400);
             int rank = scores.indexOf(score) + 1;
-            addObject(new Text(format("Rang: %s", rank)), 640, 500);
+            String s;
+            if (rank == 1) {
+                SoundUtil.playSound("high_score.wav");
+                s = "Rang: %s\nNeuer Highscore!";
+            } else {
+                s = "Rang: %s";
+            }
+            addObject(new Text(format(s, rank)), 640, 500);
         }
 
         resetTimer();

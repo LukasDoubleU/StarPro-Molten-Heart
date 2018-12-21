@@ -6,7 +6,6 @@ public class Level1 extends Level {
      * Default Welt 0 = Leer 1 = Wand 2 = Spieler 3 = Gegnertyp 1 4 = Barrel 5 =
      * Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
-
     private double[][] world = {
             /**
              * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
@@ -45,7 +44,7 @@ public class Level1 extends Level {
 
     @Override
     public void finish() {
-        if (monstercount == 0) {
+        if (getMonstercount() == 0) {
             Greenfoot.setWorld(new Level2());
         }
     }
