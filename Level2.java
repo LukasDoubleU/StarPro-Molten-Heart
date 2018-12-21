@@ -44,7 +44,7 @@ public class Level2 extends Level {
     }
 
     public void finish() {
-        if (monstercount == 0) {
+        if (getMonstercount() == 0) {
             Greenfoot.setWorld(new MiniBossLevel());
         }
     }

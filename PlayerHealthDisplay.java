@@ -4,11 +4,11 @@ import java.util.List;
 import greenfoot.Actor;
 import greenfoot.World;
 
-public class PlayerHealth extends Actor {
+public class PlayerHealthDisplay extends Actor {
 
-    static PlayerHealth instance = new PlayerHealth();
+    static PlayerHealthDisplay instance = new PlayerHealthDisplay();
 
-    public static PlayerHealth get() {
+    public static PlayerHealthDisplay get() {
         return instance;
     }
 
@@ -65,7 +65,7 @@ public class PlayerHealth extends Actor {
     World previousWorld;
     List<HealthImage> currentHealthImages = new ArrayList<HealthImage>();
 
-    private PlayerHealth() {
+    private PlayerHealthDisplay() {
         setImage("transparent.png");
         refreshHealth(Player.get().getLifeCount());
     }
