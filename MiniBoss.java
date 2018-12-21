@@ -16,7 +16,7 @@ public class MiniBoss extends Boss {
      * @meleeSpawned : gibt an, ob die Melee
      * @param attack1   : dient zum steuern der zwei verschiedenen Attacken
      * @param summonEnd :
-     * @param enemyAlive : ueberprüft ob die 3 Gegner noch am leben sind
+     * @param enemyAlive : ueberprueft ob die 3 Gegner noch am leben sind
      */
     private int attackTimer;
     private int summonTimer;
