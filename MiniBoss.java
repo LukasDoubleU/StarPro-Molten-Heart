@@ -79,7 +79,7 @@ public class MiniBoss extends Boss {
             this.getWorld().addObject(new Bow(), 125, 196);
             this.getWorld().addObject(new Armor.Dark(), 125, 341);
             this.getWorld().addObject(new Sword.Master(), 125, 512);
-            this.getWorld().addObject(new MeleeDamage(4, 3, "boss/boss2.5.png"), this.getX(), this.getY() - 100);
+            this.getWorld().addObject(new MeleeDamage(4, 3, "boss/boss2.5.png", 0), this.getX(), this.getY() - 100);
             this.getWorld().removeObject(this);
             level.decreaseMonstercount(this);
         }

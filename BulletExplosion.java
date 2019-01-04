@@ -17,6 +17,7 @@ public class BulletExplosion extends Projectiles {
     int bombScale;
     int bombRange;
     int turnRate;
+    int counter;
     boolean exploded;
 
     public BulletExplosion(int newMov_Speed, int newDamage, int newRotation, String imgPath) {
@@ -26,6 +27,7 @@ public class BulletExplosion extends Projectiles {
         counter2 = 0;
         bombScale = 3;
         oldCounter = 0;
+        counter = 0;
         bombRange = randomNumber(5, 20);
         turnRate = newRotation;
         exploded = false;
@@ -43,15 +45,15 @@ public class BulletExplosion extends Projectiles {
             if (counter == 8) {
                 this.getImage().setTransparency(255);
             }
-            if (counter > bombRange && moveSpeed != 0) {
+            if (counter < 30) {
+                move(moveSpeed);
+            }
+            if (!checkCollision() && (counter > bombRange) && (moveSpeed != 0)) {
                 counter2++;
                 if (counter2 == 5) {
                     moveSpeed--;
                     counter2 = 0;
                 }
-            }
-            if (!checkCollision() && counter < 30) {
-                move(moveSpeed);
             }
             if (counter == oldCounter + 10) {
                 oldCounter = counter;

@@ -20,7 +20,7 @@ public class RangedSlow extends Ranged {
         super(moveSpeed, lifeCount, imgPath);
         slow = 4;
         stalkRange = 0;
-        viewDistance = 200;
+        viewDistance = 400;
         spiderWallRange = 20;
         isMoving = false;
         wallType = newWallType;

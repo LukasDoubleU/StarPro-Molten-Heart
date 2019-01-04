@@ -1,12 +1,10 @@
 import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 import javax.swing.JOptionPane;
 
@@ -29,11 +27,8 @@ public class ScoringHandler {
         }
     }
 
-    public static List<Score> mostRecentLoadedScores = null;
     public static final int PLAYER_NAME_MAX_LENGTH = 12;
-    public static final char SCORE_SEP_CHAR = ';';
-    static final String FILE_PATH = System.getProperty("user.home") + File.separator + "MoltenHeartScoring.txt";
-    static File file;
+    public static final Preferences PREFS = Preferences.userRoot().node("MoltenHeartScoring");
 
     /**
      * Speichert die Datei inklusive des Scores fürs aktuelle Spiel
@@ -49,26 +44,12 @@ public class ScoringHandler {
             return null;
         }
 
-        // Die bisherigen Scores
-        final List<Score> previousScores = new CopyOnWriteArrayList<Score>(read());
-
         // Der Score fürs aktuelle Spiel
-        int points = calcScoreForCurrentGame();
-        Score score = new Score(name, points);
-        mostRecentLoadedScores.add(score);
-        Collections.sort(mostRecentLoadedScores);
-        previousScores.add(score);
+        int value = calcScoreForCurrentGame();
+        Score score = new Score(name, value);
 
-        // Schreibe alle Scores in die Datei
-        StringBuilder sb = new StringBuilder();
-        for (Score s : previousScores) {
-            sb.append(s.toString() + "\n");
-        }
-        try {
-            Files.write(getPath(), sb.toString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Schreibe den Score
+        PREFS.putInt(score.getName(), score.getValue());
 
         return score;
     }
@@ -87,6 +68,14 @@ public class ScoringHandler {
             JOptionPane.showMessageDialog(null, "Die Eingabe ist zu lang! (Maximal 12 Zeichen)");
             return askForPlayerName();
         }
+        try {
+            if (Arrays.asList(PREFS.keys()).contains(ask)) {
+                JOptionPane.showMessageDialog(null, "Der Name ist bereits vergeben!");
+                return askForPlayerName();
+            }
+        } catch (BackingStoreException e) {
+            e.printStackTrace();
+        }
         return ask;
     }
 
@@ -101,41 +90,21 @@ public class ScoringHandler {
         return secs * 1000 + mins * 60 * 1000 + millis;
     }
 
-    public static File getFile() {
-        if (file == null) {
-            file = new File(FILE_PATH);
-            if (!file.exists()) {
-                try {
-                    file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return file;
-    }
-
-    public static Path getPath() {
-        return getFile().toPath();
-    }
-
     public static List<Score> read() {
         List<Score> scores = new ArrayList<Score>();
 
         try {
-            List<String> lines = Files.readAllLines(getPath());
-            for (String line : lines) {
-                String[] split = line.split(";");
-                scores.add(new Score(split[0], Integer.valueOf(split[1])));
+            String[] keys = PREFS.keys();
+            for (String key : keys) {
+                scores.add(new Score(key, PREFS.getInt(key, 0)));
             }
-        } catch (IOException e) {
+
+        } catch (BackingStoreException e) {
             e.printStackTrace();
         }
 
         // Sortiere, sodass die besten Scores ganz oben stehen
         Collections.sort(scores);
-
-        mostRecentLoadedScores = scores;
 
         return scores;
     }
