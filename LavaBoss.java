@@ -212,36 +212,36 @@ public class LavaBoss extends Boss {
 
             if (this.getRotation() <= 45) {
                 this.setRotation(22);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 1093;
+                knockBackY = 413;
             } else if (this.getRotation() <= 90 && this.getRotation() >= 46) {
                 this.setRotation(67);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 733;
+                knockBackY = 527;
             } else if (this.getRotation() <= 135 && this.getRotation() >= 91) {
                 this.setRotation(112);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 541;
+                knockBackY = 509;
             } else if (this.getRotation() <= 180 && this.getRotation() >= 136) {
                 this.setRotation(157);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 166;
+                knockBackY = 509;
             } else if (this.getRotation() <= 225 && this.getRotation() >= 181) {
                 this.setRotation(202);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 163;
+                knockBackY = 187;
             } else if (this.getRotation() <= 270 && this.getRotation() >= 226) {
                 this.setRotation(247);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 518;
+                knockBackY = 120;
             } else if (this.getRotation() <= 315 && this.getRotation() >= 271) {
                 this.setRotation(292);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 644;
+                knockBackY = 123;
             } else if (this.getRotation() >= 315) {
                 this.setRotation(337);
-                knockBackX = 400;
-                knockBackY = 400;
+                knockBackX = 931;
+                knockBackY = 130;
             }
             knockShootVV = false;
         }
