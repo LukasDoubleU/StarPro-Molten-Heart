@@ -43,6 +43,7 @@ public class LavaBoss extends Boss {
      * @param target        : instanz Player wird gespeichert
      * @param fireTimer     : dient zum Timen der verschiedenen Bilder des Bosses
      */
+    private int counter = 0;
     private int rotateShoot = 15;
     private boolean rotateBool = true;
     private boolean rotateShootVV = true;
