@@ -299,8 +299,7 @@ public class Player extends Actor {
      */
     private void checkForIntersectingObjects() {
         if (!getObjectsAtOffset(0, -(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall above player?
-            getWorld().setPaintOrder(Player.class, Enemy.class, Barrel.class, DestroyableObstacle.class,
-                    Obstacle.class);
+            getWorld().setPaintOrder(Player.class, Enemy.class, DestroyableObstacle.class, Obstacle.class);
         }
         if (!getObjectsAtOffset(0, +(getPlayerHitboxSize() - 10), Obstacle.class).isEmpty()) { // wall underneath
             // player?
