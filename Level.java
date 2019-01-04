@@ -4,6 +4,7 @@ import java.util.Random;
 
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootSound;
 import greenfoot.World;
 
 public abstract class Level extends World {
@@ -12,7 +13,7 @@ public abstract class Level extends World {
      * Default Welt 0 = World border 1 = Wand 2 = Spieler 3 = Gegnertyp 1 4 = Barrel
      * 5 = Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
-
+    GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
     private double[][] world = {
             /**
              * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
@@ -53,6 +54,14 @@ public abstract class Level extends World {
     public Level(String image) {
         super(1280, 720, 1);
         setBackground(image);
+    }
+
+    public void startSoundtrack() {
+        backgroundMusic.playLoop();
+    }
+
+    public void stopSoundtrack() {
+        backgroundMusic.stop();
     }
 
     /**

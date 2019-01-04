@@ -2,7 +2,6 @@ import java.util.List;
 
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
-import greenfoot.GreenfootSound;
 import greenfoot.MouseInfo;
 
 public class Menu extends Level {
@@ -17,8 +16,8 @@ public class Menu extends Level {
     public void started() {
         // Wird beim Start des Programms einmalig ausgeführt
         // Spiele die Hintergrundmusik in Dauerschleife
-        GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
-        backgroundMusic.playLoop();
+//        GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
+//        backgroundMusic.playLoop();
     }
 
     protected void resetTimer() {

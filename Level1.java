@@ -41,6 +41,7 @@ public class Level1 extends Level {
         super("background_final.png");
         setStatDisplay();
         generateWorld(world);
+        startSoundtrack();
     }
 
     @Override

@@ -1,6 +1,5 @@
-import java.util.List;
-import java.util.ArrayList;  
-import java.util.Iterator; 
+import java.util.ArrayList;
+
 import greenfoot.GreenfootImage;
 
 /**
@@ -12,30 +11,32 @@ import greenfoot.GreenfootImage;
 public class Lava extends InteractiveObjects {
     private String ground;
     private String lava_ground;
+    private boolean lavaState = false;
+    private String lavaSound = "lava_sound_extended.wav";
 
-    private static final int COOLDOWN = 500; 
-    private static final int RANGE = 40; 
+    private static final int COOLDOWN = 500;
+    private static final int RANGE = 40;
 
-    public boolean status; 
-    public double type; 
+    public boolean status;
+    public double type;
 
     private int cooldownTimer = -COOLDOWN;
 
-    public ArrayList<Lava> neighbours = new ArrayList<Lava>(); 
+    public ArrayList<Lava> neighbours = new ArrayList<Lava>();
 
-    public Lava(double pos){
-        if(pos == 23.01){
-            this.type = 23.8; 
-        }else if(pos == 23.21){
-            this.type = 23.6; 
-        }else if(pos == 23.61){
-            this.type = 23.2; 
-        }else if(pos == 23.81){
-            this.type = 23.0; 
-        }else{
-            this.type = pos; 
+    public Lava(double pos) {
+        if (pos == 23.01) {
+            this.type = 23.8;
+        } else if (pos == 23.21) {
+            this.type = 23.6;
+        } else if (pos == 23.61) {
+            this.type = 23.2;
+        } else if (pos == 23.81) {
+            this.type = 23.0;
+        } else {
+            this.type = pos;
         }
-        
+
         this.ground = "Interactive World Objects/lavarock_ground_" + pos + ".png";
         this.lava_ground = "Interactive World Objects/lava_ground_" + pos + ".png";
         setImage(ground);
@@ -43,53 +44,66 @@ public class Lava extends InteractiveObjects {
 
     }
 
-    public void act(){
-        //Beim ersten Act-Durchlauf soll er sich alle seine Nachbarn suchen und speichern
-        if(this.neighbours.size() == 0){
-            neighbours.addAll(this.getNeighbours(RANGE,true,Lava.class));
+    @SuppressWarnings("unchecked")
+    @Override
+    public void act() {
+        // Beim ersten Act-Durchlauf soll er sich alle seine Nachbarn suchen und
+        // speichern
+        if (this.neighbours.size() == 0) {
+            neighbours.addAll(this.getNeighbours(RANGE, true, Lava.class));
         }
 
-        if(status){
+        if (status) {
             dealDamageOnCollision();
         }
 
-        //verringere Cooldown solange bis -500 erreicht ist. 
-        if(cooldownTimer > -COOLDOWN){
-            //Bisschen versetzt, damit sich die Lava nicht 
-            //durch benachbarte Lava direkt wieder aktiviert
+        // verringere Cooldown solange bis -500 erreicht ist.
+        if (cooldownTimer > -COOLDOWN) {
+            // Bisschen versetzt, damit sich die Lava nicht
+            // durch benachbarte Lava direkt wieder aktiviert
             this.cooldownTimer--;
         }
-        
-        if(cooldownTimer == -COOLDOWN && !(status) && neighbourIsHot()){
+
+        if (cooldownTimer == -COOLDOWN && !(status) && neighbourIsHot()) {
             transform();
+            lavaState = true;
+            System.out.println("lava: " + lava_ground);
+        }
+        if (lavaState) {
+            SoundUtil.loop(lavaSound);
         }
 
-        if(cooldownTimer == 0 && status){
-            transform(ground,false, 0); 
-        }
-
-    }
-
-    //Checkt ob die Nachbarn auch heiß sind
-    private boolean neighbourIsHot(){
-        for(Lava neighbourLava : neighbours){
-            if(neighbourLava.status){
-                return true; 
+        if (cooldownTimer == 0 && status) {
+            transform(ground, false, 0);
+            lavaState = false;
+            if (!lavaState) {
+                System.out.println("lava: " + lavaState);
+                SoundUtil.stopLoop(lavaSound);
             }
         }
-        return false; 
+
     }
 
-    //Zum anzünden verwenden
-    public void transform(){
-        this.transform(lava_ground,true,COOLDOWN);
+    // Checkt ob die Nachbarn auch heiß sind
+    private boolean neighbourIsHot() {
+        for (Lava neighbourLava : neighbours) {
+            if (neighbourLava.status) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    //zum an und abzünden verwenden
-    private void transform(String img, boolean status, int coolDownTimer){
-        getImage().drawImage(new GreenfootImage(img), 0,0);
-        this.status = status; 
-        this.cooldownTimer = coolDownTimer; 
+    // Zum anzünden verwenden
+    public void transform() {
+        this.transform(lava_ground, true, COOLDOWN);
+    }
+
+    // zum an und abzünden verwenden
+    private void transform(String img, boolean status, int coolDownTimer) {
+        getImage().drawImage(new GreenfootImage(img), 0, 0);
+        this.status = status;
+        this.cooldownTimer = coolDownTimer;
     }
 
     public void dealDamageOnCollision() {
@@ -98,8 +112,9 @@ public class Lava extends InteractiveObjects {
         }
 
     }
-    
-    private double getType(){
-        return this.type; 
+
+    @SuppressWarnings("unused")
+    private double getType() {
+        return this.type;
     }
 }
