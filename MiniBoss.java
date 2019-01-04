@@ -98,7 +98,7 @@ public class MiniBoss extends Boss {
                 // spawn gegner
                 if (!meleeSpawned) {
                     for (int i = 0; i < 3; i++) {
-                        MeleeDamage b = new MeleeDamage(3, 3, "boss/boss2.5.png",1);
+                        MeleeDamage b = new MeleeDamage(3, 2, "boss/boss2.5.png",1);
                         if (i == 0) {
                             this.getWorld().addObject(b, this.getX() - 150, this.getY());
                             miniCounter++;
