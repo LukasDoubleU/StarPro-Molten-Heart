@@ -75,24 +75,16 @@ public abstract class Enemy extends Obstacle {
             imgCounter = 0;
         }
         if (isMoving) {
-//            System.out.println("left: " + left); :TODO kann das weg?
-//            System.out.println("right: " + right);
-//            System.out.println("up: " + up);
-//            System.out.println("down: " + down);
             if (left) {
                 path = path + "left_" + currentPicture;
             } else if (right) {
                 path = path + "right_" + currentPicture;
             } else if (up) {
                 path = path + "up_" + currentPicture;
-            } else if (down) {
+            } else {
                 path = path + "down_" + currentPicture;
             }
-            try {
-                setImage(path + ".png");
-            } catch (Exception e) {
-                System.out.println("ERROR"); // TODO: Wird noch geworfen...
-            }
+            setImage(path + ".png");
             if (this instanceof RangedDamage) {
                 path = "/eyeball/";
             } else if (this instanceof MeleeDamage) {
@@ -108,27 +100,33 @@ public abstract class Enemy extends Obstacle {
     public void followTarget() {
         int oldX = this.getX();
         int oldY = this.getY();
+        int tempMoveSpeed;
+        if(Math.abs(this.getX()-target.getX()) == 1) {
+            tempMoveSpeed = 1;
+        }else {
+            tempMoveSpeed = moveSpeed / 2;
+        }
         if (this.getX() > target.getX()) {
-            this.setLocation(this.getX() - moveSpeed + moveSpeed / 2, this.getY());
+            this.setLocation(this.getX() - tempMoveSpeed, this.getY());
             left = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getX() < target.getX()) {
-            this.setLocation(this.getX() + moveSpeed - moveSpeed / 2, this.getY());
+            this.setLocation(this.getX() + tempMoveSpeed, this.getY());
             right = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         if (this.getY() > target.getY()) {
-            this.setLocation(this.getX(), this.getY() - moveSpeed + moveSpeed / 2);
+            this.setLocation(this.getX(), this.getY() - tempMoveSpeed);
             up = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getY() < target.getY()) {
-            this.setLocation(this.getX(), this.getY() + moveSpeed - moveSpeed / 2);
+            this.setLocation(this.getX(), this.getY() + tempMoveSpeed);
             down = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);

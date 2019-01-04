@@ -40,7 +40,9 @@ public class MeleeDamage extends Melee {
             target = getTarget();
 
         }
-        refreshImage();
+        if(!miniEnemy) {
+            refreshImage();
+        }
         imgCounter++;
     }
 
@@ -115,7 +117,7 @@ public class MeleeDamage extends Melee {
     public boolean checkCollision(int stalkRange) {
         List<Object> intersectingObjects = this.getObjectsInRange(35, null);
             for (Object a : intersectingObjects) {
-                if (a instanceof Obstacle || a instanceof Door) {
+                if ((a instanceof Obstacle && !(a instanceof Projectiles)) || a instanceof Door) {
                     if(target == null) {
                         List<Actor> leftList = this.getObjectsAtOffset(-this.getImage().getWidth()-5, 0, null);
                         List<Actor> rightList = this.getObjectsAtOffset(this.getImage().getWidth()-5, 0, null);
