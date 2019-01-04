@@ -24,7 +24,7 @@ public class RangedDamage extends Ranged {
         damage = 1;
         isMoving = true;
         stalkRange = 150;
-        viewDistance = 200;
+        viewDistance = 300;
     }
 
     public RangedDamage(int moveSpeed) {
