@@ -20,6 +20,7 @@ public class RangedExplosion extends Ranged {
         rotation = 0;
         stalkRange = 150;
         this.getImage().scale(100, 100);
+        isMoving = false;
         viewDistance = 200;
     }
 

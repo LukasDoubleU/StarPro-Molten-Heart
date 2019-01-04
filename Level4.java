@@ -39,13 +39,14 @@ public class Level4 extends Level {
      */
     public Level4() {
         super("background_final.png");
+        setStatDisplay();
         generateWorld(world);
     }
 
     @Override
     public void finish() {
         if (getMonstercount() == 0) {
-        Greenfoot.setWorld(new EndBossLevel());
+            Greenfoot.setWorld(new EndBossLevel());
         }
     }
 }

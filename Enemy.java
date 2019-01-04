@@ -8,18 +8,32 @@ import greenfoot.World;
 
 public abstract class Enemy extends Obstacle {
 
+    String path;
     int moveSpeed;
     int damage;
     Player target = null;
     int lifeCount;
     int stalkRange;
     int counter;
+    int imgCounter;
     int viewDistance;
+    int currentPicture;
+    boolean right;
+    boolean left;
+    boolean up;
+    boolean down;
+    boolean isMoving;
     Level level = null;
 
     public Enemy(int moveSpeed, int lifeCount, String imgPath) {
         this.moveSpeed = moveSpeed;
         this.lifeCount = lifeCount;
+        currentPicture = 1;
+        right = false;
+        left = false;
+        up = false;
+        down = false;
+        path = "/images/";
         setImage(imgPath);
         this.counter = 0;
     }
@@ -31,6 +45,11 @@ public abstract class Enemy extends Obstacle {
     public void addedToWorld(World world) {
         level = (Level) world;
         level.increaseMonstercount(this);
+        if (this instanceof RangedDamage) {
+            path = "/eyeball/";
+        } else if (this instanceof MeleeDamage) {
+            path = "/ghost/";
+        }
         // damage = damage + level.damageModifier;
         counter = randomNumber(200, 1);
     }
@@ -46,35 +65,71 @@ public abstract class Enemy extends Obstacle {
         }
     }
 
+    public void refreshImage() {
+        if (imgCounter < 20) {
+            currentPicture = 1;
+        } else if (imgCounter < 40) {
+            currentPicture = 2;
+        } else if (imgCounter < 60) {
+            currentPicture = 3;
+            imgCounter = 0;
+        }
+        if (isMoving) {
+//            System.out.println("left: " + left); :TODO kann das weg?
+//            System.out.println("right: " + right);
+//            System.out.println("up: " + up);
+//            System.out.println("down: " + down);
+            if (left) {
+                path = path + "left_" + currentPicture;
+            } else if (right) {
+                path = path + "right_" + currentPicture;
+            } else if (up) {
+                path = path + "up_" + currentPicture;
+            } else if (down) {
+                path = path + "down_" + currentPicture;
+            }
+            try {
+                setImage(path + ".png");
+            } catch (Exception e) {
+                System.out.println("ERROR"); // TODO: Wird noch geworfen...
+            }
+            if (this instanceof RangedDamage) {
+                path = "/eyeball/";
+            } else if (this instanceof MeleeDamage) {
+                path = "/ghost/";
+            }
+            right = false;
+            left = false;
+            up = false;
+            down = false;
+        }
+    }
+
     public void followTarget() {
-        boolean right = false;
-        boolean left = false;
-        boolean up = false;
-        boolean down = false;
         int oldX = this.getX();
         int oldY = this.getY();
         if (this.getX() > target.getX()) {
             this.setLocation(this.getX() - moveSpeed + moveSpeed / 2, this.getY());
-            right = true;
+            left = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getX() < target.getX()) {
             this.setLocation(this.getX() + moveSpeed - moveSpeed / 2, this.getY());
-            left = true;
+            right = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         }
         if (this.getY() > target.getY()) {
             this.setLocation(this.getX(), this.getY() - moveSpeed + moveSpeed / 2);
-            down = true;
+            up = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }
         } else if (this.getY() < target.getY()) {
             this.setLocation(this.getX(), this.getY() + moveSpeed - moveSpeed / 2);
-            up = true;
+            down = true;
             if (checkCollision(stalkRange)) {
                 this.setLocation(oldX, oldY);
             }

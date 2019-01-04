@@ -39,6 +39,7 @@ public class Level1 extends Level {
 
     public Level1() {
         super("background_final.png");
+        setStatDisplay();
         generateWorld(world);
     }
 

@@ -1,4 +1,4 @@
-import greenfoot.*;
+import greenfoot.Greenfoot;
 
 public class Level2 extends Level {
 
@@ -40,9 +40,11 @@ public class Level2 extends Level {
 
     public Level2() {
         super("background_final.png");
+        setStatDisplay();
         generateWorld(world);
     }
 
+    @Override
     public void finish() {
         if (getMonstercount() == 0) {
             Greenfoot.setWorld(new MiniBossLevel());
