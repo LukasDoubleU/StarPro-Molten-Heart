@@ -18,7 +18,7 @@ public class Sword extends Weapon {
     public static class Big extends Sword {
 
         public Big() {
-            super("sword_resize/image_part_033.png", 3, 75);
+            super("sword_resize/image_part_033.png", 2, 75);
         }
     }
 
