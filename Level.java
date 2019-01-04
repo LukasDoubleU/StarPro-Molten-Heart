@@ -111,8 +111,12 @@ public abstract class Level extends World {
         Actor object = null;
         if ((int) obj == 1) {
             object = new Wall(obj);
-        } else if (obj >= 2 && obj <= 4) {
-            object = new DestroyableObstacle(obj);
+        } else if (obj == 2) {
+            object = new DestroyableObstacle.Rock();
+        } else if (obj == 3) {
+            object = new DestroyableObstacle.Barrel();
+        } else if (obj == 4) {
+            object = new DestroyableObstacle.Slime();
         } else if (obj == 5) {
             object = new MeleeDamage();
         } else if (obj == 6) {

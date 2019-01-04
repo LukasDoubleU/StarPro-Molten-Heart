@@ -61,7 +61,9 @@ public abstract class Enemy extends Obstacle {
                 level.decreaseMonstercount(this);
             }
             this.getWorld().removeObject(this);
-            SoundUtil.playSound("splash_sound.wav");
+            if (!(this instanceof DestroyableObstacle)) {
+                SoundUtil.playSound("splash_sound.wav");
+            }
         }
     }
 
@@ -101,9 +103,9 @@ public abstract class Enemy extends Obstacle {
         int oldX = this.getX();
         int oldY = this.getY();
         int tempMoveSpeed;
-        if(Math.abs(this.getX()-target.getX()) == 1) {
+        if (Math.abs(this.getX() - target.getX()) == 1) {
             tempMoveSpeed = 1;
-        }else {
+        } else {
             tempMoveSpeed = moveSpeed / 2;
         }
         if (this.getX() > target.getX()) {
@@ -175,6 +177,10 @@ public abstract class Enemy extends Obstacle {
     public int randomNumber(int minWert, int maxWert) {
         Random rand = new Random();
         return rand.nextInt(maxWert) + minWert;
+    }
+
+    public String getHitSound() {
+        return "enemy_hit.wav";
     }
 
 }

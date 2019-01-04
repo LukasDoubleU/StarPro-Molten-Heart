@@ -10,7 +10,6 @@ public abstract class Attack extends Actor {
     Weapon weapon;
     int duration = 5;
     Set<Enemy> alreadyHit = new HashSet<Enemy>();
-    boolean obstacleFound = false;
 
     public Attack(Weapon weapon) {
         this.weapon = weapon;
@@ -47,34 +46,10 @@ public abstract class Attack extends Actor {
         // Wenn min. 1 Gegner getroffen wird, spiele Sound
         if (!intersectingEnemies.isEmpty()) {
             for (Enemy enemy : intersectingEnemies) {
-                if (enemy instanceof DestroyableObstacle) {
-                    DestroyableObstacle obst = (DestroyableObstacle) enemy;
-                    setObstacleSound(obst, obst.getObjectX());
-                    obstacleFound = true;
-                }
                 if (!alreadyHit.contains(enemy)) {
                     processHit(enemy);
                 }
             }
-            if (!obstacleFound) {
-                SoundUtil.playSound("enemy_hit.wav");
-            }
-        }
-    }
-
-    private void setObstacleSound(DestroyableObstacle obst, double x) {
-        if (x == 2) {
-            SoundUtil.playSound("breaking_stone.wav");
-//            imgPath = "img_utilities/rock.png";
-        } else if (x == 3) {
-            SoundUtil.playSound("breaking_wood.wav");
-//            imgPath = "img_utilities/barrel.png";
-        } else if (x == 4) {
-            SoundUtil.playSound("breaking_stone.wav");
-//            imgPath = "img_utilities/slime.png";
-        } else {
-            SoundUtil.playSound("breaking_stone.wav");
-//            imgPath = "img_utilities/rock.png";
         }
     }
 
@@ -83,6 +58,7 @@ public abstract class Attack extends Actor {
         Player.get().getWorld().addObject(hit, enemy.getX(), getY());
         enemy.damage(weapon.getDamage());
         alreadyHit.add(enemy);
+        SoundUtil.playSound(enemy.getHitSound());
     }
 
     /**
