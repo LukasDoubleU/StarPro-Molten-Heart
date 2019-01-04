@@ -36,6 +36,7 @@ public class MiniBossLevel extends Level {
      */
     public MiniBossLevel() {
         super("background_final.png");
+        setStatDisplay();
         generateWorld(world);
     }
 

@@ -1,5 +1,8 @@
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import greenfoot.Actor;
 import greenfoot.World;
 
@@ -42,12 +45,12 @@ public abstract class Enemy extends Obstacle {
     public void addedToWorld(World world) {
         level = (Level) world;
         level.increaseMonstercount(this);
-        if(this instanceof RangedDamage) {
+        if (this instanceof RangedDamage) {
             path = "/eyeball/";
-        }else if(this instanceof MeleeDamage) {
+        } else if (this instanceof MeleeDamage) {
             path = "/ghost/";
         }
-        //damage = damage + level.damageModifier;
+        // damage = damage + level.damageModifier;
         counter = randomNumber(200, 1);
     }
 
@@ -63,37 +66,36 @@ public abstract class Enemy extends Obstacle {
     }
 
     public void refreshImage() {
-        if(imgCounter < 20) {
+        if (imgCounter < 20) {
             currentPicture = 1;
-        }else if(imgCounter < 40) {
+        } else if (imgCounter < 40) {
             currentPicture = 2;
-        }else if(imgCounter < 60) {
+        } else if (imgCounter < 60) {
             currentPicture = 3;
             imgCounter = 0;
         }
-        if(isMoving) {
-            System.out.println("left: " + left);
-            System.out.println("right: " + right);
-            System.out.println("up: " + up);
-            System.out.println("down: " + down);
-            if(left) {
+        if (isMoving) {
+//            System.out.println("left: " + left); :TODO kann das weg?
+//            System.out.println("right: " + right);
+//            System.out.println("up: " + up);
+//            System.out.println("down: " + down);
+            if (left) {
                 path = path + "left_" + currentPicture;
-            }else if(right) {
+            } else if (right) {
                 path = path + "right_" + currentPicture;
-            }else if(up) {
+            } else if (up) {
                 path = path + "up_" + currentPicture;
-            }else if(down) {
+            } else if (down) {
                 path = path + "down_" + currentPicture;
             }
             try {
                 setImage(path + ".png");
+            } catch (Exception e) {
+                System.out.println("ERROR"); // TODO: Wird noch geworfen...
             }
-            catch(Exception e) {
-                System.out.println("ERROE");
-            }
-            if(this instanceof RangedDamage) {
+            if (this instanceof RangedDamage) {
                 path = "/eyeball/";
-            }else if(this instanceof MeleeDamage) {
+            } else if (this instanceof MeleeDamage) {
                 path = "/ghost/";
             }
             right = false;

@@ -53,12 +53,6 @@ public abstract class Level extends World {
     public Level(String image) {
         super(1280, 720, 1);
         setBackground(image);
-        // Zeige unten links die Leben des Spielers an
-        addObject(PlayerHealthDisplay.get(), 30, 680);
-        // Zeige unten rechts die Stats des Spielers an
-        addObject(PlayerStatsDisplay.get(), 1196, 672);
-        // Mittig: Spielzeit
-        addObject(TimerDisplay.get(), 640, 674);
     }
 
     /**
@@ -75,6 +69,15 @@ public abstract class Level extends World {
         timer.reset();
         timer.start();
         Greenfoot.setWorld(new Level1());
+    }
+
+    public void setStatDisplay() {
+        // Zeige unten links die Leben des Spielers an
+        addObject(PlayerHealthDisplay.get(), 30, 680);
+        // Zeige unten rechts die Stats des Spielers an
+        addObject(PlayerStatsDisplay.get(), 1196, 672);
+        // Mittig: Spielzeit
+        addObject(TimerDisplay.get(), 640, 674);
     }
 
     /**
