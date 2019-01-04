@@ -33,7 +33,7 @@ public class Score implements Comparable<Score> {
 
     @Override
     public String toString() {
-        return getName() + ScoringHandler.SCORE_SEP_CHAR + getValue();
+        return "Name: " + getName() + ", Score: " + getValue();
     }
 
     public String getNameFilledToMax() {
@@ -52,4 +52,17 @@ public class Score implements Comparable<Score> {
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+        if(obj instanceof Score) {
+            Score s = (Score) obj;
+            return getName().equals(s.getName()) && getValue() == s.getValue();
+        }
+        return false;
+    }
+
 }

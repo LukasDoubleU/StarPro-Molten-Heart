@@ -183,7 +183,7 @@ public abstract class Level extends World {
         if (object != null) {
             addObject(object, 10 + x, 10 + y);
         }
-        setPaintOrder(Player.class, Enemy.class, Barrel.class, DestroyableObstacle.class, Obstacle.class);
+        setPaintOrder(Player.class, Enemy.class, DestroyableObstacle.class, Obstacle.class);
     }
 
     /**

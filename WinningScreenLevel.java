@@ -21,7 +21,7 @@ public class WinningScreenLevel extends Menu {
         addBackToMainMenuButton();
 
         Score score = ScoringHandler.saveScore();
-        List<Score> scores = ScoringHandler.mostRecentLoadedScores;
+        List<Score> scores = ScoringHandler.read();
         if (score != null && scores != null) {
             addObject(new Text(format("Score: %s", score.getValue())), 640, 400);
             int rank = scores.indexOf(score) + 1;
