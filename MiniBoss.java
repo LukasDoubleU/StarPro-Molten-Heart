@@ -38,6 +38,7 @@ public class MiniBoss extends Boss {
         attack1 = true;
         summonEnd = false;
         miniCounter = 0;
+        this.getImage().scale(60, 60);        
     }
 
     /**
@@ -90,11 +91,13 @@ public class MiniBoss extends Boss {
     public void summon() {
         if(miniCounter==0){
             this.setImage("boss/boss2.2.png");
+            this.getImage().scale(60, 60);        
         }
         addAttackTimer();
         if (attackTimer >= 30) {
             if(miniCounter==0){
                 this.setImage("boss/boss2.3.png");
+                this.getImage().scale(60, 60);        
                 // spawn gegner
                 if (!meleeSpawned) {
                     for (int i = 0; i < 3; i++) {
@@ -115,6 +118,7 @@ public class MiniBoss extends Boss {
             }
             if (attackTimer == 65) {
                 this.setImage("boss/boss2.1.png");
+                this.getImage().scale(60, 60);        
                 summonEnd = true;
                 attackTimer = 0;
             }
