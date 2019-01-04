@@ -58,7 +58,7 @@ public class MeleeDamage extends Melee {
     @Override
     public void damage(int damage) {
         this.lifeCount = lifeCount - damage;
-        if (lifeCount < 0) {
+        if (lifeCount <= 0) {
             if (miniEnemy) {
                 MiniBoss a = getBoss();
                 if (a != null) {
