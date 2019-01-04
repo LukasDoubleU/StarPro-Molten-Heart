@@ -192,7 +192,7 @@ public abstract class Level extends World {
      */
     public static void triggerLava() {
         if (lavarray.size() > 0) {
-            lavarray.get(new Random().nextInt(lavarray.size()));
+            lavarray.get(new Random().nextInt(lavarray.size())).transform();
         }
     }
 

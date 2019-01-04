@@ -98,6 +98,7 @@ public class LavaBoss extends Boss {
 
         if (randomAttack == 1) {
             if (attack1) {
+                level.triggerLava();
                 attack2 = false;
                 attack3 = false;
                 attack4 = false;
