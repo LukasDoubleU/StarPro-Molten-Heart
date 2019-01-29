@@ -10,7 +10,10 @@ public class GameOverLevel extends Menu {
 
     public GameOverLevel() {
         super("/game_over/game_over_part_1.png");
-        stopSoundtrack();
+        Level.BACKGROUND_SOUND.stop();
+        if (Level.LAVA_SOUND.isPlaying()) {
+            Level.LAVA_SOUND.stop();
+        }
         SoundUtil.playSound("sad_violin.wav");
         resetTimer();
     }

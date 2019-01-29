@@ -12,8 +12,6 @@ public class Lava extends InteractiveObjects {
     private String ground;
     private String lava_ground;
     private boolean lavaState = false;
-    private String lavaSound = "lava_sound_extended.wav";
-
     private static final int COOLDOWN = 500;
     private static final int RANGE = 40;
 
@@ -67,18 +65,18 @@ public class Lava extends InteractiveObjects {
         if (cooldownTimer == -COOLDOWN && !(status) && neighbourIsHot()) {
             transform();
             lavaState = true;
-            System.out.println("lava: " + lava_ground);
+//            System.out.println("lava: " + lava_ground);
         }
         if (lavaState) {
-            SoundUtil.loop(lavaSound);
+            Level.LAVA_SOUND.playLoop();
         }
 
         if (cooldownTimer == 0 && status) {
             transform(ground, false, 0);
             lavaState = false;
             if (!lavaState) {
-                System.out.println("lava: " + lavaState);
-                SoundUtil.stopLoop(lavaSound);
+//                System.out.println("lava: " + lavaState);
+                Level.LAVA_SOUND.stop();
             }
         }
 

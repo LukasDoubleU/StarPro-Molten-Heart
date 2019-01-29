@@ -17,7 +17,6 @@ public class WinningScreenLevel extends Menu {
 
     public WinningScreenLevel() {
         super("WinScreen/win_screen.png");
-        stopSoundtrack();
         addBackToMainMenuButton();
 
         Score score = ScoringHandler.saveScore();

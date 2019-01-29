@@ -13,7 +13,9 @@ public abstract class Level extends World {
      * Default Welt 0 = World border 1 = Wand 2 = Spieler 3 = Gegnertyp 1 4 = Barrel
      * 5 = Wand 90° links 6 = Wand 90° rechts 7 = Wand 180°
      */
-    GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
+    public static final GreenfootSound BACKGROUND_SOUND = new GreenfootSound("sounds/background.wav");
+    public static final GreenfootSound LAVA_SOUND = new GreenfootSound("sounds/lava_sound_extended.wav");
+//    GreenfootSound backgroundMusic = new GreenfootSound("sounds/background.wav");
     private double[][] world = {
             /**
              * 18 Zeilen von Oben nach unten für 720 Pixel Die letzten 2 Zeilen sind für
@@ -56,13 +58,13 @@ public abstract class Level extends World {
         setBackground(image);
     }
 
-    public void startSoundtrack() {
-        backgroundMusic.playLoop();
-    }
-
-    public void stopSoundtrack() {
-        backgroundMusic.stop();
-    }
+//    public void startSoundtrack() {
+//        BACKGROUND_SOUND.playLoop();
+//    }
+//
+//    public void stopSoundtrack() {
+//        BACKGROUND_SOUND.stop();
+//    }
 
     /**
      * Wenn getriggert wird das Level hochgesetzt

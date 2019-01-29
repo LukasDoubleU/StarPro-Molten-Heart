@@ -66,6 +66,10 @@ public class EndBossLevel extends Level {
 
     @Override
     public void finish() {
+        Level.BACKGROUND_SOUND.stop();
+        if (Level.LAVA_SOUND.isPlaying()) {
+            Level.LAVA_SOUND.stop();
+        }
         Greenfoot.setWorld(new WinningScreenLevel());
     }
 }

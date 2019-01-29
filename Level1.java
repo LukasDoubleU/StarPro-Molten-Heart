@@ -40,8 +40,8 @@ public class Level1 extends Level {
     public Level1() {
         super("background_final.png");
         setStatDisplay();
+        BACKGROUND_SOUND.playLoop();
         generateWorld(world);
-        startSoundtrack();
     }
 
     @Override
